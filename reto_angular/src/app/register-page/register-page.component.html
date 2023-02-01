@@ -1,0 +1,112 @@
+<div>
+  <div class="form-container">
+    <form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <mat-form-field class="full-width">
+        <mat-label>Nick</mat-label>
+        <input type="text" matInput formControlName="nick" placeholder="Tonini" />
+        <span matPrefix><mat-icon> person_pin</mat-icon></span>
+        <mat-error *ngIf="registerForm.controls['nick'].hasError('required')">
+          El nick es <strong>obligatorio</strong>
+        </mat-error>
+        <mat-error *ngIf="registerForm.controls['nick'].hasError('apellidos')">
+          Error de formato
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <!-- Usuario con Validacion -->
+
+      <mat-form-field class="full-width">
+        <mat-label>Nombre</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="n"
+          [errorStateMatcher]="matcher"
+          placeholder="perico@ilerna.com"
+        />
+        <span matPrefix><mat-icon> person_pin</mat-icon></span>
+
+        <mat-error *ngIf="registerForm.controls['nombre'].hasError('required')">
+          El nombre es <strong>obligatorio</strong>
+        </mat-error>
+        <mat-error
+          *ngIf="registerForm.controls['nombre'].hasError('apellidos')"
+        >
+          Error de formato
+        </mat-error>
+      </mat-form-field>
+      <br />
+      <mat-form-field class="full-width">
+        <mat-label>Apellidos</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="apellido"
+          [errorStateMatcher]="matcher"
+          placeholder="Gonza"
+        />
+
+        <span matPrefix> <mat-icon> person_pin</mat-icon></span>
+        <mat-error
+          *ngIf="registerForm.controls['apellidos'].hasError('required')"
+        >
+          El apellido es <strong>obligatorio</strong>
+        </mat-error>
+        <mat-error
+          *ngIf="registerForm.controls['apellidos'].hasError('nombre')"
+        >
+          Ha de ser una dirección de correo
+        </mat-error>
+      </mat-form-field>
+      <br />
+      <mat-form-field class="full-width">
+        <mat-label>Email</mat-label>
+        <mat-input
+          type="text"
+          matInput
+          formControlName="email"
+          placeholder="perico@ilerna.com"
+        ></mat-input>
+
+        <span matPrefix> <mat-icon> person_pin</mat-icon></span>
+        <mat-icon> email</mat-icon>
+        <mat-error *ngIf="registerForm.controls['email'].hasError('required')">
+          El usuario es <strong>obligatorio</strong>
+        </mat-error>
+        <mat-error *ngIf="registerForm.controls['email'].hasError('email')">
+          Ha de ser una dirección de correo
+        </mat-error>
+      </mat-form-field>
+      <br />
+      Contraseña
+      <mat-form-field class="full-width">
+        <mat-label>Password</mat-label>
+        <input
+          type="password"
+          matInput
+          formControlName="password"
+          [errorStateMatcher]="matcher"
+        />
+
+        <span matPrefix> <mat-icon> vpn_key</mat-icon></span>
+        <mat-error
+          *ngIf="registerForm.controls['password'].hasError('required')"
+        >
+          La contraseña es <strong>obligatoria</strong>
+        </mat-error>
+      </mat-form-field>
+      <br />
+      <button
+        class="form-buttons"
+        type="submit"
+        mat-raised-button
+        color="primary"
+        [disabled]="registerForm.invalid"
+      >
+        <span matPrefix> <mat-icon> login</mat-icon></span>
+        Entrar
+      </button>
+    </form>
+  </div>
+</div>
