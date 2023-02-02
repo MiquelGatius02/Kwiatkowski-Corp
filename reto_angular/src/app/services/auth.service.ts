@@ -38,7 +38,7 @@ export class AuthService {
   }
 
   register(data: LoginData): Observable<LoginData> {
-
+    console.log(data);
     return this.http.get<LoginData>(this.fakeUrl).pipe(
       filter((value: any) => {
         let found = false;

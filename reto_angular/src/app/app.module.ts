@@ -54,11 +54,13 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { HeaderComponent } from './header/header.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { registerPageStudentsComponent } from './register-page-students/register-page-students.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     registerPageComponent,
+    registerPageStudentsComponent,
     AppComponent,
     LoginPageComponent,
     MainPageComponent,

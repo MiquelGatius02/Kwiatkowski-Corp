@@ -1,6 +1,21 @@
 <div class="form-container">
   <form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <!-- Usuario con Validacion -->
+      <span><mat-icon>voicemail</mat-icon></span>
+    <mat-form-field class="example-full-width">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput  formControlName="email" [errorStateMatcher]="matcher"
+             placeholder="Ex. pat@example.com">
+      <mat-hint>Errors appear instantly!</mat-hint>
+      <mat-error *ngIf="registerForm.controls['email'].hasError('required')">
+        El correo es <strong>obligatorio</strong>
+      </mat-error>
+      <mat-error *ngIf="registerForm.controls['email'].hasError('email')">
+        Ha de ser una dirección de correo
+      </mat-error>
+    </mat-form-field>
+
+    <!--
+    <!Usuario con Validacion>
     <mat-form-field class="full-width">
       <mat-label>Nick</mat-label>
       <input
@@ -69,8 +84,14 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field class="full-width">
+
+    <mat-form-field class="full-width" style="animation:unset ;">
       <mat-label>Centro</mat-label>
+      <span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-buildings-fill pb-1" viewBox="0 0 16 16">
+          <path d="M15 .5a.5.5 0 0 0-.724-.447l-8 4A.5.5 0 0 0 6 4.5v3.14L.342 9.526A.5.5 0 0 0 0 10v5.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V14h1v1.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5V.5ZM2 11h1v1H2v-1Zm2 0h1v1H4v-1Zm-1 2v1H2v-1h1Zm1 0h1v1H4v-1Zm9-10v1h-1V3h1ZM8 5h1v1H8V5Zm1 2v1H8V7h1ZM8 9h1v1H8V9Zm2 0h1v1h-1V9Zm-1 2v1H8v-1h1Zm1 0h1v1h-1v-1Zm3-2v1h-1V9h1Zm-1 2h1v1h-1v-1Zm-2-4h1v1h-1V7Zm3 0v1h-1V7h1Zm-2-2v1h-1V5h1Zm1 0h1v1h-1V5Z"/>
+        </svg>
+      </span>
       <input
         type="text"
         matInput
@@ -78,6 +99,7 @@
         [errorStateMatcher]="matcher"
         placeholder="perico@ilerna.com"
       />
+
       <mat-error *ngIf="registerForm.controls['email'].hasError('required')">
         El centro es <strong>obligatorio</strong>
       </mat-error>
@@ -86,7 +108,11 @@
       </mat-error>
     </mat-form-field>
 
-    <!-- Contraseña -->
+    <!Contraseña>
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16">
+      <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/>
+      <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z"/>
+    </svg>
     <mat-form-field class="full-width">
       <mat-label>Password</mat-label>
       <input
@@ -108,7 +134,7 @@
       [disabled]="registerForm.invalid"
     >
       <mat-icon>register</mat-icon>
-      Entrar
-    </button>
+      Registrarse
+    </button>-->
   </form>
 </div>

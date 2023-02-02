@@ -5,13 +5,14 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { NotfoundPageComponent } from './notfound-page/notfound-page.component';
 import { registerPageComponent } from './register-page/register-page.component';
-
+import { registerPageStudentsComponent } from './register-page-students/register-page-students.component';
 
 //TODO: Definir las ruta/s que correspondan
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginPageComponent },
-  { path: 'registro', component: registerPageComponent },
+  { path: 'registro-profesor', component: registerPageComponent },
+  { path: 'registro-alumno', component: registerPageStudentsComponent },
   {
     path: 'main',
     loadChildren: () => import('./pages/pages.module').then((m) => m.PagesModule),
