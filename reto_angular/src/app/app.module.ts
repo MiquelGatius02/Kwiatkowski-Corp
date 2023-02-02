@@ -50,7 +50,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { registerPageComponent } from './register-page/register-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
-import { MainPageComponent } from './pages/main-page/main-page.component';
+import { MainPageComponent } from './main-page/main-page.component';
 import { HeaderComponent } from './header/header.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
