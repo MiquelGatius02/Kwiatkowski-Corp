@@ -33,6 +33,7 @@ export class registerPageComponent {
     password: new FormControl('', [Validators.required]),
     nombre: new FormControl('', [Validators.required]),
     apellidos: new FormControl('', [Validators.required]),
+    centro: new FormControl('', [Validators.required]),
   });
 
   matcher = new MyErrorStateMatcher();
@@ -43,13 +44,15 @@ export class registerPageComponent {
     const lastname = this.registerForm.controls['apellidos'].value;
     const mail = this.registerForm.controls['email'].value;
     const pass = this.registerForm.controls['password'].value;
+    const cent = this.registerForm.controls['centro'].value;
 
     const logData: RegisterData = {
       nick: (nickname) ? nickname : '',
       nombre: (name) ? name: '',
       apellidos: (lastname) ? lastname: '',
       email: (mail) ? mail : '',
-      password: (pass) ? pass : ''
+      password: (pass) ? pass : '',
+      centro: (cent) ? cent : '', 
     };
 
     this.authService.register(logData)

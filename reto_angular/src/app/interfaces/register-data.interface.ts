@@ -3,5 +3,6 @@ export interface RegisterData {
   nombre: string;
   apellidos: string;
   email: string;
+  centro: string;
   password: string;
 }

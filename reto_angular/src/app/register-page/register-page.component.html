@@ -23,7 +23,7 @@
       <input
         type="text"
         matInput
-        formControlName="nick"
+        formControlName="nombre"
         [errorStateMatcher]="matcher"
         placeholder="perico@ilerna.com"
       />
@@ -40,7 +40,7 @@
       <input
         type="text"
         matInput
-        formControlName="nick"
+        formControlName="apellidos"
         [errorStateMatcher]="matcher"
         placeholder="perico@ilerna.com"
       />
@@ -57,12 +57,29 @@
       <input
         type="text"
         matInput
-        formControlName="nick"
+        formControlName="email"
         [errorStateMatcher]="matcher"
         placeholder="perico@ilerna.com"
       />
       <mat-error *ngIf="registerForm.controls['email'].hasError('required')">
         El correo es <strong>obligatorio</strong>
+      </mat-error>
+      <mat-error *ngIf="registerForm.controls['email'].hasError('email')">
+        Ha de ser una dirección de correo
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Centro</mat-label>
+      <input
+        type="text"
+        matInput
+        formControlName="centro"
+        [errorStateMatcher]="matcher"
+        placeholder="perico@ilerna.com"
+      />
+      <mat-error *ngIf="registerForm.controls['email'].hasError('required')">
+        El centro es <strong>obligatorio</strong>
       </mat-error>
       <mat-error *ngIf="registerForm.controls['email'].hasError('email')">
         Ha de ser una dirección de correo
