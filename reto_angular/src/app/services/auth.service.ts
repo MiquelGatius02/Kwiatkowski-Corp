@@ -8,7 +8,11 @@ import { LoginData } from '../interfaces/login-data.interface';
 })
 export class AuthService {
 
-  fakeUrl: string = 'assets/serverFake.json';
+  registerStudent: string = 'localhost:8000/api/register_student';
+  loginStudent: string = 'http://127.0.0.1:8000/api/login_student';
+  registerProfessor: string = 'localhost:8000/api/register_professor';
+  loginProfessor: string = 'localhost:8000/api/login_professor';
+
   user: LoginData = { nick: '', password: '' };
 
   constructor(
@@ -17,10 +21,11 @@ export class AuthService {
 
   login(data: LoginData): Observable<LoginData> {
 
-    return this.http.get<LoginData>(this.fakeUrl).pipe(
+    return this.http.get<LoginData>(this.loginStudent).pipe(
       filter((value: any) => {
+        console.log("Entro");
         let found = false;
-
+        console.log("Hola");
         for (let i = 0; i < value.length; i++) {
           if (value[i].nick == data.nick && value[i].password == data.password) {
             found = true;
@@ -39,10 +44,9 @@ export class AuthService {
 
   register(data: LoginData): Observable<LoginData> {
     console.log(data);
-    return this.http.get<LoginData>(this.fakeUrl).pipe(
+    return this.http.post<LoginData>(this.registerStudent,data).pipe(
       filter((value: any) => {
         let found = false;
-
         for (let i = 0; i < value.length; i++) {
           if (value[i].nick == data.nick && value[i].password == data.password) {
             found = true;
@@ -58,4 +62,5 @@ export class AuthService {
       })
     );
   }
+  
 }

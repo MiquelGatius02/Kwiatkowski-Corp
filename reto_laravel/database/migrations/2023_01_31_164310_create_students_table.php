@@ -20,7 +20,10 @@ return new class extends Migration
             $table->string('nick');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('imagen');
+            $table->string('fechaNacimiento');
+            $table->string('imagen')->default('Null');
+            $table->rememberToken();
+            $table->timestamps();
         });
     }
 

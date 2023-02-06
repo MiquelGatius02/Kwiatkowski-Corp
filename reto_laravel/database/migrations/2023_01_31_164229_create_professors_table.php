@@ -21,7 +21,9 @@ return new class extends Migration
             $table->string('centro');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('imagen');
+            $table->string('imagen')->default('Null');
+            $table->rememberToken();
+            $table->timestamps();
         });
     }
 

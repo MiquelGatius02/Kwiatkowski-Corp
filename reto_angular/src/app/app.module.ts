@@ -55,6 +55,8 @@ import { HeaderComponent } from './header/header.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { registerPageStudentsComponent } from './register-page-students/register-page-students.component';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { ProfilePageStudentsComponent } from './profile-page-students/profile-page-students.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,9 @@ import { registerPageStudentsComponent } from './register-page-students/register
     AppComponent,
     LoginPageComponent,
     MainPageComponent,
-    HeaderComponent
+    HeaderComponent,
+    ProfilePageComponent,
+    ProfilePageStudentsComponent
   ],
   imports: [
     HttpClientModule,
