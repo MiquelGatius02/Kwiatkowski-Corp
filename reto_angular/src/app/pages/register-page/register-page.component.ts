@@ -28,34 +28,34 @@ export class registerPageComponent {
   ) { }
 
   registerForm = new FormGroup({
-    nick: new FormControl('',[Validators.required]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required]),
-    nombre: new FormControl('', [Validators.required]),
-    apellidos: new FormControl('', [Validators.required]),
-    centro: new FormControl('', [Validators.required]),
+    Nick: new FormControl('',[Validators.required]),
+    Email: new FormControl('', [Validators.required, Validators.email]),
+    Password: new FormControl('', [Validators.required]),
+    Nombre: new FormControl('', [Validators.required]),
+    Apellidos: new FormControl('', [Validators.required]),
+    Centro: new FormControl('', [Validators.required]),
   });
 
   matcher = new MyErrorStateMatcher();
 
   onSubmit() {
-    const nickname = this.registerForm.controls['nick'].value;
-    const name = this.registerForm.controls['nombre'].value;
-    const lastname = this.registerForm.controls['apellidos'].value;
-    const mail = this.registerForm.controls['email'].value;
-    const pass = this.registerForm.controls['password'].value;
-    const cent = this.registerForm.controls['centro'].value;
+    const nickname = this.registerForm.controls['Nick'].value;
+    const name = this.registerForm.controls['Nombre'].value;
+    const lastname = this.registerForm.controls['Apellidos'].value;
+    const mail = this.registerForm.controls['Email'].value;
+    const pass = this.registerForm.controls['Password'].value;
+    const cent = this.registerForm.controls['Centro'].value;
 
     const logData: RegisterData = {
-      nick: (nickname) ? nickname : '',
-      nombre: (name) ? name: '',
-      apellidos: (lastname) ? lastname: '',
-      email: (mail) ? mail : '',
-      password: (pass) ? pass : '',
-      centro: (cent) ? cent : '', 
+      Nick: (nickname) ? nickname : '',
+      Nombre: (name) ? name: '',
+      Apellidos: (lastname) ? lastname: '',
+      Email: (mail) ? mail : '',
+      Password: (pass) ? pass : '',
+      Centro: (cent) ? cent : '', 
     };
 
-    this.authService.register(logData)
+    this.authService.register_professor(logData)
       .subscribe({ // Una vez se inicia sesión correctamente se redirige al main
         next: (v) => console.log(v),
         error: (e) => console.error(e),

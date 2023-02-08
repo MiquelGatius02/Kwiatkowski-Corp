@@ -24,32 +24,49 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class LoginPageComponent {
 
   constructor(
-    private readonly authService: AuthService,
+    private authService: AuthService,
     private readonly router: Router
   ) { }
 
   loginForm = new FormGroup({
-    nick: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
+    Nick: new FormControl('', [Validators.required]),
+    Professor: new FormControl(0, [Validators.required]),
+    Password: new FormControl('', [Validators.required]),
   });
 
   matcher = new MyErrorStateMatcher();
 
   onSubmit() {
-    const nickname = this.loginForm.controls['nick'].value;
-    const pass = this.loginForm.controls['password'].value;
+    const nickname = this.loginForm.controls['Nick'].value;
+    const pass = this.loginForm.controls['Password'].value;
+    const prof = this.loginForm.controls['Professor'].value;
 
     const logData: LoginData = {
-      nick: (nickname) ? nickname : '',
-      password: (pass) ? pass : ''
+      Nick: (nickname) ? nickname : '',
+      Password: (pass) ? pass : '',
+      Professor: (prof) ? prof : 0
     };
 
-    this.authService.login(logData)
-      .subscribe({ // Una vez se inicia sesión correctamente se redirige al main
-        next: (v) => console.log(v),
-        error: (e) => console.error(e),
-        complete: () => this.router.navigate(['/main'])
-      });
+
+    console.log(prof)
+    if (prof == 1) {
+      this.authService.login_professor(logData)
+        .subscribe({ // Una vez se inicia sesión correctamente se redirige al main
+          next: (v) => console.log(v),
+          error: (e) => console.error(e),
+          complete: () => this.router.navigate(['/perfil-prof'])
+        });
+    }
+    else {
+      this.authService.login_student(logData)
+        .subscribe({ // Una vez se inicia sesión correctamente se redirige al main
+          next: (v) => console.log(v),
+          error: (e) => console.error(e),
+          complete: () => this.router.navigate(['/perfil-alumno'])
+        });
+    }
+    // console.log(perfil);
+
   }
 
 }

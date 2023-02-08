@@ -64,6 +64,7 @@ class ProfessorController extends Controller{
                     "status" => 1,
                     "msg" => "¡Usuario logueado exitosamente!",
                     "access_token" => $token,
+                    "data" => $user
                 ]);
             }else{
                 return response()->json([

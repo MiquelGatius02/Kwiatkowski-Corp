@@ -65,6 +65,7 @@ class StudentController extends Controller{
                     "status" => 'OK',
                     "msg" => "¡Usuario logueado exitosamente!",
                     "access_token" => $token,
+                    "data" => $user
                 ]);
             }else{
                 return response()->json([

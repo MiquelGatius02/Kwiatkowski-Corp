@@ -48,15 +48,15 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
-import { registerPageComponent } from './register-page/register-page.component';
+import { registerPageComponent } from './pages/register-page/register-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
-import { MainPageComponent } from './main-page/main-page.component';
+import { MainPageComponent } from './pages/main-page/main-page.component';
 import { HeaderComponent } from './header/header.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { registerPageStudentsComponent } from './register-page-students/register-page-students.component';
-import { ProfilePageComponent } from './profile-page/profile-page.component';
-import { ProfilePageStudentsComponent } from './profile-page-students/profile-page-students.component';
+import { registerPageStudentsComponent } from './pages/register-page-students/register-page-students.component';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { ProfilePageStudentsComponent } from './pages/profile-page-students/profile-page-students.component';
 
 @NgModule({
   declarations: [

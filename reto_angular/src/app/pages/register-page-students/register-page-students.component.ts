@@ -28,34 +28,34 @@ export class registerPageStudentsComponent {
   ) { }
 
   registerStudentsForm = new FormGroup({
-    nick: new FormControl('',[Validators.required]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required]),
-    nombre: new FormControl('', [Validators.required]),
-    apellidos: new FormControl('', [Validators.required]),
-    nacimiento: new FormControl('', [Validators.required]),
+    Nick: new FormControl('',[Validators.required]),
+    Email: new FormControl('', [Validators.required, Validators.email]),
+    Password: new FormControl('', [Validators.required]),
+    Nombre: new FormControl('', [Validators.required]),
+    Apellidos: new FormControl('', [Validators.required]),
+    fechaNacimiento: new FormControl('', [Validators.required]),
   });
 
   matcher = new MyErrorStateMatcher();
 
   onSubmit() {
-    const nickname = this.registerStudentsForm.controls['nick'].value;
-    const name = this.registerStudentsForm.controls['nombre'].value;
-    const lastname = this.registerStudentsForm.controls['apellidos'].value;
-    const mail = this.registerStudentsForm.controls['email'].value;
-    const pass = this.registerStudentsForm.controls['password'].value;
-    const fechaNacimiento = this.registerStudentsForm.controls['nacimiento'].value;
+    const nickname = this.registerStudentsForm.controls['Nick'].value;
+    const name = this.registerStudentsForm.controls['Nombre'].value;
+    const lastname = this.registerStudentsForm.controls['Apellidos'].value;
+    const mail = this.registerStudentsForm.controls['Email'].value;
+    const pass = this.registerStudentsForm.controls['Password'].value;
+    const fechaNacimiento = this.registerStudentsForm.controls['fechaNacimiento'].value;
 
     const logData: RegisterStudentsData = {
-      nick: (nickname) ? nickname : '',
-      nombre: (name) ? name: '',
-      apellidos: (lastname) ? lastname: '',
-      email: (mail) ? mail : '',
-      password: (pass) ? pass : '',
-      nacimiento: (fechaNacimiento) ? fechaNacimiento : '',
+      Nick: (nickname) ? nickname : '',
+      Nombre: (name) ? name: '',
+      Apellidos: (lastname) ? lastname: '',
+      Email: (mail) ? mail : '',
+      Password: (pass) ? pass : '',
+      fechaNacimiento: (fechaNacimiento) ? fechaNacimiento : '',
     };
 
-    this.authService.register(logData)
+    this.authService.register_student(logData)
       .subscribe({ // Una vez se inicia sesión correctamente se redirige al main
         next: (v) => console.log(v),
         error: (e) => console.error(e),
