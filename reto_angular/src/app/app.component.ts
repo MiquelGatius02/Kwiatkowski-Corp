@@ -8,6 +8,6 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class AppComponent {
   title = 'CatMania';
-  
+
 
 }

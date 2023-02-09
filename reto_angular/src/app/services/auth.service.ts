@@ -26,10 +26,15 @@ export class AuthService {
 
   perfilStudent: UserDataStudent = { Imagen: '', Nick: '', Nombre: '', Apellidos: '', Email: '', Nacimiento: '', Password: '' }; // toni maricon
   perfilProf: UserDataProf = { Imagen: '', Nick: '', Nombre: '', Apellidos: '', Email: '', Centro: '', Password: '' };
+  login: boolean = false;
   constructor(
     private http: HttpClient
 
   ) { }
+
+  end_session() {
+    this.login = false;
+  }
 
   login_student(data: LoginData): Observable<LoginData> {
 
@@ -44,7 +49,7 @@ export class AuthService {
           this.perfilStudent.Nombre = value.data.nombre;
           this.perfilStudent.Password = data.Password;
           this.perfilStudent.Imagen = value.data.imagen
-
+          this.login = true;
           return value;
 
         } else {
@@ -66,7 +71,7 @@ export class AuthService {
           this.perfilProf.Nombre = value.data.nombre;
           this.perfilProf.Password = data.Password;
           this.perfilProf.Imagen = value.data.imagen
-
+          this.login = true;
           return value;
         } else {
         }

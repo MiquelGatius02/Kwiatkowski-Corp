@@ -36,6 +36,10 @@ export class LoginPageComponent {
 
   matcher = new MyErrorStateMatcher();
 
+  ngOnInit(): void {
+    this.authService.end_session();
+  }
+
   onSubmit() {
     const nickname = this.loginForm.controls['Nick'].value;
     const pass = this.loginForm.controls['Password'].value;
