@@ -40,9 +40,6 @@ img {
   height: 50px;
 }
 
-.centrar {
-}
-
 .inline {
-    display: inline-flex;
+  display: inline-flex;
 }

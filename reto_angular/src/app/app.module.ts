@@ -73,7 +73,7 @@ import { ProfilePageStudentsComponent } from './pages/profile-page-students/prof
   imports: [
     HttpClientModule,
     ReactiveFormsModule,
-    BrowserModule,
+    BrowserModule,/*  */
     AppRoutingModule,
     NgbModule,
     BrowserAnimationsModule,

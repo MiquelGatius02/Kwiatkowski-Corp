@@ -11,18 +11,18 @@ import { ProfilePageStudentsComponent } from './pages/profile-page-students/prof
 
 //TODO: Definir las ruta/s que correspondan
 const routes: Routes = [
-  { path: 'main', component: ProfilePageComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginPageComponent },
   { path: 'registro-profesor', component: registerPageComponent },
   { path: 'registro-alumno', component: registerPageStudentsComponent },
-  { path: 'perfil-prof', component: ProfilePageComponent},
-  { path: 'perfil-alumno', component: ProfilePageStudentsComponent},
   {
     path: 'login',
     loadChildren: () => import('./pages/pages.module').then((m) => m.PagesModule),
     canActivate: [AuthGuard]
   },
+  { path: 'main', component: MainPageComponent },
+  { path: 'perfil-prof', component: ProfilePageComponent },
+  { path: 'perfil-alumno', component: ProfilePageStudentsComponent },
   { path: '**', component: NotfoundPageComponent },
 ];
 

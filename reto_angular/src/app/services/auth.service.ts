@@ -24,7 +24,7 @@ export class AuthService {
   professorRegister: RegisterData = { Nick: '', Nombre: '', Apellidos: '', Email: '', Centro: '', Password: '' };
   studentRegister: RegisterStudentsData = { Nick: '', Nombre: '', Apellidos: '', Email: '', fechaNacimiento: '', Password: '' };
 
-  perfilStudent: UserDataStudent = { Imagen: '', Nick: '', Nombre: '', Apellidos: '', Email: '', Nacimiento: '', Password: '' }; // toni maricon
+  perfilStudent: UserDataStudent = { Imagen: '', Nick: '', Nombre: '', Apellidos: '', Email: '', Nacimiento: '', Password: '' };
   perfilProf: UserDataProf = { Imagen: '', Nick: '', Nombre: '', Apellidos: '', Email: '', Centro: '', Password: '' };
   login: boolean = false;
   constructor(
@@ -34,6 +34,7 @@ export class AuthService {
 
   end_session() {
     this.login = false;
+    alert("Toni maricon")
   }
 
   login_student(data: LoginData): Observable<LoginData> {

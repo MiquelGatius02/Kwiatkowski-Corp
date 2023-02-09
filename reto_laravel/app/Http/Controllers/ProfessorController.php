@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Professor;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -56,10 +58,11 @@ class ProfessorController extends Controller{
         ]);
         $user = Professor::where("nick", "=", $request->Nick)->first();
         if( isset($user->id) ){
-            if(Hash::check($request->password, $user->password)){
+            if(Hash::check($request->Password, $user->password)){
                 //creamos el token
                 $token = $user->createToken("auth_token")->plainTextToken;
                 //si está todo ok
+
                 return response()->json([
                     "status" => 1,
                     "msg" => "¡Usuario logueado exitosamente!",

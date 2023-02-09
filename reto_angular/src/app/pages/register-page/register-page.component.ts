@@ -1,18 +1,12 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormGroupDirective, NgForm, Form, AbstractControl, ValidationErrors, Validator } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { RegisterData } from 'src/app/interfaces/register-data.interface';
+import { MyErrorStateMatcher } from '../login-page/login-page.component';
+import { passwordMatch } from 'src/app/validators/passwordMatch';
 
-
-/** Error when invalid control is dirty, touched, or submitted. */
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-  }
-}
 
 @Component({
   selector: 'app-register-page',
@@ -22,23 +16,30 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 
 export class registerPageComponent {
 
+  registerForm: FormGroup;
+
   constructor(
     private readonly authService: AuthService,
-    private readonly router: Router
-  ) { }
+    private readonly router: Router,
 
-  registerForm = new FormGroup({
-    Nick: new FormControl('',[Validators.required]),
-    Email: new FormControl('', [Validators.required, Validators.email]),
-    Password: new FormControl('', [Validators.required]),
-    Nombre: new FormControl('', [Validators.required]),
-    Apellidos: new FormControl('', [Validators.required]),
-    Centro: new FormControl('', [Validators.required]),
-  });
+
+  ) {
+    this.registerForm = new FormGroup({
+      Nick: new FormControl('', [Validators.required]),
+      Email: new FormControl('', [Validators.required, Validators.email]),
+      Password: new FormControl('', [Validators.required]),
+      Confirm: new FormControl('', [Validators.required]),
+      Nombre: new FormControl('', [Validators.required]),
+      Apellidos: new FormControl('', [Validators.required]),
+      Centro: new FormControl('', [Validators.required]),
+    }, [passwordMatch("Password", "Confirm")] // Comparador / Validador para la contraseña
+    )
+  }
 
   matcher = new MyErrorStateMatcher();
-
   onSubmit() {
+
+
     const nickname = this.registerForm.controls['Nick'].value;
     const name = this.registerForm.controls['Nombre'].value;
     const lastname = this.registerForm.controls['Apellidos'].value;
@@ -46,13 +47,15 @@ export class registerPageComponent {
     const pass = this.registerForm.controls['Password'].value;
     const cent = this.registerForm.controls['Centro'].value;
 
+
+
     const logData: RegisterData = {
       Nick: (nickname) ? nickname : '',
-      Nombre: (name) ? name: '',
-      Apellidos: (lastname) ? lastname: '',
+      Nombre: (name) ? name : '',
+      Apellidos: (lastname) ? lastname : '',
       Email: (mail) ? mail : '',
       Password: (pass) ? pass : '',
-      Centro: (cent) ? cent : '', 
+      Centro: (cent) ? cent : '',
     };
 
     this.authService.register_professor(logData)
@@ -62,5 +65,6 @@ export class registerPageComponent {
         complete: () => this.router.navigate(['/main'])
       });
   }
+
 
 }

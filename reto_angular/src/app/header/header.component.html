@@ -29,12 +29,16 @@
           >Registrar Alumno</a
         >
       </div>
-      <div *ngIf="this.authService.login">
-        <a id="0" class="nav-item nav-link active" routerLink="./perfil-alumno"
-          >Perfil</a
-        >
+      <div class="inline">
+        <a class="nav-item nav-link active" routerLink="./main">Home</a>
       </div>
-      <div *ngIf="this.authService.login">
+
+      <div *ngIf="this.authService.login" style="display:inline-flex;">
+        <a id="0" class="nav-item nav-link active" routerLink="./perfil-alumno"
+          >Mi Perfil</a
+        >
+        <a *ngIf="this.authService.perfilProf.Nick == ''" class="nav-item nav-link active" routerLink="./login">{{this.authService.perfilStudent.Nick}}</a>
+        <a *ngIf="this.authService.perfilStudent.Nick == ''" class="nav-item nav-link active" routerLink="./login">{{this.authService.perfilProf.Nick}}</a>
         <a
           id="0"
           class="nav-item nav-link active"
@@ -42,8 +46,11 @@
           routerLink="./login"
           >Cerrar Sesión</a
         >
-      </div>
+      </div>        
     </div>
   </div>
 </nav>
+
 <router-outlet></router-outlet>
+
+

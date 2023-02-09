@@ -36,7 +36,7 @@ export class LoginPageComponent {
 
   matcher = new MyErrorStateMatcher();
 
-  ngOnInit(): void {
+  ngOnInit(): void { // Cada vez que se accede a login-page se reinicia la sesión
     this.authService.end_session();
   }
 
@@ -52,13 +52,13 @@ export class LoginPageComponent {
     };
 
 
-    console.log(prof)
+    // console.log(prof)
     if (prof == 1) {
       this.authService.login_professor(logData)
         .subscribe({ // Una vez se inicia sesión correctamente se redirige al main
           next: (v) => console.log(v),
           error: (e) => console.error(e),
-          complete: () => this.router.navigate(['/perfil-prof'])
+          complete: () => this.router.navigate(['/main'])
         });
     }
     else {
@@ -66,7 +66,7 @@ export class LoginPageComponent {
         .subscribe({ // Una vez se inicia sesión correctamente se redirige al main
           next: (v) => console.log(v),
           error: (e) => console.error(e),
-          complete: () => this.router.navigate(['/perfil-alumno'])
+          complete: () => this.router.navigate(['/main'])
         });
     }
     // console.log(perfil);

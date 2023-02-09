@@ -17,10 +17,11 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    if (this.authService.user.Nick != '' && this.authService.user.Password != '') { 
+    if (this.authService.login == false) { 
+      console.log("maricon");
+      this.router.navigate(['/login']);
       return true; 
     }else { 
-      this.router.navigate(['/login']); 
       return false; 
     }
   }

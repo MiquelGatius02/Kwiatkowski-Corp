@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { LoginData } from 'src/app/interfaces/login-data.interface';
 
 @Component({
   selector: 'app-header',
@@ -17,6 +14,10 @@ export class HeaderComponent {
     private readonly router: Router
   ) { }
 
-  login = this.authService.login;
+  login = this.authService.login; // Se comprueba si hay una sesión iniciada
+
+  logOut(){
+    alert
+  }
 
 }

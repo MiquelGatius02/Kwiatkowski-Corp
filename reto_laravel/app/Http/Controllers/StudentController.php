@@ -54,7 +54,6 @@ class StudentController extends Controller{
             "Nick" => "required",
             "Password" => "required"
         ]);
-        
         $user = Student::where("nick", "=", $request->Nick)->first();
         if( isset($user->id) ){
             if(Hash::check($request->Password, $user->password)){

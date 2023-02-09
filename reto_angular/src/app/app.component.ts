@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
