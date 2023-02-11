@@ -10,12 +10,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class ProfessorController extends Controller{
-    
+class ProfessorController extends Controller
+{
 
-    public function register_professor(Request $request) {
-        
-        try{
+
+    public function register_professor(Request $request)
+    {
+
+        try {
 
             DB::beginTransaction();
             $request->validate([
@@ -38,27 +40,27 @@ class ProfessorController extends Controller{
 
             return response()->json([
                 "status" => 1,
-                "msg" => "¡Registro de estudiante exitoso!",
+                "msg" => "¡Registro de profesor exitoso!",
+                "data" => $professor
             ]);
-
-        }catch(\Exception $exp){
+        } catch (\Exception $exp) {
             DB::rollBack();
             return response()->json([
-                "status" =>'KO',
+                "status" => 'KO',
                 "msg" => $exp,
             ]);
-
         }
     }
 
-    public function login_professor(Request $request) {
+    public function login_professor(Request $request)
+    {
         $request->validate([
             "Nick" => "required",
             "Password" => "required"
         ]);
         $user = Professor::where("nick", "=", $request->Nick)->first();
-        if( isset($user->id) ){
-            if(Hash::check($request->Password, $user->password)){
+        if (isset($user->id)) {
+            if (Hash::check($request->Password, $user->password)) {
                 //creamos el token
                 $token = $user->createToken("auth_token")->plainTextToken;
                 //si está todo ok
@@ -69,17 +71,30 @@ class ProfessorController extends Controller{
                     "access_token" => $token,
                     "data" => $user
                 ]);
-            }else{
+            } else {
                 return response()->json([
                     "status" => 0,
                     "msg" => "La password es incorrecta",
                 ], 404);
             }
-        }else{
+        } else {
             return response()->json([
                 "status" => 0,
                 "msg" => "Usuario no registrado",
             ], 404);
         }
+    }
+    public function updatePasswordProf(Request $request)
+    {
+
+        $request->validate([
+            'id' => '',
+            'newPassword' => '',
+        ]);
+
+        DB::update(
+            'update professors set Password = ? WHERE id = ?',
+            [$request->newPassword, $request->id]
+        );
     }
 }

@@ -6,4 +6,5 @@ export interface UserDataProf {
     Email: string;
     Centro: string;
     Password: string;
+    id: number;
 }

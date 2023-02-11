@@ -16,8 +16,13 @@ export class HeaderComponent {
 
   login = this.authService.login; // Se comprueba si hay una sesión iniciada
 
-  logOut(){
-    alert
-  }
 
+  end_session() {
+    if (this.authService.login == true) {
+      if (confirm("¿Estás seguro de que quieres cerrar sesión? ")) {
+        this.router.navigate(['/login'])
+        console.log(this.authService.login = false, this.login = false);
+      }
+    }
+  }
 }

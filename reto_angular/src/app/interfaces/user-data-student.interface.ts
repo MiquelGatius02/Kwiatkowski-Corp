@@ -6,5 +6,6 @@ export interface UserDataStudent {
     Email: string;
     Nacimiento: string;
     Password: string;
+    id: number;
   }
   

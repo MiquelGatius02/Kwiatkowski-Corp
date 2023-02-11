@@ -1,15 +1,3 @@
 <div class="container">
-  <h4>Buscador de gatos...</h4>
-  <form (ngSubmit)="searchCats()" [formGroup]="valor">
-  <mat-form-field appearance="fill">
-    <mat-label>Límite de imagenes</mat-label>
-    <mat-select formControlName="limite" required> 
-      <mat-option *ngFor="let cantidad of total" [value]="cantidad">
-        {{cantidad}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <button type="submit">Buscar</button>
-</form>
-<img *ngFor="let cat of cats" src="{{cat.url}}">
+  <h4>Main...</h4>
 </div>

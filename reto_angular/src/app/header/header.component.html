@@ -29,28 +29,30 @@
           >Registrar Alumno</a
         >
       </div>
-      <div class="inline">
-        <a class="nav-item nav-link active" routerLink="./main">Home</a>
-      </div>
 
-      <div *ngIf="this.authService.login" style="display:inline-flex;">
-        <a id="0" class="nav-item nav-link active" routerLink="./perfil-alumno"
-          >Mi Perfil</a
+      <div *ngIf="this.authService.login" style="display: inline-flex">
+        <a class="nav-item nav-link active" routerLink="./main">Home</a>
+        <a
+          *ngIf="this.authService.perfilProf.Nick == ''"
+          class="nav-item nav-link active"
+          routerLink="/main/perfil-alumno"
+          >{{ this.authService.perfilStudent.Nick }}</a
         >
-        <a *ngIf="this.authService.perfilProf.Nick == ''" class="nav-item nav-link active" routerLink="./login">{{this.authService.perfilStudent.Nick}}</a>
-        <a *ngIf="this.authService.perfilStudent.Nick == ''" class="nav-item nav-link active" routerLink="./login">{{this.authService.perfilProf.Nick}}</a>
+        <a
+          *ngIf="this.authService.perfilStudent.Nick == ''"
+          class="nav-item nav-link active"
+          routerLink="/main/perfil-prof"
+          >{{ this.authService.perfilProf.Nick }}</a
+        >
         <a
           id="0"
           class="nav-item nav-link active"
-          onclick="this.authService.end_session()"
-          routerLink="./login"
+         (click)="end_session()"
           >Cerrar Sesión</a
         >
-      </div>        
+      </div>
     </div>
   </div>
 </nav>
 
 <router-outlet></router-outlet>
-
-

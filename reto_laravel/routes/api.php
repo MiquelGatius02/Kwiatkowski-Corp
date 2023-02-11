@@ -22,6 +22,12 @@ Route::post('login_student', [StudentController::class, 'login_student']);
 Route::post('register_professor', [ProfessorController::class, 'register_professor']);
 Route::post('login_professor', [ProfessorController::class, 'login_professor']);
 
+
+Route::post('updatePasswordProf', [ProfessorController::class, 'updatePasswordProf']);
+Route::post('updatePasswordStud', [StudentController::class, 'updatePasswordStud']);
+
+
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });

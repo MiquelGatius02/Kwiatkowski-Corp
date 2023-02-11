@@ -8,12 +8,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class StudentController extends Controller{
-    
+class StudentController extends Controller
+{
 
-    public function register_student(Request $request) {
+    public function register_student(Request $request)
+    {
 
-        try{
+        try {
 
             DB::beginTransaction();
             $request->validate([
@@ -37,26 +38,26 @@ class StudentController extends Controller{
             return response()->json([
                 "status" => 1,
                 "msg" => "¡Registro de estudiante exitoso!",
+                "data" => $student
             ]);
-
-        }catch(\Exception $exp){
+        } catch (\Exception $exp) {
             DB::rollBack();
             return response()->json([
-                "status" =>'KO',
-                "msg" => "Maricon".$exp,
+                "status" => 'KO',
+                "msg" => $exp,
             ]);
-
         }
     }
 
-    public function login_student(Request $request) {
+    public function login_student(Request $request)
+    {
         $request->validate([
             "Nick" => "required",
             "Password" => "required"
         ]);
         $user = Student::where("nick", "=", $request->Nick)->first();
-        if( isset($user->id) ){
-            if(Hash::check($request->Password, $user->password)){
+        if (isset($user->id)) {
+            if (Hash::check($request->Password, $user->password)) {
                 //creamos el token
                 $token = $user->createToken("auth_token")->plainTextToken;
                 //si está todo ok
@@ -66,13 +67,13 @@ class StudentController extends Controller{
                     "access_token" => $token,
                     "data" => $user
                 ]);
-            }else{
+            } else {
                 return response()->json([
                     "status" => 'KO',
                     "msg" => "La password es incorrecta",
                 ], 404);
             }
-        }else{
+        } else {
             return response()->json([
                 "status" => 'KO',
                 "msg" => "Usuario no registrado",
@@ -80,97 +81,40 @@ class StudentController extends Controller{
         }
     }
 
-    public function delete(Request $request) {
+    public function update(Request $request)
+    {
 
-        if (auth()->user()->role == '1' || auth()->user()->role == '2') {
 
-            try{
+        $request->validate([
+            'id' => '',
+            'Nombre' => '',
+            'Apellidos' => '',
+            'DNI' => '',
+            'idCourse' => '',
+        ]);
 
-                DB::beginTransaction();
-                $request->validate([
-                    'id' => 'required',
-                ]);
-        
-                $student = Student::find($request->id);
-                $student = DB::table('students')->where('id',$request->id)->first();
-                DB::table('students')->where('id',$request->id)->delete();
+        DB::update(
+            'update students set Nombre = ?,Apellidos = ?,DNI = ?,idCourse = ? WHERE id = ?',
+            [$request->Nombre, $request->Apellidos, $request->DNI, $request->idCourse, $request->id]
+        );
 
-                return response()->json([
-                    "status" => 1,
-                    "msg" => "¡Un estudante ha sido borrado!",
-                ]);
-            }catch(\Exception $exp){
-
-                return response()->json([
-                    "status" =>'KO',
-                    "msg" => $exp,
-                ]);
-
-            }
-        }else{
-            return response()->json([
-                "status" => 1,
-                "msg" => "Usted no tiene permisos para realizar esta operación",
-            ]);
-        }
+        return response()->json([
+            "status" => 1,
+            "msg" => "¡Un registro ha sido actualizado!",
+        ]);
     }
 
-    public function select(Request $request) {
+    public function updatePasswordStud(Request $request)
+    {
 
-        if (auth()->user()->role == '1' || auth()->user()->role == '2' || auth()->user()->role == '4') {
-            $request->validate([
-                'id' => '',
-                'Nombre' => '',
-                'Apellidos' => '',
-                'DNI' => '',
-                'idCourse' => '',
-            ]);
-            $student = new student();
-            $student = DB::select('select * from students WHERE id = ? OR Nombre = ? OR Apellidos = ? OR DNI = ? OR idCourse = ?',
-            [$request->id,$request->Nombre,$request->Apellidos,$request->DNI,$request->idCourse]);
-            
+        $request->validate([
+            'id' => '',
+            'newPassword' => '',
+        ]);
 
-            return $student;
-
-            return response()->json([
-                "status" => 1,
-                "msg" => "¡Un registro ha sido actualizado!",
-            ]);
-        }else{
-            return response()->json([
-                "status" => 1,
-                "msg" => "Usted no tiene permisos para realizar esta operación",
-            ]);
-        }
-
+        DB::update(
+            'update students set Password = ? WHERE id = ?',
+            [$request->newPassword, $request->id]
+        );
     }
-
-    public function update(Request $request) {
-
-        if (auth()->user()->role == '1' || auth()->user()->role == '2') {
-            $request->validate([
-                'id' => '',
-                'Nombre' => '',
-                'Apellidos' => '',
-                'DNI' => '',
-                'idCourse' => '',
-            ]);
-        
-            DB::update('update students set Nombre = ?,Apellidos = ?,DNI = ?,idCourse = ? WHERE id = ?',
-            [$request->Nombre,$request->Apellidos,$request->DNI,$request->idCourse,$request->id]);
-            
-
-            return response()->json([
-                "status" => 1,
-                "msg" => "¡Un registro ha sido actualizado!",
-            ]);
-        }else{
-            return response()->json([
-                "status" => 1,
-                "msg" => "Usted no tiene permisos para realizar esta operación",
-            ]);
-        }
-
-    }
-
 }

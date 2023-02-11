@@ -52,11 +52,9 @@ import { registerPageComponent } from './pages/register-page/register-page.compo
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { HeaderComponent } from './header/header.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { registerPageStudentsComponent } from './pages/register-page-students/register-page-students.component';
-import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
-import { ProfilePageStudentsComponent } from './pages/profile-page-students/profile-page-students.component';
 
 @NgModule({
   declarations: [
@@ -66,11 +64,12 @@ import { ProfilePageStudentsComponent } from './pages/profile-page-students/prof
     AppComponent,
     LoginPageComponent,
     MainPageComponent,
-    HeaderComponent,
-    ProfilePageComponent,
-    ProfilePageStudentsComponent
+    HeaderComponent
   ],
   imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     ReactiveFormsModule,
     BrowserModule,/*  */

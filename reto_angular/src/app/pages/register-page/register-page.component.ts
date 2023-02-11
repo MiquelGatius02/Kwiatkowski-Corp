@@ -39,7 +39,6 @@ export class registerPageComponent {
   matcher = new MyErrorStateMatcher();
   onSubmit() {
 
-
     const nickname = this.registerForm.controls['Nick'].value;
     const name = this.registerForm.controls['Nombre'].value;
     const lastname = this.registerForm.controls['Apellidos'].value;

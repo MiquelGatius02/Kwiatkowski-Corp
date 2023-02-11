@@ -47,9 +47,13 @@
           ><br />
           <label for="disabledTextInput" class="form-label">{{
             perfil.Password
-          }}</label
-          ><br />
-          <button type="button" class="btn btn-primary btn-sm">
+          }}</label>
+          <input type="text" placeholder="{{ perfil.Password }}" /><br />
+          <button
+            type="button"
+            (click)="cambiarContrasena(newPass)"
+            class="btn btn-primary btn-sm"
+          >
             Cambiar contraseña
           </button>
         </div>

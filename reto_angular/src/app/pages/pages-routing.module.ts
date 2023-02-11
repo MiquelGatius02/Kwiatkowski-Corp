@@ -3,13 +3,14 @@ import {RouterModule, Routes} from '@angular/router';
 import { MainPageComponent } from './main-page/main-page.component';
 import { ProfilePageStudentsComponent } from './profile-page-students/profile-page-students.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
-import { LoginPageComponent } from './login-page/login-page.component';
 
 
-
+console.log("hola");
 const routes: Routes = [
 
   {path: '',component:MainPageComponent},
+  {path: 'perfil-prof', component: ProfilePageComponent },
+  {path: 'perfil-alumno', component: ProfilePageStudentsComponent },
 
   
 ];

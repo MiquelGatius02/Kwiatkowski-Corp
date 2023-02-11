@@ -17,9 +17,7 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    if (this.authService.login == false) { 
-      console.log("maricon");
-      this.router.navigate(['/login']);
+    if (this.authService.login != false) { 
       return true; 
     }else { 
       return false; 
