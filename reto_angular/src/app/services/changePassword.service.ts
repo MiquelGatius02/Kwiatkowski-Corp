@@ -37,18 +37,6 @@ export class PasswordService {
     }
 
     changePasswordStud(id: number, newPassword: string) {
-        //        this.http.post(this.changePasswordProfessor, id, newPassword);
+         this.http.post(this.changePasswordProfessor, id, newPassword);
     }
 }
-
-/* ████╗░░░████████████╗
-████║░░░████████████║
-████║░░░████╔═══════╝
-████║░░░████║░░░░░░░░
-████████████████████╗
-████████████████████║
-╚═══════████╔═══████║
-░░░░░░░░████║░░░████║
-████████████║░░░████║
-████████████║░░░████║
-╚═══════════╝░░░╚═══╝ */
