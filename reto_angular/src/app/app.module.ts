@@ -55,6 +55,8 @@ import { HeaderComponent } from './header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { registerPageStudentsComponent } from './pages/register-page-students/register-page-students.component';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { ProfilePageStudentsComponent } from './pages/profile-page-students/profile-page-students.component';
 
 @NgModule({
   declarations: [
@@ -64,9 +66,12 @@ import { registerPageStudentsComponent } from './pages/register-page-students/re
     AppComponent,
     LoginPageComponent,
     MainPageComponent,
-    HeaderComponent
+    HeaderComponent,
+    ProfilePageComponent,
+    ProfilePageStudentsComponent,
   ],
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
@@ -111,7 +116,8 @@ import { registerPageStudentsComponent } from './pages/register-page-students/re
     MatTooltipModule,
     MatPaginatorModule,
     MatSortModule,
-    MatTableModule
+    MatTableModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

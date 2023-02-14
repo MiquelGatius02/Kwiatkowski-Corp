@@ -52,49 +52,18 @@ class ProfessorController extends Controller
         }
     }
 
-    public function login_professor(Request $request)
-    {
-        $request->validate([
-            "Nick" => "required",
-            "Password" => "required"
-        ]);
-        $user = Professor::where("nick", "=", $request->Nick)->first();
-        if (isset($user->id)) {
-            if (Hash::check($request->Password, $user->password)) {
-                //creamos el token
-                $token = $user->createToken("auth_token")->plainTextToken;
-                //si está todo ok
-
-                return response()->json([
-                    "status" => 1,
-                    "msg" => "¡Usuario logueado exitosamente!",
-                    "access_token" => $token,
-                    "data" => $user
-                ]);
-            } else {
-                return response()->json([
-                    "status" => 0,
-                    "msg" => "La password es incorrecta",
-                ], 404);
-            }
-        } else {
-            return response()->json([
-                "status" => 0,
-                "msg" => "Usuario no registrado",
-            ], 404);
-        }
-    }
+    
     public function updatePasswordProf(Request $request)
     {
 
         $request->validate([
-            'id' => '',
-            'newPassword' => '',
+            'Nick' => '',
+            'Password' => '',
         ]);
 
         DB::update(
-            'update professors set Password = ? WHERE id = ?',
-            [$request->newPassword, $request->id]
+            'update professors set Password = ? WHERE Nick = ?',
+            [$request->Nick, $request->Password]
         );
     }
 }

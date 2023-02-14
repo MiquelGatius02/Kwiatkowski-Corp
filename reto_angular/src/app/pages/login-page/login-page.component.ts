@@ -48,28 +48,16 @@ export class LoginPageComponent {
     const logData: LoginData = {
       Nick: (nickname) ? nickname : '',
       Password: (pass) ? pass : '',
-      Professor: (prof) ? prof : 0
     };
 
 
-    // console.log(prof)
-    if (prof == 1) {
-      this.authService.login_professor(logData)
+
+      this.authService.loginUser(logData)
         .subscribe({ // Una vez se inicia sesión correctamente se redirige al main
           next: (v) => console.log(v),
           error: (e) => console.error(e),
           complete: () => this.router.navigate(['/main'])
         });
-    }
-    else {
-      this.authService.login_student(logData)
-        .subscribe({ // Una vez se inicia sesión correctamente se redirige al main
-          next: (v) => console.log(v),
-          error: (e) => console.error(e),
-          complete: () => this.router.navigate(['/main'])
-        });
-    }
-    // console.log(perfil);
 
   }
 

@@ -8,35 +8,38 @@ import { UserDataStudent } from '../interfaces/user-data-student.interface';
 import { Component, Input } from '@angular/core'; // First, import Input
 import { UserDataProf } from '../interfaces/user-data-prof.interface';
 import { Router } from '@angular/router';
+import { ChangePasswordData } from '../interfaces/changePass.interface';
+import { AuthService } from './auth.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class PasswordService {
     url: string = "http://127.0.0.1:8000/api";
-    registerStudent: string = this.url + '/register_student';
-    loginStudent: string = this.url + '/login_student';
-    registerProfessor: string = this.url + '/register_professor';
-    loginProfessor: string = this.url + '/login_professor';
-    getProfessor: string = this.url + '/get_professor';
-    getStudent: string = this.url + '/get_student';
     changePasswordProfessor: string = this.url + '/updatePasswordProf';
     changePasswordStudent: string = this.url + '/updatePasswordStud';
+    requestPassword: any[] = [];
 
-    user: LoginData = { Nick: '', Password: '', Professor: -1 };
-
+    user: LoginData = { Nick: '', Password: ''};
+    data: ChangePasswordData = { Nick: '', Password: '' };
     login: boolean = false;
     constructor(
         private http: HttpClient,
-        private readonly router: Router
+        private readonly router: Router,
+        private readonly authService: AuthService
     ) { }
 
-
-    changePasswordProf(id: number, newPassword: string) {
-        //      this.http.post(this.changePasswordProfessor, id, newPassword);
+    changePasswordProf(data: ChangePasswordData) {
+        this.data.Nick = data.Nick;
+        this.data.Password = data.Password;
+        console.log(data)
+        return this.http.post(this.changePasswordProfessor, data);
     }
 
-    changePasswordStud(id: number, newPassword: string) {
-         this.http.post(this.changePasswordProfessor, id, newPassword);
+    changePasswordStud(data: ChangePasswordData) {
+        this.data.Nick = data.Nick;
+        this.data.Password = data.Password;
+        console.log(data)
+        return this.http.post(this.changePasswordStudent, data);
     }
 }

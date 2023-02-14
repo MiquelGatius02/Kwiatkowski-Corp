@@ -15,13 +15,12 @@ import { Router } from '@angular/router';
 export class AuthService {
   url: string = "http://127.0.0.1:8000/api";
   registerStudent: string = this.url + '/register_student';
-  loginStudent: string = this.url + '/login_student';
+  logUser: string = this.url + '/loginUser';
   registerProfessor: string = this.url + '/register_professor';
-  loginProfessor: string = this.url + '/login_professor';
   getProfessor: string = this.url + '/get_professor';
   getStudent: string = this.url + '/get_student';
 
-  user: LoginData = { Nick: '', Password: '', Professor: -1 };
+  user: LoginData = { Nick: '', Password: ''};
   professorRegister: RegisterData = { Nick: '', Nombre: '', Apellidos: '', Email: '', Centro: '', Password: '' };
   studentRegister: RegisterStudentsData = { Nick: '', Nombre: '', Apellidos: '', Email: '', fechaNacimiento: '', Password: '' };
 
@@ -43,9 +42,9 @@ export class AuthService {
     }
   }
 
-  login_student(data: LoginData): Observable<LoginData> {
+  loginUser(data: LoginData): Observable<LoginData> {
 
-    return this.http.post<LoginData>(this.loginStudent, data).pipe(
+    return this.http.post<LoginData>(this.logUser, data).pipe(
       filter((value: any) => {
         if (value != undefined) {
           console.log(value);
@@ -53,6 +52,7 @@ export class AuthService {
           this.perfilStudent.Apellidos = value.data.apellidos;
           this.perfilStudent.Email = value.data.email;
           this.perfilStudent.Nacimiento = value.data.fechaNacimiento;
+          this.perfilProf.Centro = value.data.centro;
           this.perfilStudent.Nick = value.data.nick;
           this.perfilStudent.Nombre = value.data.nombre;
           this.perfilStudent.Password = data.Password;
@@ -60,28 +60,6 @@ export class AuthService {
           this.login = true;
           return value;
 
-        } else {
-        }
-      })
-    );
-  }
-
-  login_professor(data: LoginData): Observable<LoginData> {
-
-    return this.http.post<LoginData>(this.loginProfessor, data).pipe(
-      filter((value: any) => {
-        if (value != '') {
-          console.log(value);
-          /*           this.perfilProf.id = value.data.id; */
-          this.perfilProf.Apellidos = value.data.apellidos;
-          this.perfilProf.Email = value.data.email;
-          this.perfilProf.Centro = value.data.centro;
-          this.perfilProf.Nick = value.data.nick;
-          this.perfilProf.Nombre = value.data.nombre;
-          this.perfilProf.Password = data.Password;
-          this.perfilProf.Imagen = value.data.imagen
-          this.login = true;
-          return value;
         } else {
         }
       })

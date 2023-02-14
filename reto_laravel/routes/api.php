@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Http\Request;
@@ -17,10 +18,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('register_student', [StudentController::class, 'register_student']);
-Route::post('login_student', [StudentController::class, 'login_student']);
-
 Route::post('register_professor', [ProfessorController::class, 'register_professor']);
-Route::post('login_professor', [ProfessorController::class, 'login_professor']);
+
+Route::post('loginUser', [LoginController::class, 'loginUser']);
 
 
 Route::post('updatePasswordProf', [ProfessorController::class, 'updatePasswordProf']);

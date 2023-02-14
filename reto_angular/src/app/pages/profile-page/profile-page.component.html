@@ -43,19 +43,22 @@
           perfil.Email
         }}</label>
         <div class="change-password">
-          <label for="disabledTextInput" class="form-label">Contraseña:</label
-          ><br />
-          <label for="disabledTextInput" class="form-label">{{
-            perfil.Password
-          }}</label>
-          <input type="text" placeholder="{{ perfil.Password }}" /><br />
-          <button
-            type="button"
-            (click)="cambiarContrasena(newPass)"
-            class="btn btn-primary btn-sm"
-          >
-            Cambiar contraseña
-          </button>
+          <div class="center">
+            <form
+              class="form"
+              [formGroup]="changeForm"
+              (ngSubmit)="cambiarContrasena()"
+            >
+              <input
+                type="text"
+                formControlName="Password"
+                placeholder="{{ this.perfil.Password }}"
+              />
+              <button class="form-buttons" type="submit" color="primary">
+                Cambiar Contraseña
+              </button>
+            </form>
+          </div>
         </div>
       </div>
 

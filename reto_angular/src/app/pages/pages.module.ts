@@ -60,12 +60,11 @@ import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     MainPageComponent,
-    ProfilePageComponent,
-    ProfilePageStudentsComponent,
+ 
 
   ],
   imports: [
-    
+    ReactiveFormsModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
@@ -111,7 +110,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatTooltipModule,
     MatPaginatorModule,
     MatSortModule,
-    MatTableModule
+    MatTableModule,
+    FormsModule
   ],
 })
 export class PagesModule { }
