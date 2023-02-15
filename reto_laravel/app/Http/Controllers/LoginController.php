@@ -31,7 +31,7 @@ class LoginController extends Controller{
             if ($user != null && password_verify($request->Password,$user[0]->password)) {
                 return response()->json([
                     "status" => 'OK',
-                    "msg" => "¡Usuario logueado exitosamente!",
+                    "msg" => "¡Usuario logueado!",
                     "data" => $user
                 ]);
             }else{
