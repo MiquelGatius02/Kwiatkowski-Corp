@@ -47,16 +47,22 @@ export class AuthService {
     return this.http.post<LoginData>(this.logUser, data).pipe(
       filter((value: any) => {
         if (value != undefined) {
-          console.log(value);
+          // console.log(value);
           /*          this.perfilStudent.id = value.data.id; */
           this.perfilStudent.Apellidos = value.data.apellidos;
           this.perfilStudent.Email = value.data.email;
           this.perfilStudent.Nacimiento = value.data.fechaNacimiento;
-          this.perfilProf.Centro = value.data.centro;
           this.perfilStudent.Nick = value.data.nick;
           this.perfilStudent.Nombre = value.data.nombre;
           this.perfilStudent.Password = data.Password;
           this.perfilStudent.Imagen = value.data.imagen
+          this.perfilProf.Apellidos = value.data.apellidos;
+          this.perfilProf.Email = value.data.email;
+          this.perfilProf.Nick = value.data.nick;
+          this.perfilProf.Nombre = value.data.nombre;
+          this.perfilProf.Password = data.Password;
+          this.perfilProf.Imagen = value.data.imagen
+          this.perfilProf.Centro = value.data.centro;
           this.login = true;
           return value;
 
@@ -64,6 +70,7 @@ export class AuthService {
         }
       })
     );
+    console.log(this.perfilStudent)
   }
 
   register_student(data: RegisterStudentsData): Observable<LoginData> {
@@ -71,7 +78,7 @@ export class AuthService {
       filter((value: any) => {
         let found = false;
         if (value != '') {
-          console.log(value);
+          // console.log(value);
           /*       this.perfilStudent.id = value.data.id; */
           this.perfilStudent.Apellidos = value.data.apellidos;
           this.perfilStudent.Email = value.data.email;
@@ -94,7 +101,7 @@ export class AuthService {
       filter((value: any) => {
         let found = false;
         if (value != '') {
-          console.log(value);
+          // console.log(value);
           this.perfilProf.Apellidos = value.data.apellidos;
           this.perfilProf.Email = value.data.email;
           this.perfilProf.Centro = value.data.centro;
