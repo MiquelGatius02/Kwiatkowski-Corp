@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserData } from 'src/app/interfaces/userData.interface';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -8,15 +9,21 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ProfileComponent implements OnInit {
 
+  profileData: UserData = { username: "", email: "", firstname: "", lastname: "", centro: "", date: "", password: "" };
+
   constructor(
     public authService: AuthService
   ) { }
 
   ngOnInit(): void {
-  }
 
-  LogPerfil() {
-    this.authService.profileStudent();
+    if (this.profileData.centro != undefined)
+      this.authService.profileProfesor();
+    else if (this.profileData.date != undefined) {
+      this.authService.profileStudent();
+    }
+    this.profileData = this.authService.UserData;
+
   }
 
 }

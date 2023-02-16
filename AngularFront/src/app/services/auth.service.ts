@@ -54,26 +54,25 @@ export class AuthService {
         this.http.get("http://127.0.0.1:8000/api/userProfile", { headers: new HttpHeaders().set('Authorization', tokenCache) }).subscribe(data => {
             console.log(data);
             this.Data = data;
-            this.UserData.username = this.Data.username;
-            this.UserData.email = this.Data.email;
-            this.UserData.firstname = this.Data.firstname;
-            this.UserData.lastname = this.Data.lastname;
-            this.UserData.date = this.Data.date;
-            this.UserData.password = this.Data.password;
-            console.log(this.Data)
+            this.UserData.username = this.Data.data.username;
+            this.UserData.email = this.Data.data.email;
+            this.UserData.firstname = this.Data.data.firstname;
+            this.UserData.lastname = this.Data.data.lastname;
+            this.UserData.date = this.Data.data.date;
+            this.UserData.password = this.Data.data.password;
         });
     }
     profileProfesor() {
         const tokenCache: any = this.token.getToken();
         this.http.get("http://127.0.0.1:8000/api/userProfile", { headers: new HttpHeaders().set('Authorization', tokenCache) }).subscribe(data => {
-            console.log(data);
             this.Data = data;
-            this.UserData.username = this.Data.username;
-            this.UserData.email = this.Data.email;
-            this.UserData.firstname = this.Data.firstname;
-            this.UserData.lastname = this.Data.lastname;
-            this.UserData.centro = this.Data.centro;
-            this.UserData.password = this.Data.password;
+            console.log(this.Data);
+            this.UserData.username = this.Data.data.username;
+            this.UserData.email = this.Data.data.email;
+            this.UserData.firstname = this.Data.data.firstname;
+            this.UserData.lastname = this.Data.data.lastname;
+            this.UserData.centro = this.Data.data.centro;
+            this.UserData.password = this.Data.datapassword;
         });
     }
 
