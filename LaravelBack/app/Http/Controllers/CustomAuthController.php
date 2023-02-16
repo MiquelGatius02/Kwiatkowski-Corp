@@ -104,7 +104,8 @@ class CustomAuthController extends Controller
         ]);
     }
 
-    public function logout() {
+    public function logout()
+    {
         auth()->user()->tokens()->delete();
         return response()->json([
             "status" => 1,

@@ -23,6 +23,6 @@ Route::post('login', [CustomAuthController::class, 'login']);
 
 
 Route::group(['middleware' => ["auth:sanctum"]], function () {
-    Route::get('profile', [UserController::class, 'profile']);
-    Route::get('logout', [UserController::class, 'logout']);
+    Route::get('userProfile', [CustomAuthController::class, 'userProfile']);
+    Route::get('logout', [CustomAuthController::class, 'logout']);
 });
