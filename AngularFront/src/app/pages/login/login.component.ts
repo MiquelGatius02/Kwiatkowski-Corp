@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthStateService } from '../services/auth-state.service';
-import { AuthService } from '../services/auth.service';
-import { TokenService } from '../services/token.service';
+import { AuthStateService } from '../../services/auth-state.service';
+import { AuthService } from '../../services/auth.service';
+import { TokenService } from '../../services/token.service';
 
 @Component({
   selector: 'app-login',
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
       () => {
         this.authState.setAuthState(true);
         this.loginForm.reset();
-        this.router.navigate(['profile']);
+        this.router.navigate(['/home/profile']);
       }
     );
   }

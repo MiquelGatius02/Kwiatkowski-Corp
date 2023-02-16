@@ -2,7 +2,7 @@ import { registerLocaleData } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { RegisterComponent } from '../register/register.component';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
