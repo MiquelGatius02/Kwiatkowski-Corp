@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ProfileComponent implements OnInit {
 
-  profileData: UserData = { username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "" };
+  profileData: UserData = { id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "" };
 
   constructor(
     public authService: AuthService
@@ -18,6 +18,10 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.authService.profile();
     this.profileData = this.authService.UserData;
+  }
+
+  changePassword(newPass: string) {
+
   }
 
 }
