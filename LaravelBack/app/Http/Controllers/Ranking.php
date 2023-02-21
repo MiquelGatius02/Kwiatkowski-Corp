@@ -6,7 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Ranking;
 
-class RankingController extends Controller{
+
+class RankingController extends Controller
+{
+
+
 
     public function createRanking(Request $request){
         $request->validate([
@@ -14,10 +18,10 @@ class RankingController extends Controller{
             'codigo_sala' => 'required',
         ]);
 
-       $ranking = new Ranking();
-       $ranking->nombre = $request->nombre;
-       $ranking->codigo_sala = $request->codigo_sala;
-       $ranking->save();
+        $ranking = new Ranking();
+        $ranking->nombre = $request->nombre;
+        $ranking->codigo_sala = $request->codigo_sala;
+        $ranking->save();
 
         return response()->json([
             "status" => 1,
@@ -32,14 +36,37 @@ class RankingController extends Controller{
             'codRanking' => 'required',
         ]);
 
-       $ranking = new Ranking();
-       $ranking->idUser = $request->idUser;
-       $ranking->codRanking = $request->codRanking;
-       $ranking->save();
+        $ranking = new Ranking();
+        $ranking->idUser = $request->idUser;
+        $ranking->codRanking = $request->codRanking;
+        $ranking->save();
 
         return response()->json([
             "status" => 1,
             "msg" => "¡Registro de usuario exitoso!",
         ]);
+    }
+
+    public function getRanking(Request $request){
+       
+        $request->validate([
+            "idUser" => "required",
+            "codigoSala" => "required"
+        ]);
+
+        $ranking = Ranking::where("idUser", "=", $request->idUser, "AND", "codigoSala", "=", $request->codigoSala)->first();
+
+        if (isset($ranking->id)) {
+                return response()->json([
+                    "status" => 1,
+                    "msg" => "¡Usuario logueado exitosamente!",
+                    "data" => $ranking
+                ]);
+        }else{
+            return response()->json([
+                "status" => 0,
+                "msg" => "Usuario no registrado",
+            ], 404);
+        }
     }
 }

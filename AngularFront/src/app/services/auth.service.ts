@@ -15,7 +15,7 @@ export class AuthService {
 
     typeUser: number = 0;
     Data: any;
-    UserData: UserData = { username: '', email: '', firstname: '', lastname: '', centro: '', date: '', password: '' }
+    UserData: UserData = { id: 0, username: '', email: '', firstname: '', lastname: '', centro: '', date: '', password: '' }
     public loggedIn: Subject<boolean> = new ReplaySubject<boolean>(1);
 
     changeType(type: number) {
@@ -54,6 +54,7 @@ export class AuthService {
         this.http.get("http://127.0.0.1:8000/api/userProfile", { headers: new HttpHeaders().set('Authorization', tokenCache) }).subscribe(data => {
             console.log(data);
             this.Data = data;
+            this.UserData.id = this.Data.data.id;
             this.UserData.username = this.Data.data.username;
             this.UserData.email = this.Data.data.email;
             this.UserData.firstname = this.Data.data.firstname;
@@ -62,6 +63,10 @@ export class AuthService {
             this.UserData.centro = this.Data.data.center;
             this.UserData.password = this.Data.data.password;
         });
+    }
+
+    changePassword(newPass: string): Observable<any> {
+        return this.http.post('http://127.0.0.1:8000/api/changePassword', newPass);
     }
 
 }
