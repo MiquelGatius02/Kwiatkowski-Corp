@@ -6,12 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Ranking;
 
-<<<<<<< Updated upstream
-class RankingController extends Controller{
-=======
-class Ranking extends Controller
+
+class RankingController extends Controller
 {
->>>>>>> Stashed changes
+
+
 
     public function createRanking(Request $request)
     {
