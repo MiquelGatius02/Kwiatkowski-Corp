@@ -12,7 +12,8 @@ class RankingController extends Controller
 
 
 
-    public function createRanking(Request $request){
+    public function createRanking(Request $request)
+    {
         $request->validate([
             'nombre' => '',
             'codigo_sala' => 'required',
@@ -30,7 +31,8 @@ class RankingController extends Controller
     }
 
 
-    public function addToRanking(Request $request){
+    public function addToRanking(Request $request)
+    {
         $request->validate([
             'idUser' => 'required',
             'codRanking' => 'required',
