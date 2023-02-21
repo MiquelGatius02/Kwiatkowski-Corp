@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Ranking;
 
-class Ranking extends Controller{
+class RankingController extends Controller{
 
     public function createRanking(Request $request){
         $request->validate([
