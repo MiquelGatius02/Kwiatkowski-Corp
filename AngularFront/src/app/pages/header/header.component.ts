@@ -36,6 +36,7 @@ export class HeaderComponent implements OnInit {
 
     }
     else {
+      this.session = true;
     }
   }
 

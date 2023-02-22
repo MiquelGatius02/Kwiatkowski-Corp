@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('registerProfessor', [CustomAuthController::class, 'registerProfessor']);
 Route::post('registerStudent', [CustomAuthController::class, 'registerStudent']);
 Route::post('login', [CustomAuthController::class, 'login']);
+Route::post('changePassword', [CustomAuthController::class, 'changePassword']);
 
 
 Route::group(['middleware' => ["auth:sanctum"]], function () {
