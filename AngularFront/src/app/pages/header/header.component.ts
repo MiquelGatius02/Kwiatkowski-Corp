@@ -29,15 +29,9 @@ export class HeaderComponent implements OnInit {
   }
 
   endSession() {
-    if (window.confirm('¿Quieres cerrar sesión?')) {
-      this.token.removeToken()
-      this.router.navigate(['main']);
-      this.session = false;
-
-    }
-    else {
-      this.session = true;
-    }
+    this.token.removeToken()
+    this.router.navigate(['main']);
+    this.session = false;
   }
 
 }

@@ -17,6 +17,7 @@ export class ProfileComponent implements OnInit {
   passwordForm: FormGroup;
   typeUser: number = 0;
   errors: any = null;
+  url: any;
 
   constructor(
     public authService: AuthService,
