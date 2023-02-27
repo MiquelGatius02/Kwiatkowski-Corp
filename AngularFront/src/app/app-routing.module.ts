@@ -17,8 +17,10 @@ const routes: Routes = [
   { path: 'register-select', component: SelectRegisterComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'home',loadChildren: () => import('src/app/pages/pages-routing.module').then((m) => m.PagesRoutingModule),
-  canActivate: [AuthGuard]},
+  {
+    path: 'home', loadChildren: () => import('src/app/pages/pages-routing.module').then((m) => m.PagesRoutingModule),
+    canActivate: [AuthGuard]
+  },
   { path: '**', component: NotfoundComponent },
 ];
 

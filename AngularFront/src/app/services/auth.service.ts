@@ -7,6 +7,7 @@ import { FormBuilder } from '@angular/forms';
 import { TokenService } from './token.service';
 import { AuthStateService } from './auth-state.service';
 import { passwordData } from '../interfaces/passwordData.interface';
+import { RankData } from '../interfaces/rankData.interface ';
 // User interface
 
 @Injectable({
