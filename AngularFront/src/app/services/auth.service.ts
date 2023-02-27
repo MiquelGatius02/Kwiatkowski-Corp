@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { TokenService } from './token.service';
 import { AuthStateService } from './auth-state.service';
+import { passwordData } from '../interfaces/passwordData.interface';
 // User interface
 
 @Injectable({
@@ -65,8 +66,8 @@ export class AuthService {
         });
     }
 
-    changePassword(newPass: string): Observable<any> {
-        return this.http.post('http://127.0.0.1:8000/api/changePassword', newPass);
+    changePassword(user: passwordData): Observable<any> {
+        return this.http.post('http://127.0.0.1:8000/api/changePassword', user);
     }
 
 }

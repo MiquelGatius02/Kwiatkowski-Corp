@@ -74,11 +74,20 @@
               <div class="col-sm-3">
                 <p class="mb-0">Contraseña</p>
               </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0">{{this.profileData.password}}</p>
-                <button type="button" class="btn btn-primary">Cambiar contraseñ</button>
-              </div>
+
+              <form class="form-signin" [formGroup]="passwordForm" (ngSubmit)="onSubmit()">
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{this.profileData.password}}</p>
+                  <div class="inline">
+                    <input style="width: 250px; margin-right: 10px;" type="password" formControlName="password" />
+                    <button type="submit" class="btn btn-block btn-primary">
+                      Cambiar contraseña
+                    </button><br>
+                  </div>
+                </div>
+              </form>
             </div>
+
 
 
           </div>

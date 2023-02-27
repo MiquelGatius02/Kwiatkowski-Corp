@@ -104,12 +104,23 @@ class CustomAuthController extends Controller
         ]);
     }
 
-    public function logout()
+    public function changePassword(Request $request)
     {
-        auth()->user()->tokens()->delete();
+        $request->validate([
+            "id" => "required",
+            "password" => "required"
+        ]);
+
+        $user = user::find($request->id);
+
+        if ($user) {
+            $user->password = Hash::make($request->password);
+            $user->save();
+        }
+
         return response()->json([
-            "status" => 1,
-            "msg" => "Cierre de Sesión",
+            "status" => 0,
+            "msg" => "Se ha cambiado la contraseña del usuario"
         ]);
     }
 }

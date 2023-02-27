@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'ranking', component: RankingPageComponent },
+  { path: 'main-page', component: HomeComponent },
 
 ];
 
