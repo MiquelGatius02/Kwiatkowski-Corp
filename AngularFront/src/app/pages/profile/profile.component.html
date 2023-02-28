@@ -6,9 +6,11 @@
       <div class="col-lg-15">
         <div class="card mb-3">
           <div class="card-body text-center">
-            <img src="{{profileData.imagen}}" alt="avatar"
-                 class="rounded-circle img-fluid" style="width: 100px;">
+            <img src="{{profileData.imagen}}" alt="avatar" class="rounded-circle img-fluid" style="width: 100px;">
             <h5 class="my-3">{{profileData.username}}</h5>
+            <!-- <button class="btn btn-primary" (click)="onImageChange()">Cambiar imagen</button> -->
+            <input type="file" accept="image/*" (change)="onFileSelected($event)" style="display:none;" #fileInput>
+            <button type="button" class="btn btn-primary" (click)="fileInput.click()">Cambiar imagen</button>
           </div>
         </div>
       </div>
