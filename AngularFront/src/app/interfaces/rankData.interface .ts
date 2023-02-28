@@ -1,5 +1,6 @@
-export interface rankData {
+export interface RankData {
+    iduser: number;
+    id: number;
     nombre: string;
-    codigoSala: number;
-    idUser: string;
+    codigo_sala: string;
 }

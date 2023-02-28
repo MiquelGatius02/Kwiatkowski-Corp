@@ -10,8 +10,8 @@ export class RankingPageComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    
+
   }
-  
+
 
 }
