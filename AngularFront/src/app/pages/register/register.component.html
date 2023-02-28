@@ -18,11 +18,13 @@
       <!-- Signup form -->
       <div class="form-group">
         <label>Username</label>
-        <input type="text" class="form-control" formControlName="username" />
-      </div>
+        <input type="text" class="form-control" formControlName="username" (keypress)="controlChars($event)"/>
+        <p [ngStyle]="{'color': 'red', 'font-family': 'poppins', 'font-size': '10px', 'margin-top': '5px', 'display': errorBolNombre ? 'inline' : 'none'}">{{error}}</p>
+      </div>      
       <div class="form-group">
         <label>Correo electrónico</label>
         <input type="email" class="form-control" formControlName="email" />
+        <p *ngIf="emailErrors" class="error-message" [ngStyle]="{'color': 'red', 'font-family': 'poppins', 'font-size': '10px', 'margin-top': '5px'}">{{ emailErrors }}</p>
       </div>
       <div class="form-group">
         <label>Nombre</label>
