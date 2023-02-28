@@ -18,6 +18,7 @@ export class ProfileComponent implements OnInit {
   typeUser: number = 0;
   errors: any = null;
   url: any;
+  userId: string = '123'; // aquí deberías obtener el ID del usuario actualmente logueado
 
   constructor(
     public authService: AuthService,

@@ -6,15 +6,9 @@
       <div class="col-lg-15">
         <div class="card mb-3">
           <div class="card-body text-center">
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
-              class="rounded-circle img-fluid" style="width: 100px;">
-            <h5 class="my-3">{{ this.profileData.username}}</h5>
-            <div *ngIf="this.profileData.centro != undefined">
-              <p class="text-muted mb-4">Profesor</p>
-            </div>
-            <div *ngIf="this.profileData.date != undefined">
-              <p class="text-muted mb-2">Student</p>
-            </div>
+            <img src="{{profileData.imagen}}" alt="avatar"
+                 class="rounded-circle img-fluid" style="width: 100px;">
+            <h5 class="my-3">{{profileData.username}}</h5>
           </div>
         </div>
       </div>
