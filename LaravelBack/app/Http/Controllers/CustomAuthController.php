@@ -123,4 +123,31 @@ class CustomAuthController extends Controller
             "msg" => "Se ha cambiado la contraseña del usuario"
         ]);
     }
+
+    public function changeImg(Request $request)
+    {
+        $request->validate([
+            "id" => "required",
+            "img" => "required"
+        ]);
+
+        $user = user::find($request->id);
+
+        if ($user) { // verifica si $user no es nulo
+            $user->imagen = $request->img;
+            $user->save();
+
+            return response()->json([
+                "status" => 0,
+                "msg" => "Se ha cambiado la imagen del usuario",
+                "data" => $user->imagen,
+            ]);
+        } else {
+            return response()->json([
+                "status" => 1,
+                "msg" => "Ha ocurrido un error",
+                "data" => $user,
+            ]);
+        }
+    }
 }

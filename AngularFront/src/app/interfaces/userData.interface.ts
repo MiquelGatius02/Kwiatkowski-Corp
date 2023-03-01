@@ -7,4 +7,5 @@ export interface UserData {
     centro?: string;
     date?: string;
     password: string;
+    imagen?: string;
 }

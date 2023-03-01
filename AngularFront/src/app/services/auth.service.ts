@@ -17,7 +17,7 @@ export class AuthService {
 
     typeUser: number = 0;
     Data: any;
-    UserData: UserData = { id: 0, username: '', email: '', firstname: '', lastname: '', centro: '', date: '', password: '' }
+    UserData: UserData = { id: 0, username: '', email: '', firstname: '', lastname: '', centro: '', date: '', password: '', imagen: '' }
     public loggedIn: Subject<boolean> = new ReplaySubject<boolean>(1);
 
     changeType(type: number) {
@@ -64,6 +64,7 @@ export class AuthService {
             this.UserData.date = this.Data.data.date;
             this.UserData.centro = this.Data.data.center;
             this.UserData.password = this.Data.data.password;
+            this.UserData.imagen = this.Data.data.imagen;
         });
     }
 
