@@ -21,7 +21,8 @@ export class ProfileComponent implements OnInit {
   passwordData: passwordData = { id: 0, password: "" };
   passwordForm: FormGroup;
   typeUser: number = 0;
-  
+
+  showAlert: boolean = false;
   errors: any = null;
   url: any;
   
@@ -99,9 +100,12 @@ export class ProfileComponent implements OnInit {
               this.errors = error.error;
             },
           );
+          this.showAlert = true;
+          setTimeout(() => {
+            this.showAlert = false;
+          }, 5000);
         }
       };
     }
   }
-
 }
