@@ -133,14 +133,21 @@ class CustomAuthController extends Controller
 
         $user = user::find($request->id);
 
-        if ($user) {
+        if ($user) { // verifica si $user no es nulo
             $user->imagen = $request->img;
             $user->save();
-        }
 
-        return response()->json([
-            "status" => 0,
-            "msg" => "Se ha cambiado la imagen del usuario"
-        ]);
+            return response()->json([
+                "status" => 0,
+                "msg" => "Se ha cambiado la imagen del usuario",
+                "data" => $user->imagen,
+            ]);
+        } else {
+            return response()->json([
+                "status" => 1,
+                "msg" => "Ha ocurrido un error",
+                "data" => $user,
+            ]);
+        }
     }
 }

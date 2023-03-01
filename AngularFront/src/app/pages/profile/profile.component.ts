@@ -14,7 +14,7 @@ import { changeImgService } from 'src/app/services/changeImg.service';
 })
 export class ProfileComponent implements OnInit {
 
-  profileData: UserData = { id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "", imagen:""};
+  profileData: UserData = { id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: ""};
   
   imgData: imgData = { id: 0, img: "" };
   
@@ -89,8 +89,8 @@ export class ProfileComponent implements OnInit {
       reader.onload = () => {
         if(reader.result != null){
           const imageBase64 = reader.result.toString();
-          console.log(imageBase64);
           this.imgData.img = imageBase64;
+          this.imgData.id = this.profileData.id;
           this.imgChange.changeImg(this.imgData).subscribe(
             (result) => {
               console.log(result);
