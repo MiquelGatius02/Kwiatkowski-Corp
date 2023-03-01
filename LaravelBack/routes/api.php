@@ -26,6 +26,8 @@ Route::post('createRanking', [RankingController::class, 'createRanking']);
 Route::get('getRanking', [RankingController::class, 'getRanking']);
 Route::post('addToRanking', [RankingController::class, 'addToRanking']);
 Route::post('login', [CustomAuthController::class, 'login']);
+Route::post('createRanking', [RankingController::class, 'createRanking']);
+Route::post('addRanking', [RankingController::class, 'addRanking']);
 
 
 

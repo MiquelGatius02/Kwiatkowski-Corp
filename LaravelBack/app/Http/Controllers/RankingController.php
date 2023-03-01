@@ -27,21 +27,21 @@ class RankingController extends Controller
         ]);
     }
 
-    public function addToRanking(Request $request)
+    public function addRanking(Request $request)
     {
         $request->validate([
-            'idUser' => 'required',
-            'codRanking' => 'required',
+            'iduser' => 'required',
+            'codranking' => 'required'
         ]);
 
         $ranking = new RankingData();
-        $ranking->idUser = $request->idUser;
-        $ranking->codRanking = $request->codRanking;
+        $ranking->iduser = $request->nombre;
+        $ranking->codranking = $request->nombre;
         $ranking->save();
 
         return response()->json([
             "status" => 1,
-            "msg" => "¡Registro de usuario exitoso!",
+            "msg" => "¡Registro en ranking exitoso!",
         ]);
     }
 
