@@ -1,17 +1,13 @@
 <nav id="spacing" class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#">Kwiatowski</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"></button>
-  <span id="space-right"> </span>
-
   <ul class="navbar-nav">
-    <div id="flex">
-      <div *ngIf="!session">
+    <div *ngIf="!session" id="flex">
+      <div>
         <li class="nav-item">
           <a class="nav-link" routerLink="register-select">Register</a>
         </li>
       </div>
-      <div *ngIf="!session" id="flex">
+      <div>
         <li class="nav-item">
           <a class="nav-link" routerLink="login">Login</a>
         </li>
@@ -19,9 +15,18 @@
     </div>
     <div *ngIf="session">
       <!-- Button trigger modal -->
-      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">
-        Cerrar Sesión
-      </button>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          {{this.userName.username}}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <button class="dropdown-item" routerLink="home/profile" type="button">Perfil</button>
+          <button type="button" class="dropdown-item" data-toggle="modal" data-target="#exampleModal">
+            Cerrar Sesión
+          </button>
+        </div>
+      </div>
 
       <!-- Modal -->
       <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -35,16 +40,16 @@
               </button>
             </div>
             <div class="modal-body">
-              ¿Estás segur@ de que deseas cerrar sesión?
+              ¿Estás seguro de que deseas cerrar sesión?
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-              <button type="button" (click)="endSession()" class="btn btn-primary" data-dismiss="modal">Cerrar Sesión</button>
+              <button type="button" (click)="endSession()" class="btn btn-primary" data-dismiss="modal">
+                Cerrar Sesión</button>
             </div>
           </div>
         </div>
       </div>
     </div>
   </ul>
-
 </nav>
