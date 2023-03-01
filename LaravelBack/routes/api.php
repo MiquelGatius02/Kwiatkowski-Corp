@@ -22,9 +22,9 @@ Route::post('registerProfessor', [CustomAuthController::class, 'registerProfesso
 Route::post('registerStudent', [CustomAuthController::class, 'registerStudent']);
 Route::post('changePassword', [CustomAuthController::class, 'changePassword']);
 Route::post('createRanking', [RankingController::class, 'createRanking']);
-Route::post('getRankingData', [RankingController::class, 'getRankingData']);
+Route::get('getRankingData', [RankingController::class, 'getRankingData']);
 Route::post('addToRanking', [RankingController::class, 'addToRanking']);
-Route::get('login', [CustomAuthController::class, 'login']);
+Route::post('login', [CustomAuthController::class, 'login']);
 
 
 

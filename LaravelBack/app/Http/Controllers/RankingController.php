@@ -49,7 +49,7 @@ class RankingController extends Controller
     {
 
         $request->validate([
-            "idUser" => "required"
+            "iduser" => "required"
         ]);
 
         $ranking = RankingData::where("idUser", "=", $request->iduser, "AND", "codRanking", "=", $request->codigoSala)->first();
