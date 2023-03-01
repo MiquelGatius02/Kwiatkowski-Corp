@@ -22,9 +22,12 @@ Route::post('registerProfessor', [CustomAuthController::class, 'registerProfesso
 Route::post('registerStudent', [CustomAuthController::class, 'registerStudent']);
 Route::post('changePassword', [CustomAuthController::class, 'changePassword']);
 Route::post('changeImg', [CustomAuthController::class, 'changeImg']);
-
-Route::post('getRanking', [RankingController::class, 'getRanking']);
+Route::post('createRanking', [RankingController::class, 'createRanking']);
+Route::get('getRanking', [RankingController::class, 'getRanking']);
+Route::post('addToRanking', [RankingController::class, 'addToRanking']);
 Route::post('login', [CustomAuthController::class, 'login']);
+
+
 
 Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get('userProfile', [CustomAuthController::class, 'userProfile']);

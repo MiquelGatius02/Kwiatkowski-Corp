@@ -25,7 +25,8 @@ export class HomeComponent implements OnInit {
     this.authService.profile();
     this.profileData = this.authService.UserData;
     this.rankingData.iduser = this.profileData.id;
-    this.obtenerRankingService.getRanking(this.rankingData)
+    console.log(this.rankingData.iduser)
+    this.obtenerRankingService.getRanking()
     this.rankingData = this.obtenerRankingService.rankingData;
   }
 

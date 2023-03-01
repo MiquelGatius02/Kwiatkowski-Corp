@@ -14,11 +14,13 @@ export class ObtenerRankingService {
 
   constructor(private http: HttpClient, public router: Router) { }
 
-  getRanking(ranking: RankData) {
-    this.http.get("http://127.0.0.1:8000/api/getRanking").subscribe(ranking => {
-      this.rankingData.nombre = this.Data.nombre;
-      this.rankingData.codigo_sala = this.Data.codigo_sala;
-      this.rankingData.id = this.Data.id;
+  getRanking() {
+    this.http.get("http://127.0.0.1:8000/api/getRanking").subscribe(data => {
+      console.log(data);
+      this.Data = data;
+      this.rankingData.id = this.Data.data.id;
+      this.rankingData.nombre = this.Data.data.nombre;
+      this.rankingData.codigo_sala = this.Data.data.codigo_sala;
     });
   }
 }
