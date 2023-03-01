@@ -13,7 +13,7 @@ import { UserData } from 'src/app/interfaces/userData.interface';
 })
 export class HeaderComponent implements OnInit {
 
-  userName: UserData = { id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "" };
+  userData: UserData = { id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "" };
   session: boolean = this.token.isLoggedIn();
 
   constructor(
@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.profile();
-    this.userName = this.authService.UserData;
+    this.userData = this.authService.UserData;
     this.authService.loginStatusChange().subscribe(loggedIn => {
       this.session = loggedIn;
     });
