@@ -19,8 +19,8 @@ export class ObtenerRankingService {
       console.log(data);
       this.Data = data;
       this.rankingData.id = this.Data.data.id;
-      this.rankingData.nombre = this.Data.data.username;
-      this.rankingData.codigo_sala = this.Data.data.email;
+      this.rankingData.nombre = this.Data.data.nombre;
+      this.rankingData.codigo_sala = this.Data.data.codigo_sala;
     });
   }
 }

@@ -45,6 +45,25 @@ class RankingController extends Controller
         ]);
     }
 
+    public function getRanking(Request $request)
+    {
+
+        $ranking = RankingData::where("idUser", "=", $request->iduser, "AND", "codRanking", "=", $request->codigoSala)->first();
+
+        if (isset($ranking->id)) {
+            return response()->json([
+                "status" => 1,
+                "msg" => "¡Registros recuperados con éxito",
+                "data" => $ranking
+            ]);
+        } else {
+            return response()->json([
+                "status" => 0,
+                "msg" => "No se han encontrado registros",
+            ], 404);
+        }
+    }
+
     public function getRankingData(Request $request)
     {
 
