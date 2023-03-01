@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class CustomAuthController extends Controller
@@ -134,20 +135,22 @@ class CustomAuthController extends Controller
         $user = user::find($request->id);
 
         if ($user) { // verifica si $user no es nulo
-            $user->imagen = $request->img;
-            $user->save();
+            $user = DB::update('update users set imagen = ? WHERE id = ?',
+            [$request->img,$request->id]);
 
             return response()->json([
                 "status" => 0,
                 "msg" => "Se ha cambiado la imagen del usuario",
-                "data" => $user->imagen,
+                "data" => $user,
             ]);
         } else {
             return response()->json([
                 "status" => 1,
                 "msg" => "Ha ocurrido un error",
-                "data" => $user,
+                "data" => $php_errormsg,
             ]);
         }
     }
+
+    
 }

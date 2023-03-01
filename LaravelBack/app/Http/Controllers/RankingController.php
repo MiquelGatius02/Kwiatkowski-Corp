@@ -48,9 +48,9 @@ class RankingController extends Controller
     public function getRanking(Request $request)
     {
 
-        $ranking = RankingData::where("idUser", "=", $request->iduser, "AND", "codRanking", "=", $request->codigoSala)->first();
+        $ranking = Ranking::all();
 
-        if (isset($ranking->id)) {
+        if (isset($ranking)) {
             return response()->json([
                 "status" => 1,
                 "msg" => "¡Registros recuperados con éxito",
