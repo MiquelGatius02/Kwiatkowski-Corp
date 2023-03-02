@@ -4,37 +4,15 @@
   </div>
 
   <div class="big-layout">
-    <div class="card" style="width: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title">Nombre</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Código Sala</h6>
-      </div>
-    </div>
-    <div class="card" style="width: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title">Nombre</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Código Sala</h6>
-      </div>
-    </div>
-    <div class="card" style="width: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title">Nombre</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Código Sala</h6>
-      </div>
-    </div>
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">Nombre</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Código Sala</h6>
-        </div>
-      </div>
+    <tr *ngFor="let ranking of rankingList">
       <div class="card" style="width: 18rem;">
         <div class="card-body">
-          <h5 class="card-title">Nombre</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Código Sala</h6>
+          <h5 class="card-title">{{this.ranking.nombre}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{this.ranking.codigo_sala}}</h6>
         </div>
       </div>
-      <br>
-      
+    </tr>
+    <br>
+
   </div>
 </div>

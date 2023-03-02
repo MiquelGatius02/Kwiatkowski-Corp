@@ -35,8 +35,8 @@ class RankingController extends Controller
         ]);
 
         $ranking = new RankingData();
-        $ranking->iduser = $request->nombre;
-        $ranking->codranking = $request->nombre;
+        $ranking->iduser = $request->iduser;
+        $ranking->codranking = $request->codranking;
         $ranking->save();
 
         return response()->json([
@@ -68,10 +68,11 @@ class RankingController extends Controller
     {
 
         $request->validate([
-            "iduser" => "required"
+            "iduser" => "required",
+            "codranking" => "required"
         ]);
 
-        $ranking = RankingData::where("idUser", "=", $request->iduser, "AND", "codRanking", "=", $request->codigoSala)->first();
+        $ranking = RankingData::where("idUser", "=", $request->iduser, "AND", "codRanking", "=", $request->codranking)->all();
 
         if (isset($ranking->id)) {
             return response()->json([

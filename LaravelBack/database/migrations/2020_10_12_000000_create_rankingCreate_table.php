@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('ranking', function (Blueprint $table) {
             $table->id();
             $table->string('nombre')->nullable();
-            $table->string('codigo_sala')->unique();
+            $table->unsignedBigInteger('codigo_sala')->unique();
         });
     }
 

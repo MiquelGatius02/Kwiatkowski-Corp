@@ -13,7 +13,7 @@ import { ObtenerRankingService } from 'src/app/services/obtener-ranking.service'
 export class HomeComponent implements OnInit {
 
   profileData: UserData = { id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "" };
-  rankingData: RankData = { iduser: 0, id: 0, nombre: "", codigo_sala: "" };
+  rankingData: any[] = [];
   constructor(
     public authService: AuthService,
     public obtenerRankingService: ObtenerRankingService,
@@ -24,10 +24,11 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.authService.profile();
     this.profileData = this.authService.UserData;
-    this.rankingData.iduser = this.profileData.id;
-    console.log(this.rankingData.iduser)
-    this.obtenerRankingService.getRanking()
     this.rankingData = this.obtenerRankingService.rankingData;
+    console.log(this.obtenerRankingService.getRanking())
+    console.log(this.rankingData.values)
+    console.log(this.obtenerRankingService.rankingData)
+
   }
 
 }
