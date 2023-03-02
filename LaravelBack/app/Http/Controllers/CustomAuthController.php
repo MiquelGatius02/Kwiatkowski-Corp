@@ -137,6 +137,7 @@ class CustomAuthController extends Controller
         if ($user) { // verifica si $user no es nulo
             $user = DB::update('update users set imagen = "" WHERE id = ?',
             [$request->img,$request->id]);
+            
             $user = DB::update('update users set imagen = ? WHERE id = ?',
             [$request->img,$request->id]);
 

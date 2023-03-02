@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthStateService } from '../../services/auth-state.service';
 import { AuthService } from '../../services/auth.service';
 import { TokenService } from '../../services/token.service';
+import { UserData } from 'src/app/interfaces/userData.interface';
 
 @Component({
   selector: 'app-header',
@@ -12,6 +13,7 @@ import { TokenService } from '../../services/token.service';
 })
 export class HeaderComponent implements OnInit {
 
+  userName: UserData = { id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "" };
   session: boolean = this.token.isLoggedIn();
 
   constructor(
@@ -23,6 +25,8 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.authService.profile();
+    this.userName = this.authService.UserData;
     this.authService.loginStatusChange().subscribe(loggedIn => {
       this.session = loggedIn;
     });
