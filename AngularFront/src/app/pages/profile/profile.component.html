@@ -6,10 +6,11 @@
       <div class="col-lg-15">
         <div class="card mb-3">
           <div class="card-body text-center">
-            <img src="{{profileData.imagen}}" alt="avatar" class="rounded-circle img-fluid" style="width: 100px;">
+            <img *ngIf="profileData.imagen != null" src="{{profileData.imagen}}" alt="avatar" class="rounded-circle img-fluid" style="width: 100px;">
+            <img *ngIf="profileData.imagen == null" src="https://www.nicepng.com/png/full/202-2022264_usuario-annimo-usuario-annimo-user-icon-png-transparent.png" class="imagenAnonimo">
             <h5 class="my-3"></h5>
             <input type="file" accept="image/*" (change)="onFileSelected($event)" style="display:none;" #fileInput>
-            <button type="button" class="btn btn-primary" (click)="fileInput.click()">Cambiar imagen</button>
+            <button type="button" class="btn btn-primary" (click)="fileInput.click()">Cambiar imagen</button><br>
             <div class="alert alert-success" role="alert" *ngIf="showAlert">
               La imagen ha sido cambiada con éxito.
             </div>
@@ -81,6 +82,9 @@
                     <button type="submit" class="btn btn-block btn-primary">
                       Cambiar contraseña
                     </button><br>
+                    <div class="alert alert-success" role="alert" *ngIf="showAlertImg">
+                      La contraseña ha sido cambiada con éxito.
+                    </div><br>
                   </div>
                 </div>
               </form>

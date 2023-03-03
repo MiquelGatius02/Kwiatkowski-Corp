@@ -23,6 +23,7 @@ export class ProfileComponent implements OnInit {
   typeUser: number = 0;
 
   showAlert: boolean = false;
+  showAlertImg: boolean = false;
   errors: any = null;
   url: any;
   
@@ -47,6 +48,10 @@ export class ProfileComponent implements OnInit {
     this.authService.changePassword(this.passwordForm.value).subscribe(
       (result) => {
         console.log(result);
+        this.showAlertImg = true;
+        setTimeout(() => {
+          this.showAlertImg = false;
+        }, 5000);
       },
       (error) => {
         this.errors = error.error;
@@ -64,25 +69,8 @@ export class ProfileComponent implements OnInit {
     this.profileData = this.authService.UserData;
   }
 
-  // función para cambiar la imagen
-  onImageChange() {
-    const newImage = prompt('Introduce la URL de la nueva imagen');
-    if (newImage) {
-      this.imgData.img = newImage;
-      this.imgData.id = this.profileData.id;
-      this.imgChange.changeImg(this.imgData).subscribe(
-        (result) => {
-          console.log(result);
-        },
-        (error) => {
-          this.errors = error.error;
-        },
-      );
-      
-    }
-  }
-
   onFileSelected(event: any): void {
+    this.showAlert = false;
     const file: File = event.target.files[0];
     if (file) {
       const reader = new FileReader();
@@ -95,15 +83,15 @@ export class ProfileComponent implements OnInit {
           this.imgChange.changeImg(this.imgData).subscribe(
             (result) => {
               console.log(result);
+              this.showAlert = true;
+              setTimeout(() => {
+                this.showAlert = false;
+              }, 5000);
             },
             (error) => {
               this.errors = error.error;
             },
           );
-          this.showAlert = true;
-          setTimeout(() => {
-            this.showAlert = false;
-          }, 5000);
         }
       };
     }
