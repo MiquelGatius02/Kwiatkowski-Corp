@@ -29,7 +29,8 @@ import { NotfoundComponent } from './notfound/notfound.component';
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
-    RouterModule
+    RouterModule,
+    BrowserModule
   ],
   providers: [
     {

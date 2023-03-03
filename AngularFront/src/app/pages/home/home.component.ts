@@ -24,11 +24,9 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.authService.profile();
     this.profileData = this.authService.UserData;
-    this.rankingData = this.obtenerRankingService.rankingData;
-    console.log(this.obtenerRankingService.getRanking())
-    console.log(this.rankingData.values)
-    console.log(this.obtenerRankingService.rankingData)
-
+    this.obtenerRankingService.getRanking()
+    this.rankingData = this.obtenerRankingService.finalData
+    console.log(this.rankingData)
   }
 
 }

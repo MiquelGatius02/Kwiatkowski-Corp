@@ -11,14 +11,18 @@ export class ObtenerRankingService {
   typeUser: number = 0;
   Data: any[] = [];
   rankingData: any[] = [];
+  finalData: RankData[] = []
 
   constructor(private http: HttpClient, public router: Router) { }
 
   getRanking() {
     this.http.get("http://127.0.0.1:8000/api/getRanking").subscribe(data => {
       this.Data.push(data)
-      this.rankingData.push(this.Data[0])
-      console.log(this.rankingData)
+      this.rankingData.push(this.Data[0].data)
+      for (let i = 0; i < this.rankingData[0].length; i++) {
+        this.finalData[i] = this.rankingData[0][i];
+      }
+      console.log(this.finalData)
     });
   }
 }
