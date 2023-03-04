@@ -5,13 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Ranking;
-
+use App\Models\RankingData;
 
 class RankingController extends Controller
 {
-
-
-
     public function createRanking(Request $request)
     {
         $request->validate([
@@ -30,44 +27,63 @@ class RankingController extends Controller
         ]);
     }
 
-
-    public function addToRanking(Request $request)
+    public function addRanking(Request $request)
     {
         $request->validate([
-            'idUser' => 'required',
-            'codRanking' => 'required',
+            'iduser' => 'required',
+            'codranking' => 'required'
         ]);
 
-        $ranking = new Ranking();
-        $ranking->idUser = $request->idUser;
-        $ranking->codRanking = $request->codRanking;
+        $ranking = new RankingData();
+        $ranking->iduser = $request->iduser;
+        $ranking->codranking = $request->codranking;
         $ranking->save();
 
         return response()->json([
             "status" => 1,
-            "msg" => "¡Registro de usuario exitoso!",
+            "msg" => "¡Registro en ranking exitoso!",
         ]);
     }
 
     public function getRanking(Request $request)
     {
 
-        $request->validate([
-            "iduser" => "required"
-        ]);
+        $ranking = Ranking::all();
 
-        $ranking = Ranking::where("iduser", "=", $request->iduser, "AND", "codigoSala", "=", $request->codigoSala)->first();
-
-        if (isset($ranking->id)) {
+        if (isset($ranking)) {
             return response()->json([
                 "status" => 1,
-                "msg" => "¡Usuario logueado exitosamente!",
+                "msg" => "¡Registros recuperados con éxito",
                 "data" => $ranking
             ]);
         } else {
             return response()->json([
                 "status" => 0,
-                "msg" => "Usuario no registrado",
+                "msg" => "No se han encontrado registros",
+            ], 404);
+        }
+    }
+
+    public function getRankingData(Request $request)
+    {
+
+        $request->validate([
+            "iduser" => "required",
+            "codranking" => "required"
+        ]);
+
+        $ranking = RankingData::where("idUser", "=", $request->iduser, "AND", "codRanking", "=", $request->codranking)->all();
+
+        if (isset($ranking->id)) {
+            return response()->json([
+                "status" => 1,
+                "msg" => "¡Registros recuperados con éxito",
+                "data" => $ranking
+            ]);
+        } else {
+            return response()->json([
+                "status" => 0,
+                "msg" => "No se han encontrado registros",
             ], 404);
         }
     }

@@ -9,16 +9,20 @@ import { RankData } from '../interfaces/rankData.interface ';
 export class ObtenerRankingService {
 
   typeUser: number = 0;
-  Data: any;
-  rankingData: RankData = { iduser: 0, id: 0, nombre: "", codigo_sala: "" };
+  Data: any[] = [];
+  rankingData: any[] = [];
+  finalData: RankData[] = []
 
   constructor(private http: HttpClient, public router: Router) { }
 
-  getRanking(ranking: RankData) {
-    this.http.get("http://127.0.0.1:8000/api/getRanking").subscribe(ranking => {
-      this.rankingData.nombre = this.Data.nombre;
-      this.rankingData.codigo_sala = this.Data.codigo_sala;
-      this.rankingData.id = this.Data.id;
+  getRanking() {
+    this.http.get("http://127.0.0.1:8000/api/getRanking").subscribe(data => {
+      this.Data.push(data)
+      this.rankingData.push(this.Data[0].data)
+      for (let i = 0; i < this.rankingData[0].length; i++) {
+        this.finalData[i] = this.rankingData[0][i];
+      }
+      console.log(this.finalData)
     });
   }
 }

@@ -3,38 +3,16 @@
     <button type="button" class="btn btn-primary btn-lg btn-block">UNIRSE A UN RANKING</button>
   </div>
 
-  <div class="big-layout">
-    <div class="card" style="width: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title">Nombre</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Código Sala</h6>
-      </div>
-    </div>
-    <div class="card" style="width: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title">Nombre</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Código Sala</h6>
-      </div>
-    </div>
-    <div class="card" style="width: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title">Nombre</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Código Sala</h6>
-      </div>
-    </div>
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">Nombre</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Código Sala</h6>
-        </div>
-      </div>
+  <div *ngFor="let ranking of rankingData" class="big-layout">
+    <div >
       <div class="card" style="width: 18rem;">
         <div class="card-body">
-          <h5 class="card-title">Nombre</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Código Sala</h6>
+          <h5 class="card-title">{{this.ranking.nombre}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{this.ranking.codigo_sala}}</h6>
         </div>
       </div>
-      <br>
-      
+    </div>
+    <br>
+
   </div>
 </div>

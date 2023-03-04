@@ -15,19 +15,16 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('idUser');
             $table->unsignedBigInteger('codRanking');
-            $table->rememberToken();
-            $table->timestamps();
 
             $table->foreign('idUser')
-            ->references('id')
-            ->on('users')
-            ->onDelete('cascade');
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
 
             $table->foreign('codRanking')
-            ->references('id')
-            ->on('ranking')
-            ->onDelete('cascade');
-
+                ->references('id')
+                ->on('ranking')
+                ->onDelete('cascade');
         });
     }
 
@@ -36,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('rankingData');
     }
 };

@@ -6,14 +6,13 @@
       <div class="col-lg-15">
         <div class="card mb-3">
           <div class="card-body text-center">
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
-              class="rounded-circle img-fluid" style="width: 100px;">
-            <h5 class="my-3">{{ this.profileData.username}}</h5>
-            <div *ngIf="this.profileData.centro != undefined">
-              <p class="text-muted mb-4">Profesor</p>
-            </div>
-            <div *ngIf="this.profileData.date != undefined">
-              <p class="text-muted mb-2">Student</p>
+            <img *ngIf="profileData.imagen != null" src="{{profileData.imagen}}" alt="avatar" class="rounded-circle img-fluid" style="width: 100px;">
+            <img *ngIf="profileData.imagen == null" src="https://www.nicepng.com/png/full/202-2022264_usuario-annimo-usuario-annimo-user-icon-png-transparent.png" class="imagenAnonimo">
+            <h5 class="my-3"></h5>
+            <input type="file" accept="image/*" (change)="onFileSelected($event)" style="display:none;" #fileInput>
+            <button type="button" class="btn btn-primary" (click)="fileInput.click()">Cambiar imagen</button><br>
+            <div class="alert alert-success" role="alert" *ngIf="showAlert">
+              La imagen ha sido cambiada con éxito.
             </div>
           </div>
         </div>
@@ -83,6 +82,9 @@
                     <button type="submit" class="btn btn-block btn-primary">
                       Cambiar contraseña
                     </button><br>
+                    <div class="alert alert-success" role="alert" *ngIf="showAlertImg">
+                      La contraseña ha sido cambiada con éxito.
+                    </div><br>
                   </div>
                 </div>
               </form>
@@ -90,27 +92,6 @@
 
 
 
-          </div>
-        </div>
-
-        <div class="col-lg-5">
-          <div class="col-md-20">
-            <div class="card mb-4 mb-md-0">
-              <div class="card-body">
-                <p class="mb-4"><span class="text-primary font-italic me-1">Rankings</span> Project Status
-                </p>
-                <p class="mb-1" style="font-size: .77rem;">Web Design</p>
-
-                <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
-
-                <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
-
-                <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
-
-                <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
-
-              </div>
-            </div>
           </div>
         </div>
       </div>
