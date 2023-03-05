@@ -21,6 +21,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
     RegisterComponent,
     ProfileComponent,
     NotfoundComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +31,6 @@ import { NotfoundComponent } from './notfound/notfound.component';
     FormsModule,
     CommonModule,
     RouterModule,
-    BrowserModule
   ],
   providers: [
     {

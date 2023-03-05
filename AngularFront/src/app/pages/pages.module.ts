@@ -10,11 +10,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
-    HomeComponent
   ],
 
   imports: [
-    CommonModule, BrowserModule
+    BrowserModule, CommonModule
   ],
 })
 export class PagesModule { }

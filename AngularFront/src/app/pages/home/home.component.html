@@ -1,18 +1,26 @@
 <div class="container">
   <div class="layout">
-    <button type="button" class="btn btn-primary btn-lg btn-block">UNIRSE A UN RANKING</button>
+
+    <form class="form-signin" [formGroup]="joinForm" (ngSubmit)="onSubmit()">
+      <div class="col-sm-9">
+        <div class="inline">
+          <input style="width: 230px; margin-right: 10px;" type="password" formControlName="rank_id" />
+          <button type="submit" class="btn btn-block btn-primary">
+            Unirse al ranking
+          </button><br>
+        </div>
+      </div>
+    </form>
   </div>
 
-  <div *ngFor="let ranking of rankingData" class="big-layout">
-    <div >
+  <div class="container">
+    <div *ngFor="let ranking of this.UserData" class="big-layout">
       <div class="card" style="width: 18rem;">
         <div class="card-body">
-          <h5 class="card-title">{{this.ranking.nombre}}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">{{this.ranking.codigo_sala}}</h6>
+          <h5 class="card-title">{{this.ranking.rank_name}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{this.ranking.rank_code}}</h6>
         </div>
       </div>
     </div>
-    <br>
-
   </div>
 </div>

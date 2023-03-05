@@ -11,10 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ranking', function (Blueprint $table) {
+        Schema::create('rankings', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre')->nullable();
-            $table->unsignedBigInteger('codigo_sala')->unique();
+            $table->string('rank_name')->nullable();
+            $table->unsignedBigInteger('rank_code');
+            $table->unsignedBigInteger('user_id')->nullable();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 
@@ -23,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ranking');
+        Schema::dropIfExists('rankings');
     }
 };

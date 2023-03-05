@@ -15,19 +15,20 @@
     </div>
     <div *ngIf="session">
       <!-- Button trigger modal -->
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          {{this.userName.username}}
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-          <button class="dropdown-item" routerLink="home/profile" type="button">Perfil</button>
-          <button type="button" class="dropdown-item" data-toggle="modal" data-target="#exampleModal">
-            Cerrar Sesión
+      <div id="space-right">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {{this.userName.username}}
           </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <button class="dropdown-item" routerLink="home/profile" type="button">Perfil</button>
+            <button type="button" class="dropdown-item" data-toggle="modal" data-target="#exampleModal">
+              Cerrar Sesión
+            </button>
+          </div>
         </div>
       </div>
-
       <!-- Modal -->
       <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
