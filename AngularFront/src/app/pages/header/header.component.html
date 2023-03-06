@@ -15,19 +15,25 @@
     </div>
     <div *ngIf="session">
       <!-- Button trigger modal -->
-      <div class="dropdown">
-        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-          <a class="navbar-brand" href="#">
-            <img src="{{userData.username}}" alt="" width="30" height="24" class="d-inline-block align-text-top">
-            {{this.userData.username}}
-          </a>
-        </button>
-        <div class="dropdown-menu dropdown-menu-right">
-          <button class="dropdown-item" routerLink="home/profile" type="button">Perfil</button>
-          <button type="button" class="dropdown-item" data-toggle="modal" data-target="#exampleModal">
-            Cerrar sesión
+      <!--
+        <a class="navbar-brand" href="#">
+        <img src="{{userData.username}}" alt="" width="30" height="24" class="d-inline-block align-text-top">
+        {{this.userData.username}}
+      </a>
+    -->
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+            <a class="navbar-brand" href="#">
+              <img src="{{userData.username}}" alt="" width="30" height="24" class="d-inline-block align-text-top">
+              {{this.userData.username}}
+            </a>
           </button>
+          <ul class="dropdown-menu dropdown-menu-right">
+            <li><button class="dropdown-item" routerLink="home/profile" type="button">Perfil</button></li>
+            <li><button class="dropdown-item" type="button" data-toggle="modal" data-target="#exampleModal">
+              Cerrar sesión
+            </button></li>
+          </ul>
         </div>
       </div>
 
@@ -51,6 +57,5 @@
           </div>
         </div>
       </div>
-    </div>
   </ul>
 </nav>
