@@ -28,13 +28,12 @@ export class RankingService {
   Data: any;
 
   getRankingData() {
-
     const tokenCache: any = this.token.getToken();
     this.http.get("http://127.0.0.1:8000/api/getRankingData", { headers: new HttpHeaders().set('Authorization', tokenCache) }).subscribe(data => {
       console.log(data);
       this.Data = data;
       console.log(this.Data)
-      this.UserData.splice(0,this.UserData.length)
+      this.UserData.splice(0, this.UserData.length)
       for (let i = 0; i < this.Data.data.length; i++) {
         this.UserData.push(this.Data.data[i]);
       }
@@ -42,6 +41,8 @@ export class RankingService {
     });
   }
   addRanking(rank: JoinRank): Observable<any> {
-    return this.http.post('http://127.0.0.1:8000/api/addRanking', rank);
+    const tokenCache: any = this.token.getToken();
+    console.log("Añadiendo ranking...")
+    return this.http.post('http://127.0.0.1:8000/api/addRanking', rank, { headers: new HttpHeaders().set('Authorization', tokenCache) })
   }
 }

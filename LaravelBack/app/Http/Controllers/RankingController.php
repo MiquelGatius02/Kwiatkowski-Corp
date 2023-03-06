@@ -22,6 +22,7 @@ class RankingController extends Controller
         $ranking->rank_name = $request->rank_name;
         $ranking->rank_code = $request->rank_code;
         $ranking->user_id = $request->user_id;
+        $ranking->points = $request->points;
         $ranking->save();
 
         return response()->json([
@@ -43,16 +44,27 @@ class RankingController extends Controller
     public function addRanking(request $request)
     {
         $request->validate([
-            "rank_id" => "required"
+            "rank_id" => "required",
         ]);
         $rank = Ranking::where('rank_code', $request->rank_id)->first();
-
-        if ($rank) {
+        $user = Ranking::where('rank_code', $request->rank_id,)->where('user_id', (auth()->user()->id))->first();
+        if ($rank && $user == null) {
             $ranking = new Ranking();
             $ranking->rank_name = $rank->rank_name;
             $ranking->rank_code = $rank->rank_code;
             $ranking->user_id = (auth()->user()->id);
+            $ranking->points = 0;
             $ranking->save();
+            return response()->json([
+                "status" => 1,
+                "msg" => "Se ha añadido el usuario al ranking",
+                "data" => $ranking
+            ]);
+        } else {
+            return response()->json([
+                "status" => 0,
+                "msg" => "No se ha podido añadir el usuario al ranking",
+            ]);
         }
     }
 }

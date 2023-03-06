@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('rank_name')->nullable();
             $table->unsignedBigInteger('rank_code');
             $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('points')->nullable();
 
             $table->foreign('user_id')
                 ->references('id')

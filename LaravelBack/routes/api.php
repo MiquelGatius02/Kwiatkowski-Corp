@@ -24,12 +24,8 @@ Route::post('changePassword', [CustomAuthController::class, 'changePassword']);
 Route::post('changeImg', [CustomAuthController::class, 'changeImg']);
 Route::post('createRanking', [RankingController::class, 'createRanking']);
 Route::post('getRanking', [RankingController::class, 'getRanking']);
-Route::post('addToRanking', [RankingController::class, 'addToRanking']);
 Route::post('login', [CustomAuthController::class, 'login']);
 Route::post('createRanking', [RankingController::class, 'createRanking']);
-
-
-
 
 
 Route::group(['middleware' => ["auth:sanctum"]], function () {

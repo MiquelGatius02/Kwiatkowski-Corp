@@ -16,7 +16,7 @@ import { RankingService } from 'src/app/services/ranking.service';
 
 
 export class HomeComponent implements OnInit {
-  UserData: RankData[] = [{ id: 0, rank_name: '', rank_code: 0, user_id: 0 }]
+  UserData: RankData[] = [{ id: 0, rank_name: '', rank_code: 0, user_id: 0, points: 0 }]
   filteredRankingData: any[] = []
   joinData: JoinRank = { rank_id: 0 };
   joinForm: FormGroup;
@@ -34,15 +34,23 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.UserData.splice(0,this.UserData.length)
+    this.UserData.splice(0, this.UserData.length)
     this.UserData = this.rankingService.UserData
     console.log(this.UserData)
   }
 
   onSubmit() {
     this.joinData = this.joinForm.value
-    this.rankingService.addRanking(this.joinData)
-    this.router.navigate(['/home/main-page']);
+    this.rankingService.addRanking(this.joinData).subscribe(
+      (result) => {
+        console.log(result);
+        window.location.reload();
+      },
+      () => {
+        this.joinForm.reset();
+        this.router.navigate(['/home/main-page']);
+      }
+    );
 
   }
 

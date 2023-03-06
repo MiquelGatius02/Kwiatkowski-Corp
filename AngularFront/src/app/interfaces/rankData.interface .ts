@@ -3,4 +3,5 @@ export interface RankData {
     rank_name: string;
     rank_code: number;
     user_id: number;
+    points: number;
 }
