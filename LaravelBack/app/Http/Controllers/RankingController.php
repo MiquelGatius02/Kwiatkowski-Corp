@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 use App\Models\Ranking;
 use App\Models\RankingData;
 
@@ -12,31 +13,16 @@ class RankingController extends Controller
     public function createRanking(Request $request)
     {
         $request->validate([
-            'nombre' => '',
-            'codigo_sala' => 'required',
+            'rank_name',
+            'rank_code' => 'required',
+            'user_id',
         ]);
 
         $ranking = new Ranking();
-        $ranking->nombre = $request->nombre;
-        $ranking->codigo_sala = $request->codigo_sala;
-        $ranking->save();
-
-        return response()->json([
-            "status" => 1,
-            "msg" => "¡Registro de usuario al ranking exitoso!",
-        ]);
-    }
-
-    public function addToRanking(Request $request)
-    {
-        $request->validate([
-            'idUser' => 'required',
-            'codRanking' => 'required',
-        ]);
-
-        $ranking = new RankingData();
-        $ranking->idUser = $request->idUser;
-        $ranking->codRanking = $request->codRanking;
+        $ranking->rank_name = $request->rank_name;
+        $ranking->rank_code = $request->rank_code;
+        $ranking->user_id = $request->user_id;
+        $ranking->points = $request->points;
         $ranking->save();
 
         return response()->json([
@@ -44,46 +30,59 @@ class RankingController extends Controller
             "msg" => "¡Registro de usuario exitoso!",
         ]);
     }
-
-    public function getRanking(Request $request)
+    public function getRankingData()
     {
+        $ranking = Ranking::where('user_id', '=', auth()->user()->id)->get();
 
-        $ranking = Ranking::all();
+        return response()->json([
+            "status" => 0,
+            "msg" => "Acerca del perfil de usuario",
+            "data" => $ranking
+        ]);
+    }
 
-        if (isset($ranking)) {
+    public function addRanking(request $request)
+    {
+        $request->validate([
+            "rank_id" => "required",
+        ]);
+        $rank = Ranking::where('rank_code', $request->rank_id)->first();
+        $user = Ranking::where('rank_code', $request->rank_id,)->where('user_id', (auth()->user()->id))->first();
+        if ($rank && $user == null) {
+            $ranking = new Ranking();
+            $ranking->rank_name = $rank->rank_name;
+            $ranking->rank_code = $rank->rank_code;
+            $ranking->user_id = (auth()->user()->id);
+            $ranking->points = 0;
+            $ranking->save();
             return response()->json([
                 "status" => 1,
-                "msg" => "¡Registros recuperados con éxito",
+                "msg" => "Se ha añadido el usuario al ranking",
                 "data" => $ranking
             ]);
         } else {
             return response()->json([
                 "status" => 0,
-                "msg" => "No se han encontrado registros",
-            ], 404);
+                "msg" => "No se ha podido añadir el usuario al ranking",
+            ]);
         }
     }
 
-    public function getRankingData(Request $request)
+    public function infoRanking(request $request)
     {
+        $ranking = Ranking::all();
 
-        $request->validate([
-            "iduser" => "required"
+        return response()->json([
+            "status" => 1,
+            "msg" => "Se ha extraido el ranking",
+            "data" => $ranking
         ]);
+    }
 
-        $ranking = RankingData::where("idUser", "=", $request->iduser, "AND", "codRanking", "=", $request->codigoSala)->first();
+    public function getUser(request $request)
+    {
+        $user = User::all();
 
-        if (isset($ranking->id)) {
-            return response()->json([
-                "status" => 1,
-                "msg" => "¡Registros recuperados con éxito",
-                "data" => $ranking
-            ]);
-        } else {
-            return response()->json([
-                "status" => 0,
-                "msg" => "No se han encontrado registros",
-            ], 404);
-        }
+        return response()->json([$user]);
     }
 }

@@ -14,17 +14,20 @@
       </div>
     </div>
     <div *ngIf="session">
-      <!-- Button trigger modal -->
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          {{this.userName.username}}
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-          <button class="dropdown-item" routerLink="home/profile" type="button">Perfil</button>
-          <button type="button" class="dropdown-item" data-toggle="modal" data-target="#exampleModal">
-            Cerrar Sesión
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+            <a class="navbar-brand" href="#">
+              <img *ngIf="userData.imagen != null" src="{{userData.imagen}}" alt="avatar" class="rounded-circle img-fluid" style="width: 30px; height: 30px;">
+              <img *ngIf="userData.imagen == null" src="https://www.nicepng.com/png/full/202-2022264_usuario-annimo-usuario-annimo-user-icon-png-transparent.png" style="width: 50px; height: 50px;">
+              {{this.userData.username}}
+            </a>
           </button>
+          <ul class="dropdown-menu dropdown-menu-right">
+            <li><button class="dropdown-item" routerLink="home/profile" type="button">Perfil</button></li>
+            <li><button class="dropdown-item" type="button" data-toggle="modal" data-target="#exampleModal">
+              Cerrar sesión
+            </button></li>
+          </ul>
         </div>
       </div>
 
@@ -35,9 +38,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+              <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               ¿Estás seguro de que deseas cerrar sesión?
@@ -45,11 +46,10 @@
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
               <button type="button" (click)="endSession()" class="btn btn-primary" data-dismiss="modal">
-                Cerrar Sesión</button>
+                Cerrar sesión</button>
             </div>
           </div>
         </div>
       </div>
-    </div>
   </ul>
 </nav>
