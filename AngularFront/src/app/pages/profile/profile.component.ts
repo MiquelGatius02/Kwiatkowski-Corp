@@ -95,6 +95,14 @@ export class ProfileComponent implements OnInit {
           this.imgChange.changeImg(this.imgData).subscribe(
             (result) => {
               console.log(result);
+<<<<<<< Updated upstream
+=======
+              this.showAlert = true;
+              setTimeout(() => {
+                this.showAlert = false;
+                window.location.reload();
+              }, 2500);
+>>>>>>> Stashed changes
             },
             (error) => {
               this.errors = error.error;

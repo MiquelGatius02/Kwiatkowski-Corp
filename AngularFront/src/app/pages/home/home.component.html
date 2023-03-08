@@ -1,5 +1,9 @@
+<div class="alert alert-warning alerta" role="alert" *ngIf="this.rankingService.Data.data == ''">
+  No está suscrito a ningún ranking.
+</div>
 <div class="container">
   <div class="layout">
+<<<<<<< Updated upstream
     <button type="button" class="btn btn-primary btn-lg btn-block">UNIRSE A UN RANKING</button>
   </div>
 
@@ -26,6 +30,18 @@
         <div class="card-body">
           <h5 class="card-title">Nombre</h5>
           <h6 class="card-subtitle mb-2 text-muted">Código Sala</h6>
+=======
+    <form class="form-signin" [formGroup]="joinForm" (ngSubmit)="onSubmit()">
+      <div class="col-sm-9">
+        <div class="inline">
+          <input style="width: 230px; margin-right: 10px;" type="password" formControlName="rank_id" />
+          <button type="submit" class="btn btn-block btn-primary" style="margin-top: 5%;">
+            Unirse al ranking
+          </button><br>
+          <!-- <div class="alert alert-success" role="alert" >
+            Se ha suscrito a ún ranking.
+          </div> -->
+>>>>>>> Stashed changes
         </div>
       </div>
       <div class="card" style="width: 18rem;">
@@ -34,7 +50,11 @@
           <h6 class="card-subtitle mb-2 text-muted">Código Sala</h6>
         </div>
       </div>
+<<<<<<< Updated upstream
       <br>
       
+=======
+    </div>
+>>>>>>> Stashed changes
   </div>
 </div>

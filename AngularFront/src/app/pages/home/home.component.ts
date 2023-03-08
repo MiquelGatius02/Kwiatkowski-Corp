@@ -20,6 +20,27 @@ export class HomeComponent implements OnInit {
     public router: Router
   ) { }
 
+<<<<<<< Updated upstream
+=======
+  ngOnInit(): void {
+    this.UserData.splice(0, this.UserData.length)
+    this.UserData = this.rankingService.UserData
+    // console.log(this.UserData);
+  }
+
+  onSubmit() {
+    this.joinData = this.joinForm.value
+    this.rankingService.addRanking(this.joinData).subscribe(
+      (result) => {
+        console.log(result);
+        window.location.reload();
+      },
+      () => {
+        this.joinForm.reset();
+        this.router.navigate(['/home/main-page']);
+      }
+    );
+>>>>>>> Stashed changes
 
   ngOnInit(): void {
     this.authService.profile();
