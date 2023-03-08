@@ -133,21 +133,13 @@ class CustomAuthController extends Controller
         ]);
 
         $user = User::find($request->id);
-        
+
         if ($user) { // verifica si $user no es nulo
 
-            // return response()->json([
-            //     "status" => 0,
-            //     "msg" => "imagen e id",
-            //     "data" => $request->img,
-            //     "id" => $request->id,
-            // ]);
-            
-            // $user = DB::update('update users set imagen = "" WHERE id = ?',
-            // [$request->img,$request->id]);
-            
-            $user = DB::update('update users set imagen = ? WHERE id = ?',
-            [$request->img,$request->id]);
+            $user = DB::update(
+                'update users set imagen = ? WHERE id = ?',
+                [$request->img, $request->id]
+            );
 
             return response()->json([
                 "status" => 0,
@@ -162,6 +154,4 @@ class CustomAuthController extends Controller
             ]);
         }
     }
-
-    
 }

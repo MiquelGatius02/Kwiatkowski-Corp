@@ -6,15 +6,15 @@ import { ProfileComponent } from './profile/profile.component';
 import { BrowserModule } from '@angular/platform-browser';
 
 
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
-    HomeComponent
   ],
 
   imports: [
-    CommonModule, BrowserModule
+    BrowserModule, CommonModule,
   ],
 })
 export class PagesModule { }

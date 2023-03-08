@@ -14,10 +14,10 @@ import { changeImgService } from 'src/app/services/changeImg.service';
 })
 export class ProfileComponent implements OnInit {
 
-  profileData: UserData = { id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: ""};
-  
+  profileData: UserData = { id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "" };
+
   imgData: imgData = { id: 0, img: "" };
-  
+
   passwordData: passwordData = { id: 0, password: "" };
   passwordForm: FormGroup;
   typeUser: number = 0;
@@ -26,7 +26,7 @@ export class ProfileComponent implements OnInit {
   showAlertImg: boolean = false;
   errors: any = null;
   url: any;
-  
+
   constructor(
     public authService: AuthService,
     public router: Router,
@@ -76,7 +76,7 @@ export class ProfileComponent implements OnInit {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => {
-        if(reader.result != null){
+        if (reader.result != null) {
           const imageBase64 = reader.result.toString();
           this.imgData.img = imageBase64;
           this.imgData.id = this.profileData.id;
@@ -84,16 +84,20 @@ export class ProfileComponent implements OnInit {
             (result) => {
               console.log(result);
               this.showAlert = true;
+              
               setTimeout(() => {
                 this.showAlert = false;
-              }, 5000);
+                window.location.reload();
+              }, 2500);
             },
             (error) => {
               this.errors = error.error;
             },
           );
+
         }
       };
     }
   }
 }
+
