@@ -1,0 +1,32 @@
+.container {
+  display: inline-flex;
+  margin-left: 44rem;
+  margin-top: 10rem;
+}
+
+.layout {
+  margin-left: 5rem;
+  width: 16rem;
+  height: 7rem;
+  border-radius: 10px;
+  background-color: white;
+  padding: 1rem;
+  margin-top: 10rem;
+  text-align: center;
+}
+
+.big-layout {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 5rem;
+  width: 20rem;
+  border-radius: 10px;
+  background-color: white;
+  padding: 1rem;
+  margin-top: 10rem;
+  text-align: center;
+}
+
+h5 {
+    text-align: center;
+}

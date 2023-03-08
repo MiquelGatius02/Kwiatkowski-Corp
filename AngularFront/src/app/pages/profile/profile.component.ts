@@ -84,10 +84,11 @@ export class ProfileComponent implements OnInit {
             (result) => {
               console.log(result);
               this.showAlert = true;
-              window.location.reload();
+              
               setTimeout(() => {
                 this.showAlert = false;
-              }, 5000);
+                window.location.reload();
+              }, 2500);
             },
             (error) => {
               this.errors = error.error;

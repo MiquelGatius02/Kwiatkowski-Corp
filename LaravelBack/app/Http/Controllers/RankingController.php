@@ -67,4 +67,22 @@ class RankingController extends Controller
             ]);
         }
     }
+
+    public function infoRanking(request $request)
+    {
+        $ranking = Ranking::all();
+
+        return response()->json([
+            "status" => 1,
+            "msg" => "Se ha extraido el ranking",
+            "data" => $ranking
+        ]);
+    }
+
+    public function getUser(request $request)
+    {
+        $user = User::all();
+
+        return response()->json([$user]);
+    }
 }

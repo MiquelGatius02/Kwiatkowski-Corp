@@ -6,6 +6,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { BrowserModule } from '@angular/platform-browser';
 
 
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -13,7 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
 
   imports: [
-    BrowserModule, CommonModule
+    BrowserModule, CommonModule,
   ],
 })
 export class PagesModule { }

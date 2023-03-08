@@ -19,7 +19,9 @@ export class HomeComponent implements OnInit {
   UserData: RankData[] = [{ id: 0, rank_name: '', rank_code: 0, user_id: 0, points: 0 }]
   filteredRankingData: any[] = []
   joinData: JoinRank = { rank_id: 0 };
+  rankInfo: JoinRank = { rank_id: 0 };
   joinForm: FormGroup;
+
   constructor(
     public authService: AuthService,
     public rankingService: RankingService,
@@ -51,7 +53,11 @@ export class HomeComponent implements OnInit {
         this.router.navigate(['/home/main-page']);
       }
     );
-
   }
 
+  rankingData(valor: number) {
+    this.rankingService.rankCode = valor
+    console.log(this.rankingService.rankCode)
+    this.router.navigate(['/home/ranking']);
+  }
 }

@@ -1,0 +1,32 @@
+<div class="container">
+  <div>
+    <div *ngFor="let ranking of this.UserData">
+      <div *ngIf="seguir">
+        <div>
+          <div *ngIf="this.ranking.rank_code == this.rankingService.rankCode" class="card" style="width: 18rem;">
+
+            <div>
+              <div class="card-body">
+
+                <h5 class="card-title"><b>{{this.ranking.rank_name}}</b></h5>
+                <h5 class="card-text"><b>{{this.ranking.rank_code}}</b></h5><br>
+                <ul *ngFor="let ranking2 of this.UserData">
+                  <li *ngIf="this.ranking.rank_code == this.ranking2.rank_code && this.ranking2.user_id != 0">
+                    <div *ngFor="let nombre of this.nombreUser[0]">
+                      <div *ngIf="this.ranking2.user_id == this.nombre.id">
+                        <p *ngIf="this.nombre.username.length != 0"> {{this.nombre.username}} ->
+                          {{this.ranking2.points}}
+                        </p>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{change()}}
+    </div>
+  </div>
+</div>
