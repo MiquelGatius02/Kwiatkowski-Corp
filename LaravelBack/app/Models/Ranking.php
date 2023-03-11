@@ -11,7 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 class Ranking extends Authenticatable
 {
     public $timestamps = false;
-    public $table = "Rankings";
+    public $table = "rankings";
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -20,14 +20,8 @@ class Ranking extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'id',
+        'id',   
         'rank_name',
-        'rank_code',
-        "user_id"
+        'rank_description'
     ];
-
-    public function users()
-    {
-        return $this->belongsToMany(User::class);
-    }
 }

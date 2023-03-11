@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -8,6 +8,7 @@ import { RankData } from '../interfaces/rankData.interface ';
 import { RankingUserData } from '../interfaces/rankingUserData.interface';
 import { UserData } from '../interfaces/userData.interface';
 import { AuthStateService } from './auth-state.service';
+import { AuthService } from './auth.service';
 import { TokenService } from './token.service';
 
 @Injectable({
@@ -22,56 +23,48 @@ export class RankingService {
     public router: Router,
     public fb: FormBuilder,
     private token: TokenService,
-    private authState: AuthStateService
+    private authState: AuthStateService,
   ) { }
 
-  UserData: RankData[] = []
-  AllUserData: RankData[] = []
 
-  Data: any;
-  Data2: any;
+  cache: any;
+  _getRanking: any
+  _getRankingDataByCode: any;
+  _getRankingDataByUser: any;
+  _data1: RankingUserData[] = [{ id: 0, rank_code: 0, user_id: 0, points: 0 }]
+  _data2: RankData[] = [{ id: 0, rank_name: "", rank_description: "" }]
   Data3: any;
   rankCode: number = 0;
   nombreUser: any;
+  contador: number = 0;
 
-
-  getRankingData() {
+  public getRanking() {
     const tokenCache: any = this.token.getToken();
-    this.http.get("http://127.0.0.1:8000/api/getRankingData", { headers: new HttpHeaders().set('Authorization', tokenCache) }).subscribe(data => {
-      console.log(data);
-      this.Data = data;
-      console.log(this.Data)
-      this.UserData.splice(0, this.UserData.length)
-      for (let i = 0; i < this.Data.data.length; i++) {
-        this.UserData.push(this.Data.data[i]);
+    this.http.get("http://127.0.0.1:8000/api/getRanking").subscribe(data => {
+      console.log(data)
+      this._getRanking = data;
+      for (let i = 0; i < this._getRanking.data.length; i++) {
+        this._data2.push(this._getRanking.data[i])
       }
-      console.log(this.UserData)
     });
   }
-  addRanking(rank: JoinRank): Observable<any> {
-    const tokenCache: any = this.token.getToken();
-    console.log("Añadiendo ranking...")
-    return this.http.post('http://127.0.0.1:8000/api/addRanking', rank, { headers: new HttpHeaders().set('Authorization', tokenCache) })
+  public getRankingDataByCode(rank_code: number) {
+    this.http.get("http://127.0.0.1:8000/api/getRankingDataByCode" + "?" + "rank_code=" + rank_code).subscribe(data => {
+      /*    console.log(data) */
+      this._getRankingDataByCode = data
+      console.log(this._getRankingDataByCode.data)
+    });
   }
-  getRankingDataAll() {
-    const tokenCache: any = this.token.getToken();
-    this.http.get("http://127.0.0.1:8000/api/infoRanking", { headers: new HttpHeaders().set('Authorization', tokenCache) }).subscribe(data => {
-      console.log(data);
-      this.Data2 = data;
-      console.log(this.Data2)
-      this.AllUserData.splice(0, this.AllUserData.length)
-      for (let i = 0; i < this.Data2.data.length; i++) {
-        this.AllUserData.push(this.Data2.data[i]);
+
+  public getRankingDataByUser(user_id: number) {
+    this.http.get("http://127.0.0.1:8000/api/getRankingDataByUser" + "?" + "user_id=" + user_id).subscribe(data => {
+      console.log(data)
+      this._getRankingDataByUser = data
+      for (let i = 0; i < this._getRankingDataByUser.data.length; i++) {
+        this._data1.push(this._getRankingDataByUser.data[i])
       }
-      console.log(this.AllUserData)
     });
+
   }
 
-  getUser() {
-    this.http.get("http://127.0.0.1:8000/api/getUser").subscribe(data => {
-      this.Data3 = data;
-      this.nombreUser = this.Data3
-
-    });
-  }
-}
+} 

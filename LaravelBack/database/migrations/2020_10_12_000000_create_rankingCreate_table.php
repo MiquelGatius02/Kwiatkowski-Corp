@@ -12,16 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('rankings', function (Blueprint $table) {
-            $table->id();
+            $table->id('id');
             $table->string('rank_name')->nullable();
-            $table->unsignedBigInteger('rank_code');
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('points')->nullable();
-
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
+            $table->string('rank_description')->nullable();
         });
     }
 
