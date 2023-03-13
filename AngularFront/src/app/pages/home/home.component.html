@@ -4,16 +4,39 @@
 <div class="container">
   <div class="layout">
 
-    <form class="form-signin" [formGroup]="joinForm" (ngSubmit)="onSubmit()">
-      <div class="col-sm-9">
-        <div class="inline">
-          <input style="width: 230px; margin-right: 10px;" type="number" formControlName="rank_id" />
+    <div class="" *ngIf="this.authService.UserData.date == ''" style="color: white">
+      <form class="form-signin" [formGroup]="joinForm" (ngSubmit)="unirseRanking()">
+        <div class="col-sm-9">
+          <div class="inline">
+            <input style="width: 230px; margin-right: 10px;" type="number" formControlName="rank_id" />
+            <button type="submit" class="btn btn-block btn-primary" style="margin-top: 5%;">
+              Unirse al ranking
+            </button><br>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="" *ngIf="this.authService.UserData.date != ''" style="color: white">
+      <form class="form-signin" [formGroup]="createForm" (ngSubmit)="createRanking()">
+        <div class="col-sm-9">
+          <div class="form-group">
+            <label for="rank_name">Nombre del ranking:</label>
+            <input type="text" class="form-control" formControlName="rank_name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Descripción:</label>
+            <textarea class="form-control" rows="3" formControlName="description" required></textarea>
+          </div>
+
           <button type="submit" class="btn btn-block btn-primary" style="margin-top: 5%;">
-            Unirse al ranking
+            Crear Ranking
           </button><br>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
+
   </div>
   <div class="container">
     <div *ngFor="let ranking of UserRankingData; let i = index">
