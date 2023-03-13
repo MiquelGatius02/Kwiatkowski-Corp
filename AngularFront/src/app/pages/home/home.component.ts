@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { createRank } from 'src/app/interfaces/createRankingData';
 import { JoinRank } from 'src/app/interfaces/joinRank.interface';
 import { RankData } from 'src/app/interfaces/rankData.interface ';
 import { RankingUserData } from 'src/app/interfaces/rankingUserData.interface';
@@ -22,6 +23,9 @@ export class HomeComponent implements OnInit {
   noLoop: boolean = true;
   joinData: JoinRank = { rank_code: 0 };
   joinForm: FormGroup;
+  createForm: FormGroup;
+  rankData: createRank[] = [{ rank_code: 0, rank_name: '', description: '' }];
+
   constructor(
     public authService: AuthService,
     public rankingService: RankingService,
@@ -31,6 +35,12 @@ export class HomeComponent implements OnInit {
     this.authService.profile()
     this.joinForm = this.fb.group({
       rank_id: [''],
+    });
+
+    this.createForm = this.fb.group({
+      rank_name: ['', Validators.required],
+      description: ['', Validators.required],
+      rank_code: [0, Validators.required],
     });
   } 
 
@@ -61,6 +71,20 @@ export class HomeComponent implements OnInit {
         this.router.navigate(['/home/main-page']);
       }
     );
+  }
+
+  createRanking() {
+    const { rank_name, description } = this.createForm.value;
+    const rank_code = this.generateRankCode();
+    const data: createRank = { rank_code, rank_name, description };
+    // this.rankingService.crearRanking(data);
+    console.log(data);
+  }
+
+  generateRankCode(): number {
+    // Generar código aleatorio de 5 dígitos
+    const code = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000;
+    return code;
   }
 }
 

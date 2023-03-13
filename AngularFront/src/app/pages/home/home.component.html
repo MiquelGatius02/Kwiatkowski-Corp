@@ -4,8 +4,8 @@
 <div class="container">
   <div class="layout">
 
-    <div class="" *ngIf="this.authService.UserData.date == ''" style="color: white">
-      <form class="form-signin" [formGroup]="joinForm" (ngSubmit)="unirseRanking()">
+    <div class="" *ngIf="this.authService.UserData.date != undefined " style="color: white">
+      <form class="form-signin" [formGroup]="joinForm" (ngSubmit)="onSubmit()">
         <div class="col-sm-9">
           <div class="inline">
             <input style="width: 230px; margin-right: 10px;" type="number" formControlName="rank_id" />
@@ -17,7 +17,7 @@
       </form>
     </div>
 
-    <div class="" *ngIf="this.authService.UserData.date != ''" style="color: white">
+    <div class="" *ngIf="this.authService.UserData.date == undefined" style="color: white">
       <form class="form-signin" [formGroup]="createForm" (ngSubmit)="createRanking()">
         <div class="col-sm-9">
           <div class="form-group">
