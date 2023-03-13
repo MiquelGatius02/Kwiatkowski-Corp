@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
     this.joinForm = this.fb.group({
       rank_id: [''],
     });
-  }
+  } 
 
   ngOnInit(): void {
     this.UserRankingData = this.UserRankingData.splice(0, this.UserRankingData.length)
