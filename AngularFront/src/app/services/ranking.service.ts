@@ -45,6 +45,10 @@ export class RankingService {
   _data4: UserData[] = [{ id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "" }];
 
 
+  public createRaking(rank: RankData) {
+    return this.http.post("http://127.0.0.1:8000/api/createRanking", rank)
+  }
+
   public getRanking() {  // TODOS LOS RANKINGS
     const tokenCache: any = this.token.getToken();
     this.http.get("http://127.0.0.1:8000/api/getRanking").subscribe(data => {
@@ -56,6 +60,7 @@ export class RankingService {
       for (let i = 0; i < this._getRanking.data.length; i++) {
         this._data2.push(this._getRanking.data[i])
       }
+
     });
   }
   public getRankingDataByCode(rank_code: number) { // RECUPRAR DATOS RANKING POR ID DE RANKING
@@ -66,6 +71,7 @@ export class RankingService {
               this._getRankingDataByCode = undefined
             } */
       this._getRankingDataByCode = data
+      this._data3 = []
       for (let i = 0; i < this._getRankingDataByCode.data.length; i++) {
         this._data3.push(this._getRankingDataByCode.data[i])
       }

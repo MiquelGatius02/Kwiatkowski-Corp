@@ -22,9 +22,9 @@ export class HomeComponent implements OnInit {
   RankingData: RankData[] = [{ id: 0, rank_name: "", rank_description: "" }]
   noLoop: boolean = true;
   joinData: JoinRank = { rank_code: 0 };
+  crearData: RankData = { id: 0, rank_name: "", rank_description: "" };
   joinForm: FormGroup;
   createForm: FormGroup;
-  rankData: createRank[] = [{ rank_code: 0, rank_name: '', description: '' }];
 
   constructor(
     public authService: AuthService,
@@ -38,11 +38,11 @@ export class HomeComponent implements OnInit {
     });
 
     this.createForm = this.fb.group({
+      id: [''],
       rank_name: ['', Validators.required],
-      description: ['', Validators.required],
-      rank_code: [0, Validators.required],
+      rank_description: ['', Validators.required],
     });
-  } 
+  }
 
   ngOnInit(): void {
     this.UserRankingData = this.UserRankingData.splice(0, this.UserRankingData.length)
@@ -51,7 +51,6 @@ export class HomeComponent implements OnInit {
     this.rankingService.getRanking()
     this.UserRankingData = this.rankingService._data1
     this.RankingData = this.rankingService._data2
-    
   }
 
   clickRanking(rank: RankData) {
@@ -74,11 +73,19 @@ export class HomeComponent implements OnInit {
   }
 
   createRanking() {
-    const { rank_name, description } = this.createForm.value;
+    this.crearData = this.createForm.value;
     const rank_code = this.generateRankCode();
-    const data: createRank = { rank_code, rank_name, description };
-    // this.rankingService.crearRanking(data);
-    console.log(data);
+    this.crearData.id = rank_code
+    this.rankingService.createRaking(this.crearData).subscribe(
+      (result) => {
+        console.log(result);
+        window.location.reload();
+      },
+      () => {
+        this.joinForm.reset();
+        this.router.navigate(['/home/main-page']);
+      }
+    );
   }
 
   generateRankCode(): number {

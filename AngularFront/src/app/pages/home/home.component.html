@@ -27,7 +27,7 @@
 
           <div class="form-group">
             <label for="description">Descripción:</label>
-            <textarea class="form-control" rows="3" formControlName="description" required></textarea>
+            <textarea class="form-control" rows="3" formControlName="rank_description" required></textarea>
           </div>
 
           <button type="submit" class="btn btn-block btn-primary" style="margin-top: 5%;">
@@ -35,6 +35,7 @@
           </button><br>
         </div>
       </form>
+
     </div>
 
   </div>
@@ -48,7 +49,8 @@
                 <b> {{rank.rank_name}}</b>
               </h5>
             </div>
-            <h6 class="card-subtitle mb-2 text-muted">Puntos: {{this.ranking.points}}</h6>
+            <h6 *ngIf="this.authService.UserData.date != undefined" class="card-subtitle mb-2 text-muted">Puntos:
+              {{this.ranking.points}}</h6>
           </div>
         </div>
       </div>

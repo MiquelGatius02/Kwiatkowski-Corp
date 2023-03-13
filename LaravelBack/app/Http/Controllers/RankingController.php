@@ -16,11 +16,13 @@ class RankingController extends Controller
     public function createRanking(Request $request)
     {
         $request->validate([
+            'id',
             'rank_name',
             'rank_description',
         ]);
 
         $ranking = new Ranking();
+        $ranking->id = $request->id;
         $ranking->rank_name = $request->rank_name;
         $ranking->rank_description = $request->rank_description;
         $ranking->save();
@@ -29,7 +31,7 @@ class RankingController extends Controller
             "status" => 1,
             "msg" => "¡Ranking creado con éxito!",
         ]);
-    }   
+    }
 
 
     // RECOLECTAR INFORMACIÓN DE RANKINGs
@@ -52,6 +54,4 @@ class RankingController extends Controller
             ]);
         }
     }
-
-    
 }
