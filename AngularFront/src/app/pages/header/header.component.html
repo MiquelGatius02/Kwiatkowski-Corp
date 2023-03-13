@@ -1,5 +1,5 @@
 <nav id="spacing" class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Kwiatowski</a>
+  <a class="navbar-brand" href="/home/main-page">Kwiatowski</a>
   <ul class="navbar-nav">
     <div *ngIf="!session" id="flex">
       <div>
@@ -14,17 +14,11 @@
       </div>
     </div>
     <div *ngIf="session">
-      <!-- Button trigger modal -->
-      <!--
-        <a class="navbar-brand" href="#">
-        <img src="{{userData.username}}" alt="" width="30" height="24" class="d-inline-block align-text-top">
-        {{this.userData.username}}
-      </a>
-    -->
         <div class="dropdown">
           <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
             <a class="navbar-brand" href="#">
-              <img src="{{userData.username}}" alt="" width="30" height="24" class="d-inline-block align-text-top">
+              <img *ngIf="userData.imagen != null" src="{{userData.imagen}}" alt="avatar" class="rounded-circle img-fluid" style="width: 30px; height: 30px;">
+              <img *ngIf="userData.imagen == null" src="https://www.nicepng.com/png/full/202-2022264_usuario-annimo-usuario-annimo-user-icon-png-transparent.png" style="width: 50px; height: 50px;">
               {{this.userData.username}}
             </a>
           </button>
