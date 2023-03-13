@@ -1,19 +1,20 @@
-<div class="alert alert-warning" role="alert">
-  No está suscrito a ningún ranking.
-</div>
 <div class="container">
 
   <div class="container">
-    <div *ngFor="let ranking of UserRankingData; let i = index">
-      <div *ngIf="this.ranking.id != 0" class="big-layout">
+    <div>
+      <div class="big-layout">
         <div class="card" style="width: 18rem;">
           <div class="card-body">
-            <div *ngFor="let rank of RankingData; let i = index">
-              <h5 *ngIf="this.ranking.rank_code == this.rank.id" class="card-title mb-2 text-muted">
-                <b> {{rank.rank_name}}</b>
-              </h5>
-            </div>
-            <h6 class="card-subtitle mb-2 text-muted">Puntos: {{this.ranking.points}}</h6>
+            <h5 class="card-title mb-2 text-muted">
+              <b> {{this.rankingService.rankCache.rank_name}}</b>
+            </h5>
+            <h6 *ngFor="let rankingData of UsersRankingData; let i = index" class="card-subtitle mb-2 text-muted">
+              <div *ngFor="let user of User">
+                <div *ngIf="user.id == rankingData.user_id && user.id != 0">
+                  {{user.username}} {{rankingData.points}}
+                </div>
+              </div>
+            </h6>
           </div>
         </div>
       </div>

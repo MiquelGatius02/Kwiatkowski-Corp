@@ -21,6 +21,7 @@ export class AuthService {
     Data: any;
     UserData: UserData = { id: 0, username: '', email: '', firstname: '', lastname: '', centro: undefined, date: undefined, password: '', imagen: '' }
     RankUserData: RankData[] = []
+
     public loggedIn: Subject<boolean> = new ReplaySubject<boolean>(1);
 
     changeType(type: number) {

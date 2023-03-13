@@ -13,7 +13,7 @@ import { RouterModule } from '@angular/router';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NotfoundComponent } from './notfound/notfound.component';
-/* import { RankingComponent } from './pages/ranking/ranking.component'; */
+import { RankingComponent } from './pages/ranking/ranking.component';
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -23,7 +23,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
     ProfileComponent,
     NotfoundComponent,
     HomeComponent,
-  /*   RankingComponent */
+    RankingComponent
   ],
   imports: [
     BrowserModule,

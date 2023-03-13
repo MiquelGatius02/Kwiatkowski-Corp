@@ -19,20 +19,48 @@ export class HomeComponent implements OnInit {
   profileData: UserData = { id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "", imagen: "" };
   UserRankingData: RankingUserData[] = [{ id: 0, rank_code: 0, user_id: 0, points: 0 }]
   RankingData: RankData[] = [{ id: 0, rank_name: "", rank_description: "" }]
+  noLoop: boolean = true;
+  joinData: JoinRank = { rank_code: 0 };
+  joinForm: FormGroup;
   constructor(
     public authService: AuthService,
     public rankingService: RankingService,
     public fb: FormBuilder,
     public router: Router
   ) {
+    this.authService.profile()
+    this.joinForm = this.fb.group({
+      rank_id: [''],
+    });
   }
 
   ngOnInit(): void {
+    this.UserRankingData = this.UserRankingData.splice(0, this.UserRankingData.length)
+    this.RankingData = this.RankingData.splice(0, this.RankingData.length)
     this.authService.profile()
     this.rankingService.getRanking()
-    this.UserRankingData = this.UserRankingData.splice(0, this.UserRankingData.length)
     this.UserRankingData = this.rankingService._data1
     this.RankingData = this.rankingService._data2
+    
   }
 
+  clickRanking(rank: RankData) {
+    this.rankingService.rankCache = rank
+    this.router.navigate(['/home/ranking']);
+  }
+
+  onSubmit() {
+    this.joinData = this.joinForm.value
+    this.rankingService.addRanking(this.joinData).subscribe(
+      (result) => {
+        console.log(result);
+        window.location.reload();
+      },
+      () => {
+        this.joinForm.reset();
+        this.router.navigate(['/home/main-page']);
+      }
+    );
+  }
 }
+

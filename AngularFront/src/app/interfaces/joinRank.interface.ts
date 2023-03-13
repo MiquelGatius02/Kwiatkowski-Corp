@@ -1,3 +1,3 @@
 export interface JoinRank {
-    rank_id: number;
+    rank_code: number;
 }

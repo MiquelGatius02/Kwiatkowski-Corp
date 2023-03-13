@@ -33,10 +33,11 @@ Route::get('getRanking', [RankingController::class, 'getRanking']);
 Route::post('createRankingData', [RankingDataController::class, 'createRankingData']);
 Route::get('getRankingDataByUser', [RankingDataController::class, 'getRankingDataByUser']);
 Route::get('getRankingDataByCode', [RankingDataController::class, 'getRankingDataByCode']);
+Route::get('getUser', [RankingDataController::class, 'getUser']);
 
 
 Route::group(['middleware' => ["auth:sanctum"]], function () {
+    Route::post('addRanking', [RankingDataController::class, 'addRanking']);
     Route::get('userProfile', [CustomAuthController::class, 'userProfile']);
     Route::get('logout', [CustomAuthController::class, 'logout']);
 });
-

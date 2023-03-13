@@ -52,4 +52,6 @@ class RankingController extends Controller
             ]);
         }
     }
+
+    
 }
