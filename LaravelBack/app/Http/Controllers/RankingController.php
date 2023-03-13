@@ -10,79 +10,48 @@ use App\Models\RankingData;
 
 class RankingController extends Controller
 {
+
+    // CREAR RANKING
+
     public function createRanking(Request $request)
     {
         $request->validate([
             'rank_name',
-            'rank_code' => 'required',
-            'user_id',
+            'rank_description',
         ]);
 
         $ranking = new Ranking();
         $ranking->rank_name = $request->rank_name;
-        $ranking->rank_code = $request->rank_code;
-        $ranking->user_id = $request->user_id;
-        $ranking->points = $request->points;
+        $ranking->rank_description = $request->rank_description;
         $ranking->save();
 
         return response()->json([
             "status" => 1,
-            "msg" => "¡Registro de usuario exitoso!",
+            "msg" => "¡Ranking creado con éxito!",
         ]);
-    }
-    public function getRankingData()
-    {
-        $ranking = Ranking::where('user_id', '=', auth()->user()->id)->get();
+    }   
 
-        return response()->json([
-            "status" => 0,
-            "msg" => "Acerca del perfil de usuario",
-            "data" => $ranking
-        ]);
-    }
 
-    public function addRanking(request $request)
+    // RECOLECTAR INFORMACIÓN DE RANKINGs
+
+    public function getRanking()
     {
-        $request->validate([
-            "rank_id" => "required",
-        ]);
-        $rank = Ranking::where('rank_code', $request->rank_id)->first();
-        $user = Ranking::where('rank_code', $request->rank_id,)->where('user_id', (auth()->user()->id))->first();
-        if ($rank && $user == null) {
-            $ranking = new Ranking();
-            $ranking->rank_name = $rank->rank_name;
-            $ranking->rank_code = $rank->rank_code;
-            $ranking->user_id = (auth()->user()->id);
-            $ranking->points = 0;
-            $ranking->save();
+
+        $ranking = Ranking::get();
+
+        if ($ranking) {
             return response()->json([
                 "status" => 1,
-                "msg" => "Se ha añadido el usuario al ranking",
+                "msg" => "Se han recuperado los siguientes datos",
                 "data" => $ranking
             ]);
         } else {
             return response()->json([
                 "status" => 0,
-                "msg" => "No se ha podido añadir el usuario al ranking",
+                "msg" => "No se han encontrado registros"
             ]);
         }
     }
 
-    public function infoRanking(request $request)
-    {
-        $ranking = Ranking::all();
-
-        return response()->json([
-            "status" => 1,
-            "msg" => "Se ha extraido el ranking",
-            "data" => $ranking
-        ]);
-    }
-
-    public function getUser(request $request)
-    {
-        $user = User::all();
-
-        return response()->json([$user]);
-    }
+    
 }

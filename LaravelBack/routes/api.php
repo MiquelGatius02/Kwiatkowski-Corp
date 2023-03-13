@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\RankingController;
+use App\Http\Controllers\RankingDataController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -22,18 +23,21 @@ Route::post('registerProfessor', [CustomAuthController::class, 'registerProfesso
 Route::post('registerStudent', [CustomAuthController::class, 'registerStudent']);
 Route::post('changePassword', [CustomAuthController::class, 'changePassword']);
 Route::post('changeImg', [CustomAuthController::class, 'changeImg']);
-Route::post('createRanking', [RankingController::class, 'createRanking']);
 Route::post('login', [CustomAuthController::class, 'login']);
-Route::post('createRanking', [RankingController::class, 'createRanking']);
-Route::get('getUser', [RankingController::class, 'getUser']);
 
+// RANKING
+Route::post('createRanking', [RankingController::class, 'createRanking']);
+Route::get('getRanking', [RankingController::class, 'getRanking']);
+
+//RANKING DATA
+Route::post('createRankingData', [RankingDataController::class, 'createRankingData']);
+Route::get('getRankingDataByUser', [RankingDataController::class, 'getRankingDataByUser']);
+Route::get('getRankingDataByCode', [RankingDataController::class, 'getRankingDataByCode']);
+Route::get('getUser', [RankingDataController::class, 'getUser']);
 
 
 Route::group(['middleware' => ["auth:sanctum"]], function () {
-    Route::get('infoRanking', [RankingController::class, 'infoRanking']);
-    Route::get('getRanking', [RankingController::class, 'getRanking']);
+    Route::post('addRanking', [RankingDataController::class, 'addRanking']);
     Route::get('userProfile', [CustomAuthController::class, 'userProfile']);
-    Route::get('getRankingData', [RankingController::class, 'getRankingData']);
-    Route::post('addRanking', [RankingController::class, 'addRanking']);
     Route::get('logout', [CustomAuthController::class, 'logout']);
 });
