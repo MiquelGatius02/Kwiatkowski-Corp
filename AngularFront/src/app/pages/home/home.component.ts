@@ -16,19 +16,18 @@ import { RankingService } from 'src/app/services/ranking.service';
 
 
 export class HomeComponent implements OnInit {
-  UserData: RankData[] = [{ id: 0, rank_name: '', rank_code: 0, user_id: 0, points: 0 }]
-  filteredRankingData: any[] = []
-  joinData: JoinRank = { rank_id: 0 };
-  rankInfo: JoinRank = { rank_id: 0 };
+  profileData: UserData = { id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "", imagen: "" };
+  UserRankingData: RankingUserData[] = [{ id: 0, rank_code: 0, user_id: 0, points: 0 }]
+  RankingData: RankData[] = [{ id: 0, rank_name: "", rank_description: "" }]
+  noLoop: boolean = true;
+  joinData: JoinRank = { rank_code: 0 };
   joinForm: FormGroup;
-
   constructor(
     public authService: AuthService,
     public rankingService: RankingService,
     public fb: FormBuilder,
     public router: Router
   ) {
-    this.rankingService.getRankingData()
     this.authService.profile()
     this.joinForm = this.fb.group({
       rank_id: [''],
@@ -36,9 +35,18 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.UserData.splice(0, this.UserData.length)
-    this.UserData = this.rankingService.UserData
-    console.log(this.UserData)
+    this.UserRankingData = this.UserRankingData.splice(0, this.UserRankingData.length)
+    this.RankingData = this.RankingData.splice(0, this.RankingData.length)
+    this.authService.profile()
+    this.rankingService.getRanking()
+    this.UserRankingData = this.rankingService._data1
+    this.RankingData = this.rankingService._data2
+    
+  }
+
+  clickRanking(rank: RankData) {
+    this.rankingService.rankCache = rank
+    this.router.navigate(['/home/ranking']);
   }
 
   onSubmit() {
@@ -54,10 +62,5 @@ export class HomeComponent implements OnInit {
       }
     );
   }
-
-  rankingData(valor: number) {
-    this.rankingService.rankCode = valor
-    console.log(this.rankingService.rankCode)
-    this.router.navigate(['/home/ranking']);
-  }
 }
+
