@@ -24,6 +24,7 @@ export class RankingService {
     public fb: FormBuilder,
     private token: TokenService,
     private authState: AuthStateService,
+
   ) { }
 
 
@@ -53,7 +54,6 @@ export class RankingService {
   public getRanking() {  // TODOS LOS RANKINGS
     const tokenCache: any = this.token.getToken();
     this.http.get("http://127.0.0.1:8000/api/getRanking").subscribe(data => {
-      console.log(data)
       if (this._getRanking != undefined) {
         this._getRanking = this._getRanking.splice(0, this._getRanking.length)
       }
@@ -111,6 +111,7 @@ export class RankingService {
   addRanking(rank: JoinRank): Observable<any> {
     // console.log(rank);
     return this.http.post('http://127.0.0.1:8000/api/addRanking', rank);
+
   }
 
 } 
