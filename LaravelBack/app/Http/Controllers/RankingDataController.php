@@ -98,6 +98,4 @@ class RankingDataController extends Controller
             ]);
         }
     }
-
-    }
 }
