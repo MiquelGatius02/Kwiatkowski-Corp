@@ -46,7 +46,8 @@ export class RankingService {
 
 
   public createRaking(rank: RankData) {
-    return this.http.post("http://127.0.0.1:8000/api/createRanking", rank)
+    const tokenCache: any = this.token.getToken();
+    return this.http.post("http://127.0.0.1:8000/api/createRanking", rank, { headers: new HttpHeaders().set('Authorization', tokenCache) })
   }
 
   public getRanking() {  // TODOS LOS RANKINGS

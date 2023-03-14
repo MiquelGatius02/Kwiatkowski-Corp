@@ -27,6 +27,11 @@ class RankingController extends Controller
         $ranking->rank_description = $request->rank_description;
         $ranking->save();
 
+        $ranking2 = new RankingData();
+        $ranking2->rank_code = $ranking->id;
+        $ranking2->user_id = $ranking->auth()->user()->id;
+        $ranking2->points = 0;
+
         return response()->json([
             "status" => 1,
             "msg" => "¡Ranking creado con éxito!",
