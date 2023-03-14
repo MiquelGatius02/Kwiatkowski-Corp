@@ -21,10 +21,10 @@ export class HomeComponent implements OnInit {
   UserRankingData: RankingUserData[] = [{ id: 0, rank_code: 0, user_id: 0, points: 0 }]
   RankingData: RankData[] = [{ id: 0, rank_name: "", rank_description: "" }]
   noLoop: boolean = true;
-  joinData: JoinRank = { rank_code: 0 };
+  joinData: JoinRank = { rank_code: 0, user_logged: 0};
+  crearData: RankData = { id: 0, rank_name: "", rank_description: "" };
   joinForm: FormGroup;
   createForm: FormGroup;
-  rankData: createRank[] = [{ rank_code: 0, rank_name: '', description: '' }];
 
   constructor(
     public authService: AuthService,
@@ -34,13 +34,13 @@ export class HomeComponent implements OnInit {
   ) {
     this.authService.profile()
     this.joinForm = this.fb.group({
-      rank_id: [''],
+      rank_id: '',
     });
 
     this.createForm = this.fb.group({
+      id: [''],
       rank_name: ['', Validators.required],
-      description: ['', Validators.required],
-      rank_code: [0, Validators.required],
+      rank_description: ['', Validators.required],
     });
   }
 
@@ -51,7 +51,6 @@ export class HomeComponent implements OnInit {
     this.rankingService.getRanking()
     this.UserRankingData = this.rankingService._data1
     this.RankingData = this.rankingService._data2
-
   }
 
   clickRanking(rank: RankData) {
@@ -59,25 +58,12 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/home/ranking']);
   }
 
-  createRanking() {
-    const { rank_name, description } = this.createForm.value;
-    const rank_code = this.generateRankCode();
-    const data: createRank = { rank_code, rank_name, description };
-    // this.rankingService.crearRanking(data);
-    console.log(data);
-  }
-
-  generateRankCode(): number {
-    // Generar código aleatorio de 5 dígitos
-    const code = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000;
-    return code;
-  }
-
   onSubmit() {
-    this.joinData = this.joinForm.value
+    this.joinData = this.joinForm.value;
+    this.joinData.user_logged = this.authService.UserData.id;
     this.rankingService.addRanking(this.joinData).subscribe(
       (result) => {
-        console.log(result);
+        // console.log(result);
         window.location.reload();
       },
       () => {
@@ -85,6 +71,28 @@ export class HomeComponent implements OnInit {
         this.router.navigate(['/home/main-page']);
       }
     );
+  }
+
+  createRanking() {
+    this.crearData = this.createForm.value;
+    const rank_code = this.generateRankCode();
+    this.crearData.id = rank_code
+    this.rankingService.createRaking(this.crearData).subscribe(
+      (result) => {
+        // console.log(result);
+        window.location.reload();
+      },
+      () => {
+        this.joinForm.reset();
+        this.router.navigate(['/home/main-page']);
+      }
+    );
+  }
+
+  generateRankCode(): number {
+    // Generar código aleatorio de 5 dígitos
+    const code = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000;
+    return code;
   }
 }
 
