@@ -14,18 +14,11 @@
       </div>
     </div>
     <div *ngIf="session">
-      <!-- Button trigger modal -->
-      <!--
-        <a class="navbar-brand" href="#">
-        <img src="{{userData.username}}" alt="" width="30" height="24" class="d-inline-block align-text-top">
-        {{this.userData.username}}
-      </a>
-    -->
         <div class="dropdown">
-          <button class="btn  dropdown-toggle" type="button" data-toggle="dropdown">
-            <a class="navbar-brand " href="#">
-              <img class="image" *ngIf="userData.imagen != null" src="{{userData.imagen}}" alt="avatar" class="rounded-circle img-fluid" style="width: 30px; height: 30px;">
-              <img class="image" *ngIf="userData.imagen == null" src="https://www.nicepng.com/png/full/202-2022264_usuario-annimo-usuario-annimo-user-icon-png-transparent.png" style="width: 30px; height: 30px;">
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+            <a class="navbar-brand" href="#">
+              <img *ngIf="userData.imagen != null" src="{{userData.imagen}}" alt="avatar" class="rounded-circle img-fluid" style="width: 30px; height: 30px;">
+              <img *ngIf="userData.imagen == null" src="https://www.nicepng.com/png/full/202-2022264_usuario-annimo-usuario-annimo-user-icon-png-transparent.png" style="width: 50px; height: 50px;">
               {{this.userData.username}}
             </a>
           </button>

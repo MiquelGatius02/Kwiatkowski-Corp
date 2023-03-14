@@ -29,8 +29,6 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.authService.signin(this.loginForm.value).subscribe(
       (result) => {
-        console.log("resultado:")
-        console.log(result);
         this.responseHandler(result);
       },
       (error) => {
@@ -45,7 +43,6 @@ export class LoginComponent implements OnInit {
   }
   // Handle response
   responseHandler(data: any) {
-    console.log(data)
     this.token.handleData(data.access_token);
   }
 

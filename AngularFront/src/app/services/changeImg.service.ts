@@ -17,7 +17,7 @@ export class changeImgService {
         public fb: FormBuilder) { }
 
     changeImg(user: imgData): Observable<any> {
-        console.log(user);
+         (user);
         return this.http.post('http://127.0.0.1:8000/api/changeImg', user);
     }
 
