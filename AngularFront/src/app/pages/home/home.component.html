@@ -1,33 +1,26 @@
-<div class="alert alert-warning" role="alert" *ngIf="this.UserRankingData.length == 0" >
+<div class="alert alert-warning" role="alert" *ngIf="this.UserRankingData.length == 0">
   No está suscrito a ningún ranking.
 </div>
 <div class="container">
-  <div class="layout">
-
-    <div class="" *ngIf="this.authService.UserData.date != undefined " style="color: white">
-      <form class="form-signin" [formGroup]="joinForm" (ngSubmit)="onSubmit()">
-        <div class="col-sm-9">
-          <div class="inline">
+  <div class="big-layout">
+    <div class= "" *ngIf="this.authService.UserData.date != undefined" style="color: rgb(0, 0, 0)">
+      <form class="" [formGroup]="joinForm" (ngSubmit)="onSubmit()">
+            <label for="rank_name">Codigo del ranking:</label>
             <input style="width: 230px; margin-right: 10px;" type="number" formControlName="rank_id" />
             <button type="submit" class="btn btn-block btn-primary" style="margin-top: 5%;">
               Unirse al ranking
             </button><br>
-          </div>
-        </div>
       </form>
     </div>
 
-    <div class="" *ngIf="this.authService.UserData.date == undefined" style="color: white">
+    <div class="" *ngIf="this.authService.UserData.date == undefined" style="color: rgb(0, 0, 0)">
       <form class="form-signin" [formGroup]="createForm" (ngSubmit)="createRanking()">
-        <div class="col-sm-9">
+        <div class="">
           <div class="form-group">
             <label for="rank_name">Nombre del ranking:</label>
             <input type="text" class="form-control" formControlName="rank_name" required>
-          </div>
-
-          <div class="form-group">
             <label for="description">Descripción:</label>
-            <textarea class="form-control" rows="3" formControlName="rank_description" required></textarea>
+            <textarea class="form-control" rows="3" formControlName="description" required></textarea>
           </div>
 
           <button type="submit" class="btn btn-block btn-primary" style="margin-top: 5%;">
@@ -35,7 +28,6 @@
           </button><br>
         </div>
       </form>
-
     </div>
 
   </div>
@@ -46,11 +38,11 @@
           <div class="card-body">
             <div (click)="clickRanking(this.rank)" *ngFor="let rank of RankingData; let i = index">
               <h5 *ngIf="this.ranking.rank_code == this.rank.id" class="card-title mb-2 text-muted">
+                <b> Codigo de ranking</b>
                 <b> {{rank.rank_name}}</b>
               </h5>
             </div>
-            <h6 *ngIf="this.authService.UserData.date != undefined" class="card-subtitle mb-2 text-muted">Puntos:
-              {{this.ranking.points}}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Puntos: {{this.ranking.points}}</h6>
           </div>
         </div>
       </div>

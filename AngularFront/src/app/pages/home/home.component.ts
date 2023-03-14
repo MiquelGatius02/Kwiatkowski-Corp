@@ -21,7 +21,12 @@ export class HomeComponent implements OnInit {
   UserRankingData: RankingUserData[] = [{ id: 0, rank_code: 0, user_id: 0, points: 0 }]
   RankingData: RankData[] = [{ id: 0, rank_name: "", rank_description: "" }]
   noLoop: boolean = true;
-  joinData: JoinRank = { rank_code: 0 };
+
+  joinData: JoinRank = {
+    rank_code: 0,
+    user_logged: 0
+  };
+
   crearData: RankData = { id: 0, rank_name: "", rank_description: "" };
   joinForm: FormGroup;
   createForm: FormGroup;
@@ -59,7 +64,8 @@ export class HomeComponent implements OnInit {
   }
 
   onSubmit() {
-    this.joinData = this.joinForm.value
+    this.joinData = this.joinForm.value;
+    this.joinData.user_logged = this.authService.UserData.id;
     this.rankingService.addRanking(this.joinData).subscribe(
       (result) => {
         window.location.reload();

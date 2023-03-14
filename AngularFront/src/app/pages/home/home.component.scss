@@ -3,15 +3,18 @@
 }
 
 .layout {
-  margin-left: 5rem;
-  width: 16rem;
-  height: 7rem;
+  margin: auto;
+  width: 30rem;
   border-radius: 10px;
   background-color: white;
-  padding: 1rem;
+  padding: 2rem;
   margin-top: 10rem;
-  text-align: center;
 }
+.center{
+  display: flex;
+  align-items: center;
+}
+
 
 .big-layout {
   display: flex;
