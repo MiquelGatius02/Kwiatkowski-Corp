@@ -29,8 +29,9 @@ class RankingController extends Controller
 
         $ranking2 = new RankingData();
         $ranking2->rank_code = $ranking->id;
-        $ranking2->user_id = $ranking->auth()->user()->id;
+        $ranking2->user_id = auth()->user()->id;
         $ranking2->points = 0;
+        $ranking2->save();
 
         return response()->json([
             "status" => 1,
