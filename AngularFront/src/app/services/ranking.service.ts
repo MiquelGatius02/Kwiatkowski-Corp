@@ -23,6 +23,8 @@ export class RankingService {
     public router: Router,
     public fb: FormBuilder,
     private token: TokenService,
+    private authState: AuthStateService,
+
   ) { }
 
 
@@ -107,9 +109,9 @@ export class RankingService {
   }
 
   addRanking(rank: JoinRank): Observable<any> {
-    const tokenCache: any = this.token.getToken();
-    console.log("Añadiendo ranking...")
-    return this.http.post('http://127.0.0.1:8000/api/addRanking', rank, { headers: new HttpHeaders().set('Authorization', tokenCache) })
+    // console.log(rank);
+    return this.http.post('http://127.0.0.1:8000/api/addRanking', rank);
+
   }
 
 } 

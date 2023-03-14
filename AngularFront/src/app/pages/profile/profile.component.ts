@@ -45,6 +45,7 @@ export class ProfileComponent implements OnInit {
 
     this.authService.changePassword(this.passwordForm.value).subscribe(
       (result) => {
+        console.log(result);
 
         this.showAlertImg = true;
         setTimeout(() => {
@@ -81,7 +82,6 @@ export class ProfileComponent implements OnInit {
           this.imgChange.changeImg(this.imgData).subscribe(
             (result) => {
               this.showAlert = true;
-
               setTimeout(() => {
                 this.showAlert = false;
                 window.location.reload();
