@@ -22,9 +22,9 @@ export class HomeComponent implements OnInit {
   RankingData: RankData[] = [{ id: 0, rank_name: "", rank_description: "" }]
   noLoop: boolean = true;
   joinData: JoinRank = { rank_code: 0 };
-  crearData: RankData = { id: 0, rank_name: "", rank_description: "" };
   joinForm: FormGroup;
   createForm: FormGroup;
+  rankData: createRank[] = [{ rank_code: 0, rank_name: '', description: '' }];
 
   constructor(
     public authService: AuthService,
@@ -38,9 +38,9 @@ export class HomeComponent implements OnInit {
     });
 
     this.createForm = this.fb.group({
-      id: [''],
       rank_name: ['', Validators.required],
-      rank_description: ['', Validators.required],
+      description: ['', Validators.required],
+      rank_code: [0, Validators.required],
     });
   }
 
@@ -51,11 +51,26 @@ export class HomeComponent implements OnInit {
     this.rankingService.getRanking()
     this.UserRankingData = this.rankingService._data1
     this.RankingData = this.rankingService._data2
+
   }
 
   clickRanking(rank: RankData) {
     this.rankingService.rankCache = rank
     this.router.navigate(['/home/ranking']);
+  }
+
+  createRanking() {
+    const { rank_name, description } = this.createForm.value;
+    const rank_code = this.generateRankCode();
+    const data: createRank = { rank_code, rank_name, description };
+    // this.rankingService.crearRanking(data);
+    console.log(data);
+  }
+
+  generateRankCode(): number {
+    // Generar código aleatorio de 5 dígitos
+    const code = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000;
+    return code;
   }
 
   onSubmit() {
@@ -70,28 +85,6 @@ export class HomeComponent implements OnInit {
         this.router.navigate(['/home/main-page']);
       }
     );
-  }
-
-  createRanking() {
-    this.crearData = this.createForm.value;
-    const rank_code = this.generateRankCode();
-    this.crearData.id = rank_code
-    this.rankingService.createRaking(this.crearData).subscribe(
-      (result) => {
-        console.log(result);
-        window.location.reload();
-      },
-      () => {
-        this.joinForm.reset();
-        this.router.navigate(['/home/main-page']);
-      }
-    );
-  }
-
-  generateRankCode(): number {
-    // Generar código aleatorio de 5 dígitos
-    const code = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000;
-    return code;
   }
 }
 
