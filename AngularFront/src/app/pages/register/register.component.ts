@@ -58,7 +58,6 @@ export class RegisterComponent implements OnInit {
     if (this.typeUser == 0) {
       this.authService.registerStudent(this.registerForm.value).subscribe(
         (result) => {
-          console.log(result);
         },
         (error) => {
           this.errors = error.error;
@@ -72,7 +71,6 @@ export class RegisterComponent implements OnInit {
     else {
       this.authService.registerProfessor(this.registerForm.value).subscribe(
         (result) => {
-          console.log(result);
         },
         (error) => {
           this.errors = error.error;

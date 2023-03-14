@@ -24,6 +24,7 @@ export class RankingService {
     public fb: FormBuilder,
     private token: TokenService,
     private authState: AuthStateService,
+
   ) { }
 
 
@@ -53,7 +54,6 @@ export class RankingService {
   public getRanking() {  // TODOS LOS RANKINGS
     const tokenCache: any = this.token.getToken();
     this.http.get("http://127.0.0.1:8000/api/getRanking").subscribe(data => {
-      console.log(data)
       if (this._getRanking != undefined) {
         this._getRanking = this._getRanking.splice(0, this._getRanking.length)
       }
@@ -67,7 +67,7 @@ export class RankingService {
   public getRankingDataByCode(rank_code: number) { // RECUPRAR DATOS RANKING POR ID DE RANKING
     console.log(rank_code)
     this.http.get("http://127.0.0.1:8000/api/getRankingDataByCode" + "?" + "rank_code=" + rank_code).subscribe(data => {
-      console.log(data)
+      // console.log(data)
       /*       if (this._getRankingDataByCode != undefined) {
               this._getRankingDataByCode = undefined
             } */
@@ -76,13 +76,13 @@ export class RankingService {
       for (let i = 0; i < this._getRankingDataByCode.data.length; i++) {
         this._data3.push(this._getRankingDataByCode.data[i])
       }
-      console.log(this._data3)
+      // console.log(this._data3)
     });
   }
 
   public getRankingDataByUser(user_id: number) { // RECUPERAR DATOS RANKING POR ID DE USUARIO
     this.http.get("http://127.0.0.1:8000/api/getRankingDataByUser" + "?" + "user_id=" + user_id).subscribe(data => {
-      console.log(data)
+      // console.log(data)
       /*       if (this._getRankingDataByUser != undefined) {
               this._getRankingDataByUser = undefined
             } */
@@ -111,6 +111,7 @@ export class RankingService {
   addRanking(rank: JoinRank): Observable<any> {
     // console.log(rank);
     return this.http.post('http://127.0.0.1:8000/api/addRanking', rank);
+
   }
 
 } 

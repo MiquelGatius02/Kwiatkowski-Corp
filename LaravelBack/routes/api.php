@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\CustomAuthController;
+use App\Http\Controllers\PetitionsController;
 use App\Http\Controllers\RankingController;
 use App\Http\Controllers\RankingDataController;
 use Illuminate\Support\Facades\Route;
@@ -25,8 +26,10 @@ Route::post('changePassword', [CustomAuthController::class, 'changePassword']);
 Route::post('changeImg', [CustomAuthController::class, 'changeImg']);
 Route::post('login', [CustomAuthController::class, 'login']);
 
-// RANKING
+//PETICIONES
+Route::get('getPetitions', [PetitionsController::class, 'getPetitions']);
 
+// RANKING
 Route::get('getRanking', [RankingController::class, 'getRanking']);
 
 //RANKING DATA

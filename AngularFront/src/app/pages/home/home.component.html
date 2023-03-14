@@ -35,27 +35,31 @@
           </button><br>
         </div>
       </form>
-
-      <table class="table">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">Petición</th>
-            <th scope="col">Ranking</th>
-            <th scope="col">Alumno</th>
-            <th scope="col">Aceptar</th>
-            <th scope="col">Denegar</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td><button class="btn btn-success">Aceptar</button></td>
-            <td><button class="btn btn-danger">Denegar</button></td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="tabla">
+        <button class="btn btn-success" (click)="verPeticiones()">Ver/Ocultar peticiones</button>
+        <br>
+        <br>
+        <table *ngIf="showTable == true" class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Petición</th>
+              <th scope="col">Ranking</th>
+              <th scope="col">Alumno</th>
+              <th scope="col">Aceptar</th>
+              <th scope="col">Denegar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td><button class="btn btn-success">Aceptar</button></td>
+              <td><button class="btn btn-danger">Denegar</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
   </div>

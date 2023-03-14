@@ -13,7 +13,7 @@ export class TokenService {
         localStorage.setItem('auth_token', token);
     }
     getToken() {
-        console.log(localStorage.getItem('auth_token'))
+        // console.log(localStorage.getItem('auth_token'))
         return localStorage.getItem('auth_token');
     }
     // Verify the token

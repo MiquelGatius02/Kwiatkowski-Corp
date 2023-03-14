@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { createRank } from 'src/app/interfaces/createRankingData';
 import { JoinRank } from 'src/app/interfaces/joinRank.interface';
+import { PetitionsData } from 'src/app/interfaces/petitionsData.interface';
 import { RankData } from 'src/app/interfaces/rankData.interface ';
 import { RankingUserData } from 'src/app/interfaces/rankingUserData.interface';
-import { UserData } from 'src/app/interfaces/userData.interface';
 import { AuthService } from 'src/app/services/auth.service';
+import { PetitionsService } from 'src/app/services/petitions.service';
 import { RankingService } from 'src/app/services/ranking.service';
 
 @Component({
@@ -17,24 +17,28 @@ import { RankingService } from 'src/app/services/ranking.service';
 
 
 export class HomeComponent implements OnInit {
-  profileData: UserData = { id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "", imagen: "" };
-  UserRankingData: RankingUserData[] = [{ id: 0, rank_code: 0, user_id: 0, points: 0 }]
-  RankingData: RankData[] = [{ id: 0, rank_name: "", rank_description: "" }]
-  noLoop: boolean = true;
+  UserRankingData: RankingUserData[] = [{ id: 0, rank_code: 0, user_id: 0, points: 0 }];
+  RankingData: RankData[] = [{ id: 0, rank_name: "", rank_description: "" }];
+  // PetitionsData: PetitionsData[] = [{id: 0, rank_id:0, alumno:0}];
   joinData: JoinRank = { rank_code: 0, user_logged: 0};
+
   crearData: RankData = { id: 0, rank_name: "", rank_description: "" };
   joinForm: FormGroup;
   createForm: FormGroup;
+  showTable: boolean = false;
 
   constructor(
     public authService: AuthService,
     public rankingService: RankingService,
     public fb: FormBuilder,
-    public router: Router
+    public router: Router,
+    public petitionService: PetitionsService
   ) {
     this.authService.profile()
     this.joinForm = this.fb.group({
+
       rank_id: '',
+
     });
 
     this.createForm = this.fb.group({
@@ -45,12 +49,12 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.UserRankingData = this.UserRankingData.splice(0, this.UserRankingData.length)
-    this.RankingData = this.RankingData.splice(0, this.RankingData.length)
-    this.authService.profile()
-    this.rankingService.getRanking()
-    this.UserRankingData = this.rankingService._data1
-    this.RankingData = this.rankingService._data2
+    this.UserRankingData = this.UserRankingData.splice(0, this.UserRankingData.length);
+    this.RankingData = this.RankingData.splice(0, this.RankingData.length);
+    this.authService.profile();
+    this.rankingService.getRanking();
+    this.UserRankingData = this.rankingService._data1;
+    this.RankingData = this.rankingService._data2;
   }
 
   clickRanking(rank: RankData) {
@@ -59,11 +63,13 @@ export class HomeComponent implements OnInit {
   }
 
   onSubmit() {
+
     this.joinData = this.joinForm.value;
     this.joinData.user_logged = this.authService.UserData.id;
     this.rankingService.addRanking(this.joinData).subscribe(
       (result) => {
         // console.log(result);
+
         window.location.reload();
       },
       () => {
@@ -80,6 +86,7 @@ export class HomeComponent implements OnInit {
     this.rankingService.createRaking(this.crearData).subscribe(
       (result) => {
         // console.log(result);
+
         window.location.reload();
       },
       () => {
@@ -93,6 +100,16 @@ export class HomeComponent implements OnInit {
     // Generar código aleatorio de 5 dígitos
     const code = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000;
     return code;
+  }
+
+  verPeticiones(){
+    this.petitionService.getPetitions(this.authService.UserData.id);
+    console.log(this.petitionService);
+    if(this.showTable == true){
+      this.showTable = false;
+    }else{
+      this.showTable = true;
+    }
   }
 }
 
