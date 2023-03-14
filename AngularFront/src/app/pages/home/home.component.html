@@ -46,6 +46,10 @@
           <div class="card-body">
             <div (click)="clickRanking(this.rank)" *ngFor="let rank of RankingData; let i = index">
               <h5 *ngIf="this.ranking.rank_code == this.rank.id" class="card-title mb-2 text-muted">
+                <b>Código de ranking:</b>
+                <br>
+                <b>{{rank.id}}</b>
+                <br>
                 <b> {{rank.rank_name}}</b>
               </h5>
             </div>

@@ -62,7 +62,6 @@ export class HomeComponent implements OnInit {
     this.joinData = this.joinForm.value
     this.rankingService.addRanking(this.joinData).subscribe(
       (result) => {
-        console.log(result);
         window.location.reload();
       },
       () => {
@@ -78,7 +77,6 @@ export class HomeComponent implements OnInit {
     this.crearData.id = rank_code
     this.rankingService.createRaking(this.crearData).subscribe(
       (result) => {
-        console.log(result);
         window.location.reload();
       },
       () => {
