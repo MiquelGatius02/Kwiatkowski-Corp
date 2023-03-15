@@ -3,10 +3,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { createRank } from 'src/app/interfaces/createRankingData';
 import { JoinRank } from 'src/app/interfaces/joinRank.interface';
+import { PetitionsData } from 'src/app/interfaces/petitionsData.interface';
 import { RankData } from 'src/app/interfaces/rankData.interface ';
 import { RankingUserData } from 'src/app/interfaces/rankingUserData.interface';
 import { UserData } from 'src/app/interfaces/userData.interface';
 import { AuthService } from 'src/app/services/auth.service';
+import { PetitionsService } from 'src/app/services/petitions.service';
 import { RankingService } from 'src/app/services/ranking.service';
 
 @Component({
@@ -18,23 +20,29 @@ import { RankingService } from 'src/app/services/ranking.service';
 
 export class HomeComponent implements OnInit {
   profileData: UserData = { id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "", imagen: "" };
-  UserRankingData: RankingUserData[] = [{ id: 0, rank_code: 0, user_id: 0, points: 0 }]
-  RankingData: RankData[] = [{ id: 0, rank_name: "", rank_description: "" }]
+  UserRankingData: RankingUserData[] = [{ id: 0, rank_code: 0, user_id: 0, points: 0 }];
+  RankingData: RankData[] = [{ id: 0, rank_name: "", rank_description: "" }];
   noLoop: boolean = true;
 
+  //Unirse/Crear Rankings
   joinData: JoinRank = { rank_code: 0, user_logged: 0};
-
   crearData: RankData = { id: 0, rank_name: "", rank_description: "" };
   joinForm: FormGroup;
   createForm: FormGroup;
+
+  PetitionsData: PetitionsData[] = [{ id: 0, rank_code: 0, user_id: 0 }];
+  // GestionarPeticion: UserData ={id:0};
+  showTable: boolean = false;
 
   constructor(
     public authService: AuthService,
     public rankingService: RankingService,
     public fb: FormBuilder,
-    public router: Router
+    public router: Router,
+    public petitionsService: PetitionsService
   ) {
-    this.authService.profile()
+    this.authService.profile();
+
     this.joinForm = this.fb.group({
 
       rank_id: '',
@@ -100,6 +108,34 @@ export class HomeComponent implements OnInit {
     // Generar código aleatorio de 5 dígitos
     const code = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000;
     return code;
+  }
+
+  verPeticiones(){
+    this.petitionsService.getPetitions(this.authService.UserData.id);
+    this.PetitionsData = this.petitionsService.dataPetitions; 
+    if(this.showTable == false){
+      this.showTable = true;
+    }else{
+      this.showTable = false;
+    }
+  }
+
+  aceptarPeticion(){
+    // this.petitionsService.getPetitions(this.authService.UserData.id);
+    // this.PetitionsData = this.petitionsService.dataPetitions; 
+    // if(this.showTable == false){
+    //   this.showTable = true;
+    // }else{
+    //   this.showTable = false;
+    // }
+  }
+
+  denegarPeticion(){
+    this.petitionsService.denegarPeticion(this.PetitionsData[0].id).subscribe(
+      () => {
+        // console.log(result);
+        window.location.reload();
+      });
   }
 }
 

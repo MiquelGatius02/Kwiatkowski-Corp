@@ -13,8 +13,7 @@ class RankingController extends Controller
 
     // CREAR RANKING
 
-    public function createRanking(Request $request)
-    {
+    public function createRanking(Request $request){
         $request->validate([
             'id',
             'rank_name',
@@ -42,8 +41,7 @@ class RankingController extends Controller
 
     // RECOLECTAR INFORMACIÓN DE RANKINGs
 
-    public function getRanking()
-    {
+    public function getRanking(){
 
         $ranking = Ranking::get();
 

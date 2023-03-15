@@ -1,5 +1,5 @@
 export interface PetitionsData {
     id: number;
-    rank_id: number;
-    alumno: number;
+    rank_code: number;
+    user_id: any;
 }

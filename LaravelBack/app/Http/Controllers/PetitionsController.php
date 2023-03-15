@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\petitions;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PetitionsController extends Controller{
     public function getPetitions(Request $request){
@@ -11,8 +13,7 @@ class PetitionsController extends Controller{
         $request->validate([
             "id_prof"       => "required",
         ]);
-        $petitionsData = petitions::where('professor_id', $request->id_prof,)->all();
-        
+        $petitionsData = petitions::where('professor_id', $request->id_prof,)->get();
 
         if ($petitionsData) {
             return response()->json([
@@ -26,5 +27,37 @@ class PetitionsController extends Controller{
                 "msg" => "No se han encontrado peticiones"
             ]);
         }
+    }
+    public function getUserPetitions(Request $request){
+
+        $request->validate([
+            "id_user"       => "required",
+        ]);
+
+        $User = User::where('id', $request->id_user,)->get('username');
+
+        if ($User) {
+            return response()->json($User);
+        } else {
+            return response()->json([
+                "status" => 0,
+                "msg" => "No se han encontrado usuarios"
+            ]);
+        }
+    }
+
+    public function denegarPetitions(Request $request){
+        
+        $request->validate([
+            "id" => "required",
+        ]);
+
+        DB::table('petitions')->where('id', $request->id)->delete();
+        DB::commit();
+
+        return response()->json([
+            "status" => 1,
+            "msg" => "Peticion borrada"
+        ]);
     }
 }

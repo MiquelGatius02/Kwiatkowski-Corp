@@ -26,8 +26,12 @@ Route::post('changePassword', [CustomAuthController::class, 'changePassword']);
 Route::post('changeImg', [CustomAuthController::class, 'changeImg']);
 Route::post('login', [CustomAuthController::class, 'login']);
 
-//PETICIONES
+//PETICIONES GET
 Route::get('getPetitions', [PetitionsController::class, 'getPetitions']);
+Route::get('getUserPetitions', [PetitionsController::class, 'getUserPetitions']);
+
+//PETICIONES POST
+Route::post('denegarPetitions', [PetitionsController::class, 'denegarPetitions']);
 
 // RANKING
 Route::get('getRanking', [RankingController::class, 'getRanking']);
