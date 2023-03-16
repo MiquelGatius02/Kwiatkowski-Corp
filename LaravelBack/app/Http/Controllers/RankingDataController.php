@@ -98,4 +98,23 @@ class RankingDataController extends Controller
             ]);
         }
     }
+
+    public function addRanking(request $request)
+    {
+        $request->validate([
+            "rank_id"       => "required",
+            "user_logged"   => "required",
+        ]);
+        $user = RankingData::where('rank_code', $request->rank_id,)->first();
+        $petitions = new petitions();
+        $petitions->rank_code = $request->rank_id;
+        $petitions->user_id = $request->user_logged;
+        $petitions->professor_id = $user->user_id;
+        $petitions->save();
+        return response()->json([
+            "status" => 1,
+            "msg" => "Se ha realizado una solicitud de unión",
+            "data" => $petitions
+        ]);
+    }
 }

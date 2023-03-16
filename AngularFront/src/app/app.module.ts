@@ -15,6 +15,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { RankingComponent } from './pages/ranking/ranking.component';
 import { AssignmentsService } from './services/assignments.service';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { AssignmentComponent } from './pages/assignment/assignment.component';
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -24,7 +25,8 @@ import { AuthInterceptor } from './services/auth.interceptor';
     ProfileComponent,
     NotfoundComponent,
     HomeComponent,
-    RankingComponent
+    RankingComponent,
+    AssignmentComponent
   ],
   imports: [
     BrowserModule,
