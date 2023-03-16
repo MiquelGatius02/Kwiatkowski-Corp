@@ -30,9 +30,15 @@ export class HomeComponent implements OnInit {
   joinForm: FormGroup;
   createForm: FormGroup;
 
+  //Gestionar peticiones
   PetitionsData: PetitionsData[] = [{ id: 0, rank_code: 0, user_id: 0 }];
-  // GestionarPeticion: UserData ={id:0};
   showTable: boolean = false;
+  
+  //Mostrar alertas
+  showAlert: boolean = false;
+  showAlertError: boolean = false;
+  showAlertAceptada: boolean = false;
+  showAlertErrorAceptada: boolean = false;
 
   constructor(
     public authService: AuthService,
@@ -121,21 +127,43 @@ export class HomeComponent implements OnInit {
   }
 
   aceptarPeticion(){
-    // this.petitionsService.getPetitions(this.authService.UserData.id);
-    // this.PetitionsData = this.petitionsService.dataPetitions; 
-    // if(this.showTable == false){
-    //   this.showTable = true;
-    // }else{
-    //   this.showTable = false;
-    // }
+    this.petitionsService.aceptarPeticion(this.PetitionsData[0].id,this.PetitionsData[0].rank_code);
+
+    if(this.petitionsService.Petitions.msg == 'Tenemos estas peticiones'){
+      this.showAlertAceptada = true;
+        setTimeout(() => {
+          this.showAlertAceptada = false;
+          this.verPeticiones();
+        }, 2000);
+        this.showAlertAceptada = true;
+    }else{
+      this.showAlertErrorAceptada = true;
+      setTimeout(() => {
+        this.showAlertErrorAceptada = false;
+        this.verPeticiones();
+      }, 2000);
+      this.showAlertErrorAceptada = true;
+    }
   }
 
   denegarPeticion(){
-    this.petitionsService.denegarPeticion(this.PetitionsData[0].id).subscribe(
-      () => {
-        // console.log(result);
-        window.location.reload();
-      });
+    this.petitionsService.denegarPeticion(this.PetitionsData[0].id);
+
+    if(this.petitionsService.Petitions.msg == 'Tenemos estas peticiones'){
+      this.showAlert = true;
+        setTimeout(() => {
+          this.showAlert = false;
+          this.verPeticiones();
+        }, 2000);
+        this.showTable = true;
+    }else{
+      this.showAlertError = true;
+      setTimeout(() => {
+        this.showAlertError = false;
+        this.verPeticiones();
+      }, 2000);
+      this.showAlertError = true;
+    }
   }
 }
 

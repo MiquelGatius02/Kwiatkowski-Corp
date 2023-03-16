@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\petitions;
+use App\Models\RankingData;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -58,6 +59,28 @@ class PetitionsController extends Controller{
         return response()->json([
             "status" => 1,
             "msg" => "Peticion borrada"
+        ]);
+    }
+
+    public function aceptarPetitions(Request $request){
+        
+        $request->validate([
+            "id" => "required",
+            "rank_id" => "required",
+        ]);
+
+        DB::table('petitions')->where('id', $request->id)->delete();
+        DB::commit();
+
+        $ranking = new RankingData();
+        $ranking->rank_code = $request->rank_id;
+        $ranking->user_id = (auth()->user()->id);
+        $ranking->points = 0;
+        $ranking->save();
+        return response()->json([
+            "status" => 1,
+            "msg" => "Se ha añadido el usuario al ranking",
+            "data" => $ranking
         ]);
     }
 }

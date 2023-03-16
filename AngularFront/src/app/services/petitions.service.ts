@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PetitionsData } from '../interfaces/petitionsData.interface';
+import { TokenService } from './token.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class PetitionsService {
 
   constructor(
     private http: HttpClient,
+    private token: TokenService,
   ) { }
 
   dataPetitions: PetitionsData[] =[];
@@ -32,9 +34,18 @@ export class PetitionsService {
       });  
   }
 
-  public denegarPeticion(id:number): Observable<any>{  // Dengar Peticion
+  public denegarPeticion(id:number): any{  // Denegar Peticion
+    this.http.get('http://127.0.0.1:8000/api/denegarPetitions'+'?'+'id='+id).subscribe(data => {
+      this.Petitions = data;
+    });  
     
-    return this.http.post('http://127.0.0.1:8000/api/denegarPetitions',id);
+  }
+
+  public aceptarPeticion(id:number,rank_id:number): any{  // Aceptar Peticion
+    const tokenCache: any = this.token.getToken();
+    this.http.get('http://127.0.0.1:8000/api/aceptarPetitions'+'?'+'id='+id + '&rank_id='+rank_id,{ headers: new HttpHeaders().set('Authorization', tokenCache) }).subscribe(data => {
+      console.log(data);      
+    });  
     
   }
 }  

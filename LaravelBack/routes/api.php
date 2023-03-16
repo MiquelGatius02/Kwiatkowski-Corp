@@ -29,9 +29,8 @@ Route::post('login', [CustomAuthController::class, 'login']);
 //PETICIONES GET
 Route::get('getPetitions', [PetitionsController::class, 'getPetitions']);
 Route::get('getUserPetitions', [PetitionsController::class, 'getUserPetitions']);
+Route::get('denegarPetitions', [PetitionsController::class, 'denegarPetitions']);
 
-//PETICIONES POST
-Route::post('denegarPetitions', [PetitionsController::class, 'denegarPetitions']);
 
 // RANKING
 Route::get('getRanking', [RankingController::class, 'getRanking']);
@@ -48,4 +47,5 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::post('addRanking', [RankingDataController::class, 'addRanking']);
     Route::get('userProfile', [CustomAuthController::class, 'userProfile']);
     Route::get('logout', [CustomAuthController::class, 'logout']);
+    Route::get('aceptarPetitions', [PetitionsController::class, 'aceptarPetitions']);
 });
