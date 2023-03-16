@@ -79,7 +79,7 @@ class PetitionsController extends Controller{
         $ranking->save();
         return response()->json([
             "status" => 1,
-            "msg" => "Se ha añadido el usuario al ranking",
+            "msg" => "Se ha añadido el usuario al ranking.",
             "data" => $ranking
         ]);
     }
