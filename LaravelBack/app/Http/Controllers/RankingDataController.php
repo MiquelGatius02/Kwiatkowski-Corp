@@ -97,6 +97,7 @@ class RankingDataController extends Controller
     
     public function addRanking(request $request){
 
+
         $request->validate([
         "rank_id" => "required",
         "user_logged" => "required",
@@ -108,9 +109,11 @@ class RankingDataController extends Controller
         $petitions->professor_id = $user->user_id;
         $petitions->save();
         return response()->json([
+
         "status" => 1,
         "msg" => "Se ha realizado una solicitud de unión",
         "data" => $petitions
+
         ]);
     }
 }

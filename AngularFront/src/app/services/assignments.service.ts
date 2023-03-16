@@ -19,9 +19,29 @@ export class AssignmentsService {
     public rankingService: RankingService,
   ) { }
 
-  public createRaking(rank: assignmentData) {
+  _getAssignment: any
+  _data1: assignmentData[] = [{ id: 0, assignment_name: "", rank_code: 0, prof_id: 0 }]
+
+  public createAssignment(rank: assignmentData) {
     const tokenCache: any = this.token.getToken();
-    return this.http.post("http://127.0.0.1:8000/api/createRanking", rank, { headers: new HttpHeaders().set('Authorization', tokenCache) })
+    return this.http.post("http://127.0.0.1:8000/api/createAssignment", rank, { headers: new HttpHeaders().set('Authorization', tokenCache) })
+  }
+
+  public delAssignment(data: assignmentData) {
+    return this.http.post("http://127.0.0.1:8000/api/delAssignment", data)
+  }
+
+  public getAssignment() {  // TODOS LOS ASSIGNMENTSF
+    const tokenCache: any = this.token.getToken();
+    this.http.get("http://127.0.0.1:8000/api/getAssignment").subscribe(data => {
+      if (this._getAssignment != undefined) {
+        this._getAssignment = this._getAssignment.splice(0, this._getAssignment.length)
+      }
+      this._getAssignment = data;
+      for (let i = 0; i < this._getAssignment.data.length; i++) {
+        this._data1.push(this._getAssignment.data[i])
+      }
+    });
   }
 }
 

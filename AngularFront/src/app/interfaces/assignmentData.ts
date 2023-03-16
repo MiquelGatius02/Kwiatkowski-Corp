@@ -1,5 +1,6 @@
 export interface assignmentData {
+    id: number;
+    assignment_name: string;
     rank_code: number;
-    rank_name: string;
-    description: string;
+    prof_id: number;
 }

@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit {
     this.rankingService.addRanking(this.joinData).subscribe(
       (result) => {
         // console.log(result);
-
+        
         window.location.reload();
       },
       () => {
