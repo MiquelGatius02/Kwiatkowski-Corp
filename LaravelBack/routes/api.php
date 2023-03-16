@@ -3,6 +3,7 @@
 use App\Http\Controllers\AssignmentController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\CustomAuthController;
+use App\Http\Controllers\PetitionsController;
 use App\Http\Controllers\RankingController;
 use App\Http\Controllers\RankingDataController;
 use Illuminate\Support\Facades\Route;
@@ -26,8 +27,13 @@ Route::post('changePassword', [CustomAuthController::class, 'changePassword']);
 Route::post('changeImg', [CustomAuthController::class, 'changeImg']);
 Route::post('login', [CustomAuthController::class, 'login']);
 
-// RANKING
+//PETICIONES GET
+Route::get('getPetitions', [PetitionsController::class, 'getPetitions']);
+Route::get('getUserPetitions', [PetitionsController::class, 'getUserPetitions']);
+Route::get('denegarPetitions', [PetitionsController::class, 'denegarPetitions']);
 
+
+// RANKING
 Route::get('getRanking', [RankingController::class, 'getRanking']);
 
 //RANKING DATA
@@ -45,4 +51,5 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::post('addRanking', [RankingDataController::class, 'addRanking']);
     Route::get('userProfile', [CustomAuthController::class, 'userProfile']);
     Route::get('logout', [CustomAuthController::class, 'logout']);
+    Route::get('aceptarPetitions', [PetitionsController::class, 'aceptarPetitions']);
 });

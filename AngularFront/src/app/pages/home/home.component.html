@@ -35,6 +35,43 @@
           </button><br>
         </div>
       </form>
+      <div class="tabla">
+        <button class="btn btn-success" (click)="verPeticiones()">Ver/Ocultar peticiones</button>
+        <br>
+        <br>
+        <table *ngIf="showTable == true" class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Ranking</th>
+              <th scope="col">Alumno</th>
+              <th scope="col">Aceptar</th>
+              <th scope="col">Denegar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let peticiones of PetitionsData">
+              <td>{{peticiones.rank_code}}</td>
+              <!-- El ranking al que hace la peticion -->
+              <td>{{peticiones.user_id}}</td>
+              <!-- Usuario que hace la petición -->
+              <td><button class="btn btn-success" (click)="aceptarPeticion()">Aceptar</button></td>
+              <td><button class="btn btn-danger" (click)="denegarPeticion()">Denegar</button></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="alert alert-success" role="alert" *ngIf="showAlertAceptada">
+          Se ha aceptado una petición.
+        </div>
+        <div class="alert alert-danger" role="alert" *ngIf="showAlert">
+          Se ha eliminado una petición.
+        </div>
+        <div class="alert alert-info" role="alert" *ngIf="showAlertErrorAceptada">
+          Ha ocurrido un error y la petición no se ha aceptado.
+        </div>
+        <div class="alert alert-info" role="alert" *ngIf="showAlertError">
+          Ha ocurrido un error y la petición no se ha eliminado.
+        </div>
+      </div>
     </div>
 
   </div>
