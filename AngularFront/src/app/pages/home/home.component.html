@@ -2,8 +2,7 @@
   No está suscrito a ningún ranking.
 </div>
 <div class="container">
-  <div class="layout">
-
+  <div class="big-layout">
     <div class="" *ngIf="this.authService.UserData.date != undefined " style="color: white">
       <form class="form-signin" [formGroup]="joinForm" (ngSubmit)="onSubmit()">
         <div class="col-sm-9">
@@ -19,62 +18,63 @@
 
     <div class="" *ngIf="this.authService.UserData.date == undefined" style="color: white">
       <form class="form-signin" [formGroup]="createForm" (ngSubmit)="createRanking()">
-        <div class="col-sm-9">
+        <div class="">
           <div class="form-group">
             <label for="rank_name">Nombre del ranking:</label>
             <input type="text" class="form-control" formControlName="rank_name" required>
           </div>
-
+          <br>
           <div class="form-group">
             <label for="description">Descripción:</label>
             <textarea class="form-control" rows="3" formControlName="rank_description" required></textarea>
           </div>
-
+          <br>
           <button type="submit" class="btn btn-block btn-primary" style="margin-top: 5%;">
             Crear Ranking
           </button><br>
         </div>
       </form>
-      <div class="tabla">
-        <button class="btn btn-success" (click)="verPeticiones()">Ver/Ocultar peticiones</button>
-        <br>
-        <br>
-        <table *ngIf="showTable == true" class="table">
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col">Ranking</th>
-              <th scope="col">Alumno</th>
-              <th scope="col">Aceptar</th>
-              <th scope="col">Denegar</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let peticiones of PetitionsData">
-              <td>{{peticiones.rank_code}}</td>
-              <!-- El ranking al que hace la peticion -->
-              <td>{{peticiones.user_id}}</td>
-              <!-- Usuario que hace la petición -->
-              <td><button class="btn btn-success" (click)="aceptarPeticion()">Aceptar</button></td>
-              <td><button class="btn btn-danger" (click)="denegarPeticion()">Denegar</button></td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="alert alert-success" role="alert" *ngIf="showAlertAceptada">
-          Se ha aceptado una petición.
-        </div>
-        <div class="alert alert-danger" role="alert" *ngIf="showAlert">
-          Se ha eliminado una petición.
-        </div>
-        <div class="alert alert-info" role="alert" *ngIf="showAlertErrorAceptada">
-          Ha ocurrido un error y la petición no se ha aceptado.
-        </div>
-        <div class="alert alert-info" role="alert" *ngIf="showAlertError">
-          Ha ocurrido un error y la petición no se ha eliminado.
-        </div>
-      </div>
     </div>
-
   </div>
+
+  <div class="tabla" *ngIf="this.authService.UserData.date == undefined">
+    <button class="btn btn-success" (click)="verPeticiones()">Ver/Ocultar peticiones</button>
+    <br>
+    <br>
+    <table *ngIf="showTable == true" class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Ranking</th>
+          <th scope="col">Alumno</th>
+          <th scope="col">Aceptar</th>
+          <th scope="col">Denegar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let peticiones of PetitionsData">
+          <td>{{peticiones.rank_code}}</td>
+          <!-- El ranking al que hace la peticion -->
+          <td>{{peticiones.user_id}}</td>
+          <!-- Usuario que hace la petición -->
+          <td><button class="btn btn-success" (click)="aceptarPeticion()">Aceptar</button></td>
+          <td><button class="btn btn-danger" (click)="denegarPeticion()">Denegar</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="alert alert-success" role="alert" *ngIf="showAlertAceptada">
+      Se ha aceptado una petición.
+    </div>
+    <div class="alert alert-danger" role="alert" *ngIf="showAlert">
+      Se ha eliminado una petición.
+    </div>
+    <div class="alert alert-info" role="alert" *ngIf="showAlertErrorAceptada">
+      Ha ocurrido un error y la petición no se ha aceptado.
+    </div>
+    <div class="alert alert-info" role="alert" *ngIf="showAlertError">
+      Ha ocurrido un error y la petición no se ha eliminado.
+    </div>
+  </div>
+
   <div class="container">
     <div *ngFor="let ranking of UserRankingData; let i = index">
       <div *ngIf="this.ranking.id != 0" class="big-layout">
