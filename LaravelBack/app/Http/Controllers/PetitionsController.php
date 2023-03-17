@@ -77,7 +77,9 @@ class PetitionsController extends Controller{
 
         $ranking = new RankingData();
         $ranking->rank_code = $request->rank_id;
-        $ranking->user_id = $User->id;
+
+        $ranking->user_id = $User[0]->id;
+
         $ranking->points = 0;
         $ranking->save();
         return response()->json([
