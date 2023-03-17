@@ -16,6 +16,7 @@ import { RankingComponent } from './pages/ranking/ranking.component';
 import { AssignmentsService } from './services/assignments.service';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { AssignmentComponent } from './pages/assignment/assignment.component';
+import { AssignmentDataComponent } from './pages/assignment-data/assignment-data.component';
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -26,7 +27,8 @@ import { AssignmentComponent } from './pages/assignment/assignment.component';
     NotfoundComponent,
     HomeComponent,
     RankingComponent,
-    AssignmentComponent
+    AssignmentComponent,
+    AssignmentDataComponent
   ],
   imports: [
     BrowserModule,
