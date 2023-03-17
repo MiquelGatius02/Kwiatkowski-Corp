@@ -30,11 +30,14 @@ export class RankingComponent implements OnInit {
     this.UsersRankingData = []
     this.RankingData = []
     this.User = []
+
     this.RankingData = this.rankingService._data2
     this.rankingService.getRankingDataByCode(this.rankingService.rankCache.id)
     this.UsersRankingData = this.rankingService._data3;
     this.rankingService.getUser();
     this.User = this.rankingService._data4
+    console.log(this.authService.UserData.id)
+    console.log(this.User)
 
   }
 
