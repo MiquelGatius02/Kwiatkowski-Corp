@@ -41,9 +41,8 @@ export class PetitionsService {
     
   }
 
-  public aceptarPeticion(id:number,rank_id:number): any{  // Aceptar Peticion
-    const tokenCache: any = this.token.getToken();
-    this.http.get('http://127.0.0.1:8000/api/aceptarPetitions'+'?'+'id='+id + '&rank_id='+rank_id,{ headers: new HttpHeaders().set('Authorization', tokenCache) }).subscribe(data => {
+  public aceptarPeticion(id:number,rank_id:number,user_id:number): any{  // Aceptar Peticion
+    this.http.get('http://127.0.0.1:8000/api/aceptarPetitions'+'?'+'id='+id + '&rank_id='+rank_id+'&user_id='+user_id).subscribe(data => {
       console.log(data);      
     });  
     

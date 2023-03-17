@@ -12,7 +12,8 @@ class RankingDataController extends Controller
 {
     // CREAR RANKING
 
-    public function createRankingData(Request $request){
+    public function createRankingData(Request $request)
+    {
         $request->validate([
             'rank_code' => 'required',
             'user_id' => 'required',
@@ -35,7 +36,8 @@ class RankingDataController extends Controller
 
     // RECOLECTAR INFORMACIÓN DE RANKINGs
 
-    public function getRankingDataByUser(Request $request){
+    public function getRankingDataByUser(Request $request)
+    {
         $request->validate([
             'user_id' => 'required'
         ]);
@@ -56,7 +58,8 @@ class RankingDataController extends Controller
         }
     }
 
-    public function getRankingDataByCode(Request $request){
+    public function getRankingDataByCode(Request $request)
+    {
         $request->validate([
             'rank_code' => 'required'
         ]);
@@ -77,7 +80,8 @@ class RankingDataController extends Controller
         }
     }
 
-    public function getUser(Request $request){
+    public function getUser(Request $request)
+    {
 
         $user = User::get();
 
@@ -94,13 +98,14 @@ class RankingDataController extends Controller
             ]);
         }
     }
-    
-    public function addRanking(request $request){
+
+    public function addRanking(request $request)
+    {
 
 
         $request->validate([
-        "rank_id" => "required",
-        "user_logged" => "required",
+            "rank_id" => "required",
+            "user_logged" => "required",
         ]);
         $user = RankingData::where('rank_code', $request->rank_id,)->first();
         $petitions = new petitions();
@@ -110,11 +115,10 @@ class RankingDataController extends Controller
         $petitions->save();
         return response()->json([
 
-        "status" => 1,
-        "msg" => "Se ha realizado una solicitud de unión",
-        "data" => $petitions
+            "status" => 1,
+            "msg" => "Se ha realizado una solicitud de unión",
+            "data" => $petitions
 
         ]);
     }
 }
-

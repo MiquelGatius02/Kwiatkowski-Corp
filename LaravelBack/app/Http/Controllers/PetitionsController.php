@@ -67,14 +67,17 @@ class PetitionsController extends Controller{
         $request->validate([
             "id" => "required",
             "rank_id" => "required",
+            "user_id" => "required"
         ]);
 
         DB::table('petitions')->where('id', $request->id)->delete();
         DB::commit();
 
+        $User = User::where('username', $request->user_id,)->get('id');
+
         $ranking = new RankingData();
         $ranking->rank_code = $request->rank_id;
-        $ranking->user_id = (auth()->user()->id);
+        $ranking->user_id = $User->id;
         $ranking->points = 0;
         $ranking->save();
         return response()->json([
