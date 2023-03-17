@@ -127,7 +127,7 @@ export class HomeComponent implements OnInit {
   }
 
   aceptarPeticion(){
-    this.petitionsService.aceptarPeticion(this.PetitionsData[0].id,this.PetitionsData[0].rank_code);
+    this.petitionsService.aceptarPeticion(this.PetitionsData[0].id,this.PetitionsData[0].rank_code,this.PetitionsData[0].user_id);
 
     if(this.petitionsService.Petitions.msg == 'Tenemos estas peticiones'){
       this.showAlertAceptada = true;
