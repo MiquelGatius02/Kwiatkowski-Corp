@@ -55,7 +55,7 @@ export class RankingService {
     const tokenCache: any = this.token.getToken();
     this.http.get("http://127.0.0.1:8000/api/getRanking").subscribe(data => {
       if (this._getRanking != undefined) {
-        this._getRanking = this._getRanking.splice(0, this._getRanking.length)
+        this._getRanking = []
       }
       this._getRanking = data;
       for (let i = 0; i < this._getRanking.data.length; i++) {
@@ -75,6 +75,8 @@ export class RankingService {
       this._data3 = []
       for (let i = 0; i < this._getRankingDataByCode.data.length; i++) {
         this._data3.push(this._getRankingDataByCode.data[i])
+        console.log("aqui")
+        console.log(this._data3[i])
       }
       // console.log(this._data3)
     });
