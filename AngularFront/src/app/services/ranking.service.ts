@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
+import { deleteUserRank } from '../interfaces/deleteUserRank';
 import { JoinRank } from '../interfaces/joinRank.interface';
 import { RankData } from '../interfaces/rankData.interface ';
 import { RankingUserData } from '../interfaces/rankingUserData.interface';
@@ -17,7 +18,6 @@ import { TokenService } from './token.service';
 export class RankingService {
   loggedIn: any;
 
-
   constructor(
     private http: HttpClient,
     public router: Router,
@@ -29,19 +29,19 @@ export class RankingService {
 
 
   // VARIABLES
-
+  valoresDelete: deleteUserRank = { id_user: 0, id_rank: 0 };
 
   // CACHE .data
   _getRanking: any
   _getRankingDataByCode: any;
   _getRankingDataByUser: any;
   _getUser: any;
-  rankCache: RankData = { id: 0, rank_name: "", rank_description: "" }
+  rankCache: RankData = { id: 0, rank_name: "", rank_description: "",id_creador:0 }
 
   // ARRAYS VALORES RECUPERADOS
 
   _data1: RankingUserData[] = [{ id: 0, rank_code: 0, user_id: 0, points: 0 }]
-  _data2: RankData[] = [{ id: 0, rank_name: "", rank_description: "" }]
+  _data2: RankData[] = [{ id: 0, rank_name: "", rank_description: "",id_creador:0 }]
   _data3: RankingUserData[] = [{ id: 0, rank_code: 0, user_id: 0, points: 0 }]
   _data4: UserData[] = [{ id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "" }];
 
@@ -110,10 +110,20 @@ export class RankingService {
     });
   }
 
-  addRanking(rank: JoinRank): Observable<any> {
+  addRanking(rank: JoinRank) {
     // console.log(rank);
-    return this.http.post('http://127.0.0.1:8000/api/addRanking', rank);
+    this.http.post('http://127.0.0.1:8000/api/addRanking', rank).subscribe(data => {
+      console.log(data)
+    });
 
+  }
+
+  deleteUser(user_id: number, id_rank: number) {
+    this.valoresDelete.id_user = user_id;
+    this.valoresDelete.id_rank = id_rank;
+    this.http.post('http://127.0.0.1:8000/api/deleteUser', this.valoresDelete).subscribe(data => {
+      console.log(data)
+    });
   }
 
 } 

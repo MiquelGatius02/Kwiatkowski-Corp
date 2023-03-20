@@ -21,12 +21,12 @@ import { RankingService } from 'src/app/services/ranking.service';
 export class HomeComponent implements OnInit {
   profileData: UserData = { id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "", imagen: "" };
   UserRankingData: RankingUserData[] = [{ id: 0, rank_code: 0, user_id: 0, points: 0 }];
-  RankingData: RankData[] = [{ id: 0, rank_name: "", rank_description: "" }];
+  RankingData: RankData[] = [{ id: 0, rank_name: "", rank_description: "",id_creador:0 }];
   noLoop: boolean = true;
 
   //Unirse/Crear Rankings
   joinData: JoinRank = { rank_code: 0, user_logged: 0};
-  crearData: RankData = { id: 0, rank_name: "", rank_description: "" };
+  crearData: RankData = { id: 0, rank_name: "", rank_description: "",id_creador:0 };
   joinForm: FormGroup;
   createForm: FormGroup;
 
@@ -68,7 +68,9 @@ export class HomeComponent implements OnInit {
     this.authService.profile()
     this.rankingService.getRanking()
     this.UserRankingData = this.rankingService._data1
-    this.RankingData = this.rankingService._data2
+    this.RankingData = this.rankingService._data2;
+    console.log(this.UserRankingData);
+    console.log(this.RankingData);
   }
 
   clickRanking(rank: RankData) {
@@ -80,23 +82,15 @@ export class HomeComponent implements OnInit {
 
     this.joinData = this.joinForm.value;
     this.joinData.user_logged = this.authService.UserData.id;
-    this.rankingService.addRanking(this.joinData).subscribe(
-      (result) => {
-        // console.log(result);
-        
-        window.location.reload();
-      },
-      () => {
-        this.joinForm.reset();
-        this.router.navigate(['/home/main-page']);
-      }
-    );
+    this.rankingService.addRanking(this.joinData);
+    this.joinForm.reset();
   }
 
   createRanking() {
     this.crearData = this.createForm.value;
     const rank_code = this.generateRankCode();
-    this.crearData.id = rank_code
+    this.crearData.id = rank_code;
+    this.crearData.id_creador = this.authService.UserData.id;
     this.rankingService.createRaking(this.crearData).subscribe(
       (result) => {
         // console.log(result);

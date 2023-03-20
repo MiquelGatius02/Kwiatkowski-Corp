@@ -18,19 +18,21 @@ class RankingController extends Controller
             'id',
             'rank_name',
             'rank_description',
+            'id_creador',
         ]);
 
         $ranking = new Ranking();
         $ranking->id = $request->id;
         $ranking->rank_name = $request->rank_name;
         $ranking->rank_description = $request->rank_description;
+        $ranking->id_creador = $request->id_creador;
         $ranking->save();
 
-        $ranking2 = new RankingData();
-        $ranking2->rank_code = $ranking->id;
-        $ranking2->user_id = auth()->user()->id;
-        $ranking2->points = 0;
-        $ranking2->save();
+        // $ranking2 = new RankingData();
+        // $ranking2->rank_code = $ranking->id;
+        // $ranking2->user_id = auth()->user()->id;
+        // $ranking2->points = 0;
+        // $ranking2->save();
 
         return response()->json([
             "status" => 1,

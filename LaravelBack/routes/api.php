@@ -41,6 +41,7 @@ Route::post('createRankingData', [RankingDataController::class, 'createRankingDa
 Route::get('getRankingDataByUser', [RankingDataController::class, 'getRankingDataByUser']);
 Route::get('getRankingDataByCode', [RankingDataController::class, 'getRankingDataByCode']);
 Route::get('getUser', [RankingDataController::class, 'getUser']);
+Route::post('deleteUser', [RankingDataController::class, 'deleteUser']);
 Route::post('delAssignment', [AssignmentController::class, 'delAssignment']);
 
 Route::group(['middleware' => ["auth:sanctum"]], function () {

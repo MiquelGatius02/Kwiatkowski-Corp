@@ -15,7 +15,7 @@ import { RankingService } from 'src/app/services/ranking.service';
 export class AssignmentComponent implements OnInit {
 
   newAssignment: FormGroup;
-  RankingData: RankData[] = [{ id: 0, rank_name: "", rank_description: "" }]
+  RankingData: RankData[] = [{ id: 0, rank_name: "", rank_description: "",id_creador:0 }]
   Value: assignmentData = { id: 0, assignment_name: "", rank_code: 0, prof_id: 0 }
   Assignments: assignmentData[] = [{ id: 0, assignment_name: "", rank_code: 0, prof_id: 0 }]
   constructor(
