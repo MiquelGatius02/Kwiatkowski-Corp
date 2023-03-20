@@ -84,7 +84,7 @@ export class RegisterComponent implements OnInit {
   }
 
   // Obtener los errores del campo nombre
-  controlChars (e:any) {
+  controlChars (e:any) { 
     var regex = new RegExp("^[a-zA-Z0-9_]+$");
     var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
     if (regex.test(str)) {

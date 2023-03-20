@@ -2,8 +2,8 @@
   No está suscrito a ningún ranking.
 </div>
 <div class="container">
-  <div class="big-layout">
-    <div class="" *ngIf="this.authService.UserData.date != undefined" style="color: rgb(0, 0, 0)">
+  <div class="big-layout" *ngIf="this.authService.UserData.date != undefined">
+    <div class="" style="color: rgb(0, 0, 0)">
       <form class="" [formGroup]="joinForm" (ngSubmit)="onSubmit()">
         <label for="rank_name">Codigo del ranking:</label>
         <input style="width: 230px; margin-right: 10px;" type="number" formControlName="rank_id" />
@@ -12,40 +12,45 @@
         </button><br>
       </form>
     </div>
-
-    <div class="" *ngIf="this.authService.UserData.date == undefined" style="color: rgb(0, 0, 0)">
-      <form class="form-signin" [formGroup]="createForm" (ngSubmit)="createRanking()">
-        <div class="">
-          <div class="form-group">
-            <label for="rank_name">Nombre del ranking:</label>
-            <input type="text" class="form-control" formControlName="rank_name" required>
-            <label for="description">Descripción:</label>
-            <textarea class="form-control" rows="3" formControlName="description" required></textarea>
-          </div>
-
-          <button type="submit" class="btn btn-block btn-primary" style="margin-top: 5%;">
-            Crear Ranking
-          </button><br>
-        </div>
-      </form>
-    </div>
-
   </div>
-  <div class="container">
-    <div *ngFor="let ranking of UserRankingData; let i = index">
-      <div *ngIf="this.ranking.id != 0" class="big-layout">
-        <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <div (click)="clickRanking(this.rank)" *ngFor="let rank of RankingData; let i = index">
-              <h5 *ngIf="this.ranking.rank_code == this.rank.id" class="card-title mb-2 text-muted">
-                <b> Codigo de ranking</b>
-                <b> {{rank.rank_name}}</b>
-              </h5>
-            </div>
-            <h6 class="card-subtitle mb-2 text-muted">Puntos: {{this.ranking.points}}</h6>
-          </div>
+  <div class="d-flex justify-content-center big-layout" *ngIf="this.authService.UserData.date == undefined"
+    style="color: rgb(0, 0, 0)">
+    <form class="form-signin" [formGroup]="createForm" (ngSubmit)="createRanking()">
+      <div class="">
+        <div class="form-group">
+          <label for="rank_name">Nombre del ranking:</label>
+          <input type="text" class="form-control" formControlName="rank_name" required>
+          <label for="description">Descripción:</label>
+          <textarea class="form-control" rows="3" formControlName="description" required></textarea>
         </div>
+        <button type="submit" class="btn btn-block btn-primary" style="margin-top: 5%;">
+          Crear Ranking
+        </button><br>
       </div>
-    </div>
+    </form>
   </div>
+</div>
+
+<div class="layout" *ngFor="let ranking of UserRankingData; let i = index">
+  <table class="table " style="color: rgb(255, 255, 255)" *ngIf="i < 1">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Codigo</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Points</th>
+        <th scope="col">Acceder</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let rank of RankingData" style="color:white;" scope="row">
+        <td *ngIf="this.rank.id != 0"></td>
+        <td *ngIf="this.rank.id != 0">{{rank.id}}</td>
+        <td *ngIf="this.rank.id != 0">{{rank.rank_name}}</td>
+        <td *ngIf="this.rank.id != 0">{{ranking.points}}</td>
+        <td *ngIf="this.rank.id != 0"><button (click)="clickRanking(this.rank)" type="button" class="btn btn-warning">Entrar</button></td>
+      </tr>
+    </tbody>
+  </table>
 </div>

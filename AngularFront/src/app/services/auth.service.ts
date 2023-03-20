@@ -70,7 +70,6 @@ export class AuthService {
             this.UserData.centro = this.Data.data.center;
             this.UserData.password = this.Data.data.password;
             this.UserData.imagen = this.Data.data.imagen;
-             (this.UserData)
             if (this.rankingGen) {
                 this.rankingService.getRankingDataByUser(this.UserData.id);
                 this.rankingGen = false;

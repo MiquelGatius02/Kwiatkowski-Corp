@@ -1,24 +1,25 @@
-<div class="container">
-
-  <div class="container">
-    <div>
-      <div class="big-layout">
-        <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title mb-2 text-muted">
-              <b> {{this.rankingService.rankCache.rank_name}}</b>
-            </h5>
-            <h6 *ngFor="let rankingData of this.rankingService._data3; let i = index"
-              class="card-subtitle mb-2 text-muted">
-              <div *ngFor="let user of User">
-                <div *ngIf="user.id == rankingData.user_id && user.id != 0 && user.id != this.authService.UserData.id">
-                  {{user.username}}, {{user.firstname}} {{user.lastname}} {{rankingData.points}}
-                </div>
-              </div>
-            </h6>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="layout" *ngFor="let rankingData of this.rankingService._data3;let i = index">
+  <h3 class="card-title" style="color: rgb(255, 255, 255)" *ngIf="i < 1">Ranking :
+    {{this.rankingService.rankCache.rank_name}}</h3>
+  <br><br>
+  <table class="table" style="color: rgb(255, 255, 255)" *ngIf="i < 1">
+    <thead>
+      <tr>
+        <th scope="col">Nick</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">Puntos</th>
+        <th scope="col">Denegar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of User" style="color:white;">
+        <td>{{user.username}}</td>
+        <td>{{user.firstname}}</td>
+        <td>{{user.lastname}}</td>
+        <td>{{rankingData.points}}</td>
+        <td><button class="btn btn-danger">Eliminar</button></td>
+      </tr>
+    </tbody>
+  </table>
 </div>

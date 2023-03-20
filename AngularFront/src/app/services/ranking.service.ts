@@ -24,6 +24,7 @@ export class RankingService {
     public fb: FormBuilder,
     private token: TokenService,
     private authState: AuthStateService,
+
   ) { }
 
 
@@ -46,7 +47,8 @@ export class RankingService {
 
 
   public createRaking(rank: RankData) {
-    return this.http.post("http://127.0.0.1:8000/api/createRanking", rank)
+    const tokenCache: any = this.token.getToken();
+    return this.http.post("http://127.0.0.1:8000/api/createRanking", rank, { headers: new HttpHeaders().set('Authorization', tokenCache) })
   }
 
   public getRanking() {  // TODOS LOS RANKINGS
@@ -63,7 +65,9 @@ export class RankingService {
     });
   }
   public getRankingDataByCode(rank_code: number) { // RECUPRAR DATOS RANKING POR ID DE RANKING
+    console.log(rank_code)
     this.http.get("http://127.0.0.1:8000/api/getRankingDataByCode" + "?" + "rank_code=" + rank_code).subscribe(data => {
+      console.log(data)
       /*       if (this._getRankingDataByCode != undefined) {
               this._getRankingDataByCode = undefined
             } */
@@ -72,12 +76,13 @@ export class RankingService {
       for (let i = 0; i < this._getRankingDataByCode.data.length; i++) {
         this._data3.push(this._getRankingDataByCode.data[i])
       }
+      console.log(this._data3)
     });
   }
 
   public getRankingDataByUser(user_id: number) { // RECUPERAR DATOS RANKING POR ID DE USUARIO
     this.http.get("http://127.0.0.1:8000/api/getRankingDataByUser" + "?" + "user_id=" + user_id).subscribe(data => {
-
+      console.log(data)
       /*       if (this._getRankingDataByUser != undefined) {
               this._getRankingDataByUser = undefined
             } */
@@ -94,7 +99,9 @@ export class RankingService {
     this._getUser = [];
     const tokenCache: any = this.token.getToken();
     this.http.get("http://127.0.0.1:8000/api/getUser").subscribe(data => {
+      console.log(data)
       this._getUser = data;
+      console.log(this._getUser)
       for (let i = 0; i < this._getUser.data.length; i++) {
         this._data4.push(this._getUser.data[i])
       }
@@ -102,8 +109,9 @@ export class RankingService {
   }
 
   addRanking(rank: JoinRank): Observable<any> {
-    const tokenCache: any = this.token.getToken();
-    return this.http.post('http://127.0.0.1:8000/api/addRanking', rank, { headers: new HttpHeaders().set('Authorization', tokenCache) })
+    // console.log(rank);
+    return this.http.post('http://127.0.0.1:8000/api/addRanking', rank);
+
   }
 
-}
+} 

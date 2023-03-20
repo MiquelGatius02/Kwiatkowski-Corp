@@ -26,7 +26,7 @@ Route::post('changeImg', [CustomAuthController::class, 'changeImg']);
 Route::post('login', [CustomAuthController::class, 'login']);
 
 // RANKING
-Route::post('createRanking', [RankingController::class, 'createRanking']);
+
 Route::get('getRanking', [RankingController::class, 'getRanking']);
 
 //RANKING DATA
@@ -37,6 +37,7 @@ Route::get('getUser', [RankingDataController::class, 'getUser']);
 
 
 Route::group(['middleware' => ["auth:sanctum"]], function () {
+    Route::post('createRanking', [RankingController::class, 'createRanking']);
     Route::post('addRanking', [RankingDataController::class, 'addRanking']);
     Route::get('userProfile', [CustomAuthController::class, 'userProfile']);
     Route::get('logout', [CustomAuthController::class, 'logout']);

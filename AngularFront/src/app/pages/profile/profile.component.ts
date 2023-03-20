@@ -39,12 +39,14 @@ export class ProfileComponent implements OnInit {
     });
   }
   onSubmit() {
-    this.passwordData = this.passwordForm.value;
+    this.passwordData = this.passwordForm.value
     this.passwordData.id = this.profileData.id;
-    this.authService.changePassword(this.profileData);
+    this.authService.changePassword(this.profileData)
 
     this.authService.changePassword(this.passwordForm.value).subscribe(
       (result) => {
+        console.log(result);
+
         this.showAlertImg = true;
         setTimeout(() => {
           this.showAlertImg = false;
@@ -80,7 +82,6 @@ export class ProfileComponent implements OnInit {
           this.imgChange.changeImg(this.imgData).subscribe(
             (result) => {
               this.showAlert = true;
-
               setTimeout(() => {
                 this.showAlert = false;
                 window.location.reload();

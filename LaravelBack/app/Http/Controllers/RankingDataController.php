@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\petitions;
 use App\Models\User;
 use App\Models\Ranking;
 use App\Models\RankingData;
@@ -94,32 +95,6 @@ class RankingDataController extends Controller
             return response()->json([
                 "status" => 0,
                 "msg" => "No se han encontrado registros"
-            ]);
-        }
-    }
-
-    public function addRanking(request $request)
-    {
-        $request->validate([
-            "rank_id" => "required",
-        ]);
-        $rank = RankingData::where('rank_code', $request->rank_id)->first();
-        $user = RankingData::where('rank_code', $request->rank_id,)->where('user_id', (auth()->user()->id))->first();
-        if ($rank && $user == null) {
-            $ranking = new RankingData();
-            $ranking->rank_code = $rank->rank_code;
-            $ranking->user_id = (auth()->user()->id);
-            $ranking->points = 0;
-            $ranking->save();
-            return response()->json([
-                "status" => 1,
-                "msg" => "Se ha añadido el usuario al ranking",
-                "data" => $ranking
-            ]);
-        } else {
-            return response()->json([
-                "status" => 0,
-                "msg" => "No se ha podido añadir el usuario al ranking",
             ]);
         }
     }

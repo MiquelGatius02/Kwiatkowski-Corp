@@ -4,11 +4,11 @@
 
 .layout {
   margin: auto;
-  width: 30rem;
+  width: 20rem;
   border-radius: 10px;
-  background-color: white;
   padding: 2rem;
-  margin-top: 10rem;
+  margin-top: -20rem;
+  margin-left: 25rem;
 }
 .center{
   display: flex;
@@ -20,10 +20,17 @@
   display: flex;
   flex-wrap: wrap;
   margin-left: 5rem;
-  width: 20rem;
   border-radius: 10px;
   background-color: white;
   padding: 1rem;
-  margin-top: 10rem;
+  margin-top: 5rem;
   text-align: center;
+}
+.table
+{
+  width: 90rem;
+  margin: auto;
+  display:table;
+  justify-content: center;
+
 }
