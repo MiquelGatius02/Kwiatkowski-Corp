@@ -3,13 +3,13 @@
 </div>
 <div class="container">
   <div class="big-layout">
-    <div class= "" *ngIf="this.authService.UserData.date != undefined" style="color: rgb(0, 0, 0)">
+    <div class="" *ngIf="this.authService.UserData.date != undefined" style="color: rgb(0, 0, 0)">
       <form class="" [formGroup]="joinForm" (ngSubmit)="onSubmit()">
-            <label for="rank_name">Codigo del ranking:</label>
-            <input style="width: 230px; margin-right: 10px;" type="number" formControlName="rank_id" />
-            <button type="submit" class="btn btn-block btn-primary" style="margin-top: 5%;">
-              Unirse al ranking
-            </button><br>
+        <label for="rank_name">Codigo del ranking:</label>
+        <input style="width: 230px; margin-right: 10px;" type="number" formControlName="rank_id" />
+        <button type="submit" class="btn btn-block btn-primary" style="margin-top: 5%;">
+          Unirse al ranking
+        </button><br>
       </form>
     </div>
 
