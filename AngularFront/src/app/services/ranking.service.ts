@@ -65,18 +65,14 @@ export class RankingService {
     });
   }
   public getRankingDataByCode(rank_code: number) { // RECUPRAR DATOS RANKING POR ID DE RANKING
-    console.log(rank_code)
+    // console.log(rank_code)
     this.http.get("http://127.0.0.1:8000/api/getRankingDataByCode" + "?" + "rank_code=" + rank_code).subscribe(data => {
-      // console.log(data)
-      /*       if (this._getRankingDataByCode != undefined) {
-              this._getRankingDataByCode = undefined
-            } */
       this._getRankingDataByCode = data
       this._data3 = []
       for (let i = 0; i < this._getRankingDataByCode.data.length; i++) {
         this._data3.push(this._getRankingDataByCode.data[i])
-        console.log("aqui")
-        console.log(this._data3[i])
+        // console.log("aqui")
+        // console.log(this._data3[i])
       }
       // console.log(this._data3)
     });
@@ -84,10 +80,6 @@ export class RankingService {
 
   public getRankingDataByUser(user_id: number) { // RECUPERAR DATOS RANKING POR ID DE USUARIO
     this.http.get("http://127.0.0.1:8000/api/getRankingDataByUser" + "?" + "user_id=" + user_id).subscribe(data => {
-      // console.log(data)
-      /*       if (this._getRankingDataByUser != undefined) {
-              this._getRankingDataByUser = undefined
-            } */
       this._getRankingDataByUser = data
       for (let i = 0; i < this._getRankingDataByUser.data.length; i++) {
         this._data1.push(this._getRankingDataByUser.data[i])
@@ -101,9 +93,9 @@ export class RankingService {
     this._getUser = [];
     const tokenCache: any = this.token.getToken();
     this.http.get("http://127.0.0.1:8000/api/getUser").subscribe(data => {
-      console.log(data)
+      // console.log(data)
       this._getUser = data;
-      console.log(this._getUser)
+      // console.log(this._getUser)
       for (let i = 0; i < this._getUser.data.length; i++) {
         this._data4.push(this._getUser.data[i])
       }
@@ -113,7 +105,7 @@ export class RankingService {
   addRanking(rank: JoinRank) {
     // console.log(rank);
     this.http.post('http://127.0.0.1:8000/api/addRanking', rank).subscribe(data => {
-      console.log(data)
+      // console.log(data)
     });
 
   }
@@ -122,7 +114,7 @@ export class RankingService {
     this.valoresDelete.id_user = user_id;
     this.valoresDelete.id_rank = id_rank;
     this.http.post('http://127.0.0.1:8000/api/deleteUser', this.valoresDelete).subscribe(data => {
-      console.log(data)
+      // console.log(data)
     });
   }
 

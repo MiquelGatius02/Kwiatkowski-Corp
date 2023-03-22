@@ -3,45 +3,34 @@
 }
 
 .layout {
-  margin-left: 5rem;
-  width: 16rem;
-  height: 7rem;
+  margin: auto;
+  width: 20rem;
   border-radius: 10px;
-  background-color: white;
-  padding: 1rem;
-  margin-top: 10rem;
-  text-align: center;
+  padding: 2rem;
+  margin-top: -20rem;
+  margin-left: 25rem;
 }
+.center{
+  display: flex;
+  align-items: center;
+}
+
 
 .big-layout {
   display: flex;
   flex-wrap: wrap;
   margin-left: 5rem;
-  width: 20rem;
   border-radius: 10px;
   background-color: white;
   padding: 1rem;
-  margin-top: 10rem;
+  margin-top: 5rem;
   text-align: center;
 }
+.table
+{
+  width: 90rem;
+  margin: auto;
+  display:table;
+  justify-content: center;
 
-.tabla{
-  color: white;
-  position: absolute;
-  margin-top: 2%;
-}
-
-table{
-  color: white;
-}
-
-.form-signin{
-  text-align: center;
-  color: black;
-  font-size:16px;
-}
-
-button{
-  height: 30px;
-  width: 200px;
 }
