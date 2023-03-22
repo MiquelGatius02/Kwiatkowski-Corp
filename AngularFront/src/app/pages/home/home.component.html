@@ -71,10 +71,9 @@
 </div>
 
 <div class="layout" *ngFor="let ranking of UserRankingData; let i = index">
-  <table class="table " style="color: rgb(255, 255, 255)" *ngIf="i < 1">
+  <table class="table " style="color: rgb(255, 255, 255)">
     <thead>
       <tr>
-        <th scope="col"></th>
         <th scope="col">Codigo</th>
         <th scope="col">Nombre</th>
         <th scope="col">Points</th>
@@ -84,11 +83,10 @@
 
     <tbody>
       <tr *ngFor="let rank of RankingData" style="color:white;" scope="row">
-        <td *ngIf="this.rank.id != 0"></td>
-        <td *ngIf="this.rank.id != 0">{{rank.id}}</td>
-        <td *ngIf="this.rank.id != 0">{{rank.rank_name}}</td>
-        <td *ngIf="this.rank.id != 0">{{ranking.points}}</td>
-        <td *ngIf="this.rank.id != 0"><button (click)="clickRanking(this.rank)" type="button" class="btn btn-warning">Entrar</button></td>
+        <td *ngIf="this.rank.id_creador == this.authService.UserData.id || this.ranking.user_id == this.authService.UserData.id">{{rank.id}}</td>
+        <td *ngIf="this.rank.id_creador == this.authService.UserData.id || this.ranking.user_id == this.authService.UserData.id">{{rank.rank_name}}</td>
+        <td *ngIf="this.rank.id_creador == this.authService.UserData.id || this.ranking.user_id == this.authService.UserData.id">{{ranking.points}}</td>
+        <td *ngIf="this.rank.id_creador == this.authService.UserData.id || this.ranking.user_id == this.authService.UserData.id"><button (click)="clickRanking(this.rank)" type="button" class="btn btn-warning">Entrar</button></td>
       </tr>
     </tbody>
   </table>

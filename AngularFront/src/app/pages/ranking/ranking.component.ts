@@ -16,6 +16,7 @@ export class RankingComponent implements OnInit {
   RankingData: RankData[] = [{ id: 0, rank_name: "", rank_description: "",id_creador:0 }]
   UsersRankingData: RankingUserData[] = [{ id: 0, rank_code: 0, user_id: 0, points: 0 }]
   User: UserData[] = [{ id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "" }];
+  showAlertDelete:boolean = false;
 
   constructor(
     public authService: AuthService,
@@ -41,11 +42,14 @@ export class RankingComponent implements OnInit {
   eliminarUsuario(usuario:number,id_rank:number){
     if(confirm("¿Seguro desea borrar este usuario?")) {
       this.rankingService.deleteUser(usuario,id_rank);
-      // if(this.showTable == false){
-      //   this.showTable = true;
-      // }else{
-      //   this.showTable = false;
-      // }
+      if(this.showAlertDelete == false){
+        this.showAlertDelete = true;
+        setTimeout(() => {
+          this.showAlertDelete = false;
+        }, 2000);
+      }else{
+        this.showAlertDelete = false;
+      }
     }
   }
 
