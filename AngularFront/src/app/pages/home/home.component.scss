@@ -4,11 +4,19 @@
 
 .layout {
   margin: auto;
-  width: 20rem;
+  width:50%;
   border-radius: 10px;
-  padding: 2rem;
-  margin-top: -20rem;
-  margin-left: 25rem;
+  padding: 2em;
+  margin-top: -17em;
+  margin-left: 25em;
+}
+.layout2 {
+  margin: auto;
+  width:50%;
+  border-radius: 10px;
+  padding: 2em;
+  margin-top: -7em;
+  margin-left:25em;
 }
 .center{
   display: flex;
@@ -28,7 +36,7 @@
 }
 .table
 {
-  width: 90rem;
+  width: 50%;
   margin: auto;
   display:table;
   justify-content: center;
