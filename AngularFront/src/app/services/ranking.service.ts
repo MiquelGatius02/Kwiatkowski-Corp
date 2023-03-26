@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
+import { assignmentData } from '../interfaces/assignmentData';
 import { JoinRank } from '../interfaces/joinRank.interface';
 import { RankData } from '../interfaces/rankData.interface ';
 import { RankingUserData } from '../interfaces/rankingUserData.interface';
@@ -37,6 +38,8 @@ export class RankingService {
   _getRankingDataByUser: any;
   _getUser: any;
   rankCache: RankData = { id: 0, rank_name: "", rank_description: "" }
+  rankCache2: assignmentData = { id: 0, assignment_name: "", rank_code: 0, prof_id: 0 }
+
 
   // ARRAYS VALORES RECUPERADOS
 
@@ -75,7 +78,6 @@ export class RankingService {
       this._data3 = []
       for (let i = 0; i < this._getRankingDataByCode.data.length; i++) {
         this._data3.push(this._getRankingDataByCode.data[i])
-        console.log("aqui")
         console.log(this._data3[i])
       }
       // console.log(this._data3)

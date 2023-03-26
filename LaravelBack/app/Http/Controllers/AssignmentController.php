@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Assignment;
+use App\Models\Assignment_Data;
 use Illuminate\Http\Request;
 
 class AssignmentController extends Controller
@@ -21,12 +22,32 @@ class AssignmentController extends Controller
         $assignment->prof_id = $request->prof_id;
         $assignment->save();
 
+        return response()->json(
+            $assignment
+        );
+    }
+
+    public function createAssignmentData(Request $request)
+    {
+        $request->validate([
+            'assignment_id' => 'required',
+            'user_id' => 'required',
+            'points' => 'required'
+        ]);
+
+        $assignment = new Assignment_Data();
+        $assignment->assignment_id = $request->assignment_id;
+        $assignment->user_id = $request->user_id;
+        $assignment->points = $request->points;
+        $assignment->save();
+
         return response()->json([
             "status" => 1,
-            "msg" => "Se ha creado correctamente la tarea $request->assignment_name",
+            "msg" => "Se ha creado correctamente la tarea $request->assignment_id",
             "data" => $assignment
         ]);
     }
+
 
     public function getAssignment()
     {

@@ -1,1 +1,28 @@
-<p>assignment-data works!</p>
+<form class="form-signin" [formGroup]="newAssignment" (ngSubmit)="onSubmit()">
+  <table class="table">
+    <h1>Tarea: {{assignmentData.assignment_name}}</h1><br>
+    <tr>
+      <th>Nombre Usuario</th>
+      <th>Puntuación</th>
+      <th>Acciones</th>
+    </tr>
+    <tr *ngFor="let rankingData of this.rankingService._data3; let i = index">
+      <div *ngFor="let user of this.rankingService._data4">
+        <div *ngIf="user.id == rankingData.user_id && user.id != 0 && user.id != User[0].id">
+          <td>
+            <input [readonly]="true" formControlName="user_id" value="{{user.id}}" placeholder="{{user.username}}">
+          </td>
+        </div>
+      </div>
+
+      <td>
+        <input formControlName="points" class="form-control" formControlName="points"
+          placeholder="{{rankingData.points}}">
+      <td>
+        <button type="submit" class="btn btn-success">Guardar cambios</button>
+      </td>
+
+    </tr>
+
+  </table>
+</form>
