@@ -35,6 +35,7 @@ Route::get('denegarPetitions', [PetitionsController::class, 'denegarPetitions'])
 
 // RANKING
 Route::get('getRanking', [RankingController::class, 'getRanking']);
+Route::post('deleteRanking', [RankingController::class, 'deleteRanking']);
 
 //RANKING DATA
 Route::post('createRankingData', [RankingDataController::class, 'createRankingData']);

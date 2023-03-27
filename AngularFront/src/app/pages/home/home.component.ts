@@ -39,6 +39,7 @@ export class HomeComponent implements OnInit {
   showAlertError: boolean = false;
   showAlertAceptada: boolean = false;
   showAlertErrorAceptada: boolean = false;
+  showAlertRankDelete: boolean = false;
 
   constructor(
     public authService: AuthService,
@@ -103,6 +104,12 @@ export class HomeComponent implements OnInit {
 
   eliminarRanking(rank: RankData) {
     this.rankingService.deleteRanking(rank);
+    this.showAlertRankDelete = true;
+    setTimeout(() => {
+      this.showAlertRankDelete = false;
+      window.location.reload();
+    }, 1000);
+    this.showAlertRankDelete = true;
   }
 
   generateRankCode(): number {

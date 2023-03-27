@@ -120,7 +120,7 @@ export class RankingService {
 
   deleteRanking(rank: RankData) {
     console.log(rank);
-    this.http.post('http://127.0.0.1:8000/api/deleteRank', rank).subscribe(data => {
+    this.http.post('http://127.0.0.1:8000/api/deleteRanking', rank).subscribe(data => {
       console.log(data)
     });
   }
