@@ -69,8 +69,6 @@ export class HomeComponent implements OnInit {
     this.rankingService.getRanking()
     this.UserRankingData = this.rankingService._data1
     this.RankingData = this.rankingService._data2;
-    // console.log(this.UserRankingData);
-    // console.log(this.RankingData);
   }
 
   clickRanking(rank: RankData) {
@@ -94,7 +92,6 @@ export class HomeComponent implements OnInit {
     this.rankingService.createRaking(this.crearData).subscribe(
       (result) => {
         // console.log(result);
-
         window.location.reload();
       },
       () => {
@@ -102,6 +99,10 @@ export class HomeComponent implements OnInit {
         this.router.navigate(['/home/main-page']);
       }
     );
+  }
+
+  eliminarRanking(rank: RankData) {
+    this.rankingService.deleteRanking(rank);
   }
 
   generateRankCode(): number {

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Ranking;
 use App\Models\RankingData;
+use Illuminate\Support\Facades\DB;
 
 class RankingController extends Controller
 {
@@ -59,5 +60,24 @@ class RankingController extends Controller
                 "msg" => "No se han encontrado registros"
             ]);
         }
+    }
+
+    public function deleteRanking(Request $request){
+
+        $request->validate([
+            'id'
+        ]);
+
+        DB::table('rankings')->where('id', $request->id)->delete();
+        DB::commit();
+
+        DB::table('rankingdata')->where('rank_code', $request->id)->delete();
+        DB::commit();
+
+        return response()->json([
+            "status" => 1,
+            "msg" => "Se ha borrado un ranking"
+        ]);
+
     }
 }

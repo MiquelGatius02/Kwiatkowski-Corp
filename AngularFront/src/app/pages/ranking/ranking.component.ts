@@ -40,7 +40,7 @@ export class RankingComponent implements OnInit {
   }
 
   eliminarUsuario(usuario:number,id_rank:number){
-    if(confirm("¿Seguro desea borrar este usuario?")) {
+    if(confirm("¿Seguro desea borrar este usuario?")){
       this.rankingService.deleteUser(usuario,id_rank);
       if(this.showAlertDelete == false){
         this.showAlertDelete = true;
