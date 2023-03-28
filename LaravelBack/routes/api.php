@@ -36,12 +36,15 @@ Route::get('denegarPetitions', [PetitionsController::class, 'denegarPetitions'])
 
 // RANKING
 Route::get('getRanking', [RankingController::class, 'getRanking']);
+Route::post('deleteRanking', [RankingController::class, 'deleteRanking']);
+Route::post('regenerarCodigo', [RankingController::class, 'regenerarCodigo']);
 
 //RANKING DATA
 Route::post('createRankingData', [RankingDataController::class, 'createRankingData']);
 Route::get('getRankingDataByUser', [RankingDataController::class, 'getRankingDataByUser']);
 Route::get('getRankingDataByCode', [RankingDataController::class, 'getRankingDataByCode']);
 Route::get('getUser', [RankingDataController::class, 'getUser']);
+Route::post('deleteUser', [RankingDataController::class, 'deleteUser']);
 Route::post('delAssignment', [AssignmentController::class, 'delAssignment']);
 Route::post('setPoints', [AssignmentController::class, 'setPoints']);
 

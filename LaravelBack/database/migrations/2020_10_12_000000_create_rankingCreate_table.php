@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id('id');
             $table->string('rank_name')->nullable();
             $table->string('rank_description')->nullable();
+            $table->integer('id_creador');
         });
     }
 

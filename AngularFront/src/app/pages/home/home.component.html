@@ -1,99 +1,107 @@
-<div *ngIf="UserRankingData.length == 0" class="alert alert-warning" role="alert">
+<h1 class="" style="color: white; text-align: center; margin-top: 2%;">Tus Rankings</h1>
+<br>
+<div class="alert alert-warning" role="alert" *ngIf="this.authService.UserData.date == undefined" style="width: 50%; text-align: center; margin-left: 24%;">
+  No tiene ningún ranking creado.
+</div>
+<div class="alert alert-warning" role="alert" *ngIf="this.authService.UserData.date != undefined" style="width: 50%; text-align: center; margin-left: 24%;">
   No está suscrito a ningún ranking.
 </div>
 <div class="container">
-  <div class="big-layout">
-    <div class="" *ngIf="this.authService.UserData.date != undefined " style="color: white">
-      <form class="form-signin" [formGroup]="joinForm" (ngSubmit)="onSubmit()">
-        <div class="col-sm-9">
-          <div class="inline">
-            <input style="width: 230px; margin-right: 10px;" type="number" formControlName="rank_id" />
-            <button type="submit" class="btn btn-block btn-primary" style="margin-top: 5%;">
-              Unirse al ranking
-            </button><br>
-          </div>
-        </div>
-      </form>
-    </div>
-
-    <div class="" *ngIf="this.authService.UserData.date == undefined" style="color: white">
-      <form class="form-signin" [formGroup]="createForm" (ngSubmit)="createRanking()">
-        <div class="">
-          <div class="form-group">
-            <label for="rank_name">Nombre del ranking:</label>
-            <input type="text" class="form-control" formControlName="rank_name" required>
-          </div>
-          <br>
-          <div class="form-group">
-            <label for="description">Descripción:</label>
-            <textarea class="form-control" rows="3" formControlName="rank_description" required></textarea>
-          </div>
-          <br>
-          <button type="submit" class="btn btn-block btn-primary" style="margin-top: 5%;">
-            Crear Ranking
-          </button><br>
-        </div>
+  <div class="big-layout" *ngIf="this.authService.UserData.date != undefined">
+    <div class="" style="color: rgb(0, 0, 0)">
+      <form class="" [formGroup]="joinForm" (ngSubmit)="onSubmit()">
+        <label for="rank_name">Codigo del ranking:</label><br>
+        <input style="width: 230px; margin-right: 10px;" type="number" formControlName="rank_id" /><br>
+        <button type="submit" class="btn btn-block btn-primary" style="margin-top: 5%;">
+          Unirse al ranking
+        </button><br>
       </form>
     </div>
   </div>
+  <div class="big-layout" *ngIf="this.authService.UserData.date == undefined" style="color: black">
+    <form class="form-signin" [formGroup]="createForm" (ngSubmit)="createRanking()">
+      <div class="">
+        <div class="form-group">
+          <label for="rank_name">Nombre del ranking:</label>
+          <input type="text" class="form-control" formControlName="rank_name" required>
+        </div>
+        <br>
+        <div class="form-group">
+          <label for="description">Descripción:</label>
+          <textarea class="form-control" rows="3" formControlName="rank_description" required></textarea>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-block btn-primary">Crear Ranking</button>
+      </div>
+    </form>
+    <br>
 
-  <div class="tabla" *ngIf="this.authService.UserData.date == undefined">
-    <button class="btn btn-success" (click)="verPeticiones()">Ver/Ocultar peticiones</button>
-    <br>
-    <br>
-    <table *ngIf="showTable == true" class="table">
-      <thead class="thead-dark">
+  </div>
+</div>
+<div *ngIf="this.authService.UserData.date == undefined">
+  <div class="layout" *ngFor="let ranking of UserRankingData; let i = index">
+    <table class="table " style="color: rgb(255, 255, 255)">
+      <thead>
         <tr>
-          <th scope="col">Ranking</th>
-          <th scope="col">Alumno</th>
-          <th scope="col">Aceptar</th>
-          <th scope="col">Denegar</th>
+          <th scope="col">Codigo</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Acceder</th>
+          <th scope="col">Eliminar</th>
+          <th scope="col">Generar Codigo</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let peticiones of PetitionsData">
-          <td>{{peticiones.rank_code}}</td>
-          <!-- El ranking al que hace la peticion -->
-          <td>{{peticiones.user_id}}</td>
-          <!-- Usuario que hace la petición -->
-          <td><button class="btn btn-success" (click)="aceptarPeticion()">Aceptar</button></td>
-          <td><button class="btn btn-danger" (click)="denegarPeticion()">Denegar</button></td>
+        <tr *ngFor="let rank of RankingData" style="color:white;" scope="row">
+          <td
+            *ngIf="this.rank.id_creador == this.authService.UserData.id">
+            {{rank.id}}</td>
+          <td
+            *ngIf="this.rank.id_creador == this.authService.UserData.id">
+            {{rank.rank_name}}</td>
+          <td
+            *ngIf="this.rank.id_creador == this.authService.UserData.id">
+            <button (click)="clickRanking(this.rank)" type="button" class="btn btn-warning">Entrar</button>
+          </td>
+          <td *ngIf="this.rank.id_creador == this.authService.UserData.id"><button (click)="eliminarRanking(this.rank)"
+              type="button" class="btn btn-danger">Borrar</button></td>
+          <td *ngIf="this.rank.id_creador == this.authService.UserData.id">
+            <button (click)="regenerarCodigo(this.rank)" type="button" class="btn btn-success">Generar</button></td>
+        </tr>
+        <br>
+      </tbody>
+    </table>
+    <div class="alert alert-warning" role="alert" *ngIf="this.showAlertRankDelete == true" style="text-align:center;">
+      Ranking eliminado.
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.authService.UserData.date != undefined">
+  <div class="layout2" >
+    <table  class="table "
+      style="color: rgb(255, 255, 255)">
+      <thead>
+        <tr>
+          <th scope="col">Codigo</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Points</th>
+          <th scope="col">Acceder</th>
+        </tr>
+      </thead>
+
+      <tbody *ngFor="let ranking of UserRankingData; let i = index" >
+        <tr *ngFor="let rank of RankingData" style="color:white;" scope="row">
+          <td *ngIf="this.ranking.rank_code == this.rank.id && this.ranking.rank_code != 0">
+            {{rank.id}}</td>
+          <td *ngIf="this.ranking.rank_code == this.rank.id && this.ranking.rank_code != 0">
+            {{rank.rank_name}}</td>
+          <td *ngIf="this.ranking.rank_code == this.rank.id && this.ranking.rank_code != 0">
+            {{ranking.points}}</td>
+          <td *ngIf="this.ranking.rank_code == this.rank.id && this.ranking.rank_code != 0">
+            <button (click)="clickRanking(this.rank)" type="button" class="btn btn-warning">Entrar</button>
+          </td>
         </tr>
       </tbody>
     </table>
-    <div class="alert alert-success" role="alert" *ngIf="showAlertAceptada">
-      Se ha aceptado una petición.
-    </div>
-    <div class="alert alert-danger" role="alert" *ngIf="showAlert">
-      Se ha eliminado una petición.
-    </div>
-    <div class="alert alert-info" role="alert" *ngIf="showAlertErrorAceptada">
-      Ha ocurrido un error y la petición no se ha aceptado.
-    </div>
-    <div class="alert alert-info" role="alert" *ngIf="showAlertError">
-      Ha ocurrido un error y la petición no se ha eliminado.
-    </div>
-  </div>
-
-  <div class="container">
-    <div *ngFor="let ranking of UserRankingData; let i = index">
-      <div *ngIf="this.ranking.id != 0" class="big-layout">
-        <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <div (click)="clickRanking(this.rank)" *ngFor="let rank of RankingData; let i = index">
-              <h5 *ngIf="this.ranking.rank_code == this.rank.id" class="card-title mb-2 text-muted">
-                <b>Código de ranking:</b>
-                <br>
-                <b>{{rank.id}}</b>
-                <br>
-                <b> {{rank.rank_name}}</b>
-              </h5>
-            </div>
-            <h6 *ngIf="this.authService.UserData.date != undefined" class="card-subtitle mb-2 text-muted">Puntos:
-              {{this.ranking.points}}</h6>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </div>

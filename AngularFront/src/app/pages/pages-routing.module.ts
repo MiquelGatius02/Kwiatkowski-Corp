@@ -5,6 +5,7 @@ import { AssignmentComponent } from './assignment/assignment.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RankingComponent } from './ranking/ranking.component';
+import { VerPetiticionesComponent } from './ver-petiticiones/ver-petiticiones.component';
 
 const routes: Routes = [
 
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'main-page', component: HomeComponent },
   { path: 'ranking', component: RankingComponent },
   { path: 'assignment', component: AssignmentComponent },
+  { path: 'ver-peticiones', component: VerPetiticionesComponent },
   { path: 'assignment-data', component: AssignmentDataComponent }
 
 ];
