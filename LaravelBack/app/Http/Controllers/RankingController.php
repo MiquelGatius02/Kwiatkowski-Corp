@@ -89,7 +89,7 @@ class RankingController extends Controller
             "rank_description" => "required",
             "id_creador" => "required",
         ]);
-
+        
         $ranking = Ranking::find($request->id);
 
         if ($ranking) {
