@@ -89,4 +89,21 @@ class AssignmentController extends Controller
             ]);
         }
     }
+
+    public function setPoints(Request $request)
+    {
+        $request->validate([
+            'id' => 'required',
+            'user_id' => 'required',
+            'points' => 'required'
+        ]);
+        $assignment = Assignment_Data::where('assignment_id', $request->id)->where('user_id', $request->user_id)->first();
+        if ($assignment) {
+            $assignment->points = $request->points;
+            $assignment->save();
+        }
+        return response()->json(
+            $assignment
+        );
+    }
 }

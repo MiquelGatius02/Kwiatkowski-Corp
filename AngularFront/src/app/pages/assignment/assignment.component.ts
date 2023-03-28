@@ -64,7 +64,6 @@ export class AssignmentComponent implements OnInit {
   }
 
   onSubmit() {
-
     this.Value = this.newAssignment.value;
     this.Value.prof_id = this.authService.UserData.id
     this.rankingService.getRankingDataByCode(this.Value.rank_code)

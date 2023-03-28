@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { assignmentData } from '../interfaces/assignmentData';
 import { assignmentData_info } from '../interfaces/assignmentData_info';
 import { RankingUserData } from '../interfaces/rankingUserData.interface';
+import { setPoints } from '../interfaces/setPoints';
 import { RankingService } from './ranking.service';
 import { TokenService } from './token.service';
 
@@ -52,6 +53,13 @@ export class AssignmentsService {
         this._data1.push(this._getAssignment.data[i])
       }
     });
+  }
+
+  public changePoints(rank: setPoints) {
+    console.log(rank)
+    return this.http.post("http://127.0.0.1:8000/api/setPoints", rank).subscribe(data => {
+      console.log(data)
+    })
   }
 }
 

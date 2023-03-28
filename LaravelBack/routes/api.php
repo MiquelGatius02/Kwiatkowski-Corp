@@ -43,7 +43,7 @@ Route::get('getRankingDataByUser', [RankingDataController::class, 'getRankingDat
 Route::get('getRankingDataByCode', [RankingDataController::class, 'getRankingDataByCode']);
 Route::get('getUser', [RankingDataController::class, 'getUser']);
 Route::post('delAssignment', [AssignmentController::class, 'delAssignment']);
-
+Route::post('setPoints', [AssignmentController::class, 'setPoints']);
 
 Route::group(['middleware' => ["auth:sanctum"]], function () {
 
@@ -55,4 +55,5 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get('userProfile', [CustomAuthController::class, 'userProfile']);
     Route::get('logout', [CustomAuthController::class, 'logout']);
     Route::get('aceptarPetitions', [PetitionsController::class, 'aceptarPetitions']);
+
 });
