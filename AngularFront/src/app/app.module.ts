@@ -17,7 +17,7 @@ import { AssignmentsService } from './services/assignments.service';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { AssignmentComponent } from './pages/assignment/assignment.component';
 import { VerPetiticionesComponent } from './pages/ver-petiticiones/ver-petiticiones.component';
-
+import { AssignmentDataComponent } from './pages/assignment-data/assignment-data.component';
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -29,7 +29,8 @@ import { VerPetiticionesComponent } from './pages/ver-petiticiones/ver-petiticio
     HomeComponent,
     RankingComponent,
     AssignmentComponent,
-    VerPetiticionesComponent
+    VerPetiticionesComponent,
+    AssignmentDataComponent
   ],
   imports: [
     BrowserModule,
