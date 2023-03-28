@@ -1,9 +1,9 @@
 <h1 class="" style="color: white; text-align: center; margin-top: 2%;">Tus Rankings</h1>
 <br>
-<div class="alert alert-warning" role="alert" *ngIf="this.authService.UserData.date == undefined" style="width: 50%; text-align: center; margin-left: 24%;">
-  No tiene ningún ranking creado.
+<div class="alert alert-warning" role="alert" *ngIf="this.authService.UserData.date == undefined && flagRankings == true" style="width: 50%; text-align: center; margin-left: 24%;">
+  No tiene ningún ranking creado.{{flagRankings}}
 </div>
-<div class="alert alert-warning" role="alert" *ngIf="this.authService.UserData.date != undefined" style="width: 50%; text-align: center; margin-left: 24%;">
+<div class="alert alert-warning" role="alert" *ngIf="this.authService.UserData.date != undefined && flagRankings == true" style="width: 50%; text-align: center; margin-left: 24%;">
   No está suscrito a ningún ranking.
 </div>
 <div class="container">

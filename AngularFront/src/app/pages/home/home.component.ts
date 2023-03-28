@@ -40,7 +40,8 @@ export class HomeComponent implements OnInit {
   showAlertAceptada: boolean = false;
   showAlertErrorAceptada: boolean = false;
   showAlertRankDelete: boolean = false;
-  showAlertRankCodeUpdated: boolean = false
+  showAlertRankCodeUpdated: boolean = false;
+  flagRankings: boolean = false;
 
   constructor(
     public authService: AuthService,
@@ -71,6 +72,7 @@ export class HomeComponent implements OnInit {
     this.rankingService.getRanking()
     this.UserRankingData = this.rankingService._data1
     this.RankingData = this.rankingService._data2;
+    this.getearRankings(this.authService.UserData);
   }
 
   clickRanking(rank: RankData) {
@@ -178,6 +180,20 @@ export class HomeComponent implements OnInit {
     //   window.location.reload();
     // }, 1000);
     this.showAlertRankCodeUpdated = true;
+  }
+
+  getearRankings(userData:UserData){
+    this.flagRankings = true;
+    console.log(this.rankingService._data2);
+        // console.log(this.authService.Data.data);
+    for (let i = 0; i < this.rankingService._data2.length; i++) {
+      if(this.authService.UserData.id == this.rankingService._data2[i].id_creador && i < 0){
+        console.log(this.rankingService._data2);
+        console.log(this.authService.UserData.id);
+        console.log(this.rankingService._data2[i].id_creador);
+        this.flagRankings = false;
+      }
+    }
   }
 }
 
