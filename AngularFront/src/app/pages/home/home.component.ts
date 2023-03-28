@@ -40,6 +40,7 @@ export class HomeComponent implements OnInit {
   showAlertAceptada: boolean = false;
   showAlertErrorAceptada: boolean = false;
   showAlertRankDelete: boolean = false;
+  showAlertRankCodeUpdated: boolean = false
 
   constructor(
     public authService: AuthService,
@@ -166,6 +167,17 @@ export class HomeComponent implements OnInit {
       }, 2000);
       this.showAlertError = true;
     }
+  }
+
+  regenerarCodigo(rank: RankData) {
+    let codeNuevo = this.generateRankCode();
+    this.rankingService.regenerarCodigo(rank, codeNuevo);
+    this.showAlertRankCodeUpdated = true;
+    // setTimeout(() => {
+    //   this.showAlertRankCodeUpdated = false;
+    //   window.location.reload();
+    // }, 1000);
+    this.showAlertRankCodeUpdated = true;
   }
 }
 

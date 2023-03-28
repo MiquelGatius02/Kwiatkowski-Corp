@@ -47,6 +47,7 @@
           <th scope="col">Nombre</th>
           <th scope="col">Acceder</th>
           <th scope="col">Eliminar</th>
+          <th scope="col">Generar Codigo</th>
         </tr>
       </thead>
       <tbody>
@@ -63,6 +64,8 @@
           </td>
           <td *ngIf="this.rank.id_creador == this.authService.UserData.id"><button (click)="eliminarRanking(this.rank)"
               type="button" class="btn btn-danger">Borrar</button></td>
+          <td *ngIf="this.rank.id_creador == this.authService.UserData.id">
+            <button (click)="regenerarCodigo(this.rank)" type="button" class="btn btn-success">Generar</button></td>
         </tr>
         <br>
       </tbody>
@@ -74,25 +77,27 @@
 </div>
 
 <div *ngIf="this.authService.UserData.date != undefined">
-  <div class="layout2" *ngFor="let ranking of UserRankingData; let i = index">
-    <table  *ngIf="this.ranking.user_id == this.authService.UserData.id && i == 1" class="table " style="color: rgb(255, 255, 255)" >
+  <div class="layout2" >
+    <table  class="table "
+      style="color: rgb(255, 255, 255)">
       <thead>
         <tr>
           <th scope="col">Codigo</th>
           <th scope="col">Nombre</th>
-          <th scope="col">Puntos</th>
+          <th scope="col">Points</th>
           <th scope="col">Acceder</th>
         </tr>
       </thead>
 
-      <tbody *ngFor="let rank of RankingData" >
-        <tr *ngIf="this.ranking.rank_code == this.rank.id" style="color:white;" scope="row">
-          <td>{{rank.id}}</td>
-          <td>
+      <tbody *ngFor="let ranking of UserRankingData; let i = index" >
+        <tr *ngFor="let rank of RankingData" style="color:white;" scope="row">
+          <td *ngIf="this.ranking.rank_code == this.rank.id && this.ranking.rank_code != 0">
+            {{rank.id}}</td>
+          <td *ngIf="this.ranking.rank_code == this.rank.id && this.ranking.rank_code != 0">
             {{rank.rank_name}}</td>
-          <td>
+          <td *ngIf="this.ranking.rank_code == this.rank.id && this.ranking.rank_code != 0">
             {{ranking.points}}</td>
-          <td>
+          <td *ngIf="this.ranking.rank_code == this.rank.id && this.ranking.rank_code != 0">
             <button (click)="clickRanking(this.rank)" type="button" class="btn btn-warning">Entrar</button>
           </td>
         </tr>

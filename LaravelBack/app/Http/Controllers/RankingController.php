@@ -80,4 +80,26 @@ class RankingController extends Controller
         ]);
 
     }
+
+    public function regenerarCodigo(request $request){
+
+        $request->validate([
+            "id" => "required",
+            "rank_name" => "required",
+            "rank_description" => "required",
+            "id_creador" => "required",
+        ]);
+
+        $ranking = Ranking::find($request->id);
+
+        if ($ranking) {
+            $ranking->id = $request->id_creador;
+            $ranking->save();
+        }
+
+        return response()->json([
+            "status" => 1,
+            "msg" => "Código regenerado correctamente"
+        ]);
+    }
 }

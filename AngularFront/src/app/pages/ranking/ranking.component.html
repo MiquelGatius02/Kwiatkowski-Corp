@@ -11,7 +11,7 @@
           <th scope="col">Nombre</th>
           <th scope="col">Apellido</th>
           <th scope="col">Puntos</th>
-          <th scope="col">Eliminar</th>
+          <th scope="col" *ngIf="this.authService.UserData.date == undefined">Eliminar</th>
         </tr>
       </thead>
       <tbody *ngFor="let rankingData of this.rankingService._data3;let i = index">
@@ -24,7 +24,7 @@
           <td *ngIf="user.id == rankingData.user_id && user.id != 0 && user.id != User[0].id">{{user.firstname}}</td>
           <td *ngIf="user.id == rankingData.user_id && user.id != 0 && user.id != User[0].id">{{user.lastname}}</td>
           <td *ngIf="user.id == rankingData.user_id && user.id != 0 && user.id != User[0].id">{{rankingData.points}}</td>
-          <td *ngIf="user.id == rankingData.user_id && user.id != 0 && user.id != User[0].id"><button class="btn btn-danger" (click)="eliminarUsuario(this.user.id,this.rankingService.rankCache.id)">Eliminar</button></td>
+          <td *ngIf="user.id == rankingData.user_id && user.id != 0 && user.id != User[0].id && this.authService.UserData.date == undefined"><button class="btn btn-danger" (click)="eliminarUsuario(this.user.id,this.rankingService.rankCache.id)">Eliminar</button></td>
         </tr>
       </tbody>
     </table>

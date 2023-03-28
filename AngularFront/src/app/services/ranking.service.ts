@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, tap } from 'rxjs';
 import { deleteUserRank } from '../interfaces/deleteUserRank';
 import { JoinRank } from '../interfaces/joinRank.interface';
 import { RankData } from '../interfaces/rankData.interface ';
@@ -23,8 +22,6 @@ export class RankingService {
     public router: Router,
     public fb: FormBuilder,
     private token: TokenService,
-    private authState: AuthStateService,
-
   ) { }
 
 
@@ -122,6 +119,14 @@ export class RankingService {
     console.log(rank);
     this.http.post('http://127.0.0.1:8000/api/deleteRanking', rank).subscribe(data => {
       console.log(data)
+    });
+  }
+
+  regenerarCodigo(rank: RankData, codeNuevo: number) {
+    rank.id_creador = codeNuevo;
+    console.log(rank);
+    this.http.post('http://127.0.0.1:8000/api/regenerarCodigo', rank).subscribe(data => {
+      console.log(data);
     });
   }
 
