@@ -21,19 +21,19 @@ import { RankingService } from 'src/app/services/ranking.service';
 export class HomeComponent implements OnInit {
   profileData: UserData = { id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "", imagen: "" };
   UserRankingData: RankingUserData[] = [{ id: 0, rank_code: 0, user_id: 0, points: 0 }];
-  RankingData: RankData[] = [{ id: 0, rank_name: "", rank_description: "",id_creador:0 }];
+  RankingData: RankData[] = [{ id: 0, rank_name: "", rank_description: "", id_creador: 0 }];
   noLoop: boolean = true;
 
   //Unirse/Crear Rankings
-  joinData: JoinRank = { rank_code: 0, user_logged: 0};
-  crearData: RankData = { id: 0, rank_name: "", rank_description: "",id_creador:0 };
+  joinData: JoinRank = { rank_code: 0, user_logged: 0 };
+  crearData: RankData = { id: 0, rank_name: "", rank_description: "", id_creador: 0 };
   joinForm: FormGroup;
   createForm: FormGroup;
 
   //Gestionar peticiones
   PetitionsData: PetitionsData[] = [{ id: 0, rank_code: 0, user_id: 0 }];
   showTable: boolean = false;
-  
+
   //Mostrar alertas
   showAlert: boolean = false;
   showAlertError: boolean = false;
@@ -71,6 +71,7 @@ export class HomeComponent implements OnInit {
     this.rankingService.getRanking()
     this.UserRankingData = this.rankingService._data1
     this.RankingData = this.rankingService._data2;
+    console.log(this.rankingService)
   }
 
   clickRanking(rank: RankData) {
@@ -119,27 +120,27 @@ export class HomeComponent implements OnInit {
     return code;
   }
 
-  verPeticiones(){
+  verPeticiones() {
     this.petitionsService.getPetitions(this.authService.UserData.id);
-    this.PetitionsData = this.petitionsService.dataPetitions; 
-    if(this.showTable == false){
+    this.PetitionsData = this.petitionsService.dataPetitions;
+    if (this.showTable == false) {
       this.showTable = true;
-    }else{
+    } else {
       this.showTable = false;
     }
   }
 
-  aceptarPeticion(){
-    this.petitionsService.aceptarPeticion(this.PetitionsData[0].id,this.PetitionsData[0].rank_code,this.PetitionsData[0].user_id);
+  aceptarPeticion() {
+    this.petitionsService.aceptarPeticion(this.PetitionsData[0].id, this.PetitionsData[0].rank_code, this.PetitionsData[0].user_id);
 
-    if(this.petitionsService.Petitions.msg == 'Tenemos estas peticiones'){
+    if (this.petitionsService.Petitions.msg == 'Tenemos estas peticiones') {
       this.showAlertAceptada = true;
-        setTimeout(() => {
-          this.showAlertAceptada = false;
-          this.verPeticiones();
-        }, 2000);
-        this.showAlertAceptada = true;
-    }else{
+      setTimeout(() => {
+        this.showAlertAceptada = false;
+        this.verPeticiones();
+      }, 2000);
+      this.showAlertAceptada = true;
+    } else {
       this.showAlertErrorAceptada = true;
       setTimeout(() => {
         this.showAlertErrorAceptada = false;
@@ -149,17 +150,17 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  denegarPeticion(){
+  denegarPeticion() {
     this.petitionsService.denegarPeticion(this.PetitionsData[0].id);
 
-    if(this.petitionsService.Petitions.msg == 'Tenemos estas peticiones'){
+    if (this.petitionsService.Petitions.msg == 'Tenemos estas peticiones') {
       this.showAlert = true;
-        setTimeout(() => {
-          this.showAlert = false;
-          this.verPeticiones();
-        }, 2000);
-        this.showTable = true;
-    }else{
+      setTimeout(() => {
+        this.showAlert = false;
+        this.verPeticiones();
+      }, 2000);
+      this.showTable = true;
+    } else {
       this.showAlertError = true;
       setTimeout(() => {
         this.showAlertError = false;

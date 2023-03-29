@@ -14,43 +14,51 @@
       </div>
     </div>
     <div *ngIf="session">
-        <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
-            <a class="navbar-brand" href="#">
-              <img *ngIf="userData.imagen != null" src="{{userData.imagen}}" alt="avatar" class="rounded-circle img-fluid" style="width: 30px; height: 30px;">
-              <img *ngIf="userData.imagen == null" src="https://www.nicepng.com/png/full/202-2022264_usuario-annimo-usuario-annimo-user-icon-png-transparent.png" style="width: 30px; height: 30px;">
-              {{this.userData.username}}
-            </a>
-          </button>
-          <ul class="dropdown-menu dropdown-menu-right">
-            <li><button class="dropdown-item" routerLink="home/profile" type="button">Perfil</button></li>
-            <li *ngIf="this.authService.UserData.date == undefined"><button class="dropdown-item" routerLink="home/ver-peticiones" type="button">Peticiones</button></li>
-            <li><button class="dropdown-item" type="button" data-toggle="modal" data-target="#exampleModal">
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+          <a class="navbar-brand" href="#">
+            <img *ngIf="userData.imagen != null" src="{{userData.imagen}}" alt="avatar" class="rounded-circle img-fluid"
+              style="width: 30px; height: 30px;">
+            <img *ngIf="userData.imagen == null"
+              src="https://www.nicepng.com/png/full/202-2022264_usuario-annimo-usuario-annimo-user-icon-png-transparent.png"
+              style="width: 30px; height: 30px;">
+            {{this.userData.username}}
+          </a>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li><button class="dropdown-item" routerLink="home/profile" type="button">Perfil</button></li>
+          <li *ngIf="this.authService.UserData.date == undefined"><button class="dropdown-item"
+              routerLink="home/ver-peticiones" type="button">Peticiones</button></li>
+          <li *ngIf="this.authService.UserData.date == undefined"><button class="dropdown-item"
+              routerLink="home/assignment" type="button">Tareas</button></li>
+          <li *ngIf="this.authService.UserData.date != undefined"><button class="dropdown-item" routerLink=""
+              type="button">Mis tareas</button></li>
+          <li><button class="dropdown-item" type="button" data-toggle="modal" data-target="#exampleModal">
               Cerrar sesión
             </button></li>
-          </ul>
-        </div>
+        </ul>
       </div>
+    </div>
 
-      <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
-              <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              ¿Estás seguro de que deseas cerrar sesión?
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-              <button type="button" (click)="endSession()" class="btn btn-primary" data-dismiss="modal">
-                Cerrar sesión</button>
-            </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            ¿Estás seguro de que deseas cerrar sesión?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" (click)="endSession()" class="btn btn-primary" data-dismiss="modal">
+              Cerrar sesión</button>
           </div>
         </div>
       </div>
+    </div>
   </ul>
 </nav>
