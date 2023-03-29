@@ -47,7 +47,8 @@ export class RankingComponent implements OnInit {
         this.showAlertDelete = true;
         setTimeout(() => {
           this.showAlertDelete = false;
-        }, 2000);
+          this.router.navigate(['home']);
+        }, 1250);
       }else{
         this.showAlertDelete = false;
       }
