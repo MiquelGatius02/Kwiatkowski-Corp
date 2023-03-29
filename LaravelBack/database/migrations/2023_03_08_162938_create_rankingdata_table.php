@@ -23,7 +23,8 @@ return new class extends Migration
             $table->foreign('rank_code')
                 ->references('id')
                 ->on('rankings')
-                ->onDelete('cascade');
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 

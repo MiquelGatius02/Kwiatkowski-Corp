@@ -1,9 +1,9 @@
 <h1 class="" style="color: white; text-align: center; margin-top: 2%;">Tus Rankings</h1>
 <br>
-<div class="alert alert-warning" role="alert" *ngIf="this.authService.UserData.date == undefined && flagRankings == true" style="width: 50%; text-align: center; margin-left: 24%;">
-  No tiene ningún ranking creado.{{flagRankings}}
+<div class="alert alert-warning" role="alert" *ngIf="this.authService.UserData.date == undefined" style="width: 50%; text-align: center; margin-left: 24%;">
+  No tiene ningún ranking creado.
 </div>
-<div class="alert alert-warning" role="alert" *ngIf="this.authService.UserData.date != undefined && flagRankings == true" style="width: 50%; text-align: center; margin-left: 24%;">
+<div class="alert alert-warning" role="alert" *ngIf="this.authService.UserData.date != undefined" style="width: 50%; text-align: center; margin-left: 24%;">
   No está suscrito a ningún ranking.
 </div>
 <div class="container">
@@ -17,6 +17,9 @@
         </button><br>
       </form>
     </div>
+  </div>
+  <div class="alert alert-warning" role="alert" *ngIf="this.showAlertPeticion == false" style="text-align:center;">
+    Solicitud de unión a ranking realizada.
   </div>
   <div class="big-layout" *ngIf="this.authService.UserData.date == undefined" style="color: black">
     <form class="form-signin" [formGroup]="createForm" (ngSubmit)="createRanking()">
@@ -72,6 +75,9 @@
     </table>
     <div class="alert alert-warning" role="alert" *ngIf="this.showAlertRankDelete == true" style="text-align:center;">
       Ranking eliminado.
+    </div>
+    <div class="alert alert-warning" role="alert" *ngIf="this.showAlertRankCodeUpdated == true" style="text-align:center;">
+      Código de ranking actualizado.
     </div>
   </div>
 </div>

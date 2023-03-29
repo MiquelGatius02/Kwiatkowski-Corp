@@ -18,7 +18,7 @@ import { RankingService } from 'src/app/services/ranking.service';
 export class AssignmentComponent implements OnInit {
 
   newAssignment: FormGroup;
-  RankingData: RankData[] = [{ id: 0, rank_name: "", rank_description: "" }]
+  RankingData: RankData[] = [{ id: 0, rank_name: "", rank_description: "", id_creador: 0 }]
   Value: any;
   Assignments: assignmentData[] = [{ id: 0, assignment_name: "", rank_code: 0, prof_id: 0 }]
   AssignmentsData: assignmentData_info = { assignment_id: 0, user_id: 0, points: 0 }
@@ -40,6 +40,7 @@ export class AssignmentComponent implements OnInit {
   ngOnInit(): void {
     this.rankingService.getRanking();
     this.RankingData = this.rankingService._data2;
+    this.RankingData.splice(0, 1)
     this.assignmentService.getAssignment();
     this.Assignments = this.assignmentService._data1;
 
