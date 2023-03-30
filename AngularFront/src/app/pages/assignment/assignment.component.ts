@@ -38,6 +38,7 @@ export class AssignmentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.RankingData = [];
     this.rankingService.getRanking();
     this.RankingData = this.rankingService._data2;
     this.RankingData.splice(0, 1)
