@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit {
   RankingData: RankData[] = [{ id: 0, rank_name: "", rank_description: "", id_creador: 0 }];
   noLoop: boolean = true;
 
+
   //Unirse/Crear Rankings
   joinData: JoinRank = { rank_code: 0, user_logged: 0 };
   crearData: RankData = { id: 0, rank_name: "", rank_description: "", id_creador: 0 };
@@ -41,6 +42,8 @@ export class HomeComponent implements OnInit {
   showAlertErrorAceptada: boolean = false;
   showAlertRankDelete: boolean = false;
   showAlertRankCodeUpdated: boolean = false
+  showAlertPeticion: boolean = false;
+  suscrito: boolean = false;
 
   constructor(
     public authService: AuthService,
@@ -65,6 +68,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.profileData = this.authService.UserData;
     this.UserRankingData = this.UserRankingData.splice(0, this.UserRankingData.length)
     this.RankingData = this.RankingData.splice(0, this.RankingData.length)
     this.authService.profile()
@@ -72,6 +76,38 @@ export class HomeComponent implements OnInit {
     this.UserRankingData = this.rankingService._data1
     this.RankingData = this.rankingService._data2;
     console.log(this.rankingService)
+    this.checkRanking()
+  }
+
+  checkRanking() {
+    console.log(this.rankingService._data1.length)
+    if (this.authService.UserData.date != undefined) {
+      for (let i = 0; i < this.UserRankingData.length; i++) {
+        if (this.UserRankingData[i].user_id == this.profileData.id) {
+          console.log(this.UserRankingData[i].user_id && this.profileData.id)
+          this.suscrito = true;
+        }
+        else {
+          this.suscrito = false;
+        }
+      }
+    }
+    else {
+      console.log("aqui")
+      for (let i = 0; i < this.rankingService._data2.length; i++) {
+        if (this.rankingService._data2[i].id_creador == this.profileData.id) {
+          console.log(this.rankingService._data2[i].id_creador)
+          console.log(this.rankingService._data2)
+          if (i != 0) {
+            this.suscrito = true;
+          }
+          console.log(this.suscrito)
+        }
+        else {
+          this.suscrito = false;
+        }
+      }
+    }
   }
 
   clickRanking(rank: RankData) {
@@ -174,11 +210,20 @@ export class HomeComponent implements OnInit {
     let codeNuevo = this.generateRankCode();
     this.rankingService.regenerarCodigo(rank, codeNuevo);
     this.showAlertRankCodeUpdated = true;
-    // setTimeout(() => {
-    //   this.showAlertRankCodeUpdated = false;
-    //   window.location.reload();
-    // }, 1000);
+    setTimeout(() => {
+      this.showAlertRankCodeUpdated = false;
+      window.location.reload();
+    }, 1500);
     this.showAlertRankCodeUpdated = true;
+  }
+
+  mostrarAlertaPeticion() {
+
+    this.showAlertPeticion = true;
+    setTimeout(() => {
+      this.showAlertPeticion = false;
+    }, 1000);
+    this.showAlertPeticion = true;
   }
 }
 

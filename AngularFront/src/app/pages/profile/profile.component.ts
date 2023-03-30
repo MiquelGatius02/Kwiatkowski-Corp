@@ -42,7 +42,6 @@ export class ProfileComponent implements OnInit {
     this.passwordData = this.passwordForm.value
     this.passwordData.id = this.profileData.id;
     this.authService.changePassword(this.profileData)
-
     this.authService.changePassword(this.passwordForm.value).subscribe(
       (result) => {
         console.log(result);
