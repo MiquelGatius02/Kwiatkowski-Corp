@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class softSkillsData extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     public $table = "softSkillsData";
 
     protected $fillable = [

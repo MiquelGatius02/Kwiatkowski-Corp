@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -34,7 +35,7 @@ return new class extends Migration
                 'firstname' => 'pro',
                 'lastname' => 'proapellido',
                 'center' => 'ilerna',
-                'password' => md5('pro'),
+                'password' => Hash::make('pro'),
             )
         );
 
@@ -45,7 +46,7 @@ return new class extends Migration
                 'firstname' => 'est',
                 'lastname' => 'estapellido',
                 'date' => '20-01-2000',
-                'password' => md5('est'),
+                'password' => Hash::make('est'),
             )
         );
     }
