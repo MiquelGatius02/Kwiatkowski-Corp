@@ -74,7 +74,6 @@ export class AuthService {
                 this.rankingService.getRankingDataByUser(this.UserData.id);
                 this.rankingGen = false;
             }
-
         });
     }
 

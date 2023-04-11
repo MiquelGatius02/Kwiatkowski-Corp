@@ -1,11 +1,13 @@
 <h1 class="" style="color: white; text-align: center; margin-top: 2%;">Tus Rankings</h1>
 <br>
-<div class="alert alert-warning" role="alert" *ngIf="this.authService.UserData.date == undefined" style="width: 50%; text-align: center; margin-left: 24%;">
+<!-- <div class="alert alert-warning" role="alert" *ngIf="this.profileData.date == undefined && !suscrito"
+  style="width: 50%; text-align: center; margin-left: 24%;">
   No tiene ningún ranking creado.
 </div>
-<div class="alert alert-warning" role="alert" *ngIf="this.authService.UserData.date != undefined" style="width: 50%; text-align: center; margin-left: 24%;">
+<div class="alert alert-warning" role="alert" *ngIf="this.profileData.date != undefined && !suscrito"
+  style="width: 50%; text-align: center; margin-left: 24%;">
   No está suscrito a ningún ranking.
-</div>
+</div> -->
 <div class="container">
   <div class="big-layout" *ngIf="this.authService.UserData.date != undefined">
     <div class="" style="color: rgb(0, 0, 0)">
@@ -16,10 +18,11 @@
           Unirse al ranking
         </button><br>
       </form>
+      <div class="alarma form-group alert alert-warning" *ngIf="this.showAlertPeticion == true" role="alert"
+        style="text-align:center;">
+        Solicitud de unión <br>a ranking realizada.
+      </div>
     </div>
-  </div>
-  <div class="alert alert-warning" role="alert" *ngIf="this.showAlertPeticion == true" style="text-align:center;">
-    Solicitud de unión a ranking realizada.
   </div>
   <div class="big-layout" *ngIf="this.authService.UserData.date == undefined" style="color: black">
     <form class="form-signin" [formGroup]="createForm" (ngSubmit)="createRanking()">
@@ -41,6 +44,8 @@
 
   </div>
 </div>
+
+
 <div *ngIf="this.authService.UserData.date == undefined">
   <div class="layout" *ngFor="let ranking of UserRankingData; let i = index">
     <table class="table " style="color: rgb(255, 255, 255)">
@@ -55,14 +60,11 @@
       </thead>
       <tbody>
         <tr *ngFor="let rank of RankingData" style="color:white;" scope="row">
-          <td
-            *ngIf="this.rank.id_creador == this.authService.UserData.id">
+          <td *ngIf="this.rank.id_creador == this.authService.UserData.id">
             {{rank.id}}</td>
-          <td
-            *ngIf="this.rank.id_creador == this.authService.UserData.id">
+          <td *ngIf="this.rank.id_creador == this.authService.UserData.id">
             {{rank.rank_name}}</td>
-          <td
-            *ngIf="this.rank.id_creador == this.authService.UserData.id">
+          <td *ngIf="this.rank.id_creador == this.authService.UserData.id">
             <button (click)="clickRanking(this.rank)" type="button" class="btn btn-warning">Entrar</button>
           </td>
           <td *ngIf="this.rank.id_creador == this.authService.UserData.id"><button (click)="eliminarRanking(this.rank)"
@@ -76,16 +78,16 @@
     <div class="alert alert-warning" role="alert" *ngIf="this.showAlertRankDelete == true" style="text-align:center;">
       Ranking eliminado.
     </div>
-    <div class="alert alert-warning" role="alert" *ngIf="this.showAlertRankCodeUpdated == true" style="text-align:center;">
+    <div class="alert alert-warning" role="alert" *ngIf="this.showAlertRankCodeUpdated == true"
+      style="text-align:center;">
       Código de ranking actualizado.
     </div>
   </div>
 </div>
 
 <div *ngIf="this.authService.UserData.date != undefined">
-  <div class="layout2" >
-    <table  class="table "
-      style="color: rgb(255, 255, 255)">
+  <div class="layout2">
+    <table class="table " style="color: rgb(255, 255, 255)">
       <thead>
         <tr>
           <th scope="col">Codigo</th>
@@ -95,7 +97,7 @@
         </tr>
       </thead>
 
-      <tbody *ngFor="let ranking of UserRankingData; let i = index" >
+      <tbody *ngFor="let ranking of UserRankingData; let i = index">
         <tr *ngFor="let rank of RankingData" style="color:white;" scope="row">
           <td *ngIf="this.ranking.rank_code == this.rank.id && this.ranking.rank_code != 0">
             {{rank.id}}</td>

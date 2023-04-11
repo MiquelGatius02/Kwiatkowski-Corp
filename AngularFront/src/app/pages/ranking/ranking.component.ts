@@ -13,10 +13,11 @@ import { RankingService } from 'src/app/services/ranking.service';
   styleUrls: ['./ranking.component.scss']
 })
 export class RankingComponent implements OnInit {
-  RankingData: RankData[] = [{ id: 0, rank_name: "", rank_description: "",id_creador:0 }]
+  RankingData: RankData[] = [{ id: 0, rank_name: "", rank_description: "", id_creador: 0 }]
   UsersRankingData: RankingUserData[] = [{ id: 0, rank_code: 0, user_id: 0, points: 0 }]
   User: UserData[] = [{ id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "" }];
-  showAlertDelete:boolean = false;
+
+  showAlertDelete: boolean = false;
 
   constructor(
     public authService: AuthService,
@@ -40,16 +41,15 @@ export class RankingComponent implements OnInit {
     console.log(this.rankingService);
   }
 
-  eliminarUsuario(usuario:number,id_rank:number){
-    if(confirm("¿Seguro desea borrar este usuario?")){
-      this.rankingService.deleteUser(usuario,id_rank);
-      if(this.showAlertDelete == false){
+  eliminarUsuario(usuario: number, id_rank: number) {
+    if (confirm("¿Seguro desea borrar este usuario?")) {
+      this.rankingService.deleteUser(usuario, id_rank);
+      if (this.showAlertDelete == false) {
         this.showAlertDelete = true;
         setTimeout(() => {
           this.showAlertDelete = false;
-          this.router.navigate(['home']);
-        }, 1250);
-      }else{
+        }, 2000);
+      } else {
         this.showAlertDelete = false;
       }
     }
