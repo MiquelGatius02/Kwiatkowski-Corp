@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('date')->nullable();
             $table->string('password');
             $table->longText('imagen')->nullable();
+            $table->integer('puntosSemanales')->default(1000)->max(1000);
             $table->rememberToken();
             $table->timestamps();
         });
