@@ -19,11 +19,10 @@ return new class extends Migration
             $table->integer('Puntos');
             $table->foreign('user_id')
                 ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
-                $table->foreign('skill_id')
-                ->references('id')
-                ->on('softSkills');
+                ->on('users');
+            $table->foreign('skill_id')
+            ->references('id')
+            ->on('softSkills');
         });
     }
 

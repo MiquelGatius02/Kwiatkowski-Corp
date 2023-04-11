@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\SoftSkillsData;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -55,6 +56,16 @@ class CustomAuthController extends Controller
         $user->date = $request->centerOrDate;
         $user->password = Hash::make($request->password);
         $user->save();
+
+        for($i = 1; $i <= 5; $i++){
+            $soft = new SoftSkillsData();
+            $soft->user_id = $user->id;
+            $soft->skill_id = $i;
+            $soft->Nivel = 0;
+            $soft->Puntos = 0;
+            $soft->save();
+        }
+
 
         return response()->json([
             "status" => 1,
