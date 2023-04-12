@@ -15,7 +15,8 @@ import { RankingService } from 'src/app/services/ranking.service';
 export class RankingComponent implements OnInit {
   RankingData: RankData[] = [{ id: 0, rank_name: "", rank_description: "", id_creador: 0 }]
   UsersRankingData: RankingUserData[] = [{ id: 0, rank_code: 0, user_id: 0, points: 0 }]
-  User: UserData[] = [{ id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "", id_skill:0,nombre_skill:"",nivel_skill:0,puntos_skill:0 }];
+  User: UserData[] = [{ id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "", 
+  Nivel_autonomia_e_iniciativa:0,Nivel_cooperación:0,Nivel_gestion_emocional:0,Nivel_habilidades_de_pensamiento:0,Nivel_responsabilidad:0,puntos_skill:0 }];
 
   showAlertDelete: boolean = false;
 
