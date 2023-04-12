@@ -13,8 +13,11 @@ class softSkillsData extends Model
 
     protected $fillable = [
         'user_id',
-        'skill_id',
-        'Nivel',
+        'Nivel_responsabilidad',
+        'Nivel_cooperación',
+        'Nivel_autonomia_e_iniciativa',
+        'Nivel_gestion_emocional',
+        'Nivel_habilidades_de_pensamiento',
         'Puntos'
     ];
 }

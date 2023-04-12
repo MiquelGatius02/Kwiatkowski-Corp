@@ -79,12 +79,15 @@ class RankingDataController extends Controller
         }
     }
 
-    public function getUser(Request $request){
+    public function getUser(){
 
         $resultados = DB::table('users')
         ->join('softSkillsData', 'users.id', '=', 'softSkillsData.user_id')
         ->select('users.id','users.username','users.firstname', 'users.lastname',
-        'softSkillsData.user_id','softSkillsData.skill_id','softSkillsData.Nivel')
+        'softSkillsData.Nivel_responsabilidad','softSkillsData.Nivel_cooperacion',
+        'softSkillsData.Nivel_autonomia_e_iniciativa','softSkillsData.Nivel_gestion_emocional',
+        'softSkillsData.Nivel_habilidades_de_pensamiento')
+        ->groupBy('users.id')
         ->get();
 
         if ($resultados) {
