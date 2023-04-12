@@ -7,13 +7,13 @@ use App\Models\User;
 use App\Models\Ranking;
 use App\Models\RankingData;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RankingDataController extends Controller
 {
     // CREAR RANKING
 
-    public function createRankingData(Request $request)
-    {
+    public function createRankingData(Request $request){
         $request->validate([
             'rank_code' => 'required',
             'user_id' => 'required',
@@ -36,8 +36,7 @@ class RankingDataController extends Controller
 
     // RECOLECTAR INFORMACIÓN DE RANKINGs
 
-    public function getRankingDataByUser(Request $request)
-    {
+    public function getRankingDataByUser(Request $request){
         $request->validate([
             'user_id' => 'required'
         ]);
@@ -58,8 +57,7 @@ class RankingDataController extends Controller
         }
     }
 
-    public function getRankingDataByCode(Request $request)
-    {
+    public function getRankingDataByCode(Request $request){
         $request->validate([
             'rank_code' => 'required'
         ]);
@@ -80,8 +78,7 @@ class RankingDataController extends Controller
         }
     }
 
-    public function getUser(Request $request)
-    {
+    public function getUser(Request $request){
 
         $user = User::get();
 
@@ -97,5 +94,44 @@ class RankingDataController extends Controller
                 "msg" => "No se han encontrado registros"
             ]);
         }
+    }
+
+    public function addRanking(request $request){
+
+
+        $request->validate([
+            "rank_id" => "required",
+            "user_logged" => "required",
+        ]);
+ 
+        $user = Ranking::where('id', $request->rank_id,)->first();
+        $petitions = new petitions();
+        $petitions->rank_code = $request->rank_id;
+        $petitions->user_id = $request->user_logged;
+        $petitions->professor_id = $user->id_creador;
+        $petitions->save();
+        return response()->json([
+
+            "status" => 1,
+            "msg" => "Se ha realizado una solicitud de unión",
+            "data" => $petitions
+
+        ]);
+    }
+
+    public function deleteUser(request $request){
+
+        $request->validate([
+            "id_user" => "required",
+            "id_rank" => "required"
+        ]);
+
+        $id = DB::table('rankingdata')->select('id')->where('rank_code',$request->id_rank)->where('user_id', $request->id_user)->first();
+        DB::table('rankingdata')->where('id', $id->id)->delete();
+        DB::commit();
+        return response()->json([
+            "status" => 1,
+            "msg" => "Se ha borrado un usuario de un ranking"
+        ]);
     }
 }

@@ -21,24 +21,29 @@ import { RankingService } from 'src/app/services/ranking.service';
 export class HomeComponent implements OnInit {
   profileData: UserData = { id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "", imagen: "" };
   UserRankingData: RankingUserData[] = [{ id: 0, rank_code: 0, user_id: 0, points: 0 }];
-  RankingData: RankData[] = [{ id: 0, rank_name: "", rank_description: "",id_creador:0 }];
+  RankingData: RankData[] = [{ id: 0, rank_name: "", rank_description: "", id_creador: 0 }];
   noLoop: boolean = true;
 
+
   //Unirse/Crear Rankings
-  joinData: JoinRank = { rank_code: 0, user_logged: 0};
-  crearData: RankData = { id: 0, rank_name: "", rank_description: "",id_creador:0 };
+  joinData: JoinRank = { rank_code: 0, user_logged: 0 };
+  crearData: RankData = { id: 0, rank_name: "", rank_description: "", id_creador: 0 };
   joinForm: FormGroup;
   createForm: FormGroup;
 
   //Gestionar peticiones
   PetitionsData: PetitionsData[] = [{ id: 0, rank_code: 0, user_id: 0 }];
   showTable: boolean = false;
-  
+
   //Mostrar alertas
   showAlert: boolean = false;
   showAlertError: boolean = false;
   showAlertAceptada: boolean = false;
   showAlertErrorAceptada: boolean = false;
+  showAlertRankDelete: boolean = false;
+  showAlertRankCodeUpdated: boolean = false
+  showAlertPeticion: boolean = false;
+  suscrito: boolean = false;
 
   constructor(
     public authService: AuthService,
@@ -63,16 +68,46 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.profileData = this.authService.UserData;
     this.UserRankingData = this.UserRankingData.splice(0, this.UserRankingData.length)
     this.RankingData = this.RankingData.splice(0, this.RankingData.length)
     this.authService.profile()
     this.rankingService.getRanking()
     this.UserRankingData = this.rankingService._data1
     this.RankingData = this.rankingService._data2;
-    console.log(this.UserRankingData);
-    console.log(this.RankingData);
-    
+    console.log(this.rankingService)
+    this.checkRanking()
+  }
 
+  checkRanking() {
+    console.log(this.rankingService._data1.length)
+    if (this.authService.UserData.date != undefined) {
+      for (let i = 0; i < this.UserRankingData.length; i++) {
+        if (this.UserRankingData[i].user_id == this.profileData.id) {
+          console.log(this.UserRankingData[i].user_id && this.profileData.id)
+          this.suscrito = true;
+        }
+        else {
+          this.suscrito = false;
+        }
+      }
+    }
+    else {
+      console.log("aqui")
+      for (let i = 0; i < this.rankingService._data2.length; i++) {
+        if (this.rankingService._data2[i].id_creador == this.profileData.id) {
+          console.log(this.rankingService._data2[i].id_creador)
+          console.log(this.rankingService._data2)
+          if (i != 0) {
+            this.suscrito = true;
+          }
+          console.log(this.suscrito)
+        }
+        else {
+          this.suscrito = false;
+        }
+      }
+    }
   }
 
   clickRanking(rank: RankData) {
@@ -95,9 +130,10 @@ export class HomeComponent implements OnInit {
     this.crearData.id_creador = this.authService.UserData.id;
     this.rankingService.createRaking(this.crearData).subscribe(
       (result) => {
-        // console.log(result);
-
-        window.location.reload();
+        setTimeout(() => {
+          this.showAlertRankDelete = false;
+          window.location.reload();
+        }, 1500);
       },
       () => {
         this.joinForm.reset();
@@ -106,33 +142,43 @@ export class HomeComponent implements OnInit {
     );
   }
 
+  eliminarRanking(rank: RankData) {
+    this.rankingService.deleteRanking(rank);
+    this.showAlertRankDelete = true;
+    setTimeout(() => {
+      this.showAlertRankDelete = false;
+      window.location.reload();
+    }, 1500);
+    this.showAlertRankDelete = true;
+  }
+
   generateRankCode(): number {
     // Generar código aleatorio de 5 dígitos
     const code = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000;
     return code;
   }
 
-  verPeticiones(){
+  verPeticiones() {
     this.petitionsService.getPetitions(this.authService.UserData.id);
-    this.PetitionsData = this.petitionsService.dataPetitions; 
-    if(this.showTable == false){
+    this.PetitionsData = this.petitionsService.dataPetitions;
+    if (this.showTable == false) {
       this.showTable = true;
-    }else{
+    } else {
       this.showTable = false;
     }
   }
 
-  aceptarPeticion(){
-    this.petitionsService.aceptarPeticion(this.PetitionsData[0].id,this.PetitionsData[0].rank_code,this.PetitionsData[0].user_id);
+  aceptarPeticion() {
+    this.petitionsService.aceptarPeticion(this.PetitionsData[0].id, this.PetitionsData[0].rank_code, this.PetitionsData[0].user_id);
 
-    if(this.petitionsService.Petitions.msg == 'Tenemos estas peticiones'){
+    if (this.petitionsService.Petitions.msg == 'Tenemos estas peticiones') {
       this.showAlertAceptada = true;
-        setTimeout(() => {
-          this.showAlertAceptada = false;
-          this.verPeticiones();
-        }, 2000);
-        this.showAlertAceptada = true;
-    }else{
+      setTimeout(() => {
+        this.showAlertAceptada = false;
+        this.verPeticiones();
+      }, 2000);
+      this.showAlertAceptada = true;
+    } else {
       this.showAlertErrorAceptada = true;
       setTimeout(() => {
         this.showAlertErrorAceptada = false;
@@ -142,17 +188,17 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  denegarPeticion(){
+  denegarPeticion() {
     this.petitionsService.denegarPeticion(this.PetitionsData[0].id);
 
-    if(this.petitionsService.Petitions.msg == 'Tenemos estas peticiones'){
+    if (this.petitionsService.Petitions.msg == 'Tenemos estas peticiones') {
       this.showAlert = true;
-        setTimeout(() => {
-          this.showAlert = false;
-          this.verPeticiones();
-        }, 2000);
-        this.showTable = true;
-    }else{
+      setTimeout(() => {
+        this.showAlert = false;
+        this.verPeticiones();
+      }, 2000);
+      this.showTable = true;
+    } else {
       this.showAlertError = true;
       setTimeout(() => {
         this.showAlertError = false;
@@ -160,6 +206,26 @@ export class HomeComponent implements OnInit {
       }, 2000);
       this.showAlertError = true;
     }
+  }
+
+  regenerarCodigo(rank: RankData) {
+    let codeNuevo = this.generateRankCode();
+    this.rankingService.regenerarCodigo(rank, codeNuevo);
+    this.showAlertRankCodeUpdated = true;
+    setTimeout(() => {
+      this.showAlertRankCodeUpdated = false;
+      window.location.reload();
+    }, 1500);
+    this.showAlertRankCodeUpdated = true;
+  }
+
+  mostrarAlertaPeticion() {
+
+    this.showAlertPeticion = true;
+    setTimeout(() => {
+      this.showAlertPeticion = false;
+    }, 1000);
+    this.showAlertPeticion = true;
   }
 }
 

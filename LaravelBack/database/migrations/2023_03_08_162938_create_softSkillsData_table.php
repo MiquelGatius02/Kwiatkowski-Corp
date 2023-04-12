@@ -11,20 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rankingdata', function (Blueprint $table) {
+        Schema::create('softSkillsData', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('rank_code');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('points');
+            $table->unsignedBigInteger('skill_id');
+            $table->integer('Nivel');
+            $table->integer('Puntos');
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
-            $table->foreign('rank_code')
+                $table->foreign('skill_id')
                 ->references('id')
-                ->on('rankings')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+                ->on('softSkills');
         });
     }
 
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rankingdata');
+        Schema::dropIfExists('softSkillsData');
     }
 };

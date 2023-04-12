@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rankings', function (Blueprint $table) {
+        Schema::create('softSkills', function (Blueprint $table) {
             $table->id('id');
-            $table->string('rank_name')->nullable();
-            $table->string('rank_description')->nullable();
-            $table->integer('id_creador');
+            $table->string('nombre')->nullable();
         });
     }
 
@@ -24,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rankings');
+        Schema::dropIfExists('softSkills');
     }
 };

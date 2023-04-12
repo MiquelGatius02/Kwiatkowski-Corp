@@ -1,34 +1,21 @@
-
 <h1 class="" style="color: white; text-align: center; margin-top: 2%;">Tus Rankings</h1>
 <br>
-<div class="alert alert-warning" role="alert" *ngIf="this.authService.UserData.date == undefined"
-  style="width: 50%; text-align: center; margin-left: 24%;">
-  No tiene ningún ranking creado.
-</div>
-<div class="alert alert-warning" role="alert" *ngIf="this.authService.UserData.date != undefined"
-  style="width: 50%; text-align: center; margin-left: 24%;">
->>>>>>> Stashed changes
-  No está suscrito a ningún ranking.
-</div>
-<h1 class="" style="color: white; text-align: center;">Tus Rankings</h1>
 <div class="container">
   <div class="big-layout" *ngIf="this.authService.UserData.date != undefined">
     <div class="" style="color: rgb(0, 0, 0)">
       <form class="" [formGroup]="joinForm" (ngSubmit)="onSubmit()">
         <label for="rank_name">Codigo del ranking:</label><br>
         <input style="width: 230px; margin-right: 10px;" type="number" formControlName="rank_id" /><br>
-        <button type="submit" class="btn btn-block btn-primary" style="margin-top: 5%;">
+        <button type="submit" class="btn btn-block btn-primary" style="margin-top: 5%;" data-toggle="modal" data-target="#modal1">
           Unirse al ranking
-        </button><br>
+        </button>
+        <br>
       </form>
-      <div class="alarma form-group alert alert-warning"  *ngIf="this.showAlertPeticion == true" role="alert" style="text-align:center;">
-        Solicitud de unión <br>a ranking realizada.
-      </div>
     </div>
   </div>
-  <div class="big-layout" *ngIf="this.authService.UserData.date == undefined" style="color: black">
-    <form class="form-signin" [formGroup]="createForm" (ngSubmit)="createRanking()">
-      <div class="">
+  <div class="big-layout"  *ngIf="this.authService.UserData.date == undefined" style="color: black">
+    <form [formGroup]="createForm" (ngSubmit)="createRanking()">
+      <div>
         <div class="form-group">
           <label for="rank_name">Nombre del ranking:</label>
           <input type="text" class="form-control" formControlName="rank_name" required>
@@ -39,20 +26,14 @@
           <textarea class="form-control" rows="3" formControlName="rank_description" required></textarea>
         </div>
         <br>
-        <button type="submit" class="btn btn-block btn-primary">Crear Ranking</button>
-
-        <button type="button" class="btn btn-success" (click)="verPeticiones()">Peticiones</button>
-
+        <button type="submit" class="btn btn-block btn-primary"  data-toggle="modal" data-target="#modal2">Crear Ranking</button>
+        
       </div>
     </form>
     <br>
   </div>
-  <div class="alert alert-warning nota" role="alert" *ngIf="this.showAlertPeticion == false"
-  style="text-align:center;">
-  Solicitud de unión a ranking realizada.
 </div>
 
-</div>
 <div *ngIf="this.authService.UserData.date == undefined">
   <div class="layout" *ngFor="let ranking of UserRankingData; let i = index">
     <table class="table " style="color: rgb(255, 255, 255)">
@@ -60,12 +41,11 @@
         <tr>
           <th scope="col">Codigo</th>
           <th scope="col">Nombre</th>
-          <th scope="col">Points</th>
           <th scope="col">Acceder</th>
           <th scope="col">Eliminar</th>
+          <th scope="col">Generar Codigo</th>
         </tr>
       </thead>
-
       <tbody>
         <tr *ngFor="let rank of RankingData" style="color:white;" scope="row">
           <td *ngIf="this.rank.id_creador == this.authService.UserData.id">
@@ -75,19 +55,15 @@
           <td *ngIf="this.rank.id_creador == this.authService.UserData.id">
             <button (click)="clickRanking(this.rank)" type="button" class="btn btn-warning">Entrar</button>
           </td>
-          <td *ngIf="this.rank.id_creador == this.authService.UserData.id"><button (click)="clickRanking(this.rank)"
-              type="button" class="btn btn-danger">Borrar</button></td>
+          <td *ngIf="this.rank.id_creador == this.authService.UserData.id"><button (click)="eliminarRanking(this.rank)"
+              type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal3">Borrar</button>
+            </td>
+          <td *ngIf="this.rank.id_creador == this.authService.UserData.id">
+            <button (click)="regenerarCodigo(this.rank)" type="button" class="btn btn-success" data-toggle="modal" data-target="#modal4">Generar</button></td>
         </tr>
+        <br>
       </tbody>
     </table>
-    <div class="alert alert-warning" role="alert" *ngIf="this.showAlertRankDelete == true" style="text-align:center;">
-      Ranking eliminado.
-    </div>
-    <div class="alert alert-warning" role="alert" *ngIf="this.showAlertRankCodeUpdated == true"
-      style="text-align:center;">
-      Código de ranking actualizado.
-    </div>
-
   </div>
 </div>
 
@@ -105,17 +81,13 @@
 
       <tbody *ngFor="let ranking of UserRankingData; let i = index">
         <tr *ngFor="let rank of RankingData" style="color:white;" scope="row">
-          <td
-            *ngIf="this.ranking.user_id == this.authService.UserData.id">
+          <td *ngIf="this.ranking.rank_code == this.rank.id && this.ranking.rank_code != 0">
             {{rank.id}}</td>
-          <td
-            *ngIf="this.ranking.user_id == this.authService.UserData.id">
+          <td *ngIf="this.ranking.rank_code == this.rank.id && this.ranking.rank_code != 0">
             {{rank.rank_name}}</td>
-          <td
-            *ngIf="this.ranking.user_id == this.authService.UserData.id">
+          <td *ngIf="this.ranking.rank_code == this.rank.id && this.ranking.rank_code != 0">
             {{ranking.points}}</td>
-          <td
-            *ngIf="this.ranking.user_id == this.authService.UserData.id">
+          <td *ngIf="this.ranking.rank_code == this.rank.id && this.ranking.rank_code != 0">
             <button (click)="clickRanking(this.rank)" type="button" class="btn btn-warning">Entrar</button>
           </td>
         </tr>
@@ -123,35 +95,56 @@
     </table>
   </div>
 </div>
-<div class="layout2" >
-  <table *ngIf="showTable == true" class="table"  style="color: rgb(255, 255, 255)">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">Ranking</th>
-        <th scope="col">Alumno</th>
-        <th scope="col">Aceptar</th>
-        <th scope="col">Denegar</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let peticiones of PetitionsData">
-        <td>{{peticiones.rank_code}}</td>
-        <td>{{peticiones.user_id}}</td>
-        <td><button class="btn btn-success" (click)="aceptarPeticion()">Aceptar</button></td>
-        <td><button class="btn btn-danger" (click)="denegarPeticion()">Denegar</button></td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="alert alert-success" role="alert" *ngIf="showAlertAceptada">
-    Se ha aceptado una petición.
+
+
+
+<div id="modal1" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Se ha enviado solicitud para unirse al ranking</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
   </div>
-  <div class="alert alert-danger" role="alert" *ngIf="showAlert">
-    Se ha eliminado una petición.
+</div>
+
+<div id="modal2" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Se ha creado un ranking</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
   </div>
-  <div class="alert alert-info" role="alert" *ngIf="showAlertErrorAceptada">
-    Ha ocurrido un error y la petición no se ha aceptado.
+</div>
+
+<div id="modal3" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Se ha eliminado el ranking</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
   </div>
-  <div class="alert alert-info" role="alert" *ngIf="showAlertError">
-    Ha ocurrido un error y la petición no se ha eliminado.
+</div>
+<div id="modal4" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Se ha generado un nuevo codigo</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
   </div>
 </div>
