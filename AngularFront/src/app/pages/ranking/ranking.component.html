@@ -11,6 +11,11 @@
           <th scope="col">Nombre</th>
           <th scope="col">Apellido</th>
           <th scope="col">Puntos</th>
+          <th scope="col">Responsabilidad</th>
+          <th scope="col">Cooperación</th>
+          <th scope="col">Autonomía e iniciativa</th>
+          <th scope="col">Gestión emocional</th>
+          <th scope="col">Habilidades de pensamiento</th>
           <th scope="col" *ngIf="this.authService.UserData.date == undefined">Eliminar</th>
         </tr>
       </thead>
@@ -23,6 +28,11 @@
           <td *ngIf="user.id == rankingData.user_id && user.id != 0 && user.id != User[0].id">{{user.username}}</td>
           <td *ngIf="user.id == rankingData.user_id && user.id != 0 && user.id != User[0].id">{{user.firstname}}</td>
           <td *ngIf="user.id == rankingData.user_id && user.id != 0 && user.id != User[0].id">{{user.lastname}}</td>
+          <td *ngIf="user.id == rankingData.user_id && user.id != 0 && user.id != User[0].id">{{rankingData.points}}</td>
+          <td *ngIf="user.id == rankingData.user_id && user.id != 0 && user.id != User[0].id">{{rankingData.points}}</td>
+          <td *ngIf="user.id == rankingData.user_id && user.id != 0 && user.id != User[0].id">{{rankingData.points}}</td>
+          <td *ngIf="user.id == rankingData.user_id && user.id != 0 && user.id != User[0].id">{{rankingData.points}}</td>
+          <td *ngIf="user.id == rankingData.user_id && user.id != 0 && user.id != User[0].id">{{rankingData.points}}</td>
           <td *ngIf="user.id == rankingData.user_id && user.id != 0 && user.id != User[0].id">{{rankingData.points}}</td>
           <td *ngIf="user.id == rankingData.user_id && user.id != 0 && user.id != User[0].id && this.authService.UserData.date == undefined"><button class="btn btn-danger" (click)="eliminarUsuario(this.user.id,this.rankingService.rankCache.id)">Eliminar</button></td>
         </tr>

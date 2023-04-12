@@ -6,6 +6,7 @@ use App\Models\petitions;
 use App\Models\User;
 use App\Models\Ranking;
 use App\Models\RankingData;
+use App\Models\softSkillsData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -80,13 +81,35 @@ class RankingDataController extends Controller
 
     public function getUser(Request $request){
 
-        $user = User::get();
+        $resultados = DB::table('users')
+        ->join('softSkillsData', 'users.id', '=', 'softSkillsData.user_id')
+        ->select('users.id','users.username','users.firstname', 'users.lastname',
+        'softSkillsData.user_id','softSkillsData.skill_id','softSkillsData.Nivel')
+        ->get();
 
-        if ($user) {
+        if ($resultados) {
             return response()->json([
                 "status" => 1,
                 "msg" => "Se han recuperado los siguientes datos",
-                "data" => $user
+                "data" => $resultados,
+            ]);
+        } else {
+            return response()->json([
+                "status" => 0,
+                "msg" => "No se han encontrado registros"
+            ]);
+        }
+    }
+
+    public function getSkills(){
+
+        $skills = softSkillsData::get();
+
+        if ($skills) {
+            return response()->json([
+                "status" => 1,
+                "msg" => "Se han recuperado los siguientes datos",
+                "data" => $skills
             ]);
         } else {
             return response()->json([
