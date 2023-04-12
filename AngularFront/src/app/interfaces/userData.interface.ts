@@ -8,4 +8,8 @@ export interface UserData {
     date?: string;
     password: string;
     imagen?: string;
+    id_skill?: number;
+    nombre_skill?: string;
+    nivel_skill?: number;
+    puntos_skill?: number;
 }

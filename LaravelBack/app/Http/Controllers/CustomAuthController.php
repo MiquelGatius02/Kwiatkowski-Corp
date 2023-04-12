@@ -57,14 +57,11 @@ class CustomAuthController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
-        for($i = 1; $i <= 5; $i++){
-            $soft = new SoftSkillsData();
-            $soft->user_id = $user->id;
-            $soft->skill_id = $i;
-            $soft->Nivel = 0;
-            $soft->Puntos = 0;
-            $soft->save();
-        }
+        $soft = new SoftSkillsData();
+        $soft->user_id = $user->id;
+        $soft->Puntos = 0;
+        $soft->save();
+        
 
 
         return response()->json([
