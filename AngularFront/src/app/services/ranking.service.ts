@@ -35,6 +35,7 @@ export class RankingService {
   _getRankingDataByCode: any;
   _getRankingDataByUser: any;
   _getUser: any;
+  _getSkills: any;
   rankCache: RankData = { id: 0, rank_name: "", rank_description: "",id_creador:0 }
   rankCache2: assignmentData = { id: 0, assignment_name: "", rank_code: 0, prof_id: 0 }
 
@@ -45,6 +46,8 @@ export class RankingService {
   _data2: RankData[] = [{ id: 0, rank_name: "", rank_description: "",id_creador:0 }]
   _data3: RankingUserData[] = [{ id: 0, rank_code: 0, user_id: 0, points: 0 }]
   _data4: UserData[] = [{ id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "" }];
+  Skills: UserData[] = [{id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "", 
+  Nivel_autonomia_e_iniciativa:0,Nivel_cooperación:0,Nivel_gestion_emocional:0,Nivel_habilidades_de_pensamiento:0,Nivel_responsabilidad:0,puntos_skill:0}];
 
 
   public createRaking(rank: RankData) {
@@ -89,14 +92,19 @@ export class RankingService {
   public getUser() { // RECUPERAR TODOS LOS USUARIOS
     this._data4 = [];
     this._getUser = [];
+    this.Skills = [];
     const tokenCache: any = this.token.getToken();
     this.http.get("http://127.0.0.1:8000/api/getUser").subscribe(data => {
-      // console.log(data)
+      console.log(data)
       this._getUser = data;
-      // console.log(this._getUser)
+      this._getSkills = this._getUser.data2;
       for (let i = 0; i < this._getUser.data.length; i++) {
         this._data4.push(this._getUser.data[i])
       }
+      // for (let i = 0; i < this._getSkills.length; i++) {
+      //   this.Skills.push(this._getSkills[i]);
+      // }
+      // console.log(this.Skills);
     });
   }
 

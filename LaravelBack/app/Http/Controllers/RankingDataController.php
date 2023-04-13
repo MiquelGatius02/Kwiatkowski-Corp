@@ -6,6 +6,7 @@ use App\Models\petitions;
 use App\Models\User;
 use App\Models\Ranking;
 use App\Models\RankingData;
+use App\Models\softSkillsData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -78,15 +79,40 @@ class RankingDataController extends Controller
         }
     }
 
-    public function getUser(Request $request){
+    public function getUser(){
 
-        $user = User::get();
+        $resultados = DB::table('users')
+        ->join('softSkillsData', 'users.id', '=', 'softSkillsData.user_id')
+        ->select('users.id','users.username','users.firstname', 'users.lastname',
+        'softSkillsData.Nivel_responsabilidad','softSkillsData.Nivel_cooperacion',
+        'softSkillsData.Nivel_autonomia_e_iniciativa','softSkillsData.Nivel_gestion_emocional',
+        'softSkillsData.Nivel_habilidades_de_pensamiento')
+        ->groupBy('users.id')
+        ->get();
 
-        if ($user) {
+        if ($resultados) {
             return response()->json([
                 "status" => 1,
                 "msg" => "Se han recuperado los siguientes datos",
-                "data" => $user
+                "data" => $resultados,
+            ]);
+        } else {
+            return response()->json([
+                "status" => 0,
+                "msg" => "No se han encontrado registros"
+            ]);
+        }
+    }
+
+    public function getSkills(){
+
+        $skills = softSkillsData::get();
+
+        if ($skills) {
+            return response()->json([
+                "status" => 1,
+                "msg" => "Se han recuperado los siguientes datos",
+                "data" => $skills
             ]);
         } else {
             return response()->json([

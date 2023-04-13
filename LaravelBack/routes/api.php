@@ -8,6 +8,7 @@ use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\PetitionsController;
 use App\Http\Controllers\RankingController;
 use App\Http\Controllers\RankingDataController;
+use App\Http\Controllers\softController;
 use Illuminate\Support\Facades\Route;
 
 
