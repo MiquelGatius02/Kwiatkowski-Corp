@@ -87,7 +87,10 @@ class RankingDataController extends Controller
         'softSkillsData.Nivel_responsabilidad','softSkillsData.Nivel_cooperacion',
         'softSkillsData.Nivel_autonomia_e_iniciativa','softSkillsData.Nivel_gestion_emocional',
         'softSkillsData.Nivel_habilidades_de_pensamiento')
-        ->groupBy('users.id')
+        ->groupBy('users.id','users.username','users.firstname', 'users.lastname',
+        'softSkillsData.Nivel_responsabilidad','softSkillsData.Nivel_cooperacion',
+        'softSkillsData.Nivel_autonomia_e_iniciativa','softSkillsData.Nivel_gestion_emocional',
+        'softSkillsData.Nivel_habilidades_de_pensamiento')
         ->get();
 
         if ($resultados) {
