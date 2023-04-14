@@ -119,22 +119,22 @@ export class RankingService {
     this.valoresDelete.id_user = user_id;
     this.valoresDelete.id_rank = id_rank;
     this.http.post('http://127.0.0.1:8000/api/deleteUser', this.valoresDelete).subscribe(data => {
-      // console.log(data)
+      // console.log(data);
     });
   }
 
   deleteRanking(rank: RankData) {
     console.log(rank);
     this.http.post('http://127.0.0.1:8000/api/deleteRanking', rank).subscribe(data => {
-      console.log(data)
+      // console.log(data);
     });
   }
 
   regenerarCodigo(rank: RankData, codeNuevo: number) {
     rank.id_creador = codeNuevo;
-    console.log(rank);
+    // console.log(rank);
     this.http.post('http://127.0.0.1:8000/api/regenerarCodigo', rank).subscribe(data => {
-      console.log(data);
+      // console.log(data);
     });
   }
 

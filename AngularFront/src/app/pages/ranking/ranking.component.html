@@ -11,11 +11,11 @@
           <th scope="col">Nombre</th>
           <th scope="col">Apellido</th>
           <th scope="col">Puntos</th>
-          <th scope="col">Responsabilidad</th>
-          <th scope="col">Cooperación</th>
           <th scope="col">Autonomía e iniciativa</th>
+          <th scope="col">Cooperación</th>
           <th scope="col">Gestión emocional</th>
           <th scope="col">Habilidades de pensamiento</th>
+          <th scope="col">Responsabilidad</th>
           <th scope="col" *ngIf="this.authService.UserData.date == undefined">Eliminar</th>
         </tr>
       </thead>
@@ -29,53 +29,100 @@
           <td *ngIf="user.id == rankingData.user_id && user.id != 0">{{user.firstname}}</td>
           <td *ngIf="user.id == rankingData.user_id && user.id != 0">{{user.lastname}}</td>
           <td *ngIf="user.id == rankingData.user_id && user.id != 0">{{rankingData.points}}</td>
-          <td *ngIf="user.id == rankingData.user_id && user.id != 0 && user.Nivel_autonomia_e_iniciativa == 0">Not unlocked</td>
           <td *ngIf="user.id == rankingData.user_id && user.id != 0">
-            <img *ngIf="user.Nivel_autonomia_e_iniciativa == 0" src="" alt="top 1" width="20" height="20">
-            <img *ngIf="user.Nivel_autonomia_e_iniciativa == 1" src="/AngularFront/src/assets/Autonomia1.png" alt="top 1" width="20" height="20">
-            <img *ngIf="user.Nivel_autonomia_e_iniciativa == 2" src="/AngularFront/src/assets/Autonomia2.png" alt="top 1" width="20" height="20">
-            <img *ngIf="user.Nivel_autonomia_e_iniciativa == 3" src="/AngularFront/src/assets/Autonomia3.png" alt="top 1" width="20" height="20">
-            <img *ngIf="user.Nivel_autonomia_e_iniciativa == 4" src="/AngularFront/src/assets/Autonomia4.png" alt="top 1" width="20" height="20">
-            <img *ngIf="user.Nivel_autonomia_e_iniciativa == 5" src="/AngularFront/src/assets/Autonomia5.png" alt="top 1" width="20" height="20">
+            <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal" data-target="#modal1" (click)="setModalTitle('Autonmía e iniciativa')"><img *ngIf="user.Nivel_autonomia_e_iniciativa == 0" src="../../../assets/Autonomia0.png" alt="Autonomia" width="40" height="40"></button>
+            <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal" data-target="#modal1" (click)="setModalTitle('Autonmía e iniciativa')"><img *ngIf="user.Nivel_autonomia_e_iniciativa == 1" src="../../../assets/Autonomia1.png" alt="Autonomia" width="40" height="40"></button>
+            <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal" data-target="#modal1" (click)="setModalTitle('Autonmía e iniciativa')"><img *ngIf="user.Nivel_autonomia_e_iniciativa == 2" src="../../../assets/Autonomia2.png" alt="Autonomia" width="40" height="40"></button>
+            <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal" data-target="#modal1" (click)="setModalTitle('Autonmía e iniciativa')"><img *ngIf="user.Nivel_autonomia_e_iniciativa == 3" src="../../../assets/Autonomia3.png" alt="Autonomia" width="40" height="40"></button>
+            <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal" data-target="#modal1" (click)="setModalTitle('Autonmía e iniciativa')"><img *ngIf="user.Nivel_autonomia_e_iniciativa == 4" src="../../../assets/Autonomia4.png" alt="Autonomia" width="40" height="40"></button>
+            <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal" data-target="#modal1" (click)="setModalTitle('Autonmía e iniciativa')"><img *ngIf="user.Nivel_autonomia_e_iniciativa == 5" src="../../../assets/Autonomia5.png" alt="Autonomia" width="40" height="40"></button>
           </td>
           <td *ngIf="user.id == rankingData.user_id && user.id != 0">
-            <img *ngIf="user.Nivel_cooperacion == 0" src="" alt="top 1" width="20" height="20">
-            <img *ngIf="user.Nivel_cooperacion == 1" src="/AngularFront/src/assets/Cooperacion1.png" alt="top 1" width="20" height="20">
-            <img *ngIf="user.Nivel_cooperacion == 2" src="/AngularFront/src/assets/Cooperacion2.png" alt="top 1" width="20" height="20">
-            <img *ngIf="user.Nivel_cooperacion == 3" src="/AngularFront/src/assets/Cooperacion3.png" alt="top 1" width="20" height="20">
-            <img *ngIf="user.Nivel_cooperacion == 4" src="/AngularFront/src/assets/Cooperacion4.png" alt="top 1" width="20" height="20">
-            <img *ngIf="user.Nivel_cooperacion == 5" src="/AngularFront/src/assets/Cooperacion5.png" alt="top 1" width="20" height="20">
+            <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal" data-target="#modal1" (click)="setModalTitle('Cooperación')"><img *ngIf="user.Nivel_cooperacion == 0" src="../../../assets/Cooperacion0.png" alt="Cooperacion" width="40" height="40"></button>
+            <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal" data-target="#modal1" (click)="setModalTitle('Cooperación')"><img *ngIf="user.Nivel_cooperacion == 1" src="../../../assets/Cooperacion1.png" alt="Cooperacion" width="40" height="40"></button>
+            <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal" data-target="#modal1" (click)="setModalTitle('Cooperación')"><img *ngIf="user.Nivel_cooperacion == 2" src="../../../assets/Cooperacion2.png" alt="Cooperacion" width="40" height="40"></button>
+            <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal" data-target="#modal1" (click)="setModalTitle('Cooperación')"><img *ngIf="user.Nivel_cooperacion == 3" src="../../../assets/Cooperacion3.png" alt="Cooperacion" width="40" height="40"></button>
+            <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal" data-target="#modal1" (click)="setModalTitle('Cooperación')"><img *ngIf="user.Nivel_cooperacion == 4" src="../../../assets/Cooperacion4.png" alt="Cooperacion" width="40" height="40"></button>
+            <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal" data-target="#modal1" (click)="setModalTitle('Cooperación')"><img *ngIf="user.Nivel_cooperacion == 5" src="../../../assets/Cooperacion5.png" alt="Cooperacion" width="40" height="40"></button>
+  
+          <td *ngIf="user.id == rankingData.user_id && user.id != 0">
+            <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal" data-target="#modal1" (click)="setModalTitle('Gestión emocional')"><img *ngIf="user.Nivel_gestion_emocional == 0" src="../../../assets/Gestion0.png" alt="Gestion" width="40" height="40"></button>
+            <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal" data-target="#modal1" (click)="setModalTitle('Gestión emocional')"><img *ngIf="user.Nivel_gestion_emocional == 1" src="../../../assets/Gestion1.png" alt="Gestion" width="40" height="40"></button>
+            <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal" data-target="#modal1" (click)="setModalTitle('Gestión emocional')"><img *ngIf="user.Nivel_gestion_emocional == 2" src="../../../assets/Gestion2.png" alt="Gestion" width="40" height="40"></button>
+            <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal" data-target="#modal1" (click)="setModalTitle('Gestión emocional')"><img *ngIf="user.Nivel_gestion_emocional == 3" src="../../../assets/Gestion3.png" alt="Gestion" width="40" height="40"></button>
+            <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal" data-target="#modal1" (click)="setModalTitle('Gestión emocional')"><img *ngIf="user.Nivel_gestion_emocional == 4" src="../../../assets/Gestion4.png" alt="Gestion" width="40" height="40"></button>
+            <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal" data-target="#modal1" (click)="setModalTitle('Gestión emocional')"><img *ngIf="user.Nivel_gestion_emocional == 5" src="../../../assets/Gestion5.png" alt="Gestion" width="40" height="40"></button>
+          </td> 
+          <td *ngIf="user.id == rankingData.user_id && user.id != 0">
+            <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal" data-target="#modal1" (click)="setModalTitle('Habilidades de pensamiento')"><img *ngIf="user.Nivel_habilidades_de_pensamiento == 0" src="../../../assets/Pensamiento0.png" alt="Pensamiento" width="40" height="40"></button>
+            <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal" data-target="#modal1" (click)="setModalTitle('Habilidades de pensamiento')"><img *ngIf="user.Nivel_habilidades_de_pensamiento == 1" src="../../../assets/Pensamiento1.png" alt="Pensamiento" width="40" height="40"></button>
+            <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal" data-target="#modal1" (click)="setModalTitle('Habilidades de pensamiento')"><img *ngIf="user.Nivel_habilidades_de_pensamiento == 2" src="../../../assets/Pensamiento2.png" alt="Pensamiento" width="40" height="40"></button>
+            <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal" data-target="#modal1" (click)="setModalTitle('Habilidades de pensamiento')"><img *ngIf="user.Nivel_habilidades_de_pensamiento == 3" src="../../../assets/Pensamiento3.png" alt="Pensamiento" width="40" height="40"></button>
+            <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal" data-target="#modal1" (click)="setModalTitle('Habilidades de pensamiento')"><img *ngIf="user.Nivel_habilidades_de_pensamiento == 4" src="../../../assets/Pensamiento4.png" alt="Pensamiento" width="40" height="40"></button>
+            <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal" data-target="#modal1" (click)="setModalTitle('Habilidades de pensamiento')"><img *ngIf="user.Nivel_habilidades_de_pensamiento == 5" src="../../../assets/Pensamiento5.png" alt="Pensamiento" width="40" height="40"></button>
           </td>
           <td *ngIf="user.id == rankingData.user_id && user.id != 0">
-            <img *ngIf="user.Nivel_gestion_emocional == 0" src="" alt="top 1" width="20" height="20">
-            <img *ngIf="user.Nivel_gestion_emocional == 1" src="/AngularFront/src/assets/Gestion1.png" alt="top 1" width="20" height="20">
-            <img *ngIf="user.Nivel_gestion_emocional == 2" src="/AngularFront/src/assets/Gestion2.png" alt="top 1" width="20" height="20">
-            <img *ngIf="user.Nivel_gestion_emocional == 3" src="/AngularFront/src/assets/Gestion3.png" alt="top 1" width="20" height="20">
-            <img *ngIf="user.Nivel_gestion_emocional == 4" src="/AngularFront/src/assets/Gestion4.png" alt="top 1" width="20" height="20">
-            <img *ngIf="user.Nivel_gestion_emocional == 5" src="/AngularFront/src/assets/Gestion5.png" alt="top 1" width="20" height="20">
+            <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal" data-target="#modal1" (click)="setModalTitle('Responsabilidad')"><img *ngIf="user.Nivel_responsabilidad == 0" src="../../../assets/Responsabilidad0.png" alt="Responsabilidad" width="40" height="40" title="aaa /n aa"></button>
+            <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal" data-target="#modal1" (click)="setModalTitle('Responsabilidad')"><img *ngIf="user.Nivel_responsabilidad == 1" src="../../../assets/Responsabilidad1.png" alt="Responsabilidad" width="40" height="40"></button>
+            <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal" data-target="#modal1" (click)="setModalTitle('Responsabilidad')"><img *ngIf="user.Nivel_responsabilidad == 2" src="../../../assets/Responsabilidad2.png" alt="Responsabilidad" width="40" height="40"></button>
+            <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal" data-target="#modal1" (click)="setModalTitle('Responsabilidad')"><img *ngIf="user.Nivel_responsabilidad == 3" src="../../../assets/Responsabilidad3.png" alt="Responsabilidad" width="40" height="40"></button>
+            <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal" data-target="#modal1" (click)="setModalTitle('Responsabilidad')"><img *ngIf="user.Nivel_responsabilidad == 4" src="../../../assets/Responsabilidad4.png" alt="Responsabilidad" width="40" height="40"></button>
+            <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal" data-target="#modal1" (click)="setModalTitle('Responsabilidad')"><img *ngIf="user.Nivel_responsabilidad == 5" src="../../../assets/Responsabilidad5.png" alt="Responsabilidad" width="40" height="40" ></button>
           </td>
-          <td *ngIf="user.id == rankingData.user_id && user.id != 0">
-            <img *ngIf="user.Nivel_habilidades_de_pensamiento == 0" src="" alt="top 1" width="20" height="20">
-            <img *ngIf="user.Nivel_habilidades_de_pensamiento == 1" src="/AngularFront/src/assets/Pensamiento1.png" alt="top 1" width="20" height="20">
-            <img *ngIf="user.Nivel_habilidades_de_pensamiento == 2" src="/AngularFront/src/assets/Pensamiento2.png" alt="top 1" width="20" height="20">
-            <img *ngIf="user.Nivel_habilidades_de_pensamiento == 3" src="/AngularFront/src/assets/Pensamiento3.png" alt="top 1" width="20" height="20">
-            <img *ngIf="user.Nivel_habilidades_de_pensamiento == 4" src="/AngularFront/src/assets/Pensamiento4.png" alt="top 1" width="20" height="20">
-            <img *ngIf="user.Nivel_habilidades_de_pensamiento == 5" src="/AngularFront/src/assets/Pensamiento5.png" alt="top 1" width="20" height="20">
-          </td>
-          <td *ngIf="user.id == rankingData.user_id && user.id != 0">
-            <img *ngIf="user.Nivel_responsabilidad == 0" src="" alt="top 1" width="20" height="20">
-            <img *ngIf="user.Nivel_responsabilidad == 1" src="/AngularFront/src/assets/Responsabilidad1.png" alt="top 1" width="20" height="20">
-            <img *ngIf="user.Nivel_responsabilidad == 2" src="/AngularFront/src/assets/Responsabilidad2.png" alt="top 1" width="20" height="20">
-            <img *ngIf="user.Nivel_responsabilidad == 3" src="/AngularFront/src/assets/Responsabilidad3.png" alt="top 1" width="20" height="20">
-            <img *ngIf="user.Nivel_responsabilidad == 4" src="/AngularFront/src/assets/Responsabilidad4.png" alt="top 1" width="20" height="20">
-            <img *ngIf="user.Nivel_responsabilidad == 5" src="/AngularFront/src/assets/Responsabilidad5.png" alt="top 1" width="20" height="20">
-          </td>
-          <td *ngIf="user.id == rankingData.user_id && user.id != 0 && this.authService.UserData.date == undefined"><button class="btn btn-danger" (click)="eliminarUsuario(this.user.id,this.rankingService.rankCache.id)">Eliminar</button></td>
+          <td *ngIf="user.id == rankingData.user_id && user.id != 0 && this.authService.UserData.date == undefined"><button class="btn btn-danger" data-toggle="modal" data-target="#modal2">Eliminar</button></td>
+          
+          <div id="modal2" class="modal" tabindex="-1" role="dialog" style="color: black; margin-top:12%">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">¿Desea Borrar?</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>¿Estás segur@ de que quieres eliminar este usuario?</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" (click)="eliminarUsuario(this.user.id,this.rankingService.rankCache.id)" class="btn btn-danger">Eliminar</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </tr>
       </tbody>
     </table>
     <div class="alert alert-success" role="alert" *ngIf="showAlertDelete">
       Se ha eliminado un usuario del ranking.
+    </div>
+  </div>
+</div>
+
+
+<div id="modal1" class="modal" tabindex="-1" role="dialog" style="color:black; margin-top:12%">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ modalTitle }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li *ngIf="li1 != ''">{{li1}}</li>
+          <li *ngIf="li2 != ''">{{li2}}</li>
+          <li *ngIf="li3 != ''">{{li3}}</li>
+          <li *ngIf="li4 != ''">{{li4}}</li>
+          <li *ngIf="li5 != ''">{{li5}}</li>
+          <li *ngIf="li6 != ''">{{li6}}</li>
+          <li *ngIf="li7 != ''">{{li7}}</li>
+          <li *ngIf="li8 != ''">{{li8}}</li>
+          <li *ngIf="li9 != ''">{{li9}}</li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
