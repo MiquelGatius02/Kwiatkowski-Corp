@@ -16,11 +16,15 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->integer('Nivel_responsabilidad')->default(0);
-            $table->integer('Nivel_cooperación')->default(0);
+            $table->integer('Nivel_cooperacion')->default(0);
             $table->integer('Nivel_autonomia_e_iniciativa')->default(0);
             $table->integer('Nivel_gestion_emocional')->default(0);
             $table->integer('Nivel_habilidades_de_pensamiento')->default(0);
-            $table->integer('Puntos');
+            $table->integer('Puntos_responsabilidad')->default(0);
+            $table->integer('Puntos_cooperacion')->default(0);
+            $table->integer('Puntos_autonomia_e_iniciativa')->default(0);
+            $table->integer('Puntos_gestion_emocional')->default(0);
+            $table->integer('Puntos_habilidades_de_pensamiento')->default(0);
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users');
@@ -29,9 +33,9 @@ return new class extends Migration
         DB::table('softSkillsData')->insert(
             array(
                 'user_id' => '2',
-                'Puntos' => 0,
             )
         );
+        
     }
 
     /**

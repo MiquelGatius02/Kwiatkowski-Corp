@@ -36,18 +36,20 @@ export class RankingService {
   _getRankingDataByUser: any;
   _getUser: any;
   _getSkills: any;
-  rankCache: RankData = { id: 0, rank_name: "", rank_description: "",id_creador:0 }
+  rankCache: RankData = { id: 0, rank_name: "", rank_description: "", id_creador: 0 }
   rankCache2: assignmentData = { id: 0, assignment_name: "", rank_code: 0, prof_id: 0 }
 
 
   // ARRAYS VALORES RECUPERADOS
 
   _data1: RankingUserData[] = [{ id: 0, rank_code: 0, user_id: 0, points: 0 }]
-  _data2: RankData[] = [{ id: 0, rank_name: "", rank_description: "",id_creador:0 }]
+  _data2: RankData[] = [{ id: 0, rank_name: "", rank_description: "", id_creador: 0 }]
   _data3: RankingUserData[] = [{ id: 0, rank_code: 0, user_id: 0, points: 0 }]
-  _data4: UserData[] = [{ id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "" }];
-  Skills: UserData[] = [{id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "", 
-  Nivel_autonomia_e_iniciativa:0,Nivel_cooperación:0,Nivel_gestion_emocional:0,Nivel_habilidades_de_pensamiento:0,Nivel_responsabilidad:0,puntos_skill:0}];
+  _data4: UserData[] = [{
+    id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "",
+    Nivel_autonomia_e_iniciativa: 0, Nivel_cooperacion: 0, Nivel_gestion_emocional: 0, Nivel_habilidades_de_pensamiento: 0, Nivel_responsabilidad: 0, puntos_skill: 0, skills: []
+  }];
+  Skills: UserData[] = [];
 
 
   public createRaking(rank: RankData) {
@@ -92,19 +94,16 @@ export class RankingService {
   public getUser() { // RECUPERAR TODOS LOS USUARIOS
     this._data4 = [];
     this._getUser = [];
-    this.Skills = [];
+
     const tokenCache: any = this.token.getToken();
     this.http.get("http://127.0.0.1:8000/api/getUser").subscribe(data => {
-      console.log(data)
+      // console.log(data);
       this._getUser = data;
-      this._getSkills = this._getUser.data2;
+      this.Skills = this._getUser.skills;
       for (let i = 0; i < this._getUser.data.length; i++) {
-        this._data4.push(this._getUser.data[i])
+        this._data4.push(this._getUser.data[i]);
       }
-      // for (let i = 0; i < this._getSkills.length; i++) {
-      //   this.Skills.push(this._getSkills[i]);
-      // }
-      // console.log(this.Skills);
+      console.log(this._data4);
     });
   }
 
@@ -120,22 +119,22 @@ export class RankingService {
     this.valoresDelete.id_user = user_id;
     this.valoresDelete.id_rank = id_rank;
     this.http.post('http://127.0.0.1:8000/api/deleteUser', this.valoresDelete).subscribe(data => {
-      // console.log(data)
+      // console.log(data);
     });
   }
 
   deleteRanking(rank: RankData) {
     console.log(rank);
     this.http.post('http://127.0.0.1:8000/api/deleteRanking', rank).subscribe(data => {
-      console.log(data)
+      // console.log(data);
     });
   }
 
   regenerarCodigo(rank: RankData, codeNuevo: number) {
     rank.id_creador = codeNuevo;
-    console.log(rank);
+    // console.log(rank);
     this.http.post('http://127.0.0.1:8000/api/regenerarCodigo', rank).subscribe(data => {
-      console.log(data);
+      // console.log(data);
     });
   }
 
