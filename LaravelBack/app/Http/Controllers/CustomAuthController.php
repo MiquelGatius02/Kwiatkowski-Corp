@@ -59,7 +59,6 @@ class CustomAuthController extends Controller
 
         $soft = new SoftSkillsData();
         $soft->user_id = $user->id;
-        $soft->Puntos = 0;
         $soft->save();
         
 
