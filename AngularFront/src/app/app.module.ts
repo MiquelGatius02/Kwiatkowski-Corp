@@ -19,6 +19,7 @@ import { AssignmentComponent } from './pages/assignment/assignment.component';
 import { VerPetiticionesComponent } from './pages/ver-petiticiones/ver-petiticiones.component';
 import { AssignmentDataComponent } from './pages/assignment-data/assignment-data.component';
 import { HistorialEvaluationsComponent } from './pages/historial-evaluations/historial-evaluations.component';
+import { EvaluationsComponent } from './pages/evaluations/evaluations.component';
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -32,7 +33,8 @@ import { HistorialEvaluationsComponent } from './pages/historial-evaluations/his
     AssignmentComponent,
     VerPetiticionesComponent,
     AssignmentDataComponent,
-    HistorialEvaluationsComponent
+    HistorialEvaluationsComponent,
+    EvaluationsComponent
   ],
   imports: [
     BrowserModule,

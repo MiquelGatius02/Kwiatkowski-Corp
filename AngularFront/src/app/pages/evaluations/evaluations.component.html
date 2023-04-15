@@ -1,0 +1,38 @@
+<div class="table">
+  <form class="form-signin" [formGroup]="newAssignment">
+
+    <th>
+      <label for="">Nombre de la tarea</label>
+      <div class="form-group">
+        <input type="text" class="form-control" />
+      </div>
+    </th>
+    <th>
+      <label for="">Ranking</label>
+      <div class="form-group">
+        <select formControlName="rank_code">
+          <option *ngFor="let rank of rankingsUsuario" value={{rank.id}}>{{rank.rank_name}}</option>
+        </select>
+      </div>
+    </th>
+    <th><br>
+      <button type="submit" class="btn btn-block btn-primary">
+        Seleccionar ranking
+      </button>
+    </th>
+
+    <p>Puntos disponibles: </p>
+  </form>
+</div>
+
+<table class="table">
+  <tr>
+    <th>Nombre Alumno</th>
+    <th>Habilidad</th>
+    <th>Puntos</th>
+  </tr>
+  <!--   <tr *ngFor="let assignment of this.assignmentService._data1; let i = index">
+    <td *ngIf="assignment.id != 0">{{assignment.assignment_name}}</td>
+    <td *ngIf="assignment.id != 0">{{assignment.rank_code}}</td>
+  </tr> -->
+</table>
