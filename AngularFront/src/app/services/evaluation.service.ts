@@ -15,7 +15,7 @@ export class EvaluationService {
     private token: TokenService,
   ) { }
 
-  public createRaking(evaluation: evaluationData) {
+  public createEvaluation(evaluation: evaluationData) {
     const tokenCache: any = this.token.getToken();
     return this.http.post("http://127.0.0.1:8000/api/createEvaluation", evaluation, { headers: new HttpHeaders().set('Authorization', tokenCache) })
   }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { waitForAsync } from '@angular/core/testing';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RankData } from 'src/app/interfaces/rankData.interface ';
@@ -32,36 +33,22 @@ export class EvaluationsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.RankingData;
-    this.rankingUserData = [];
+
     this.rankingService.getRanking();
-    this.rankingService.getRankingDataByUser(this.authService.Data.data.id)
-    this.RankingData = this.rankingService._data2
-    this.rankingUserData = this.rankingService._data1
+    this.RankingData = this.rankingService._data2.data;
 
-    console.log(this.RankingData.data.length)
-    console.log(this.rankingUserData.data.length)
-    for (let i = 0; i < this.RankingData.data.length; i++) {
-      if (this.rankingUserData.data[i].user_id == this.authService.Data.data.id) {
-        this.rankIdCache = this.rankingUserData.data[i].rank_code;
-
-        for (let j = 0; j < this.rankingUserData.length; j++) {
-          if (this.RankingData.data[j].id == this.rankIdCache) {
-            this.rankingsUsuario.push(this.RankingData[j])
-          }
+    console.log(this.RankingData)
+    setTimeout(() => {
+      for (let i = 0; i < this.RankingData.length; i++) {
+        if (this.RankingData.id_creador == this.authService.Data.data.id) {
+          this.rankingUserData.push(this.RankingData[i])
         }
+        console.log(this.rankingUserData)
       }
-    }
-    console.log(this.rankingsUsuario)
-  }
-
-  onSubmit() {
-    /*     this.rankingsUsuario = [];
-    
-        this.rankingService.getRankingDataByCode(this.newAssignment.get('rank_code')?.value)
-        this.rankingUserData = this.rankingService._data3 */
+    }, 500);
 
 
   }
+
 
 }

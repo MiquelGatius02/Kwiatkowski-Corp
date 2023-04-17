@@ -44,13 +44,12 @@ export class RankingService {
 
   _data1: any
   _data2: any
-  // _data2: Ra/nkData[] = [{ id: 0, rank_name: "", rank_description: "", id_creador: 0 }]
-  _data3: RankingUserData[] = [{ id: 0, rank_code: 0, user_id: 0, points: 0 }]
-  _data4: UserData[] = [{ id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "" }];
-  Skills: UserData[] = [{
-    id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "",
-    Nivel_autonomia_e_iniciativa: 0, Nivel_cooperación: 0, Nivel_gestion_emocional: 0, Nivel_habilidades_de_pensamiento: 0, Nivel_responsabilidad: 0, puntos_skill: 0
-  }];
+  _data3: any
+  _data4: any
+  /*   Skills: UserData[] = [{
+      id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "",
+      Nivel_autonomia_e_iniciativa: 0, Nivel_cooperación: 0, Nivel_gestion_emocional: 0, Nivel_habilidades_de_pensamiento: 0, Nivel_responsabilidad: 0, puntos_skill: 0
+    }]; */
 
 
   public createRaking(rank: RankData) {
@@ -62,6 +61,7 @@ export class RankingService {
   public getRankingDataByUser(user_id: number) { // RECUPERAR DATOS RANKING POR ID DE USUARIO
     this.http.get("http://127.0.0.1:8000/api/getRankingDataByUser" + "?" + "user_id=" + user_id).subscribe({
       next: (value: any) => {
+        console.log(value)
         this._data1 = value
       }
     });
@@ -70,8 +70,9 @@ export class RankingService {
 
   public getRanking() {  // TODOS LOS RANKINGS
     const tokenCache: any = this.token.getToken();
-    this.http.get("http://127.0.0.1:8000/api/getRanking").subscribe({
+    this.http.get("http://127.0.0.1:8000/api/getRanking", tokenCache).subscribe({
       next: (value: any) => {
+        console.log(value)
         this._data2 = value
       }
     });
@@ -79,12 +80,10 @@ export class RankingService {
   }
 
   public getRankingDataByCode(rank_code: number) { // RECUPRAR DATOS RANKING POR ID DE RANKING
-    this._data3 = [];
-    this.http.get("http://127.0.0.1:8000/api/getRankingDataByCode" + "?" + "rank_code=" + rank_code).subscribe(data => {
-      this._getRankingDataByCode = data
-      this._data3 = []
-      for (let i = 0; i < this._getRankingDataByCode.data.length; i++) {
-        this._data3.push(this._getRankingDataByCode.data[i])
+    this.http.get("http://127.0.0.1:8000/api/getRankingDataByCode" + "?" + "rank_code=" + rank_code).subscribe({
+      next: (value: any) => {
+        console.log(value)
+        this._data3 = value
       }
     });
   }
@@ -93,12 +92,12 @@ export class RankingService {
   public getUser() { // RECUPERAR TODOS LOS USUARIOS
     this._data4 = [];
     this._getUser = [];
-    this.Skills = [];
+    /* this.Skills = []; */
     const tokenCache: any = this.token.getToken();
     this.http.get("http://127.0.0.1:8000/api/getUser").subscribe(data => {
       console.log(data)
       this._getUser = data;
-      this._getSkills = this._getUser.data2;
+      /*    this._getSkills = this._getUser.data2; */
       for (let i = 0; i < this._getUser.data.length; i++) {
         this._data4.push(this._getUser.data[i]);
       }

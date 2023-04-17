@@ -13,10 +13,12 @@ import { RankingService } from 'src/app/services/ranking.service';
   styleUrls: ['./ranking.component.scss']
 })
 export class RankingComponent implements OnInit {
-  RankingData: RankData[] = [{ id: 0, rank_name: "", rank_description: "", id_creador: 0 }]
-  UsersRankingData: RankingUserData[] = [{ id: 0, rank_code: 0, user_id: 0, points: 0 }]
-  User: UserData[] = [{ id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "", 
-  Nivel_autonomia_e_iniciativa:0,Nivel_cooperacion:0,Nivel_gestion_emocional:0,Nivel_habilidades_de_pensamiento:0,Nivel_responsabilidad:0,puntos_skill:0 }];
+  RankingData: any
+  UsersRankingData: any
+  User: UserData[] = [{
+    id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "",
+    Nivel_autonomia_e_iniciativa: 0, Nivel_cooperacion: 0, Nivel_gestion_emocional: 0, Nivel_habilidades_de_pensamiento: 0, Nivel_responsabilidad: 0, puntos_skill: 0
+  }];
 
   showAlertDelete: boolean = false;
 
@@ -34,11 +36,11 @@ export class RankingComponent implements OnInit {
     this.RankingData = [];
     this.User = [];
 
-    this.RankingData = this.rankingService._data2
+    this.RankingData = this.rankingService._data2.data
     this.rankingService.getRankingDataByCode(this.rankingService.rankCache.id)
-    this.UsersRankingData = this.rankingService._data3;
     this.rankingService.getUser();
-    this.User = this.rankingService._data4;
+    this.UsersRankingData = this.rankingService._data3.data;
+    this.User = this.rankingService._data4.data;
     console.log(this.User);
   }
 
@@ -70,7 +72,7 @@ export class RankingComponent implements OnInit {
   public setModalTitle(data: string): void {
     this.modalTitle = data;
 
-    if(this.modalTitle == 'Responsabilidad'){
+    if (this.modalTitle == 'Responsabilidad') {
       this.li1 = 'Trabaja de forma constante.';
       this.li2 = 'Se mantiene conectado/a a la actividad del grupo.';
       this.li3 = 'Hace comentarios relacionados con la tarea a realizar.';
@@ -78,7 +80,7 @@ export class RankingComponent implements OnInit {
       this.li5 = 'Realiza las tareas con cuidado.';
       this.li6 = 'Persevera ante las dificultades.';
       this.li7 = 'Respeta las normas.';
-    }else if(this.modalTitle == 'Cooperación'){
+    } else if (this.modalTitle == 'Cooperación') {
       this.li1 = 'Escucha a los demás.';
       this.li2 = 'Incorpora lo que dicen los demás.';
       this.li3 = 'Fomenta la participación de los miembros del grupo.';
@@ -86,7 +88,7 @@ export class RankingComponent implements OnInit {
       this.li5 = 'Facilita la resolución de conflictos.';
       this.li6 = 'Reconoce sus responsabilidades y las de los demás.';
       this.li7 = 'Ayuda a los demás de forma desinteresada.';
-    }else if(this.modalTitle == 'Habilidades de pensamiento'){
+    } else if (this.modalTitle == 'Habilidades de pensamiento') {
       this.li1 = 'Relaciona contenidos nuevos con conocimientos previos.';
       this.li2 = 'Hace buenas reflexiones sobre los contenidos trabajados.';
       this.li3 = 'Hace buenas reflexiones sobre sus procesos personales internos.';
@@ -96,14 +98,14 @@ export class RankingComponent implements OnInit {
       this.li7 = 'Planifica y prioriza las tareas.';
       this.li8 = 'Tiene interés en explorar perspectivas diferentes.';
       this.li9 = 'Expresa eficazmente las ideas (corrección, precisión y estructura).';
-    }else if(this.modalTitle == 'Gestión emocional'){
+    } else if (this.modalTitle == 'Gestión emocional') {
       this.li1 = 'Transmite alegría.';
       this.li2 = 'Se muestra tranquilo/a en situaciones de presión.';
       this.li3 = 'Controla las emociones en situaciones de conflicto.';
       this.li4 = 'Asume la posibilidad de equivocarse.';
       this.li5 = 'Acepta que los cambios que propone no salgan adelante.';
       this.li6 = 'Adecúa el comportamiento a las circunstancias.';
-    }else if(this.modalTitle == 'Autonmía e iniciativa'){
+    } else if (this.modalTitle == 'Autonmía e iniciativa') {
       this.li1 = 'Aporta ideas.';
       this.li2 = 'Hace preguntas cuando se encalla.';
       this.li3 = 'Toma decisiones para que el proyecto avance.';
