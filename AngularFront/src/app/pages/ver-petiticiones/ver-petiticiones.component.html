@@ -15,23 +15,37 @@
           <!-- El ranking al que hace la peticion -->
           <td>{{peticiones.user_id}}</td>
           <!-- Usuario que hace la petición -->
-          <td><button class="btn btn-success" (click)="aceptarPeticion()">Aceptar</button></td>
+          <td><button class="btn btn-success" (click)="aceptarPeticion()" data-toggle="modal" data-target="#modal1">Aceptar</button></td>
           <!-- Aceptar Peticion -->
-          <td><button class="btn btn-danger" (click)="denegarPeticion()">Denegar</button></td>
+          <td><button class="btn btn-danger" (click)="denegarPeticion()" data-toggle="modal" data-target="#modal2">Denegar</button></td>
           <!-- Denegar Peticion -->
         </tr>
       </tbody>
     </table>
-    <div class="alert alert-success" role="alert" *ngIf="showAlertAceptada">
-      Se ha aceptado una petición.
+</div>
+
+<div id="modal1" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Se ha aceptado la solicitud para unirse al ranking</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+      </div>
     </div>
-    <div class="alert alert-danger" role="alert" *ngIf="showAlert">
-      Se ha eliminado una petición.
+  </div>
+</div>
+
+<div id="modal2" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Se ha denegado la solicitud para unirse al ranking</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+      </div>
     </div>
-    <div class="alert alert-info" role="alert" *ngIf="showAlertErrorAceptada">
-      Ha ocurrido un error y la petición no se ha aceptado.
-    </div>
-    <div class="alert alert-info" role="alert" *ngIf="showAlertError">
-      Ha ocurrido un error y la petición no se ha eliminado.
-    </div>
+  </div>
 </div>
