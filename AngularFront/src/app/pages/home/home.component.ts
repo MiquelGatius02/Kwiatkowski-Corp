@@ -10,6 +10,7 @@ import { UserData } from 'src/app/interfaces/userData.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { PetitionsService } from 'src/app/services/petitions.service';
 import { RankingService } from 'src/app/services/ranking.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',
@@ -209,21 +210,66 @@ export class HomeComponent implements OnInit {
   regenerarCodigo(rank: RankData) {
     let codeNuevo = this.generateRankCode();
     this.rankingService.regenerarCodigo(rank, codeNuevo);
-    this.showAlertRankCodeUpdated = true;
     setTimeout(() => {
-      this.showAlertRankCodeUpdated = false;
       window.location.reload();
-    }, 1500);
-    this.showAlertRankCodeUpdated = true;
+    }, 100);
   }
 
-  mostrarAlertaPeticion() {
+  public modalTitle: string = '';
+  actualizarRank: any = { id: 0, rank_name: "", rank_description: "", id_creador: 0 };
 
-    this.showAlertPeticion = true;
-    setTimeout(() => {
-      this.showAlertPeticion = false;
-    }, 1000);
-    this.showAlertPeticion = true;
+
+  public setModalTitle(data: string, rank:RankData): void {
+    this.modalTitle = data;
+
+    if(this.modalTitle == 'Regenerar'){
+      this.modalTitle = 'Se ha generado un código nuevo de ranking';
+      this.actualizarRank.id = rank.id;  
+      this.actualizarRank.rank_name = rank.rank_name;
+      this.actualizarRank.rank_description = rank.rank_description;
+      this.actualizarRank.id_creador = rank.id_creador; 
+
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
+      
+      swalWithBootstrapButtons.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          swalWithBootstrapButtons.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            'Cancelled',
+            'Your imaginary file is safe :)',
+            'error'
+          )
+        }
+      })
+      
+    }else if(this.modalTitle == 'Cooperación'){
+     
+    }else if(this.modalTitle == 'Habilidades de pensamiento'){
+     
+    }else if(this.modalTitle == 'Gestión emocional'){
   }
+}
 }
 

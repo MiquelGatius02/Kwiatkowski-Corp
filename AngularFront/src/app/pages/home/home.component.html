@@ -58,19 +58,12 @@
           <td *ngIf="this.rank.id_creador == this.authService.UserData.id">
             <button (click)="eliminarRanking(this.rank)" type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal3">Borrar</button>
           <td *ngIf="this.rank.id_creador == this.authService.UserData.id">
-            <button (click)="regenerarCodigo(this.rank)" type="button" class="btn btn-success" data-toggle="modal" data-target="#modal4">Generar</button>
+            <button (click)="setModalTitle('Regenerar',this.rank)" type="button" class="btn btn-success" data-toggle="modal" data-target="#modal4">Generar</button>
           </td>
         </tr>
         <br>
       </tbody>
     </table>
-    <div class="alert alert-warning" role="alert" *ngIf="this.showAlertRankDelete == true" style="text-align:center;">
-      Ranking eliminado.
-    </div>
-    <div class="alert alert-warning" role="alert" *ngIf="this.showAlertRankCodeUpdated == true"
-      style="text-align:center;">
-      Código de ranking actualizado.
-    </div>
   </div>
 </div>
 
@@ -141,15 +134,16 @@
     </div>
   </div>
 </div>
-<div id="modal4" class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
+<!-- <div id="modal4" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5>Se ha generado un nuevo codigo</h5>
+        <h5 style="text-align:center;">{{modalTitle}}</h5>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" (click)="regenerarCodigo(this.actualizarRank);">Aceptar</button>
       </div>
     </div>
   </div>
-</div>
+</div> -->
+
