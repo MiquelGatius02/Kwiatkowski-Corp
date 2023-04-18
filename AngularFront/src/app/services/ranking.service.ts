@@ -42,14 +42,14 @@ export class RankingService {
 
   // ARRAYS VALORES RECUPERADOS
 
-  _data1: any
-  _data2: any
-  _data3: any
-  _data4: any
-  /*   Skills: UserData[] = [{
-      id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "",
-      Nivel_autonomia_e_iniciativa: 0, Nivel_cooperación: 0, Nivel_gestion_emocional: 0, Nivel_habilidades_de_pensamiento: 0, Nivel_responsabilidad: 0, puntos_skill: 0
-    }]; */
+  _data1: RankingUserData[] = [{ id: 0, rank_code: 0, user_id: 0, points: 0 }]
+  _data2: RankData[] = [{ id: 0, rank_name: "", rank_description: "", id_creador: 0 }]
+  _data3: RankingUserData[] = [{ id: 0, rank_code: 0, user_id: 0, points: 0 }]
+  _data4: UserData[] = [{
+    id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "",
+    Nivel_autonomia_e_iniciativa: 0, Nivel_cooperacion: 0, Nivel_gestion_emocional: 0, Nivel_habilidades_de_pensamiento: 0, Nivel_responsabilidad: 0, puntos_skill: 0, skills: []
+  }];
+  Skills: UserData[] = [];
 
 
   public createRaking(rank: RankData) {
@@ -57,54 +57,53 @@ export class RankingService {
     return this.http.post("http://127.0.0.1:8000/api/createRanking", rank, { headers: new HttpHeaders().set('Authorization', tokenCache) })
   }
 
-
-  public getRankingDataByUser(user_id: number) { // RECUPERAR DATOS RANKING POR ID DE USUARIO
-    this.http.get("http://127.0.0.1:8000/api/getRankingDataByUser" + "?" + "user_id=" + user_id).subscribe({
-      next: (value: any) => {
-        console.log(value)
-        this._data1 = value
-      }
-    });
-
-  }
-
   public getRanking() {  // TODOS LOS RANKINGS
     const tokenCache: any = this.token.getToken();
-    this.http.get("http://127.0.0.1:8000/api/getRanking", tokenCache).subscribe({
-      next: (value: any) => {
-        console.log(value)
-        this._data2 = value
+    this.http.get("http://127.0.0.1:8000/api/getRanking").subscribe(data => {
+      if (this._getRanking != undefined) {
+        this._getRanking = []
       }
+      this._getRanking = data;
+      for (let i = 0; i < this._getRanking.data.length; i++) {
+        this._data2.push(this._getRanking.data[i])
+      }
+
     });
-
   }
-
   public getRankingDataByCode(rank_code: number) { // RECUPRAR DATOS RANKING POR ID DE RANKING
-    this.http.get("http://127.0.0.1:8000/api/getRankingDataByCode" + "?" + "rank_code=" + rank_code).subscribe({
-      next: (value: any) => {
-        console.log(value)
-        this._data3 = value
+    // console.log(rank_code)
+    this.http.get("http://127.0.0.1:8000/api/getRankingDataByCode" + "?" + "rank_code=" + rank_code).subscribe(data => {
+      this._getRankingDataByCode = data
+      this._data3 = []
+      for (let i = 0; i < this._getRankingDataByCode.data.length; i++) {
+        this._data3.push(this._getRankingDataByCode.data[i])
       }
     });
   }
 
+  public getRankingDataByUser(user_id: number) { // RECUPERAR DATOS RANKING POR ID DE USUARIO
+    this.http.get("http://127.0.0.1:8000/api/getRankingDataByUser" + "?" + "user_id=" + user_id).subscribe(data => {
+      this._getRankingDataByUser = data
+      for (let i = 0; i < this._getRankingDataByUser.data.length; i++) {
+        this._data1.push(this._getRankingDataByUser.data[i])
+      }
+    });
+
+  }
 
   public getUser() { // RECUPERAR TODOS LOS USUARIOS
     this._data4 = [];
     this._getUser = [];
-    /* this.Skills = []; */
+
     const tokenCache: any = this.token.getToken();
     this.http.get("http://127.0.0.1:8000/api/getUser").subscribe(data => {
-      console.log(data)
+      // console.log(data);
       this._getUser = data;
-      /*    this._getSkills = this._getUser.data2; */
+      this.Skills = this._getUser.skills;
       for (let i = 0; i < this._getUser.data.length; i++) {
         this._data4.push(this._getUser.data[i]);
       }
-      // for (let i = 0; i < this._getSkills.length; i++) {
-      //   this.Skills.push(this._getSkills[i]);
-      // }
-      // console.log(this.Skills);
+      console.log(this._data4);
     });
   }
 
@@ -120,22 +119,22 @@ export class RankingService {
     this.valoresDelete.id_user = user_id;
     this.valoresDelete.id_rank = id_rank;
     this.http.post('http://127.0.0.1:8000/api/deleteUser', this.valoresDelete).subscribe(data => {
-      // console.log(data)
+      // console.log(data);
     });
   }
 
   deleteRanking(rank: RankData) {
     console.log(rank);
     this.http.post('http://127.0.0.1:8000/api/deleteRanking', rank).subscribe(data => {
-      console.log(data)
+      // console.log(data);
     });
   }
 
   regenerarCodigo(rank: RankData, codeNuevo: number) {
     rank.id_creador = codeNuevo;
-    console.log(rank);
+    // console.log(rank);
     this.http.post('http://127.0.0.1:8000/api/regenerarCodigo', rank).subscribe(data => {
-      console.log(data);
+      // console.log(data);
     });
   }
 

@@ -53,6 +53,7 @@ Route::post('setPoints', [AssignmentController::class, 'setPoints']);
 
 Route::get('getEvaluation', [EvaluationController::class, 'getEvaluation']);
 Route::post('createEvaluation', [EvaluationController::class, 'createEvaluation']);
+Route::post('Evaluate', [EvaluationController::class, 'Evaluate']);
 
 Route::group(['middleware' => ["auth:sanctum"]], function () {
 

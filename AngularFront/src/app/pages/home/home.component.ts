@@ -73,13 +73,14 @@ export class HomeComponent implements OnInit {
     this.RankingData = this.RankingData.splice(0, this.RankingData.length)
     this.authService.profile()
     this.rankingService.getRanking()
-    this.UserRankingData = this.rankingService._data1.data
-    this.RankingData = this.rankingService._data2.data;
+    this.UserRankingData = this.rankingService._data1
+    this.RankingData = this.rankingService._data2;
+    // console.log(this.rankingService)
     this.checkRanking()
   }
 
   checkRanking() {
-    console.log(this.rankingService._data1.data.length)
+    console.log(this.rankingService._data1.length)
     if (this.authService.UserData.date != undefined) {
       for (let i = 0; i < this.UserRankingData.length; i++) {
         if (this.UserRankingData[i].user_id == this.profileData.id) {
