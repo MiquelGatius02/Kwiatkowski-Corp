@@ -1,13 +1,5 @@
 <h1 class="" style="color: white; text-align: center; margin-top: 2%;">Tus Rankings</h1>
 <br>
-<!-- <div class="alert alert-warning" role="alert" *ngIf="this.profileData.date == undefined && !suscrito"
-  style="width: 50%; text-align: center; margin-left: 24%;">
-  No tiene ningún ranking creado.
-</div>
-<div class="alert alert-warning" role="alert" *ngIf="this.profileData.date != undefined && !suscrito"
-  style="width: 50%; text-align: center; margin-left: 24%;">
-  No está suscrito a ningún ranking.
-</div> -->
 <div class="container">
   <div class="big-layout" *ngIf="this.authService.UserData.date != undefined">
     <div class="" style="color: rgb(0, 0, 0)">
@@ -16,17 +8,14 @@
         <input style="width: 230px; margin-right: 10px;" type="number" formControlName="rank_id" /><br>
         <button type="submit" class="btn btn-block btn-primary" style="margin-top: 5%;">
           Unirse al ranking
-        </button><br>
+        </button>
+        <br>
       </form>
-      <div class="alarma form-group alert alert-warning" *ngIf="this.showAlertPeticion == true" role="alert"
-        style="text-align:center;">
-        Solicitud de unión <br>a ranking realizada.
-      </div>
     </div>
   </div>
-  <div class="big-layout" *ngIf="this.authService.UserData.date == undefined" style="color: black">
-    <form class="form-signin" [formGroup]="createForm" (ngSubmit)="createRanking()">
-      <div class="">
+  <div class="big-layout"  *ngIf="this.authService.UserData.date == undefined" style="color: black">
+    <form [formGroup]="createForm" (ngSubmit)="createRanking()">
+      <div>
         <div class="form-group">
           <label for="rank_name">Nombre del ranking:</label>
           <input type="text" class="form-control" formControlName="rank_name" required>
@@ -41,7 +30,6 @@
       </div>
     </form>
     <br>
-
   </div>
 </div>
 
@@ -67,21 +55,15 @@
           <td *ngIf="this.rank.id_creador == this.authService.UserData.id">
             <button (click)="clickRanking(this.rank)" type="button" class="btn btn-warning">Entrar</button>
           </td>
-          <td *ngIf="this.rank.id_creador == this.authService.UserData.id"><button (click)="eliminarRanking(this.rank)"
-              type="button" class="btn btn-danger">Borrar</button></td>
           <td *ngIf="this.rank.id_creador == this.authService.UserData.id">
-            <button (click)="regenerarCodigo(this.rank)" type="button" class="btn btn-success">Generar</button></td>
+            <button (click)="setModalTitle('Eliminar',this.rank)" type="button" class="btn btn-danger">Borrar</button>
+          <td *ngIf="this.rank.id_creador == this.authService.UserData.id">
+            <button (click)="setModalTitle('Regenerar',this.rank)" type="button" class="btn btn-success">Generar</button>
+          </td>
         </tr>
         <br>
       </tbody>
     </table>
-    <div class="alert alert-warning" role="alert" *ngIf="this.showAlertRankDelete == true" style="text-align:center;">
-      Ranking eliminado.
-    </div>
-    <div class="alert alert-warning" role="alert" *ngIf="this.showAlertRankCodeUpdated == true"
-      style="text-align:center;">
-      Código de ranking actualizado.
-    </div>
   </div>
 </div>
 

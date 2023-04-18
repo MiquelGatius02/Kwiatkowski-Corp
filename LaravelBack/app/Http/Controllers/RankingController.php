@@ -29,12 +29,6 @@ class RankingController extends Controller
         $ranking->id_creador = $request->id_creador;
         $ranking->save();
 
-        // $ranking2 = new RankingData();
-        // $ranking2->rank_code = $ranking->id;
-        // $ranking2->user_id = auth()->user()->id;
-        // $ranking2->points = 0;
-        // $ranking2->save();
-
         return response()->json([
             "status" => 1,
             "msg" => "¡Ranking creado con éxito!",
@@ -89,17 +83,28 @@ class RankingController extends Controller
             "rank_description" => "required",
             "id_creador" => "required",
         ]);
+
         
         $ranking = Ranking::find($request->id);
-
         if ($ranking) {
-            $ranking->id = $request->id_creador;
-            $ranking->save();
-        }
+            $ranking->id;
 
-        return response()->json([
-            "status" => 1,
-            "msg" => "Código regenerado correctamente"
-        ]);
+            try {
+                $ranking = DB::update(
+                    'update rankings set id = ? WHERE id = ?',
+                    [$request->id_creador, $ranking->id]
+                );
+
+                return response()->json([
+                    "status" => 1,
+                    "msg" => "Código regenerado correctamente"
+                ]);
+            } catch (\Exception $e) {
+                return response()->json([
+                    "status" => 0,
+                    "msg" => "Error al actualizar el ranking: " . $e->getMessage(),
+                ]);
+            }
+        }
     }
 }

@@ -132,9 +132,9 @@ export class RankingService {
 
   regenerarCodigo(rank: RankData, codeNuevo: number) {
     rank.id_creador = codeNuevo;
-    // console.log(rank);
+    console.log(codeNuevo);
     this.http.post('http://127.0.0.1:8000/api/regenerarCodigo', rank).subscribe(data => {
-      // console.log(data);
+      console.log(data);
     });
   }
 
