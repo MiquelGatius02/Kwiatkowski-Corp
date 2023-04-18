@@ -20,7 +20,6 @@ export class EvaluationService {
     return this.http.post("http://127.0.0.1:8000/api/createEvaluation", evaluation, { headers: new HttpHeaders().set('Authorization', tokenCache) })
   }
 
-
   public getEvaluation() {
     this._data1 = [];
     this._getEvaluation = [];
@@ -31,6 +30,14 @@ export class EvaluationService {
         this._data1.push(this._getEvaluation.data[i])
       }
     });
+  }
+
+  public evaluar(evaluation: any) {
+
+    const tokenCache: any = this.token.getToken();
+    this.http.post("http://127.0.0.1:8000/api/Evaluate", evaluation/* , { headers: new HttpHeaders().set('Authorization', tokenCache) } */).subscribe(data => {
+      console.log(data)
+    })
   }
 }
 

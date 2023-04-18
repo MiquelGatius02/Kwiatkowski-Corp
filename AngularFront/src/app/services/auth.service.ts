@@ -19,7 +19,7 @@ export class AuthService {
     rankingGen = true;
     typeUser: number = 0;
     Data: any;
-    UserData: UserData = { id: 0, username: '', email: '', firstname: '', lastname: '', centro: undefined, date: undefined, password: '', imagen: '' }
+    UserData: UserData = { id: 0, username: '', email: '', firstname: '', lastname: '', centro: undefined, date: undefined, password: '', imagen: '', puntosSemanales: 0 }
     RankUserData: RankData[] = []
 
     public loggedIn: Subject<boolean> = new ReplaySubject<boolean>(1);
@@ -70,6 +70,7 @@ export class AuthService {
             this.UserData.centro = this.Data.data.center;
             this.UserData.password = this.Data.data.password;
             this.UserData.imagen = this.Data.data.imagen;
+            this.UserData.puntosSemanales = this.Data.data.puntosSemanales;
             if (this.rankingGen) {
                 this.rankingService.getRankingDataByUser(this.UserData.id);
                 this.rankingGen = false;
