@@ -6,7 +6,7 @@
       <form class="" [formGroup]="joinForm" (ngSubmit)="onSubmit()">
         <label for="rank_name">Codigo del ranking:</label><br>
         <input style="width: 230px; margin-right: 10px;" type="number" formControlName="rank_id" /><br>
-        <button type="submit" class="btn btn-block btn-primary" style="margin-top: 5%;" data-toggle="modal" data-target="#modal1">
+        <button type="submit" class="btn btn-block btn-primary" style="margin-top: 5%;">
           Unirse al ranking
         </button>
         <br>
@@ -26,7 +26,7 @@
           <textarea class="form-control" rows="3" formControlName="rank_description" required></textarea>
         </div>
         <br>
-        <button type="submit" class="btn btn-block btn-primary"  data-toggle="modal" data-target="#modal2">Crear Ranking</button>
+        <button type="submit" class="btn btn-block btn-primary">Crear Ranking</button>
       </div>
     </form>
     <br>
@@ -56,9 +56,9 @@
             <button (click)="clickRanking(this.rank)" type="button" class="btn btn-warning">Entrar</button>
           </td>
           <td *ngIf="this.rank.id_creador == this.authService.UserData.id">
-            <button (click)="eliminarRanking(this.rank)" type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal3">Borrar</button>
+            <button (click)="setModalTitle('Eliminar',this.rank)" type="button" class="btn btn-danger">Borrar</button>
           <td *ngIf="this.rank.id_creador == this.authService.UserData.id">
-            <button (click)="setModalTitle('Regenerar',this.rank)" type="button" class="btn btn-success" data-toggle="modal" data-target="#modal4">Generar</button>
+            <button (click)="setModalTitle('Regenerar',this.rank)" type="button" class="btn btn-success">Generar</button>
           </td>
         </tr>
         <br>
@@ -95,55 +95,3 @@
     </table>
   </div>
 </div>
-
-<div id="modal1" class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5>Se ha enviado solicitud para unirse al ranking</h5>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div id="modal2" class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5>Se ha creado un ranking</h5>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div id="modal3" class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5>Se ha eliminado el ranking</h5>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- <div id="modal4" class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 style="text-align:center;">{{modalTitle}}</h5>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal" (click)="regenerarCodigo(this.actualizarRank);">Aceptar</button>
-      </div>
-    </div>
-  </div>
-</div> -->
-

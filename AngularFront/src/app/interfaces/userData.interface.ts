@@ -8,6 +8,7 @@ export interface UserData {
     date?: string;
     password: string;
     imagen?: string;
+    puntosSemanales?: number;
     Nivel_responsabilidad?: number;
     Nivel_cooperacion?: number;
     Nivel_autonomia_e_iniciativa?: number;

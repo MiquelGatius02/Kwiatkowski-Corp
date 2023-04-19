@@ -76,9 +76,6 @@
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title">¿Desea Borrar?</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
                 </div>
                 <div class="modal-body">
                   <p>¿Estás segur@ de que quieres eliminar este usuario?</p>
@@ -90,7 +87,6 @@
               </div>
             </div>
           </div>
-
         </tr>
       </tbody>
     </table>
@@ -106,9 +102,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">{{ modalTitle }}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Cerrar</button>
       </div>
       <div class="modal-body">
         <ul>
@@ -122,6 +116,32 @@
           <li *ngIf="li8 != ''">{{li8}}</li>
           <li *ngIf="li9 != ''">{{li9}}</li>
         </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-dismiss="modal" aria-label="Close" data-target="#modal3">Puntuar</button> 
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal3" class="modal" tabindex="-1" role="dialog" style="color:black; margin-top:12%">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Puntuar {{ modalTitle }}</h5>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-dismiss="modal" aria-label="Close" data-target="#modal1">Volver</button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="puntos" style="font-size: 14px;">Asignar puntos</label>
+            <input type="puntosInput" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Introduzca los puntos">
+            <small id="aviso" class="form-text text-muted">Solo dispone de X puntos semanales.</small>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">aa</button>
       </div>
     </div>
   </div>

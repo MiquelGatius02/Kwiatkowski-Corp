@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AssignmentDataComponent } from './assignment-data/assignment-data.component';
 import { AssignmentComponent } from './assignment/assignment.component';
+import { EvaluationsComponent } from './evaluations/evaluations.component';
+import { HistorialEvaluationsComponent } from './historial-evaluations/historial-evaluations.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RankingComponent } from './ranking/ranking.component';
@@ -15,8 +17,9 @@ const routes: Routes = [
   { path: 'ranking', component: RankingComponent },
   { path: 'assignment', component: AssignmentComponent },
   { path: 'ver-peticiones', component: VerPetiticionesComponent },
-  { path: 'assignment-data', component: AssignmentDataComponent }
-
+  { path: 'assignment-data', component: AssignmentDataComponent },
+  { path: 'evaluations', component: EvaluationsComponent },
+  { path: 'historial', component: HistorialEvaluationsComponent }
 ];
 
 @NgModule({
