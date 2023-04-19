@@ -22,6 +22,8 @@ class RankingData extends Model
         'id',
         'rank_code',
         'user_id',
-        'points'
+        'points',
+        'puntosSemanales'
+
     ];
 }

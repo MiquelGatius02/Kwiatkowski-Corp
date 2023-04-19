@@ -33,9 +33,8 @@ export class EvaluationService {
   }
 
   public evaluar(evaluation: any) {
-
     const tokenCache: any = this.token.getToken();
-    this.http.post("http://127.0.0.1:8000/api/Evaluate", evaluation/* , { headers: new HttpHeaders().set('Authorization', tokenCache) } */).subscribe(data => {
+    this.http.post("http://127.0.0.1:8000/api/Evaluate", evaluation, { headers: new HttpHeaders().set('Authorization', tokenCache) }).subscribe(data => {
       console.log(data)
     })
   }

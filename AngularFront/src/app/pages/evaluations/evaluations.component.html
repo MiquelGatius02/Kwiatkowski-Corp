@@ -44,11 +44,9 @@
           <option value=5>Puntos_habilidades_de_pensamiento</option>
         </select>
       </td>
-      <td *ngIf="user.id == rankingData.user_id && user.id != 0"> <input type="number"
-          max="{{this.authService.UserData.puntosSemanales}}" class="form-control" formControlName="puntos" /></td>
+      <td *ngIf="user.id == rankingData.user_id && user.id != 0"> </td>
       <td *ngIf="user.id == rankingData.user_id && user.id != 0"><button
           (click)="evaluar(this.rankingData.user_id)">Evaluar</button></td>
     </tr>
   </tbody>
 </table>
-z

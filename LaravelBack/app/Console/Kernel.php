@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Models\RankingData;
 use Carbon\Carbon;
 use App\Models\User;
 
@@ -29,7 +30,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->call(function () {
             $fecha = Carbon::now()->subWeek()->format('Y-m-d');
-            User::where('puntosSemanales', '<=', $fecha)->update(['puntosSemanales' => 1000, 'puntosSemanales' => Carbon::now()->format('Y-m-d')]);
+            RankingData::where('puntosSemanales', '<=', $fecha)->update(['puntosSemanales' => 1000, 'puntosSemanales' => Carbon::now()->format('Y-m-d')]);
         })->weekly();
     }
 }

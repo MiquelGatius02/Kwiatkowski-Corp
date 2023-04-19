@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
 
     this.joinForm = this.fb.group({
 
-      rank_id:! '',
+      rank_id: ! '',
 
     });
 
@@ -144,7 +144,7 @@ export class HomeComponent implements OnInit {
           'No se ha enviado ninguna solicitud de union.',
           'error'
         )
-      } else{
+      } else {
         swalWithBootstrapButtons.fire(
           'Cancelado',
           'No se ha enviado ninguna solicitud de union ya que el input esta vacío.',
@@ -176,7 +176,7 @@ export class HomeComponent implements OnInit {
         }).then((result) => {
           if (result.isConfirmed) {
             window.location.reload();
-          }else{
+          } else {
             window.location.reload();
           }
         })
@@ -219,8 +219,8 @@ export class HomeComponent implements OnInit {
     }, 500);
   }
 
-  public setModalTitle(data: string, rank:RankData): void {
-    
+  public setModalTitle(data: string, rank: RankData): void {
+
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
@@ -229,8 +229,8 @@ export class HomeComponent implements OnInit {
       buttonsStyling: false
     })
 
-    if(data == 'Regenerar'){
-      
+    if (data == 'Regenerar') {
+
       swalWithBootstrapButtons.fire({
         title: '¿Regenerar el código?',
         text: "!El código del ranking cambiará!",
@@ -261,9 +261,9 @@ export class HomeComponent implements OnInit {
           )
         }
       })
-      
-    }else if(data == 'Eliminar'){
-      
+
+    } else if (data == 'Eliminar') {
+
       swalWithBootstrapButtons.fire({
         title: '¿Eliminar el ranking?',
         text: "!El ranking y los alumnos asociados a este serán eliminados!",

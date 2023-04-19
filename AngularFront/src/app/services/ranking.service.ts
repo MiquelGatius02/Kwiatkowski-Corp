@@ -44,7 +44,7 @@ export class RankingService {
 
   _data1: RankingUserData[] = [{ id: 0, rank_code: 0, user_id: 0, points: 0 }]
   _data2: RankData[] = [{ id: 0, rank_name: "", rank_description: "", id_creador: 0 }]
-  _data3: RankingUserData[] = [{ id: 0, rank_code: 0, user_id: 0, points: 0 }]
+  _data3: RankingUserData[] = [{ id: 0, rank_code: 0, user_id: 0, points: 0, puntosSemanales: 0 }]
   _data4: UserData[] = [{
     id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "",
     Nivel_autonomia_e_iniciativa: 0, Nivel_cooperacion: 0, Nivel_gestion_emocional: 0, Nivel_habilidades_de_pensamiento: 0, Nivel_responsabilidad: 0, puntos_skill: 0, skills: []

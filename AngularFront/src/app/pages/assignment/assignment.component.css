@@ -1,0 +1,19 @@
+.table {
+  color: white;
+}
+
+.modal {
+  color: black;
+}
+
+h5 {
+  color: black;
+}
+
+.close {
+  border-radius: 50%;
+  border: none;
+  height: 30px;
+  width: 30px;
+  box-shadow: 0 2px 4px darkslategray;
+}/*# sourceMappingURL=assignment.component.css.map */
