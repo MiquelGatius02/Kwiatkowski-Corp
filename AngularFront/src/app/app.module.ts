@@ -13,13 +13,13 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { RankingComponent } from './pages/ranking/ranking.component';
+import { AssignmentsService } from './services/assignments.service';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { AssignmentComponent } from './pages/assignment/assignment.component';
 import { VerPetiticionesComponent } from './pages/ver-petiticiones/ver-petiticiones.component';
 import { AssignmentDataComponent } from './pages/assignment-data/assignment-data.component';
 import { HistorialEvaluationsComponent } from './pages/historial-evaluations/historial-evaluations.component';
 import { EvaluationsComponent } from './pages/evaluations/evaluations.component';
-
 @NgModule({
   declarations: [
     HeaderComponent,

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('rank_code');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('points');
+            $table->integer('puntosSemanales')->default(1000)->max(1000);
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')

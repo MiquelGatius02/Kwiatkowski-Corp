@@ -18,6 +18,13 @@ class softSkillsData extends Model
         'Nivel_autonomia_e_iniciativa',
         'Nivel_gestion_emocional',
         'Nivel_habilidades_de_pensamiento',
+
+        'Puntos_responsabilidad',
+        'Puntos_cooperación',
+        'Puntos_autonomia_e_iniciativa',
+        'Puntos_gestion_emocional',
+        'Puntos_habilidades_de_pensamiento',
+        
         'Puntos'
     ];
 }

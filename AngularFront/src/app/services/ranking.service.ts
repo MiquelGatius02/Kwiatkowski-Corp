@@ -44,7 +44,7 @@ export class RankingService {
 
   _data1: RankingUserData[] = [{ id: 0, rank_code: 0, user_id: 0, points: 0 }]
   _data2: RankData[] = [{ id: 0, rank_name: "", rank_description: "", id_creador: 0 }]
-  _data3: RankingUserData[] = [{ id: 0, rank_code: 0, user_id: 0, points: 0 }]
+  _data3: RankingUserData[] = [{ id: 0, rank_code: 0, user_id: 0, points: 0, puntosSemanales: 0 }]
   _data4: UserData[] = [{
     id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "",
     Nivel_autonomia_e_iniciativa: 0, Nivel_cooperacion: 0, Nivel_gestion_emocional: 0, Nivel_habilidades_de_pensamiento: 0, Nivel_responsabilidad: 0, puntos_skill: 0, skills: []
@@ -60,9 +60,7 @@ export class RankingService {
   public getRanking() {  // TODOS LOS RANKINGS
     const tokenCache: any = this.token.getToken();
     this.http.get("http://127.0.0.1:8000/api/getRanking").subscribe(data => {
-      if (this._getRanking != undefined) {
-        this._getRanking = []
-      }
+      this._data2 = []
       this._getRanking = data;
       for (let i = 0; i < this._getRanking.data.length; i++) {
         this._data2.push(this._getRanking.data[i])
@@ -83,6 +81,7 @@ export class RankingService {
 
   public getRankingDataByUser(user_id: number) { // RECUPERAR DATOS RANKING POR ID DE USUARIO
     this.http.get("http://127.0.0.1:8000/api/getRankingDataByUser" + "?" + "user_id=" + user_id).subscribe(data => {
+      this._data1 = []
       this._getRankingDataByUser = data
       for (let i = 0; i < this._getRankingDataByUser.data.length; i++) {
         this._data1.push(this._getRankingDataByUser.data[i])

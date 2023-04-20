@@ -4,6 +4,7 @@ use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\AssignmentDataController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\CustomAuthController;
+use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\PetitionsController;
 use App\Http\Controllers\RankingController;
 use App\Http\Controllers\RankingDataController;
@@ -49,8 +50,13 @@ Route::post('deleteUser', [RankingDataController::class, 'deleteUser']);
 Route::post('delAssignment', [AssignmentController::class, 'delAssignment']);
 Route::post('setPoints', [AssignmentController::class, 'setPoints']);
 
-Route::group(['middleware' => ["auth:sanctum"]], function () {
 
+Route::get('getEvaluation', [EvaluationController::class, 'getEvaluation']);
+Route::post('createEvaluation', [EvaluationController::class, 'createEvaluation']);
+
+
+Route::group(['middleware' => ["auth:sanctum"]], function () {
+    Route::post('Evaluate', [EvaluationController::class, 'Evaluate']);
     Route::post('createAssignmentData', [AssignmentController::class, 'createAssignmentData']);
     Route::get('getAssignment', [AssignmentController::class, 'getAssignment']);
     Route::post('createAssignment', [AssignmentController::class, 'createAssignment']);
@@ -59,5 +65,4 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get('userProfile', [CustomAuthController::class, 'userProfile']);
     Route::get('logout', [CustomAuthController::class, 'logout']);
     Route::get('aceptarPetitions', [PetitionsController::class, 'aceptarPetitions']);
-
 });
