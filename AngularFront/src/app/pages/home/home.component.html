@@ -35,7 +35,7 @@
 
 
 <div *ngIf="this.authService.UserData.date == undefined">
-  <div class="layout" *ngFor="let ranking of UserRankingData; let i = index">
+  <div class="layout" *ngFor="let ranking of this.rankingService._data1; let i = index">
     <table class="table " style="color: rgb(255, 255, 255)">
       <thead>
         <tr>
@@ -47,7 +47,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let rank of RankingData" style="color:white;" scope="row">
+        <tr *ngFor="let rank of rankingService._data2;" style="color:white;" scope="row">
           <td *ngIf="this.rank.id_creador == this.authService.UserData.id">
             {{rank.id}}</td>
           <td *ngIf="this.rank.id_creador == this.authService.UserData.id">
@@ -79,8 +79,8 @@
         </tr>
       </thead>
 
-      <tbody *ngFor="let ranking of UserRankingData; let i = index">
-        <tr *ngFor="let rank of RankingData" style="color:white;" scope="row">
+      <tbody *ngFor="let ranking of this.rankingService._data1; let i = index">
+        <tr *ngFor="let rank of rankingService._data2;" style="color:white;" scope="row">
           <td *ngIf="this.ranking.rank_code == this.rank.id && this.ranking.rank_code != 0">
             {{rank.id}}</td>
           <td *ngIf="this.ranking.rank_code == this.rank.id && this.ranking.rank_code != 0">

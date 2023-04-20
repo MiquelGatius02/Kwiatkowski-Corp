@@ -63,8 +63,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.profileData = this.authService.UserData;
-    this.UserRankingData = this.UserRankingData.splice(0, this.UserRankingData.length)
-    this.RankingData = this.RankingData.splice(0, this.RankingData.length)
+    this.UserRankingData = []
+    this.RankingData = []
     this.authService.profile()
     this.rankingService.getRanking()
     this.UserRankingData = this.rankingService._data1

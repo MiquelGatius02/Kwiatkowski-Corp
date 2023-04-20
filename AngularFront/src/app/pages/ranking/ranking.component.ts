@@ -14,7 +14,8 @@ import { RankingService } from 'src/app/services/ranking.service';
   styleUrls: ['./ranking.component.scss']
 })
 export class RankingComponent implements OnInit {
-  Value: any
+  cacheUser: number = 0;
+  Value: any = { soft_skill: 0, puntos: 0, user_id: 0, rank_code: 0 }
   evaluation: FormGroup
   RankingData: RankData[] = [{ id: 0, rank_name: "", rank_description: "", id_creador: 0 }]
   UsersRankingData: RankingUserData[] = [{ id: 0, rank_code: 0, user_id: 0, points: 0 }]
@@ -66,7 +67,12 @@ export class RankingComponent implements OnInit {
     }
   }
 
-  evaluar(user_id: number, soft_skill: string, rank_code: number) {
+  evaluar(soft_skill: string, rank_code: number) {
+    this.Value = this.evaluation.value;
+    this.Value.user_id = this.cacheUser
+    if (this.authService.UserData.id == this.Value.user_id) {
+      console.log("No te puedes evaluar a ti mismo")
+    }
     this.Value = this.evaluation.value;
     if (soft_skill == "Autonmía e iniciativa") {
       this.Value.soft_skill = 3
@@ -84,9 +90,9 @@ export class RankingComponent implements OnInit {
       this.Value.soft_skill == 1
     }
     this.Value.rank_code = rank_code
-    this.Value.user_id = user_id;
     console.log(this.Value)
     this.evaluationService.evaluar(this.Value)
+    /*    window.location.reload(); */
   }
 
   public modalTitle: string = '';
@@ -100,8 +106,11 @@ export class RankingComponent implements OnInit {
   public li8: string = '';
   public li9: string = '';
 
-  public setModalTitle(data: string): void {
+  public setModalTitle(data: string, user_id: number): void {
+
     this.modalTitle = data;
+    this.cacheUser = user_id
+    
 
     if (this.modalTitle == 'Responsabilidad') {
       this.li1 = 'Trabaja de forma constante.';

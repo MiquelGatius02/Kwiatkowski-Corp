@@ -39,125 +39,131 @@
           <td *ngIf="user.id == rankingData.user_id && user.id != 0">{{rankingData.points}}</td>
           <td *ngIf="user.id == rankingData.user_id && user.id != 0">
             <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal"
-              data-target="#modal1" (click)="setModalTitle('Autonmía e iniciativa')"><img
+              data-target="#modal1" (click)="setModalTitle('Autonmía e iniciativa', this.rankingData.user_id)"><img
                 *ngIf="user.Nivel_autonomia_e_iniciativa == 0" src="../../../assets/Autonomia0.png" alt="Autonomia"
                 width="40" height="40"></button>
             <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal"
-              data-target="#modal1" (click)="setModalTitle('Autonmía e iniciativa')"><img
+              data-target="#modal1" (click)="setModalTitle('Autonmía e iniciativa', this.rankingData.user_id)"><img
                 *ngIf="user.Nivel_autonomia_e_iniciativa == 1" src="../../../assets/Autonomia1.png" alt="Autonomia"
                 width="40" height="40"></button>
             <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal"
-              data-target="#modal1" (click)="setModalTitle('Autonmía e iniciativa')"><img
+              data-target="#modal1" (click)="setModalTitle('Autonmía e iniciativa', this.rankingData.user_id)"><img
                 *ngIf="user.Nivel_autonomia_e_iniciativa == 2" src="../../../assets/Autonomia2.png" alt="Autonomia"
                 width="40" height="40"></button>
             <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal"
-              data-target="#modal1" (click)="setModalTitle('Autonmía e iniciativa')"><img
+              data-target="#modal1" (click)="setModalTitle('Autonmía e iniciativa', this.rankingData.user_id)"><img
                 *ngIf="user.Nivel_autonomia_e_iniciativa == 3" src="../../../assets/Autonomia3.png" alt="Autonomia"
                 width="40" height="40"></button>
             <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal"
-              data-target="#modal1" (click)="setModalTitle('Autonmía e iniciativa')"><img
+              data-target="#modal1" (click)="setModalTitle('Autonmía e iniciativa',this.rankingData.user_id)"><img
                 *ngIf="user.Nivel_autonomia_e_iniciativa == 4" src="../../../assets/Autonomia4.png" alt="Autonomia"
                 width="40" height="40"></button>
             <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal"
-              data-target="#modal1" (click)="setModalTitle('Autonmía e iniciativa')"><img
+              data-target="#modal1" (click)="setModalTitle('Autonmía e iniciativa', this.rankingData.user_id)"><img
                 *ngIf="user.Nivel_autonomia_e_iniciativa == 5" src="../../../assets/Autonomia5.png" alt="Autonomia"
                 width="40" height="40"></button>
           </td>
           <td *ngIf="user.id == rankingData.user_id && user.id != 0">
             <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal"
-              data-target="#modal1" (click)="setModalTitle('Cooperación')"><img *ngIf="user.Nivel_cooperacion == 0"
-                src="../../../assets/Cooperacion0.png" alt="Cooperacion" width="40" height="40"></button>
+              data-target="#modal1" (click)="setModalTitle('Cooperación', this.rankingData.user_id)"><img
+                *ngIf="user.Nivel_cooperacion == 0" src="../../../assets/Cooperacion0.png" alt="Cooperacion" width="40"
+                height="40"></button>
             <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal"
-              data-target="#modal1" (click)="setModalTitle('Cooperación')"><img *ngIf="user.Nivel_cooperacion == 1"
-                src="../../../assets/Cooperacion1.png" alt="Cooperacion" width="40" height="40"></button>
+              data-target="#modal1" (click)="setModalTitle('Cooperación', this.rankingData.user_id)"><img
+                *ngIf="user.Nivel_cooperacion == 1" src="../../../assets/Cooperacion1.png" alt="Cooperacion" width="40"
+                height="40"></button>
             <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal"
-              data-target="#modal1" (click)="setModalTitle('Cooperación')"><img *ngIf="user.Nivel_cooperacion == 2"
-                src="../../../assets/Cooperacion2.png" alt="Cooperacion" width="40" height="40"></button>
+              data-target="#modal1" (click)="setModalTitle('Cooperación', this.rankingData.user_id)"><img
+                *ngIf="user.Nivel_cooperacion == 2" src="../../../assets/Cooperacion2.png" alt="Cooperacion" width="40"
+                height="40"></button>
             <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal"
-              data-target="#modal1" (click)="setModalTitle('Cooperación')"><img *ngIf="user.Nivel_cooperacion == 3"
-                src="../../../assets/Cooperacion3.png" alt="Cooperacion" width="40" height="40"></button>
+              data-target="#modal1" (click)="setModalTitle('Cooperación', this.rankingData.user_id)"><img
+                *ngIf="user.Nivel_cooperacion == 3" src="../../../assets/Cooperacion3.png" alt="Cooperacion" width="40"
+                height="40"></button>
             <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal"
-              data-target="#modal1" (click)="setModalTitle('Cooperación')"><img *ngIf="user.Nivel_cooperacion == 4"
-                src="../../../assets/Cooperacion4.png" alt="Cooperacion" width="40" height="40"></button>
+              data-target="#modal1" (click)="setModalTitle('Cooperación', this.rankingData.user_id)"><img
+                *ngIf="user.Nivel_cooperacion == 4" src="../../../assets/Cooperacion4.png" alt="Cooperacion" width="40"
+                height="40"></button>
             <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal"
-              data-target="#modal1" (click)="setModalTitle('Cooperación')"><img *ngIf="user.Nivel_cooperacion == 5"
-                src="../../../assets/Cooperacion5.png" alt="Cooperacion" width="40" height="40"></button>
+              data-target="#modal1" (click)="setModalTitle('Cooperación', this.rankingData.user_id)"><img
+                *ngIf="user.Nivel_cooperacion == 5" src="../../../assets/Cooperacion5.png" alt="Cooperacion" width="40"
+                height="40"></button>
 
           <td *ngIf="user.id == rankingData.user_id && user.id != 0">
             <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal"
-              data-target="#modal1" (click)="setModalTitle('Gestión emocional')"><img
+              data-target="#modal1" (click)="setModalTitle('Gestión emocional', this.rankingData.user_id)"><img
                 *ngIf="user.Nivel_gestion_emocional == 0" src="../../../assets/Gestion0.png" alt="Gestion" width="40"
                 height="40"></button>
             <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal"
-              data-target="#modal1" (click)="setModalTitle('Gestión emocional')"><img
+              data-target="#modal1" (click)="setModalTitle('Gestión emocional', this.rankingData.user_id)"><img
                 *ngIf="user.Nivel_gestion_emocional == 1" src="../../../assets/Gestion1.png" alt="Gestion" width="40"
                 height="40"></button>
             <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal"
-              data-target="#modal1" (click)="setModalTitle('Gestión emocional')"><img
+              data-target="#modal1" (click)="setModalTitle('Gestión emocional', this.rankingData.user_id)"><img
                 *ngIf="user.Nivel_gestion_emocional == 2" src="../../../assets/Gestion2.png" alt="Gestion" width="40"
                 height="40"></button>
             <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal"
-              data-target="#modal1" (click)="setModalTitle('Gestión emocional')"><img
+              data-target="#modal1" (click)="setModalTitle('Gestión emocional', this.rankingData.user_id)"><img
                 *ngIf="user.Nivel_gestion_emocional == 3" src="../../../assets/Gestion3.png" alt="Gestion" width="40"
                 height="40"></button>
             <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal"
-              data-target="#modal1" (click)="setModalTitle('Gestión emocional')"><img
+              data-target="#modal1" (click)="setModalTitle('Gestión emocional', this.rankingData.user_id)"><img
                 *ngIf="user.Nivel_gestion_emocional == 4" src="../../../assets/Gestion4.png" alt="Gestion" width="40"
                 height="40"></button>
             <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal"
-              data-target="#modal1" (click)="setModalTitle('Gestión emocional')"><img
+              data-target="#modal1" (click)="setModalTitle('Gestión emocional', this.rankingData.user_id)"><img
                 *ngIf="user.Nivel_gestion_emocional == 5" src="../../../assets/Gestion5.png" alt="Gestion" width="40"
                 height="40"></button>
           </td>
           <td *ngIf="user.id == rankingData.user_id && user.id != 0">
             <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal"
-              data-target="#modal1" (click)="setModalTitle('Habilidades de pensamiento')"><img
+              data-target="#modal1" (click)="setModalTitle('Habilidades de pensamiento', this.rankingData.user_id)"><img
                 *ngIf="user.Nivel_habilidades_de_pensamiento == 0" src="../../../assets/Pensamiento0.png"
                 alt="Pensamiento" width="40" height="40"></button>
             <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal"
-              data-target="#modal1" (click)="setModalTitle('Habilidades de pensamiento')"><img
+              data-target="#modal1" (click)="setModalTitle('Habilidades de pensamiento', this.rankingData.user_id)"><img
                 *ngIf="user.Nivel_habilidades_de_pensamiento == 1" src="../../../assets/Pensamiento1.png"
                 alt="Pensamiento" width="40" height="40"></button>
             <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal"
-              data-target="#modal1" (click)="setModalTitle('Habilidades de pensamiento')"><img
+              data-target="#modal1" (click)="setModalTitle('Habilidades de pensamiento', this.rankingData.user_id)"><img
                 *ngIf="user.Nivel_habilidades_de_pensamiento == 2" src="../../../assets/Pensamiento2.png"
                 alt="Pensamiento" width="40" height="40"></button>
             <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal"
-              data-target="#modal1" (click)="setModalTitle('Habilidades de pensamiento')"><img
+              data-target="#modal1" (click)="setModalTitle('Habilidades de pensamiento', this.rankingData.user_id)"><img
                 *ngIf="user.Nivel_habilidades_de_pensamiento == 3" src="../../../assets/Pensamiento3.png"
                 alt="Pensamiento" width="40" height="40"></button>
             <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal"
-              data-target="#modal1" (click)="setModalTitle('Habilidades de pensamiento')"><img
+              data-target="#modal1" (click)="setModalTitle('Habilidades de pensamiento', this.rankingData.user_id)"><img
                 *ngIf="user.Nivel_habilidades_de_pensamiento == 4" src="../../../assets/Pensamiento4.png"
                 alt="Pensamiento" width="40" height="40"></button>
             <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal"
-              data-target="#modal1" (click)="setModalTitle('Habilidades de pensamiento')"><img
+              data-target="#modal1" (click)="setModalTitle('Habilidades de pensamiento', this.rankingData.user_id)"><img
                 *ngIf="user.Nivel_habilidades_de_pensamiento == 5" src="../../../assets/Pensamiento5.png"
                 alt="Pensamiento" width="40" height="40"></button>
           </td>
           <td *ngIf="user.id == rankingData.user_id && user.id != 0">
             <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal"
-              data-target="#modal1" (click)="setModalTitle('Responsabilidad')"><img
+              data-target="#modal1" (click)="setModalTitle('Responsabilidad', this.rankingData.user_id)"><img
                 *ngIf="user.Nivel_responsabilidad == 0" src="../../../assets/Responsabilidad0.png" alt="Responsabilidad"
                 width="40" height="40" title="aaa /n aa"></button>
             <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal"
-              data-target="#modal1" (click)="setModalTitle('Responsabilidad')"><img
+              data-target="#modal1" (click)="setModalTitle('Responsabilidad', this.rankingData.user_id)"><img
                 *ngIf="user.Nivel_responsabilidad == 1" src="../../../assets/Responsabilidad1.png" alt="Responsabilidad"
                 width="40" height="40"></button>
             <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal"
-              data-target="#modal1" (click)="setModalTitle('Responsabilidad')"><img
+              data-target="#modal1" (click)="setModalTitle('Responsabilidad', this.rankingData.user_id)"><img
                 *ngIf="user.Nivel_responsabilidad == 2" src="../../../assets/Responsabilidad2.png" alt="Responsabilidad"
                 width="40" height="40"></button>
             <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal"
-              data-target="#modal1" (click)="setModalTitle('Responsabilidad')"><img
+              data-target="#modal1" (click)="setModalTitle('Responsabilidad', this.rankingData.user_id)"><img
                 *ngIf="user.Nivel_responsabilidad == 3" src="../../../assets/Responsabilidad3.png" alt="Responsabilidad"
                 width="40" height="40"></button>
             <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal"
-              data-target="#modal1" (click)="setModalTitle('Responsabilidad')"><img
+              data-target="#modal1" (click)="setModalTitle('Responsabilidad', this.rankingData.user_id)"><img
                 *ngIf="user.Nivel_responsabilidad == 4" src="../../../assets/Responsabilidad4.png" alt="Responsabilidad"
                 width="40" height="40"></button>
             <button style="background-color: transparent;border:none" class="btnSkills" data-toggle="modal"
-              data-target="#modal1" (click)="setModalTitle('Responsabilidad')"><img
+              data-target="#modal1" (click)="setModalTitle('Responsabilidad', this.rankingData.user_id)"><img
                 *ngIf="user.Nivel_responsabilidad == 5" src="../../../assets/Responsabilidad5.png" alt="Responsabilidad"
                 width="40" height="40"></button>
           </td>
@@ -218,18 +224,18 @@
     </div>
   </div>
 </div>
+<div *ngFor="let ranking of this.rankingService._data3">
+  <div id="modal3" class="modal" tabindex="-1" role="dialog" style="color:black; margin-top:12%">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form [formGroup]="evaluation">
+          <div class="modal-header">
 
-<div id="modal3" class="modal" tabindex="-1" role="dialog" style="color:black; margin-top:12%">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <form [formGroup]="evaluation">
-        <div class="modal-header">
+            <h5 class="modal-title">Puntuar {{ modalTitle }}</h5>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-dismiss="modal" aria-label="Close"
+              data-target="#modal1">Volver</button>
+          </div>
 
-          <h5 class="modal-title">Puntuar {{ modalTitle }}</h5>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-dismiss="modal" aria-label="Close"
-            data-target="#modal1">Volver</button>
-        </div>
-        <div *ngFor="let ranking of this.rankingService._data3">
           <div class="modal-body">
 
             <div class="form-group">
@@ -244,12 +250,12 @@
 
 
           <div class="modal-footer">
-            <button type="button" class="btn btn-success"
-              (click)="evaluar(this.ranking.user_id, this.modalTitle, this.ranking.rank_code)"
+            <button type="button" class="btn btn-success" (click)="evaluar(this.modalTitle, this.ranking.rank_code)"
               data-dismiss="modal">Confirmar</button>
           </div>
-        </div>
-      </form>
+
+        </form>
+      </div>
     </div>
   </div>
 </div>

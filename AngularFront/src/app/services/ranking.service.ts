@@ -60,9 +60,7 @@ export class RankingService {
   public getRanking() {  // TODOS LOS RANKINGS
     const tokenCache: any = this.token.getToken();
     this.http.get("http://127.0.0.1:8000/api/getRanking").subscribe(data => {
-      if (this._getRanking != undefined) {
-        this._getRanking = []
-      }
+      this._data2 = []
       this._getRanking = data;
       for (let i = 0; i < this._getRanking.data.length; i++) {
         this._data2.push(this._getRanking.data[i])
@@ -83,6 +81,7 @@ export class RankingService {
 
   public getRankingDataByUser(user_id: number) { // RECUPERAR DATOS RANKING POR ID DE USUARIO
     this.http.get("http://127.0.0.1:8000/api/getRankingDataByUser" + "?" + "user_id=" + user_id).subscribe(data => {
+      this._data1 = []
       this._getRankingDataByUser = data
       for (let i = 0; i < this._getRankingDataByUser.data.length; i++) {
         this._data1.push(this._getRankingDataByUser.data[i])
