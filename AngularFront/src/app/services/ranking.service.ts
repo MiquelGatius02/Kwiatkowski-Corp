@@ -102,7 +102,7 @@ export class RankingService {
       for (let i = 0; i < this._getUser.data.length; i++) {
         this._data4.push(this._getUser.data[i]);
       }
-      console.log(this._data4);
+      // console.log(this._data4);
     });
   }
 

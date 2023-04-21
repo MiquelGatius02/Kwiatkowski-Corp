@@ -70,9 +70,11 @@ export class RankingComponent implements OnInit {
   evaluar(soft_skill: string, rank_code: number) {
     this.Value = this.evaluation.value;
     this.Value.user_id = this.cacheUser
+
     if (this.authService.UserData.id == this.Value.user_id) {
       console.log("No te puedes evaluar a ti mismo")
     }
+
     this.Value = this.evaluation.value;
     if (soft_skill == "Autonmía e iniciativa") {
       this.Value.soft_skill = 3
@@ -81,13 +83,14 @@ export class RankingComponent implements OnInit {
       this.Value.soft_skill = 2
     }
     else if (soft_skill == "Gestión emocional") {
-      this.Value.soft_skill == 4
+      console.log("aaa")
+      this.Value.soft_skill = 4
     }
     else if (soft_skill == "Habilidades de pensamiento") {
-      this.Value.soft_skill == 5
+      this.Value.soft_skill = 5
     }
     else if (soft_skill == "Responsabilidad") {
-      this.Value.soft_skill == 1
+      this.Value.soft_skill = 1
     }
     this.Value.rank_code = rank_code
     console.log(this.Value)
