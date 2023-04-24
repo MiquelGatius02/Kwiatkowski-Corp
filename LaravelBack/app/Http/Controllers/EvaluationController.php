@@ -49,7 +49,9 @@ class EvaluationController extends Controller
 
 
         $check = RankingData::where('user_id', '=', auth()->user()->id)->where('rank_code', '=', $request->rank_code)->first();
+
         
+
         if ($check->puntosSemanales < $request->puntos) {
             return response()->json([
                 "status" => 1,
@@ -152,6 +154,7 @@ class EvaluationController extends Controller
                     "status" => 1,
                     "msg" => $evaluation
                 ]);
+
             }
         }
     }
