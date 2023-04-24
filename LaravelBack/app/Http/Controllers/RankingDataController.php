@@ -86,7 +86,9 @@ class RankingDataController extends Controller
         ->select('users.id','users.username','users.firstname', 'users.lastname',
         'softSkillsData.Nivel_responsabilidad','softSkillsData.Nivel_cooperacion',
         'softSkillsData.Nivel_autonomia_e_iniciativa','softSkillsData.Nivel_gestion_emocional',
-        'softSkillsData.Nivel_habilidades_de_pensamiento')
+        'softSkillsData.Nivel_habilidades_de_pensamiento','softSkillsData.Puntos_responsabilidad',
+        'softSkillsData.Puntos_cooperacion','softSkillsData.Puntos_autonomia_e_iniciativa',
+        'softSkillsData.Puntos_gestion_emocional','softSkillsData.Puntos_habilidades_de_pensamiento')
         ->get();
 
 
