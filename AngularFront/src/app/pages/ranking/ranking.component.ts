@@ -83,7 +83,6 @@ export class RankingComponent implements OnInit {
       this.Value.soft_skill = 2
     }
     else if (soft_skill == "Gestión emocional") {
-      console.log("aaa")
       this.Value.soft_skill = 4
     }
     else if (soft_skill == "Habilidades de pensamiento") {
