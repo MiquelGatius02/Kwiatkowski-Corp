@@ -200,26 +200,8 @@
           </td>
 
           <td *ngIf="user.id == rankingData.user_id && user.id != 0 && this.authService.UserData.date == undefined">
-            <button class="btn btn-danger" data-toggle="modal" data-target="#modal2">Eliminar</button>
+            <button class="btn btn-danger" (click)="eliminarUsuario(this.rankingData.user_id,this.rankingService.rankCache.id)">Eliminar</button>
           </td>
-          
-          <div id="modal2" class="modal" tabindex="-1" role="dialog" style="color: black; margin-top:12%">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title">¿Desea Borrar?</h5>
-                </div>
-                <div class="modal-body">
-                  <p>¿Estás segur@ de que quieres eliminar este usuario?</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" (click)="eliminarUsuario(this.user.id,this.rankingService.rankCache.id)"
-                    class="btn btn-danger">Eliminar</button>
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                </div>
-              </div>
-            </div>
-          </div>
         </tr>
       </tbody>
     </table>

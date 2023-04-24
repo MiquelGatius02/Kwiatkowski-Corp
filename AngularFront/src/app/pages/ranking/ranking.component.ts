@@ -7,6 +7,7 @@ import { UserData } from 'src/app/interfaces/userData.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { EvaluationService } from 'src/app/services/evaluation.service';
 import { RankingService } from 'src/app/services/ranking.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ranking',
@@ -54,26 +55,64 @@ export class RankingComponent implements OnInit {
   }
 
   eliminarUsuario(usuario: number, id_rank: number) {
-    if (confirm("¿Seguro desea borrar este usuario?")) {
-      this.rankingService.deleteUser(usuario, id_rank);
-      if (this.showAlertDelete == false) {
-        this.showAlertDelete = true;
-        setTimeout(() => {
-          this.showAlertDelete = false;
-        }, 2000);
+    console.log(usuario);
+    console.log(id_rank);
+
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+      title: '¿Desea eliminar este usuario?',
+      text: "!Se borrará de este ranking!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'No, cancelar!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        swalWithBootstrapButtons.fire(
+          '¡Eliminado!',
+          'El usuario se ha eliminado con exito.',
+          'success'
+        ).then((result2) => {
+          if (result2.isConfirmed) {
+            setTimeout(function(){
+            },1000);
+            this.rankingService.deleteUser(usuario, id_rank);
+            window.location.href = '/home/main-page';
+          }
+        })
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        swalWithBootstrapButtons.fire(
+          'Cancelado',
+          'No se ha eliminado ningun usuario.',
+          'error'
+        )
       } else {
-        this.showAlertDelete = false;
+        swalWithBootstrapButtons.fire(
+          'Cancelado',
+          'No se ha eliminado ningun usuario.',
+          'error'
+        )
       }
-    }
+    })
   }
 
   evaluar(soft_skill: string, rank_code: number) {
     this.Value = this.evaluation.value;
     this.Value.user_id = this.cacheUser
 
+
     if (this.authService.UserData.id == this.Value.user_id) {
       console.log("No te puedes evaluar a ti mismo")
     }
+
 
     this.Value = this.evaluation.value;
     if (soft_skill == "Autonmía e iniciativa") {
@@ -83,6 +122,7 @@ export class RankingComponent implements OnInit {
       this.Value.soft_skill = 2
     }
     else if (soft_skill == "Gestión emocional") {
+
       this.Value.soft_skill = 4
     }
     else if (soft_skill == "Habilidades de pensamiento") {
@@ -90,6 +130,7 @@ export class RankingComponent implements OnInit {
     }
     else if (soft_skill == "Responsabilidad") {
       this.Value.soft_skill = 1
+
     }
     this.Value.rank_code = rank_code
     console.log(this.Value)

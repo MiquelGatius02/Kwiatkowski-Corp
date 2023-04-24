@@ -13,7 +13,7 @@
       </form>
     </div>
   </div>
-  <div class="big-layout"  *ngIf="this.authService.UserData.date == undefined" style="color: black">
+  <div class="big-layout" *ngIf="this.authService.UserData.date == undefined" style="color: black">
     <form [formGroup]="createForm" (ngSubmit)="createRanking()">
       <div>
         <div class="form-group">
@@ -35,7 +35,7 @@
 
 
 <div *ngIf="this.authService.UserData.date == undefined">
-  <div class="layout" *ngFor="let ranking of this.rankingService._data1; let i = index">
+  <div class="layout">
     <table class="table " style="color: rgb(255, 255, 255)">
       <thead>
         <tr>
@@ -46,8 +46,8 @@
           <th scope="col">Generar Codigo</th>
         </tr>
       </thead>
-      <tbody>
-        <tr *ngFor="let rank of rankingService._data2;" style="color:white;" scope="row">
+      <tbody *ngFor="let rank of rankingService._data2">
+        <tr style="color:white;" scope="row">
           <td *ngIf="this.rank.id_creador == this.authService.UserData.id">
             {{rank.id}}</td>
           <td *ngIf="this.rank.id_creador == this.authService.UserData.id">
@@ -58,7 +58,8 @@
           <td *ngIf="this.rank.id_creador == this.authService.UserData.id">
             <button (click)="setModalTitle('Eliminar',this.rank)" type="button" class="btn btn-danger">Borrar</button>
           <td *ngIf="this.rank.id_creador == this.authService.UserData.id">
-            <button (click)="setModalTitle('Regenerar',this.rank)" type="button" class="btn btn-success">Generar</button>
+            <button (click)="setModalTitle('Regenerar',this.rank)" type="button"
+              class="btn btn-success">Generar</button>
           </td>
         </tr>
         <br>
