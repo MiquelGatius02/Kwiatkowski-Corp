@@ -16,11 +16,20 @@ return new class extends Migration
             $table->unsignedBigInteger('ranking_id');
             $table->unsignedBigInteger('evaluador');
             $table->unsignedBigInteger('evaluado');
-            $table->unsignedBigInteger('soft_skill');
+            $table->unsignedBigInteger('points');
+            $table->string('soft_skill');
             $table->date('date');
-            $table->foreign('soft_skill')
+            $table->foreign('evaluador')
                 ->references('id')
-                ->on('softSkills')
+                ->on('users')
+                ->onDelete('cascade');
+            $table->foreign('evaluado')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+            $table->foreign('ranking_id')
+                ->references('id')
+                ->on('rankings')
                 ->onDelete('cascade');
         });
     }
