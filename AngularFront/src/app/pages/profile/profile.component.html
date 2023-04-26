@@ -9,9 +9,6 @@
             <h5 class="my-3"></h5>
             <input type="file" accept="image/*" (change)="onFileSelected($event)" style="display:none;" #fileInput>
             <button type="button" class="btn btn-primary" (click)="fileInput.click()">Cambiar imagen</button><br>
-            <div class="alert alert-success" role="alert" *ngIf="showAlert">
-              La imagen ha sido cambiada con éxito.
-            </div>
           </div>
         </div>
       </div>
@@ -80,16 +77,10 @@
                     <button type="submit" class="btn btn-block btn-primary">
                       Cambiar contraseña
                     </button><br>
-                    <div class="alert alert-success" role="alert" *ngIf="showAlertImg">
-                      La contraseña ha sido cambiada con éxito.
-                    </div><br>
                   </div>
                 </div>
               </form>
             </div>
-
-
-
           </div>
         </div>
       </div>

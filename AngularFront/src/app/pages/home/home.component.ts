@@ -68,7 +68,6 @@ export class HomeComponent implements OnInit {
     this.authService.profile()
     this.rankingService.getRanking()
     this.RankingData = this.rankingService._data2
-    // console.log(this.rankingService)ç
     this.checkRanking()
   }
 
