@@ -25,7 +25,7 @@ export class RankingComponent implements OnInit {
     Nivel_autonomia_e_iniciativa: 0, Nivel_cooperacion: 0, Nivel_gestion_emocional: 0, Nivel_habilidades_de_pensamiento: 0, Nivel_responsabilidad: 0, puntos_skill: 0
   }];
 
-  showAlertDelete: boolean = false;
+  resEvaluar: any;
 
   constructor(
     public authService: AuthService,
@@ -51,7 +51,7 @@ export class RankingComponent implements OnInit {
     this.UsersRankingData = this.rankingService._data3;
     this.rankingService.getUser();
     this.User = this.rankingService._data4;
-    console.log(this.User);
+    // console.log(this.User);
   }
 
   eliminarUsuario(usuario: number, id_rank: number) {
@@ -104,13 +104,43 @@ export class RankingComponent implements OnInit {
     })
   }
 
-  evaluar(soft_skill: string, rank_code: number) {
+  evaluar(soft_skill: string, rank_code: number, pts: any) {
+    
     this.Value = this.evaluation.value;
     this.Value.user_id = this.cacheUser
 
-
     if (this.authService.UserData.id == this.Value.user_id) {
-      console.log("No te puedes evaluar a ti mismo")
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+        },
+      })
+  
+      swalWithBootstrapButtons.fire({
+        title: '¡No te puedes evaluar a ti mismo!',
+        text: "¡No es posible realizar la evaluación!",
+        icon: 'error',
+        confirmButtonText: 'OK',
+        reverseButtons: true
+      }).then((result) => {
+      })
+    }else if(pts < this.Value.puntos){
+
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+        },
+      })
+  
+      swalWithBootstrapButtons.fire({
+        title: '¡No se ha realizado la evaluación!',
+        text: "¡No es posible realizar la evaluación ya que no tienes tantos puntos!",
+        icon: 'error',
+        confirmButtonText: 'OK',
+        reverseButtons: true
+      }).then((result) => {
+      })
+
     }
 
 
@@ -132,10 +162,9 @@ export class RankingComponent implements OnInit {
       this.Value.soft_skill = 1
 
     }
-    this.Value.rank_code = rank_code
-    console.log(this.Value)
-    this.evaluationService.evaluar(this.Value)
-    /*    window.location.reload(); */
+    this.Value.rank_code = rank_code;
+    this.evaluationService.evaluar(this.Value);
+
   }
 
   public modalTitle: string = '';

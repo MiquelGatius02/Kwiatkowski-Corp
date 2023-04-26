@@ -210,9 +210,7 @@
         </tr>
       </tbody>
     </table>
-    <div class="alert alert-success" role="alert" *ngIf="showAlertDelete">
-      Se ha eliminado un usuario del ranking.
-    </div>
+
   </div>
 </div>
 
@@ -261,17 +259,16 @@
 
             <div class="form-group">
               <label for="puntos" style="font-size: 14px;">Asignar puntos</label>
-              <input type="number" max="{{this.authService.UserData.puntosSemanales}}" class="form-control"
-                formControlName="puntos" max="1000" />
+              <input type="number" max="{{this.ranking.puntosSemanales}}" class="form-control"
+                formControlName="puntos" />
 
               <small *ngIf="this.ranking.user_id == this.authService.UserData.id" id="aviso"
                 class="form-text text-muted">Solo dispone de {{this.ranking.puntosSemanales}} puntos semanales.</small>
             </div>
           </div>
 
-
           <div class="modal-footer">
-            <button type="button" class="btn btn-success" (click)="evaluar(this.modalTitle, this.ranking.rank_code)"
+            <button type="button" class="btn btn-success" (click)="evaluar(this.modalTitle, this.ranking.rank_code, this.ranking.puntosSemanales)"
               data-dismiss="modal">Confirmar</button>
           </div>
 
@@ -280,4 +277,3 @@
     </div>
   </div>
 </div>
-

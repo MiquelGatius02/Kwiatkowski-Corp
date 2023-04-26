@@ -9,7 +9,10 @@ import { TokenService } from './token.service';
 export class EvaluationService {
 
   _data1: evaluationData[] = [{ id: 0, ranking_id: 0, evaluador: 0, evaluado: 0, points: 0, soft_skill: 0, date: 0 }];
-  _getEvaluation: any
+  _getEvaluation: any;
+  _resultadoEvaluar: any;
+  resultadoEvaluar: any;
+
   constructor(
     private http: HttpClient,
     private token: TokenService,
@@ -36,7 +39,7 @@ export class EvaluationService {
     const tokenCache: any = this.token.getToken();
 
     this.http.post("http://127.0.0.1:8000/api/Evaluate", evaluation, { headers: new HttpHeaders().set('Authorization', tokenCache) }).subscribe(data => {
-      console.log(data)
+      this._resultadoEvaluar = data;
     })
   }
 }
