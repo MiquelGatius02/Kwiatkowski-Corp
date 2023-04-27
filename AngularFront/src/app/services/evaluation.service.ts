@@ -15,7 +15,7 @@ export class EvaluationService {
   _getEvaluation: any;
   _resultadoEvaluar: any;
   resultadoEvaluar: any;
-
+  
   EvaluationDisplay: any[] = [{ id: 0, ranking_id: 0, evaluador: 0, evaluado: 0, points: 0, soft_skill: 0, date: 0 }]
   User: UserData[] = [{
     id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "",
