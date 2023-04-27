@@ -1,6 +1,4 @@
 <div class="layout">
-  <h3 class="card-title" style="color: rgb(255, 255, 255)">Ranking:</h3>
-  <!--    {{this.rankingService.rankCache.rank_name}}</h3> -->
   <br><br>
   <div>
     <table class="table" style="color: rgb(255, 255, 255)">
@@ -13,22 +11,24 @@
           <th scope="col">Soft Skill</th>
           <th scope="col">Puntos</th>
           <th scope="col">Fecha</th>
-          <!--             <th scope="col" *ngIf="this.authService.UserData.date == undefined">Eliminar</th> -->
+          <th scope="col" *ngIf="this.authService.UserData.date == undefined">Eliminar</th>
         </tr>
       </thead>
-      <!--      <tbody *ngFor="let rankingData of this.rankingService._data3;let i = index">
-          <tr *ngFor="let user of User" style="color:white;">
-            <td *************ngIf="user.id == rankingData.user_id && user.id != 0 && user.id != User[0].id && i == 0"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/fb9cfb5b-aa09-4dc2-b19b-931576776dae/de4fujh-3cf64804-b0b2-4d1a-8f60-928f1ddeb575.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2ZiOWNmYjViLWFhMDktNGRjMi1iMTliLTkzMTU3Njc3NmRhZVwvZGU0ZnVqaC0zY2Y2NDgwNC1iMGIyLTRkMWEtOGY2MC05MjhmMWRkZWI1NzUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.5T7yYnOROSIYA5UVeNWHfc-lfC5EcBmAbgtnGzXv5Pc" alt="top 1" width="20" height="20"></td>
-            <td *ngIf="user.id == rankingData.user_id && user.id != 0 && user.id != User[0].id && i > 0 && i < 4"><img src="https://images.squarespace-cdn.com/content/v1/60cb14f95f1f8c5346a99c66/e6768f5a-c988-4fb6-9874-424576d1e7bd/Gold.png" alt="top 1" width="20" height="20"></td>
-            <td *ngIf="user.id == rankingData.user_id && user.id != 0 && user.id != User[0].id && i > 3 && i < 10"><img src="https://images.squarespace-cdn.com/content/v1/60cb14f95f1f8c5346a99c66/37c97baa-c49e-43cf-b509-3cd136e64c7c/Silver.png" alt="top 1" width="20" height="20"></td>
-            <td *ngIf="user.id == rankingData.user_id && user.id != 0 && user.id != User[0].id && i > 9"><img src="https://images.squarespace-cdn.com/content/v1/60cb14f95f1f8c5346a99c66/fd852979-d298-4d4d-a5c7-356250ff9e26/Bronze.png" alt="top 1" width="20" height="20"></td>
-            <td *ngIf="user.id == rankingData.user_id && user.id != 0 && user.id != User[0].id">{{user.username}}</td>
-            <td *ngIf="user.id == rankingData.user_id && user.id != 0 && user.id != User[0].id">{{user.firstname}}</td>
-            <td *ngIf="user.id == rankingData.user_id && user.id != 0 && user.id != User[0].id">{{user.lastname}}</td>
-            <td *ngIf="user.id == rankingData.user_id && user.id != 0 && user.id != User[0].id">{{rankingData.points}}</td>
-            <td *ngIf="user.id == rankingData.user_id && user.id != 0 && user.id != User[0].id && this.authService.UserData.date == undefined"><button class="btn btn-danger" (click)="eliminarUsuario(this.user.id,this.rankingService.rankCache.id)">Eliminar</button></td>
-          </tr>
-        </tbody> -->
+      <tbody *ngFor="let evaluationData of this.EvaluationDisplay let i = index">
+        <tr style="color:white;">
+          <td>{{evaluationData.id}}</td>
+          <td>{{evaluationData.ranking_id}}</td>
+          <td>{{evaluationData.evaluador}}</td>
+          <td>{{evaluationData.evaluado}}</td>
+          <td>{{evaluationData.soft_skill}}</td>
+          <td>{{evaluationData.points}}</td>
+          <td>{{evaluationData.date}}</td>
+          <td *ngIf="this.authService.UserData.date == undefined">
+            <button class="btn btn-danger"
+              (click)="eliminarEvaluation(this.evaluationData.id, this.evaluationData.points, this.evaluationData.soft_skill)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
     </table>
     <!-- <div class="alert alert-success" role="alert" *ngIf="showAlertDelete">
       Se ha eliminado un usuario del ranking.

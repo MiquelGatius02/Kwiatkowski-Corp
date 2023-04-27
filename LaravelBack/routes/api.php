@@ -56,6 +56,7 @@ Route::post('createEvaluation', [EvaluationController::class, 'createEvaluation'
 
 
 Route::group(['middleware' => ["auth:sanctum"]], function () {
+    Route::post('deleteEvaluation', [EvaluationController::class, 'deleteEvaluation']);
     Route::post('Evaluate', [EvaluationController::class, 'Evaluate']);
     Route::post('createAssignmentData', [AssignmentController::class, 'createAssignmentData']);
     Route::get('getAssignment', [AssignmentController::class, 'getAssignment']);
