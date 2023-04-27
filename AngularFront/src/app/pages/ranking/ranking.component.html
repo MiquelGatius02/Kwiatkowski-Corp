@@ -23,16 +23,16 @@
         <tr *ngFor="let user of User" style="color:white;">
           <td *ngIf="user.id == rankingData.user_id && user.id != 0 && i == 0"><img
               src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/fb9cfb5b-aa09-4dc2-b19b-931576776dae/de4fujh-3cf64804-b0b2-4d1a-8f60-928f1ddeb575.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2ZiOWNmYjViLWFhMDktNGRjMi1iMTliLTkzMTU3Njc3NmRhZVwvZGU0ZnVqaC0zY2Y2NDgwNC1iMGIyLTRkMWEtOGY2MC05MjhmMWRkZWI1NzUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.5T7yYnOROSIYA5UVeNWHfc-lfC5EcBmAbgtnGzXv5Pc"
-              alt="top 1" width="20" height="20"></td>
+              alt="top 1" width="40" height="40"></td>
           <td *ngIf="user.id == rankingData.user_id && user.id != 0 && i > 0 && i < 4"><img
               src="https://images.squarespace-cdn.com/content/v1/60cb14f95f1f8c5346a99c66/e6768f5a-c988-4fb6-9874-424576d1e7bd/Gold.png"
-              alt="top 1" width="20" height="20"></td>
+              alt="top 1" width="40" height="40"></td>
           <td *ngIf="user.id == rankingData.user_id && user.id != 0 && i > 3 && i < 10"><img
               src="https://images.squarespace-cdn.com/content/v1/60cb14f95f1f8c5346a99c66/37c97baa-c49e-43cf-b509-3cd136e64c7c/Silver.png"
-              alt="top 1" width="20" height="20"></td>
+              alt="top 1" width="40" height="40"></td>
           <td *ngIf="user.id == rankingData.user_id && user.id != 0 && i > 9"><img
               src="https://images.squarespace-cdn.com/content/v1/60cb14f95f1f8c5346a99c66/fd852979-d298-4d4d-a5c7-356250ff9e26/Bronze.png"
-              alt="top 1" width="20" height="20"></td>
+              alt="top 1" width="40" height="40"></td>
           <td *ngIf="user.id == rankingData.user_id && user.id != 0">{{user.username}}</td>
           <td *ngIf="user.id == rankingData.user_id && user.id != 0">{{user.firstname}}</td>
           <td *ngIf="user.id == rankingData.user_id && user.id != 0">{{user.lastname}}</td>
@@ -267,8 +267,9 @@
           </td>
 
           <td *ngIf="user.id == rankingData.user_id && user.id != 0 && this.authService.UserData.date == undefined">
-            <button class="btn btn-danger" data-toggle="modal" data-target="#modal2">Eliminar</button>
+            <button class="btn btn-danger" (click)="eliminarUsuario(this.rankingData.user_id,this.rankingService.rankCache.id)">Eliminar</button>
           </td>
+
 
           <div id="modal2" class="modal" tabindex="-1" role="dialog" style="color: black; margin-top:12%">
             <div class="modal-dialog" role="document">
@@ -287,12 +288,11 @@
               </div>
             </div>
           </div>
+
         </tr>
       </tbody>
     </table>
-    <div class="alert alert-success" role="alert" *ngIf="showAlertDelete">
-      Se ha eliminado un usuario del ranking.
-    </div>
+
   </div>
 </div>
 
@@ -341,17 +341,16 @@
 
             <div class="form-group">
               <label for="puntos" style="font-size: 14px;">Asignar puntos</label>
-              <input type="number" max="{{this.authService.UserData.puntosSemanales}}" class="form-control"
-                formControlName="puntos" max="1000" />
+              <input type="number" max="{{this.ranking.puntosSemanales}}" class="form-control"
+                formControlName="puntos" />
 
               <small *ngIf="this.ranking.user_id == this.authService.UserData.id" id="aviso"
                 class="form-text text-muted">Solo dispone de {{this.ranking.puntosSemanales}} puntos semanales.</small>
             </div>
           </div>
 
-
           <div class="modal-footer">
-            <button type="button" class="btn btn-success" (click)="evaluar(this.modalTitle, this.ranking.rank_code)"
+            <button type="button" class="btn btn-success" (click)="evaluar(this.modalTitle, this.ranking.rank_code, this.ranking.puntosSemanales)"
               data-dismiss="modal">Confirmar</button>
           </div>
 

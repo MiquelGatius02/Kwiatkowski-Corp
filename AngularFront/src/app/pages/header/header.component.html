@@ -33,8 +33,6 @@
               routerLink="home/assignment" type="button">Tareas</button></li>
           <li *ngIf="this.authService.UserData.date != undefined"><button class="dropdown-item" routerLink=""
               type="button">Mis tareas</button></li>
-          <li *ngIf="this.authService.UserData.date != undefined"><button class="dropdown-item"
-              routerLink="home/evaluations" type="button">Evaluar</button></li>
           <li>
             <button class="dropdown-item" type="button" data-toggle="modal" data-target="#exampleModal">
               Cerrar sesión

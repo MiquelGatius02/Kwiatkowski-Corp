@@ -68,7 +68,6 @@ export class HomeComponent implements OnInit {
     this.authService.profile()
     this.rankingService.getRanking()
     this.RankingData = this.rankingService._data2
-    // console.log(this.rankingService)ç
     this.checkRanking()
   }
 
@@ -76,7 +75,6 @@ export class HomeComponent implements OnInit {
     if (this.authService.UserData.date != undefined) {
       for (let i = 0; i < this.UserRankingData.length; i++) {
         if (this.UserRankingData[i].user_id == this.profileData.id) {
-          // console.log(this.UserRankingData[i].user_id && this.profileData.id)
           this.suscrito = true;
         }
         else {
@@ -85,15 +83,11 @@ export class HomeComponent implements OnInit {
       }
     }
     else {
-      // console.log("aqui")
       for (let i = 0; i < this.rankingService._data2.length; i++) {
         if (this.rankingService._data2[i].id_creador == this.profileData.id) {
-          // console.log(this.rankingService._data2[i].id_creador)
-          // console.log(this.rankingService._data2)
           if (i != 0) {
             this.suscrito = true;
           }
-          // console.log(this.suscrito)
         }
         else {
           this.suscrito = false;

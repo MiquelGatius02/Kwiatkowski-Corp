@@ -7,6 +7,7 @@ import { UserData } from 'src/app/interfaces/userData.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { EvaluationService } from 'src/app/services/evaluation.service';
 import { RankingService } from 'src/app/services/ranking.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ranking',
@@ -23,8 +24,6 @@ export class RankingComponent implements OnInit {
     id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "",
     Nivel_autonomia_e_iniciativa: 0, Nivel_cooperacion: 0, Nivel_gestion_emocional: 0, Nivel_habilidades_de_pensamiento: 0, Nivel_responsabilidad: 0, puntos_skill: 0
   }];
-
-  showAlertDelete: boolean = false;
 
   constructor(
     public authService: AuthService,
@@ -46,34 +45,101 @@ export class RankingComponent implements OnInit {
     this.User = [];
 
     this.RankingData = this.rankingService._data2
+    console.log(this.rankingService.rankCache.id);
     this.rankingService.getRankingDataByCode(this.rankingService.rankCache.id)
     this.UsersRankingData = this.rankingService._data3;
     this.rankingService.getUser();
     this.User = this.rankingService._data4;
-    console.log(this.User);
+    // console.log(this.User);
   }
 
   eliminarUsuario(usuario: number, id_rank: number) {
-    if (confirm("¿Seguro desea borrar este usuario?")) {
-      this.rankingService.deleteUser(usuario, id_rank);
-      if (this.showAlertDelete == false) {
-        this.showAlertDelete = true;
-        setTimeout(() => {
-          this.showAlertDelete = false;
-        }, 2000);
+    console.log(usuario);
+    console.log(id_rank);
+
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+      title: '¿Desea eliminar este usuario?',
+      text: "!Se borrará de este ranking!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'No, cancelar!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        swalWithBootstrapButtons.fire(
+          '¡Eliminado!',
+          'El usuario se ha eliminado con exito.',
+          'success'
+        ).then((result2) => {
+          if (result2.isConfirmed) {
+            setTimeout(function(){
+            },1000);
+            this.rankingService.deleteUser(usuario, id_rank);
+            this.ngOnInit();
+          }
+        })
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        swalWithBootstrapButtons.fire(
+          'Cancelado',
+          'No se ha eliminado ningun usuario.',
+          'error'
+        )
       } else {
-        this.showAlertDelete = false;
+        swalWithBootstrapButtons.fire(
+          'Cancelado',
+          'No se ha eliminado ningun usuario.',
+          'error'
+        )
       }
-    }
+    })
   }
 
-  evaluar(soft_skill: string, rank_code: number) {
+  evaluar(soft_skill: string, rank_code: number, pts: any) {
+    
     this.Value = this.evaluation.value;
     this.Value.user_id = this.cacheUser
 
-
     if (this.authService.UserData.id == this.Value.user_id) {
-      console.log("No te puedes evaluar a ti mismo")
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+        },
+      })
+  
+      swalWithBootstrapButtons.fire({
+        title: '¡No te puedes evaluar a ti mismo!',
+        text: "¡No es posible realizar la evaluación!",
+        icon: 'error',
+        confirmButtonText: 'OK',
+        reverseButtons: true
+      }).then((result) => {
+      })
+    }else if(pts < this.Value.puntos){
+
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+        },
+      })
+  
+      swalWithBootstrapButtons.fire({
+        title: '¡No se ha realizado la evaluación!',
+        text: "¡No es posible realizar la evaluación ya que no tienes tantos puntos!",
+        icon: 'error',
+        confirmButtonText: 'OK',
+        reverseButtons: true
+      }).then((result) => {
+      })
+
     }
 
 
@@ -95,10 +161,24 @@ export class RankingComponent implements OnInit {
       this.Value.soft_skill = 1
 
     }
-    this.Value.rank_code = rank_code
-    console.log(this.Value)
-    this.evaluationService.evaluar(this.Value)
-    /*    window.location.reload(); */
+    this.Value.rank_code = rank_code;
+    this.evaluationService.evaluar(this.Value);
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+      },
+    })
+
+    swalWithBootstrapButtons.fire({
+      title: '¡Alumno evaluado!',
+      text: "¡Has evaluado de forma exitosa!",
+      icon: 'success',
+      confirmButtonText: 'OK',
+      reverseButtons: true
+    }).then((result) => {
+      this.ngOnInit();
+    })
+
   }
 
   public modalTitle: string = '';
