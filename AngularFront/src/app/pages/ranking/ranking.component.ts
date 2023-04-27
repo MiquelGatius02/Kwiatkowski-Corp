@@ -25,8 +25,6 @@ export class RankingComponent implements OnInit {
     Nivel_autonomia_e_iniciativa: 0, Nivel_cooperacion: 0, Nivel_gestion_emocional: 0, Nivel_habilidades_de_pensamiento: 0, Nivel_responsabilidad: 0, puntos_skill: 0
   }];
 
-  resEvaluar: any;
-
   constructor(
     public authService: AuthService,
     public rankingService: RankingService,
@@ -47,6 +45,7 @@ export class RankingComponent implements OnInit {
     this.User = [];
 
     this.RankingData = this.rankingService._data2
+    console.log(this.rankingService.rankCache.id);
     this.rankingService.getRankingDataByCode(this.rankingService.rankCache.id)
     this.UsersRankingData = this.rankingService._data3;
     this.rankingService.getUser();
@@ -85,7 +84,7 @@ export class RankingComponent implements OnInit {
             setTimeout(function(){
             },1000);
             this.rankingService.deleteUser(usuario, id_rank);
-            window.location.href = '/home/main-page';
+            this.ngOnInit();
           }
         })
       } else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -164,6 +163,21 @@ export class RankingComponent implements OnInit {
     }
     this.Value.rank_code = rank_code;
     this.evaluationService.evaluar(this.Value);
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+      },
+    })
+
+    swalWithBootstrapButtons.fire({
+      title: '¡Alumno evaluado!',
+      text: "¡Has evaluado de forma exitosa!",
+      icon: 'success',
+      confirmButtonText: 'OK',
+      reverseButtons: true
+    }).then((result) => {
+      this.ngOnInit();
+    })
 
   }
 
