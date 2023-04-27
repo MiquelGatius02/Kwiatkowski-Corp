@@ -17,4 +17,8 @@ h5 {
   height: 30px;
   width: 30px;
   box-shadow: 0 2px 4px darkslategray;
-}/*# sourceMappingURL=assignment.component.css.map */
+}
+
+.container{
+  margin-top: 2%;
+}

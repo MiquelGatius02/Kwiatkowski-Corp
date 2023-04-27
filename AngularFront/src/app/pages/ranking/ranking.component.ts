@@ -45,7 +45,6 @@ export class RankingComponent implements OnInit {
     this.User = [];
 
     this.RankingData = this.rankingService._data2
-    console.log(this.rankingService.rankCache.id);
     this.rankingService.getRankingDataByCode(this.rankingService.rankCache.id)
     this.UsersRankingData = this.rankingService._data3;
     this.rankingService.getUser();
@@ -54,9 +53,6 @@ export class RankingComponent implements OnInit {
   }
 
   eliminarUsuario(usuario: number, id_rank: number) {
-    console.log(usuario);
-    console.log(id_rank);
-
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',

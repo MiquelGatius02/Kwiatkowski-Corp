@@ -2,8 +2,8 @@
   <h3 class="card-title" style="color: rgb(255, 255, 255)">Ranking:
     {{this.rankingService.rankCache.rank_name}}</h3>
   <br><br>
-  <div>
-    <table class="table" style="color: rgb(255, 255, 255)">
+  <div class="layout">
+    <table  class="table" style="color: rgb(255, 255, 255)">
       <thead>
         <tr>
           <th scope="col">Posicion</th>
@@ -38,7 +38,6 @@
           <td *ngIf="user.id == rankingData.user_id && user.id != 0">{{user.lastname}}</td>
           <td *ngIf="user.id == rankingData.user_id && user.id != 0">{{rankingData.points}}</td>
           <td *ngIf="user.id == rankingData.user_id && user.id != 0">
-
 
             <button *ngIf="user.Nivel_autonomia_e_iniciativa == 0" style="background-color: transparent;border:none"
               class="btnSkills" data-toggle="modal" data-target="#modal1"
@@ -84,7 +83,6 @@
           </td>
 
           <td *ngIf="user.id == rankingData.user_id && user.id != 0">
-
 
             <button *ngIf="user.Nivel_cooperacion == 0" style="background-color: transparent;border:none"
               class="btnSkills" data-toggle="modal" data-target="#modal1"
@@ -222,7 +220,6 @@
 
           <td *ngIf="user.id == rankingData.user_id && user.id != 0">
 
-
             <button *ngIf="user.Nivel_responsabilidad == 0" style="background-color: transparent;border:none"
               class="btnSkills" data-toggle="modal" data-target="#modal1"
               (click)="setModalTitle('Responsabilidad', this.rankingData.user_id)">
@@ -269,26 +266,6 @@
           <td *ngIf="user.id == rankingData.user_id && user.id != 0 && this.authService.UserData.date == undefined">
             <button class="btn btn-danger" (click)="eliminarUsuario(this.rankingData.user_id,this.rankingService.rankCache.id)">Eliminar</button>
           </td>
-
-
-          <div id="modal2" class="modal" tabindex="-1" role="dialog" style="color: black; margin-top:12%">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title">¿Desea Borrar?</h5>
-                </div>
-                <div class="modal-body">
-                  <p>¿Estás segur@ de que quieres eliminar este usuario?</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" (click)="eliminarUsuario(this.user.id,this.rankingService.rankCache.id)"
-                    class="btn btn-danger">Eliminar</button>
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
         </tr>
       </tbody>
     </table>
@@ -319,7 +296,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-dismiss="modal" aria-label="Close"
-          data-target="#modal3">Puntuar</button>
+          data-target="#modal3" *ngIf="this.authService.UserData.date != undefined">Puntuar</button>
       </div>
 
     </div>

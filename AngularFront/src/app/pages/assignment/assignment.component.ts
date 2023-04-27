@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { delay } from 'rxjs';
 import { assignmentData } from 'src/app/interfaces/assignmentData';
 import { assignmentData_info } from 'src/app/interfaces/assignmentData_info';
 import { RankData } from 'src/app/interfaces/rankData.interface ';
@@ -9,6 +8,8 @@ import { RankingUserData } from 'src/app/interfaces/rankingUserData.interface';
 import { AssignmentsService } from 'src/app/services/assignments.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { RankingService } from 'src/app/services/ranking.service';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-assignment',
@@ -44,60 +45,139 @@ export class AssignmentComponent implements OnInit {
     this.RankingData.splice(0, 1)
     this.assignmentService.getAssignment();
     this.Assignments = this.assignmentService._data1;
-
-    console.log(this.Assignments)
   }
 
   delAssignment(id: number) {
-    console.log(id)
-    const assignmentCache: assignmentData = { id: 0, assignment_name: "", rank_code: 0, prof_id: 0 }
-    assignmentCache.id = id;
-    this.assignmentService.delAssignment(assignmentCache).subscribe(
-      (result) => {
+
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
       },
-      (error) => {
-        this.newAssignment = error.error;
-      },
-      () => {
-        this.newAssignment.reset();
-        window.location.reload();
+      buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+      title: '¿Desea eliminar esta tarea?',
+      text: "!Se borrará esta tarea de forma definitiva!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'No, cancelar!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const assignmentCache: assignmentData = { id: 0, assignment_name: "", rank_code: 0, prof_id: 0 }
+        assignmentCache.id = id;
+        this.assignmentService.delAssignment(assignmentCache).subscribe(
+          (result) => {
+          },
+          (error) => {
+            this.newAssignment = error.error;
+          },
+          () => {
+            swalWithBootstrapButtons.fire(
+              'Eliminado',
+              'Se ha eliminado una de las tareas.',
+              'success'
+            ).then((result) => {
+              if (result.isConfirmed) {
+                this.newAssignment.reset();
+                window.location.reload();
+              }else{
+                this.newAssignment.reset();
+                window.location.reload();
+              }
+            })
+          }
+        );
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        swalWithBootstrapButtons.fire(
+          'Cancelado',
+          'No se ha eliminado ninguna tarea.',
+          'error'
+        )
+      } else {
+        swalWithBootstrapButtons.fire(
+          'Cancelado',
+          'No se ha eliminado ninguna tarea.',
+          'error'
+        )
       }
-    );
+    })
   }
 
   onSubmit() {
-    this.Value = this.newAssignment.value;
-    this.Value.prof_id = this.authService.UserData.id
-    this.rankingService.getRankingDataByCode(this.Value.rank_code)
-    this.assignmentService.createAssignment(this.newAssignment.value).subscribe(
-      (result) => {
-        console.log(result)
-        this.Value = result;
 
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
       },
-      (error) => {
-        this.newAssignment = error.error;
-      },
-      () => {
-        this.AssignmentsData.assignment_id = this.Value.id;
-        this.AssignmentsData.points = 0;
-        console.log(this.rankingService._data3.length)
-        for (let i = 0; i < this.rankingService._data3.length; i++) {
-          this.AssignmentsData.user_id = this.rankingService._data3[i].user_id
-          console.log(this.AssignmentsData)
-          this.assignmentService.createAssignmentData(this.AssignmentsData).subscribe(
-            (result) => {
-              console.log(result)
+      buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+      title: '¿Desea crear una tarea?',
+      text: "!Se creará una tarea!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, crear',
+      cancelButtonText: 'No, cancelar!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.Value = this.newAssignment.value;
+        this.Value.prof_id = this.authService.UserData.id
+        if (this.Value.rank_code == '' || this.Value.rank_code == undefined) {
+          swalWithBootstrapButtons.fire(
+            'Cancelado',
+            'No se ha creado ninguna tarea ya que no se puede crear una tarea sin asignarle un ranking.',
+            'error'
+          ).then((result) => {
+            if (result.isConfirmed) {
+              window.location.reload();
+            }else{
+              window.location.reload();
             }
-          )
+          })
         }
+        this.rankingService.getRankingDataByCode(this.Value.rank_code)
+        this.assignmentService.createAssignment(this.newAssignment.value).subscribe(
+          (result) => {
+            this.Value = result;
 
-        setTimeout(function () {
-          window.location.reload();
-        }, 1000);
-
+          },
+          (error) => {
+            this.newAssignment = error.error;
+          },
+          () => {
+            this.AssignmentsData.assignment_id = this.Value.id;
+            this.AssignmentsData.points = 0;
+            for (let i = 0; i < this.rankingService._data3.length; i++) {
+              this.AssignmentsData.user_id = this.rankingService._data3[i].user_id
+              this.assignmentService.createAssignmentData(this.AssignmentsData).subscribe(
+                (result) => {
+                }
+              )
+            }
+            window.location.reload();
+          }
+        );
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        swalWithBootstrapButtons.fire(
+          'Cancelado',
+          'No se ha creado ninguna tarea.',
+          'error'
+        )
+      } else {
+        swalWithBootstrapButtons.fire(
+          'Cancelado',
+          'No se ha creado ninguna tarea.',
+          'error'
+        )
       }
-    );
+    })
   }
 
 

@@ -254,7 +254,7 @@ export class HomeComponent implements OnInit {
         showCancelButton: true,
         confirmButtonText: 'Sí, eliminarlo',
         cancelButtonText: 'No, cancelar!',
-        reverseButtons: true
+        reverseButtons: true,
       }).then((result) => {
         if (result.isConfirmed) {
           swalWithBootstrapButtons.fire(

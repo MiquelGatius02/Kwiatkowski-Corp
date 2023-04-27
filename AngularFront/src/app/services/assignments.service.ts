@@ -56,10 +56,7 @@ export class AssignmentsService {
   }
 
   public changePoints(rank: setPoints) {
-    console.log(rank)
-    return this.http.post("http://127.0.0.1:8000/api/setPoints", rank).subscribe(data => {
-      console.log(data)
-    })
+    return this.http.post("http://127.0.0.1:8000/api/setPoints", rank).subscribe(data => {})
   }
 }
 
