@@ -18,7 +18,7 @@ export class EvaluationService {
     id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "",
     Nivel_autonomia_e_iniciativa: 0, Nivel_cooperacion: 0, Nivel_gestion_emocional: 0, Nivel_habilidades_de_pensamiento: 0, Nivel_responsabilidad: 0, puntos_skill: 0
   }];
-  datosDelete: evaluationDelete = { id: 0, puntos: 0, soft_skill: 0 }
+  datosDelete: evaluationDelete = { id: 0, soft_skill: 0, puntos: 0 }
   constructor(
     private http: HttpClient,
     private token: TokenService,
