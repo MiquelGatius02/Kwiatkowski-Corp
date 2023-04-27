@@ -11,7 +11,7 @@
       <label for="">Ranking</label>
       <div class="form-group">
         <select formControlName="rank_code">
-          <option *ngFor="let rank of RankingData" value={{rank.id}}>{{rank.rank_name}}</option>
+          <option *ngFor="let rank of  this.rankingService._data2" value={{rank.id}}>{{rank.rank_name}}</option>
         </select>
       </div>
     </th>
@@ -24,7 +24,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5>Se ha creado un nuevo ranking</h5>
-              <button  class="close " data-dismiss="modal" >
+              <button class="close " data-dismiss="modal">
                 <span>&times;</span>
               </button>
             </div>
