@@ -200,16 +200,6 @@ export class HomeComponent implements OnInit {
     return code;
   }
 
-  verPeticiones() {
-    this.petitionsService.getPetitions(this.authService.UserData.id);
-    this.PetitionsData = this.petitionsService.dataPetitions;
-    if (this.showTable == false) {
-      this.showTable = true;
-    } else {
-      this.showTable = false;
-    }
-  }
-
   regenerarCodigo(rank: RankData) {
     let codeNuevo = this.generateRankCode();
     this.rankingService.regenerarCodigo(rank, codeNuevo);
