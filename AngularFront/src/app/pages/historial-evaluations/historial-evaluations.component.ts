@@ -38,23 +38,25 @@ export class HistorialEvaluationsComponent implements OnInit {
   }
 
   eliminarEvaluation(usuario: number, soft_skill: any, puntos: number) {
-    if (soft_skill == "Responsabilidad") {
+    console.log(soft_skill)
+    if (soft_skill.includes("Responsabilidad")) {
       soft_skill = 1
     }
-    else if (soft_skill == "Gestión emocional") {
+    else if (soft_skill.includes("Gesti")) {
       soft_skill = 2
     }
-    else if (soft_skill == "Cooperación") {
+    else if (soft_skill.includes("Autonom")) {
       soft_skill = 3
     }
-    else if (soft_skill == "Autonomía e iniciativa") {
+    else if (soft_skill.includes("Cooperaci")) {
       soft_skill = 4
     }
-    else if (soft_skill == "Habilidades de pensamiento") {
+    else if (soft_skill.includes("Habilidades de pensamiento")) {
       soft_skill = 5
     }
+    console.log(soft_skill)
     if (confirm("¿Seguro desea borrar este usuario?")) {
-      this.evaluation.deleteUser(usuario, puntos, soft_skill);
+      this.evaluation.deleteUser(usuario, soft_skill, puntos);
       if (this.showAlertDelete == false) {
         this.showAlertDelete = true;
         setTimeout(() => {
