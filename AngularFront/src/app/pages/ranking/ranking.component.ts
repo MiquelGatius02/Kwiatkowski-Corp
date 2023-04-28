@@ -120,7 +120,7 @@ export class RankingComponent implements OnInit {
       }).then((result) => {
       })
     }else if(pts < this.Value.puntos){
-
+      
       const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
           confirmButton: 'btn btn-success',
@@ -135,45 +135,43 @@ export class RankingComponent implements OnInit {
         reverseButtons: true
       }).then((result) => {
       })
-
+    }else{
+      this.Value = this.evaluation.value;
+      if (soft_skill == "Autonmía e iniciativa") {
+        this.Value.soft_skill = 3
+      }
+      else if (soft_skill == "Cooperación") {
+        this.Value.soft_skill = 2
+      }
+      else if (soft_skill == "Gestión emocional") {
+  
+        this.Value.soft_skill = 4
+      }
+      else if (soft_skill == "Habilidades de pensamiento") {
+        this.Value.soft_skill = 5
+      }
+      else if (soft_skill == "Responsabilidad") {
+        this.Value.soft_skill = 1
+  
+      }
+      this.Value.rank_code = rank_code;
+      this.evaluationService.evaluar(this.Value);
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+        },
+      })
+  
+      swalWithBootstrapButtons.fire({
+        title: '¡Alumno evaluado!',
+        text: "¡Has evaluado de forma exitosa!",
+        icon: 'success',
+        confirmButtonText: 'OK',
+        reverseButtons: true
+      }).then((result) => {
+        this.ngOnInit();
+      })
     }
-
-
-    this.Value = this.evaluation.value;
-    if (soft_skill == "Autonmía e iniciativa") {
-      this.Value.soft_skill = 3
-    }
-    else if (soft_skill == "Cooperación") {
-      this.Value.soft_skill = 2
-    }
-    else if (soft_skill == "Gestión emocional") {
-
-      this.Value.soft_skill = 4
-    }
-    else if (soft_skill == "Habilidades de pensamiento") {
-      this.Value.soft_skill = 5
-    }
-    else if (soft_skill == "Responsabilidad") {
-      this.Value.soft_skill = 1
-
-    }
-    this.Value.rank_code = rank_code;
-    this.evaluationService.evaluar(this.Value);
-    const swalWithBootstrapButtons = Swal.mixin({
-      customClass: {
-        confirmButton: 'btn btn-success',
-      },
-    })
-
-    swalWithBootstrapButtons.fire({
-      title: '¡Alumno evaluado!',
-      text: "¡Has evaluado de forma exitosa!",
-      icon: 'success',
-      confirmButtonText: 'OK',
-      reverseButtons: true
-    }).then((result) => {
-      this.ngOnInit();
-    })
 
   }
 
