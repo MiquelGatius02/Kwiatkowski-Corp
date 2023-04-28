@@ -1,73 +1,41 @@
-<div class="table">
-  <form class="form-signin" [formGroup]="newAssignment" (ngSubmit)="onSubmit()">
-
-    <th>
-      <label for="">Nombre de la tarea</label>
-      <div class="form-group">
-        <input type="text" class="form-control" formControlName="assignment_name" />
-      </div>
-    </th>
-    <th>
-      <label for="">Ranking</label>
-      <div class="form-group">
-        <select formControlName="rank_code">
-          <option *ngFor="let rank of  this.rankingService._data2" value={{rank.id}}>{{rank.rank_name}}</option>
-        </select>
-      </div>
-    </th>
-    <th><br>
-      <button type="submit" class="btn btn-block btn-primary" data-toggle="modal" data-target="#modal1">
-        Crear tarea
-      </button>
-      <div id="modal1" class="modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5>Se ha creado un nuevo ranking</h5>
-              <button class="close " data-dismiss="modal">
-                <span>&times;</span>
-              </button>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
-            </div>
-          </div>
+<div class="container">
+  <div class="table">
+    <form class="form-signin" [formGroup]="newAssignment" (ngSubmit)="onSubmit()">
+      <th>
+        <label for="">Nombre de la tarea</label>
+        <div class="form-group">
+          <input type="text" class="form-control" formControlName="assignment_name" style="width: 200px; height: 40px"/>
         </div>
-      </div>
-    </th>
-  </form>
+      </th>
+      <th>
+        <label for="">Ranking</label>
+        <div class="form-group">
+          <select formControlName="rank_code" class="form-select" aria-label="Default select example" style="width: 200px; height: 40px">
+            <option *ngFor="let rank of  this.rankingService._data2" value={{rank.id}}>{{rank.rank_name}}</option>
+          </select>
+        </div>
+      </th>
+      <th><br>
+        <button type="submit" class="btn btn-primary" style="background-color:#007bff;margin-top: 15px;">Crear tarea</button>
+      </th>
+    </form>
+  </div>
+  
+  <table class="table">
+    <tr>
+      <th>Nombre Tarea</th>
+      <th>Ranking Tarea</th>
+      <th style="padding-left: 3%;">Acciones</th>
+    </tr>
+    <tr *ngFor="let assignment of this.assignmentService._data1; let i = index">
+      <td *ngIf="assignment.id != 0">{{assignment.assignment_name}}</td>
+      <td *ngIf="assignment.id != 0">{{assignment.rank_code}}</td>
+      <td *ngIf="assignment.id != 0">
+        <button type="button" class="btn btn-danger" style="background-color: #c82333; margin-right: 10px;" (click)="delAssignment(assignment.id)">
+          Eliminar
+        </button>
+        <button (click)="assigmentData(assignment)" class="btn btn-success" style="background-color: #28a745;">Calificar</button>
+      </td>
+    </tr>
+  </table>  
 </div>
-
-<table class="table">
-  <tr>
-    <th>Nombre Tarea</th>
-    <th>Ranking Tarea</th>
-    <th>Acciones</th>
-  </tr>
-  <tr *ngFor="let assignment of this.assignmentService._data1; let i = index">
-    <td *ngIf="assignment.id != 0">{{assignment.assignment_name}}</td>
-    <td *ngIf="assignment.id != 0">{{assignment.rank_code}}</td>
-    <td *ngIf="assignment.id != 0">
-      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal2">
-        Eliminar
-      </button>
-      <div id="modal2" class="modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5>¿Estás segur@ de que quieres eliminar este usuario?</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-footer">
-              <button type="button" (click)="delAssignment(assignment.id)" class="btn btn-danger">Eliminar</button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <button (click)="assigmentData(assignment)" class="btn btn-success">Calificar</button>
-    </td>
-  </tr>
-</table>

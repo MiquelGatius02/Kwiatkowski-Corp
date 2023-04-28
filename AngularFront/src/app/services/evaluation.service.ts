@@ -12,7 +12,10 @@ import { TokenService } from './token.service';
 export class EvaluationService {
 
   _data1: evaluationData[] = [{ id: 0, ranking_id: 0, evaluador: 0, evaluado: 0, points: 0, soft_skill: 0, date: 0 }];
-  _getEvaluation: any
+  _getEvaluation: any;
+  _resultadoEvaluar: any;
+  resultadoEvaluar: any;
+
   EvaluationDisplay: any[] = [{ id: 0, ranking_id: 0, evaluador: 0, evaluado: 0, points: 0, soft_skill: 0, date: 0 }]
   User: UserData[] = [{
     id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "",
