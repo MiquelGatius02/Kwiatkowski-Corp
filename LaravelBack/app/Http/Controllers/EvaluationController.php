@@ -204,27 +204,28 @@ class EvaluationController extends Controller
         $request->validate([
             'id' => 'required',
             'puntos' => 'required',
-            'soft_skill' => 'required'
+            'soft_skill' => 'required',
         ]);
-
         $evaluation = Evaluation::find($request->id);
         if ($evaluation) {
             $softskill = softSkillsData::where('user_id', '=', $evaluation->evaluado)->first();
-            if ($request->soft_skill == 'Responsabilidad') {
+            if ($request->soft_skill == 1) {
                 $softskill->Puntos_responsabilidad = $softskill->Puntos_responsabilidad - $request->puntos;
-            } else if ($request->soft_skill == 'Cooperación') {
+            } else if ($request->soft_skill == 4) {
                 $softskill->Puntos_cooperacion =  $softskill->Puntos_cooperacion - $request->puntos;
-            } else if ($request->soft_skill == 'Autonomía e iniciativa') {
+            } else if ($request->soft_skill == 3) {
                 $softskill->Puntos_autonomia_e_iniciativa = $softskill->Puntos_autonomia_e_iniciativa - $request->puntos;
-            } else if ($request->soft_skill == 'Gestión emocional') {
+            } else if ($request->soft_skill == 2) {
                 $softskill->Puntos_gestion_emocional = $softskill->Puntos_gestion_emocional - $request->puntos;
-            } else if ($request->soft_skill == 'Habilidades de pensamiento') {
+            } else if ($request->soft_skill == 5) {
                 $softskill->Puntos_habilidades_de_pensamiento =  $softskill->Puntos_habilidades_de_pensamiento - $request->puntos;
             }
             $evaluation->delete();
             $softskill->save();
+            return response()->json([
+                "status" => 1,
+                "msg" => "$evaluation"
+            ]);
         }
-
-        return response()->json([$request->puntos]);
     }
 }

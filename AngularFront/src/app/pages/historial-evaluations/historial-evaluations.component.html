@@ -25,7 +25,7 @@
           <td>{{evaluationData.date}}</td>
           <td *ngIf="this.authService.UserData.date == undefined">
             <button class="btn btn-danger"
-              (click)="eliminarEvaluation(this.evaluationData.id, this.evaluationData.points, this.evaluationData.soft_skill)">Eliminar</button>
+              (click)="eliminarEvaluation(this.evaluationData.id, this.evaluationData.soft_skill,this.evaluationData.points)">Eliminar</button>
           </td>
         </tr>
       </tbody>
