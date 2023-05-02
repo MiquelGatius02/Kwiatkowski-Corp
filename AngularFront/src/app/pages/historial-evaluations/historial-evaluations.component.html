@@ -1,0 +1,37 @@
+<div class="layout">
+  <br><br>
+  <div>
+    <table class="table" style="color: rgb(255, 255, 255)">
+      <thead>
+        <tr>
+          <th scope="col">Posición</th>
+          <th scope="col">Ranking</th>
+          <th scope="col">Evaluador</th>
+          <th scope="col">Evaluado</th>
+          <th scope="col">Soft Skill</th>
+          <th scope="col">Puntos</th>
+          <th scope="col">Fecha</th>
+          <th scope="col" *ngIf="this.authService.UserData.date == undefined">Eliminar</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let evaluationData of this.EvaluationDisplay let i = index">
+        <tr style="color:white;">
+          <td>{{evaluationData.id}}</td>
+          <td>{{evaluationData.ranking_id}}</td>
+          <td>{{evaluationData.evaluador}}</td>
+          <td>{{evaluationData.evaluado}}</td>
+          <td>{{evaluationData.soft_skill}}</td>
+          <td>{{evaluationData.points}}</td>
+          <td>{{evaluationData.date}}</td>
+          <td *ngIf="this.authService.UserData.date == undefined">
+            <button class="btn btn-danger"
+              (click)="eliminarEvaluation(this.evaluationData.id, this.evaluationData.soft_skill,this.evaluationData.points)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- <div class="alert alert-success" role="alert" *ngIf="showAlertDelete">
+      Se ha eliminado un usuario del ranking.
+    </div> -->
+  </div>
+</div>

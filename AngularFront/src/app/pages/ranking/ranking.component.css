@@ -3,17 +3,16 @@
 }
 
 .layout {
-  margin: auto;
+  margin-left: 5em;
   width: 70%;
+  height: 7em;
   border-radius: 10px;
   padding: 1em;
   margin-top: 0em;
   text-align: center;
-  margin-right: 18em;
-  font-size: 1vw;
 }
 
-.center{
+.center {
   display: flex;
   align-items: center;
 }
@@ -26,15 +25,14 @@
   background-color: white;
   padding: 1em;
   margin-top: 5em;
-  
   text-align: center;
 }
 
-h3{
+h3 {
   text-align: center;
 }
 
-.btnSkills{
+.btnSkills {
   background-color: transparent;
-  border:none;
+  border: none;
 }

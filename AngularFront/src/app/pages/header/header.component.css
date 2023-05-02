@@ -1,0 +1,26 @@
+#spacing {
+  padding: 1rem;
+  margin-left: 20px;
+  margin-right: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#flex {
+  display: flex;
+}
+
+.d-flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+#space-right {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.dropdown-menu-right {
+  right: 0;
+  left: auto;
+}/*# sourceMappingURL=header.component.css.map */

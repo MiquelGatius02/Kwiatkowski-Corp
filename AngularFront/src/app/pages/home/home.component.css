@@ -4,25 +4,26 @@
 
 .layout {
   margin: auto;
-  width:50%;
+  width: 50%;
   border-radius: 10px;
   padding: 2em;
   margin-top: -17em;
   margin-left: 25em;
 }
+
 .layout2 {
   margin: auto;
-  width:50%;
+  width: 50%;
   border-radius: 10px;
   padding: 2em;
   margin-top: -7em;
-  margin-left:25em;
+  margin-left: 25em;
 }
-.center{
+
+.center {
   display: flex;
   align-items: center;
 }
-
 
 .big-layout {
   display: flex;
@@ -35,32 +36,32 @@
   text-align: center;
 }
 
-
 .container {
   display: inline-flex;
 }
 
 .layout {
   margin: auto;
-  width:50%;
+  width: 50%;
   border-radius: 10px;
   padding: 2em;
   margin-top: -17em;
   margin-left: 25em;
 }
+
 .layout2 {
   margin: auto;
-  width:50%;
+  width: 50%;
   border-radius: 10px;
   padding: 2em;
   margin-top: -7em;
-  margin-left:25em;
+  margin-left: 25em;
 }
-.center{
+
+.center {
   display: flex;
   align-items: center;
 }
-
 
 .big-layout {
   display: flex;
@@ -79,4 +80,4 @@
   height: 30px;
   width: 30px;
   box-shadow: 0 2px 4px darkslategray;
-}
+}/*# sourceMappingURL=home.component.css.map */

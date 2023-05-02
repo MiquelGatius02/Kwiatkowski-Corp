@@ -1,4 +1,4 @@
-<h5 style="color: white">Mis peticiones pendientes</h5>
+<h5>Mis peticiones pendientes</h5>
 <div class="tabla">
     <table class="table">
       <thead class="thead-dark">
@@ -15,38 +15,11 @@
           <!-- El ranking al que hace la peticion -->
           <td>{{peticiones.user_id}}</td>
           <!-- Usuario que hace la petición -->
-          <td><button class="btn btn-success" (click)="aceptarPeticion()" data-toggle="modal" data-target="#modal1">Aceptar</button></td>
+          <td><button class="btn btn-success" (click)="aceptarPeticion()">Aceptar</button></td>
           <!-- Aceptar Peticion -->
-          <td><button class="btn btn-danger" (click)="denegarPeticion()" data-toggle="modal" data-target="#modal2">Denegar</button></td>
+          <td><button class="btn btn-danger" (click)="denegarPeticion()">Denegar</button></td>
           <!-- Denegar Peticion -->
         </tr>
       </tbody>
-    </table>    
-</div>
-
-
-<div id="modal1" class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5>Se ha aceptado la solicitud para unirse al ranking</h5>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div id="modal2" class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5>Se ha denegado la solicitud para unirse al ranking</h5>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
-      </div>
-    </div>
-  </div>
+    </table>
 </div>

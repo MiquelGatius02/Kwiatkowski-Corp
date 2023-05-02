@@ -10,6 +10,7 @@ import { UserData } from 'src/app/interfaces/userData.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { PetitionsService } from 'src/app/services/petitions.service';
 import { RankingService } from 'src/app/services/ranking.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',
@@ -36,13 +37,6 @@ export class HomeComponent implements OnInit {
   showTable: boolean = false;
 
   //Mostrar alertas
-  showAlert: boolean = false;
-  showAlertError: boolean = false;
-  showAlertAceptada: boolean = false;
-  showAlertErrorAceptada: boolean = false;
-  showAlertRankDelete: boolean = false;
-  showAlertRankCodeUpdated: boolean = false
-  showAlertPeticion: boolean = false;
   suscrito: boolean = false;
 
   constructor(
@@ -56,7 +50,7 @@ export class HomeComponent implements OnInit {
 
     this.joinForm = this.fb.group({
 
-      rank_id: '',
+      rank_id: ! '',
 
     });
 
@@ -69,22 +63,18 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.profileData = this.authService.UserData;
-    this.UserRankingData = this.UserRankingData.splice(0, this.UserRankingData.length)
-    this.RankingData = this.RankingData.splice(0, this.RankingData.length)
+    this.UserRankingData = []
+    this.RankingData = []
     this.authService.profile()
     this.rankingService.getRanking()
-    this.UserRankingData = this.rankingService._data1
-    this.RankingData = this.rankingService._data2;
-    console.log(this.rankingService)
+    this.RankingData = this.rankingService._data2
     this.checkRanking()
   }
 
   checkRanking() {
-    console.log(this.rankingService._data1.length)
     if (this.authService.UserData.date != undefined) {
       for (let i = 0; i < this.UserRankingData.length; i++) {
         if (this.UserRankingData[i].user_id == this.profileData.id) {
-          console.log(this.UserRankingData[i].user_id && this.profileData.id)
           this.suscrito = true;
         }
         else {
@@ -93,15 +83,11 @@ export class HomeComponent implements OnInit {
       }
     }
     else {
-      console.log("aqui")
       for (let i = 0; i < this.rankingService._data2.length; i++) {
         if (this.rankingService._data2[i].id_creador == this.profileData.id) {
-          console.log(this.rankingService._data2[i].id_creador)
-          console.log(this.rankingService._data2)
           if (i != 0) {
             this.suscrito = true;
           }
-          console.log(this.suscrito)
         }
         else {
           this.suscrito = false;
@@ -116,11 +102,49 @@ export class HomeComponent implements OnInit {
   }
 
   onSubmit() {
-
-    this.joinData = this.joinForm.value;
-    this.joinData.user_logged = this.authService.UserData.id;
-    this.rankingService.addRanking(this.joinData);
-    this.joinForm.reset();
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+    swalWithBootstrapButtons.fire({
+      title: '¿Desea unirse a este ranking?',
+      text: "!De enviará una petición al administrador de este ranking!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, enviar',
+      cancelButtonText: 'No, cancelar!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed && this.joinForm.value.rank_id != true) {
+        swalWithBootstrapButtons.fire(
+          'Enviado!',
+          'Podrá acceder al ranking cuando el administrador acepte su peticion.',
+          'success'
+        ).then((result2) => {
+          if (result2.isConfirmed) {
+            this.joinData = this.joinForm.value;
+            this.joinData.user_logged = this.authService.UserData.id;
+            this.rankingService.addRanking(this.joinData);
+            this.joinForm.reset();
+          }
+        })
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        swalWithBootstrapButtons.fire(
+          'Cancelado',
+          'No se ha enviado ninguna solicitud de union.',
+          'error'
+        )
+      } else {
+        swalWithBootstrapButtons.fire(
+          'Cancelado',
+          'No se ha enviado ninguna solicitud de union ya que el input esta vacío.',
+          'error'
+        )
+      }
+    })
   }
 
   createRanking() {
@@ -130,10 +154,25 @@ export class HomeComponent implements OnInit {
     this.crearData.id_creador = this.authService.UserData.id;
     this.rankingService.createRaking(this.crearData).subscribe(
       (result) => {
-        setTimeout(() => {
-          this.showAlertRankDelete = false;
-          window.location.reload();
-        }, 1500);
+        const swalWithBootstrapButtons = Swal.mixin({
+          customClass: {
+            confirmButton: 'btn btn-success',
+          },
+          buttonsStyling: false
+        })
+        swalWithBootstrapButtons.fire({
+          title: 'Se ha creado un ranking',
+          text: "Un ranking ha sido creado!",
+          icon: 'success',
+          confirmButtonText: '¡OK!',
+          reverseButtons: true
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.reload();
+          } else {
+            window.location.reload();
+          }
+        })
       },
       () => {
         this.joinForm.reset();
@@ -144,12 +183,9 @@ export class HomeComponent implements OnInit {
 
   eliminarRanking(rank: RankData) {
     this.rankingService.deleteRanking(rank);
-    this.showAlertRankDelete = true;
     setTimeout(() => {
-      this.showAlertRankDelete = false;
       window.location.reload();
-    }, 1500);
-    this.showAlertRankDelete = true;
+    }, 1000);
   }
 
   generateRankCode(): number {
@@ -158,74 +194,90 @@ export class HomeComponent implements OnInit {
     return code;
   }
 
-  verPeticiones() {
-    this.petitionsService.getPetitions(this.authService.UserData.id);
-    this.PetitionsData = this.petitionsService.dataPetitions;
-    if (this.showTable == false) {
-      this.showTable = true;
-    } else {
-      this.showTable = false;
-    }
-  }
-
-  aceptarPeticion() {
-    this.petitionsService.aceptarPeticion(this.PetitionsData[0].id, this.PetitionsData[0].rank_code, this.PetitionsData[0].user_id);
-
-    if (this.petitionsService.Petitions.msg == 'Tenemos estas peticiones') {
-      this.showAlertAceptada = true;
-      setTimeout(() => {
-        this.showAlertAceptada = false;
-        this.verPeticiones();
-      }, 2000);
-      this.showAlertAceptada = true;
-    } else {
-      this.showAlertErrorAceptada = true;
-      setTimeout(() => {
-        this.showAlertErrorAceptada = false;
-        this.verPeticiones();
-      }, 2000);
-      this.showAlertErrorAceptada = true;
-    }
-  }
-
-  denegarPeticion() {
-    this.petitionsService.denegarPeticion(this.PetitionsData[0].id);
-
-    if (this.petitionsService.Petitions.msg == 'Tenemos estas peticiones') {
-      this.showAlert = true;
-      setTimeout(() => {
-        this.showAlert = false;
-        this.verPeticiones();
-      }, 2000);
-      this.showTable = true;
-    } else {
-      this.showAlertError = true;
-      setTimeout(() => {
-        this.showAlertError = false;
-        this.verPeticiones();
-      }, 2000);
-      this.showAlertError = true;
-    }
-  }
-
   regenerarCodigo(rank: RankData) {
     let codeNuevo = this.generateRankCode();
     this.rankingService.regenerarCodigo(rank, codeNuevo);
-    this.showAlertRankCodeUpdated = true;
     setTimeout(() => {
-      this.showAlertRankCodeUpdated = false;
       window.location.reload();
-    }, 1500);
-    this.showAlertRankCodeUpdated = true;
+    }, 500);
   }
 
-  mostrarAlertaPeticion() {
+  public setModalTitle(data: string, rank: RankData): void {
 
-    this.showAlertPeticion = true;
-    setTimeout(() => {
-      this.showAlertPeticion = false;
-    }, 1000);
-    this.showAlertPeticion = true;
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+
+    if (data == 'Regenerar') {
+
+      swalWithBootstrapButtons.fire({
+        title: '¿Regenerar el código?',
+        text: "!El código del ranking cambiará!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, cambiarlo',
+        cancelButtonText: 'No, cancelar!',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          swalWithBootstrapButtons.fire(
+            'Cambiado!',
+            'Su código de ranking ha cambiado.',
+            'success'
+          ).then((result2) => {
+            if (result2.isConfirmed) {
+              this.regenerarCodigo(rank);
+            }
+          })
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            'Cancelado',
+            'No se ha regenerado el código de ranking',
+            'error'
+          )
+        }
+      })
+
+    } else if (data == 'Eliminar') {
+
+      swalWithBootstrapButtons.fire({
+        title: '¿Eliminar el ranking?',
+        text: "!El ranking y los alumnos asociados a este serán eliminados!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, eliminarlo',
+        cancelButtonText: 'No, cancelar!',
+        reverseButtons: true,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          swalWithBootstrapButtons.fire(
+            'Eliminado!',
+            'Se ha eliminado un ranking.',
+            'success'
+          ).then((result2) => {
+            if (result2.isConfirmed) {
+              this.eliminarRanking(rank);
+            }
+          })
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            'Cancelado',
+            'No se ha eliminado ningún ranking',
+            'error'
+          )
+        }
+      })
+    }
   }
 }
 
