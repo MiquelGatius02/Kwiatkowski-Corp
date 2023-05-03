@@ -91,18 +91,15 @@ export class RankingService {
   }
 
   public getUser() { // RECUPERAR TODOS LOS USUARIOS
-    this._data4 = [];
-    this._getUser = [];
-
     const tokenCache: any = this.token.getToken();
     this.http.get("http://127.0.0.1:8000/api/getUser").subscribe(data => {
-      // console.log(data);
+      this._data4 = [];
       this._getUser = data;
       this.Skills = this._getUser.skills;
       for (let i = 0; i < this._getUser.data.length; i++) {
         this._data4.push(this._getUser.data[i]);
       }
-      // console.log(this._data4);
+      console.log(this._data4)
     });
   }
 

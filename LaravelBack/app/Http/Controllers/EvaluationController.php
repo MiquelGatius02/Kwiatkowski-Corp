@@ -79,74 +79,73 @@ class EvaluationController extends Controller
                 $restar->save();
 
 
-                if($evaluation->Puntos_responsabilidad < 1000){
+                if ($evaluation->Puntos_responsabilidad < 1000) {
                     $evaluation->Nivel_responsabilidad = 0;
-                }else if($evaluation->Puntos_responsabilidad >= 1000 && $evaluation->Puntos_responsabilidad < 2000){
+                } else if ($evaluation->Puntos_responsabilidad >= 1000 && $evaluation->Puntos_responsabilidad < 2000) {
                     $evaluation->Nivel_responsabilidad = 1;
-                }else if($evaluation->Puntos_responsabilidad >= 2000 && $evaluation->Puntos_responsabilidad < 4000){
+                } else if ($evaluation->Puntos_responsabilidad >= 2000 && $evaluation->Puntos_responsabilidad < 4000) {
                     $evaluation->Nivel_responsabilidad = 2;
-                }else if($evaluation->Puntos_responsabilidad >= 4000 && $evaluation->Puntos_responsabilidad < 7000){
+                } else if ($evaluation->Puntos_responsabilidad >= 4000 && $evaluation->Puntos_responsabilidad < 7000) {
                     $evaluation->Nivel_responsabilidad = 3;
-                }else if($evaluation->Puntos_responsabilidad >= 7000 && $evaluation->Puntos_responsabilidad < 10000){
+                } else if ($evaluation->Puntos_responsabilidad >= 7000 && $evaluation->Puntos_responsabilidad < 10000) {
                     $evaluation->Nivel_responsabilidad = 4;
-                }else if($evaluation->Puntos_responsabilidad >= 10000){
+                } else if ($evaluation->Puntos_responsabilidad >= 10000) {
                     $evaluation->Nivel_responsabilidad = 5;
                 }
 
-                if($evaluation->Puntos_cooperacion < 1000){
+                if ($evaluation->Puntos_cooperacion < 1000) {
                     $evaluation->Nivel_cooperacion = 0;
-
-                }else if($evaluation->Puntos_cooperacion >= 1000 && $evaluation->Puntos_cooperacion < 2000){
+                } else if ($evaluation->Puntos_cooperacion >= 1000 && $evaluation->Puntos_cooperacion < 2000) {
                     $evaluation->Nivel_cooperacion = 1;
-                }else if($evaluation->Puntos_cooperacion >= 2000 && $evaluation->Puntos_cooperacion < 4000){
+                } else if ($evaluation->Puntos_cooperacion >= 2000 && $evaluation->Puntos_cooperacion < 4000) {
                     $evaluation->Nivel_cooperacion = 2;
-                }else if($evaluation->Puntos_cooperacion >= 4000 && $evaluation->Puntos_cooperacion < 7000){
+                } else if ($evaluation->Puntos_cooperacion >= 4000 && $evaluation->Puntos_cooperacion < 7000) {
                     $evaluation->Nivel_cooperacion = 3;
-                }else if($evaluation->Puntos_cooperacion >= 7000 && $evaluation->Puntos_cooperacion < 10000){
+                } else if ($evaluation->Puntos_cooperacion >= 7000 && $evaluation->Puntos_cooperacion < 10000) {
                     $evaluation->Nivel_cooperacion = 4;
-                }else if($evaluation->Puntos_cooperacion >= 10000){
+                } else if ($evaluation->Puntos_cooperacion >= 10000) {
                     $evaluation->Nivel_cooperacion = 5;
                 }
 
-                if($evaluation->Puntos_autonomia_e_iniciativa < 1000){
+                if ($evaluation->Puntos_autonomia_e_iniciativa < 1000) {
                     $evaluation->Nivel_autonomia_e_iniciativa = 0;
-                }else if($evaluation->Puntos_autonomia_e_iniciativa >= 1000 && $evaluation->Puntos_autonomia_e_iniciativa < 2000){
+                } else if ($evaluation->Puntos_autonomia_e_iniciativa >= 1000 && $evaluation->Puntos_autonomia_e_iniciativa < 2000) {
                     $evaluation->Nivel_autonomia_e_iniciativa = 1;
-                }else if($evaluation->Puntos_autonomia_e_iniciativa >= 2000 && $evaluation->Puntos_autonomia_e_iniciativa < 4000){
+                } else if ($evaluation->Puntos_autonomia_e_iniciativa >= 2000 && $evaluation->Puntos_autonomia_e_iniciativa < 4000) {
                     $evaluation->Nivel_autonomia_e_iniciativa = 2;
-                }else if($evaluation->Puntos_autonomia_e_iniciativa >= 4000 && $evaluation->Puntos_autonomia_e_iniciativa < 7000){
+                } else if ($evaluation->Puntos_autonomia_e_iniciativa >= 4000 && $evaluation->Puntos_autonomia_e_iniciativa < 7000) {
                     $evaluation->Nivel_autonomia_e_iniciativa = 3;
-                }else if($evaluation->Puntos_autonomia_e_iniciativa >= 7000 && $evaluation->Puntos_autonomia_e_iniciativa < 10000){
+                } else if ($evaluation->Puntos_autonomia_e_iniciativa >= 7000 && $evaluation->Puntos_autonomia_e_iniciativa < 10000) {
                     $evaluation->Nivel_autonomia_e_iniciativa = 4;
-                }else if($evaluation->Puntos_autonomia_e_iniciativa >= 10000){
+                } else if ($evaluation->Puntos_autonomia_e_iniciativa >= 10000) {
                     $evaluation->Nivel_autonomia_e_iniciativa = 5;
                 }
-                
-                if($evaluation->Puntos_gestion_emocional < 1000){
+
+                if ($evaluation->Puntos_gestion_emocional < 1000) {
                     $evaluation->Nivel_gestion_emocional = 0;
-                }else if($evaluation->Puntos_gestion_emocional >= 1000 && $evaluation->Puntos_gestion_emocional < 2000){
+                } else if ($evaluation->Puntos_gestion_emocional >= 1000 && $evaluation->Puntos_gestion_emocional < 2000) {
                     $evaluation->Nivel_gestion_emocional = 1;
-                }else if($evaluation->Puntos_gestion_emocional >= 2000 && $evaluation->Puntos_gestion_emocional < 4000){
+                } else if ($evaluation->Puntos_gestion_emocional >= 2000 && $evaluation->Puntos_gestion_emocional < 4000) {
                     $evaluation->Nivel_gestion_emocional = 2;
-                }else if($evaluation->Puntos_gestion_emocional >= 4000 && $evaluation->Puntos_gestion_emocional < 7000){
+                } else if ($evaluation->Puntos_gestion_emocional >= 4000 && $evaluation->Puntos_gestion_emocional < 7000) {
                     $evaluation->Nivel_gestion_emocional = 3;
-                }else if($evaluation->Puntos_gestion_emocional >= 7000 && $evaluation->Puntos_gestion_emocional < 10000){
+                } else if ($evaluation->Puntos_gestion_emocional >= 7000 && $evaluation->Puntos_gestion_emocional < 10000) {
                     $evaluation->Nivel_gestion_emocional = 4;
-                }else if($evaluation->Puntos_gestion_emocional >= 10000){
+                } else if ($evaluation->Puntos_gestion_emocional >= 10000) {
                     $evaluation->Nivel_gestion_emocional = 5;
                 }
-                
-                if($evaluation->Puntos_habilidades_de_pensamiento < 1000){
+
+                if ($evaluation->Puntos_habilidades_de_pensamiento < 1000) {
                     $evaluation->Nivel_habilidades_de_pensamiento = 0;
-                }else if($evaluation->Puntos_habilidades_de_pensamiento >= 1000 && $evaluation->Puntos_habilidades_de_pensamiento < 2000){
+                } else if ($evaluation->Puntos_habilidades_de_pensamiento >= 1000 && $evaluation->Puntos_habilidades_de_pensamiento < 2000) {
                     $evaluation->Nivel_habilidades_de_pensamiento = 1;
-                }else if($evaluation->Puntos_habilidades_de_pensamiento >= 2000 && $evaluation->Puntos_habilidades_de_pensamiento < 4000){
+                } else if ($evaluation->Puntos_habilidades_de_pensamiento >= 2000 && $evaluation->Puntos_habilidades_de_pensamiento < 4000) {
                     $evaluation->Nivel_habilidades_de_pensamiento = 2;
-                }else if($evaluation->Puntos_habilidades_de_pensamiento >= 4000 && $evaluation->Puntos_habilidades_de_pensamiento < 7000){
+                } else if ($evaluation->Puntos_habilidades_de_pensamiento >= 4000 && $evaluation->Puntos_habilidades_de_pensamiento < 7000) {
                     $evaluation->Nivel_habilidades_de_pensamiento = 3;
-                }else if($evaluation->Puntos_habilidades_de_pensamiento >= 7000 && $evaluation->Puntos_habilidades_de_pensamiento < 10000){
+                } else if ($evaluation->Puntos_habilidades_de_pensamiento >= 7000 && $evaluation->Puntos_habilidades_de_pensamiento < 10000) {
                     $evaluation->Nivel_habilidades_de_pensamiento = 4;
-                }else if($evaluation->Puntos_habilidades_de_pensamiento >= 10000){
+                } else if ($evaluation->Puntos_habilidades_de_pensamiento >= 10000) {
                     $evaluation->Nivel_habilidades_de_pensamiento = 5;
                 }
 
@@ -199,6 +198,101 @@ class EvaluationController extends Controller
         }
     }
 
+    public function getEvaluationDate(Request $request)
+    {
+        $request->validate([
+            'value' => 'required'
+        ]);
+
+        $evaluation = Evaluation::where('date', 'LIKE', '%' . $request->value . '%')->get();
+
+        if ($evaluation) {
+            return response()->json([
+                "status" => 1,
+                "msg" => "Se han recuperado los siguientes datos",
+                "data" => $evaluation
+            ]);
+        } else {
+            return response()->json([
+                "status" => 0,
+                "msg" => "No se han encontrado registros"
+            ]);
+        }
+    }
+
+    public function getEvaluationEvaluado(Request $request)
+    {
+        $evaluation = Evaluation::where('evaluado', 'LIKE', '%' . $request->value . '%')->get();
+
+        if ($evaluation) {
+            return response()->json([
+                "status" => 1,
+                "msg" => "Se han recuperado los siguientes datos",
+                "data" => $evaluation
+            ]);
+        } else {
+            return response()->json([
+                "status" => 0,
+                "msg" => "No se han encontrado registros"
+            ]);
+        }
+    }
+
+    public function getEvaluationEvaluador(Request $request)
+    {
+        $evaluation = Evaluation::where('evaluador', 'LIKE', '%' . $request->value . '%')->get();
+
+
+        if ($evaluation) {
+            return response()->json([
+                "status" => 1,
+                "msg" => "Se han recuperado los siguientes datos",
+                "data" => $evaluation
+            ]);
+        } else {
+            return response()->json([
+                "status" => 0,
+                "msg" => "No se han encontrado registros"
+            ]);
+        }
+    }
+
+    public function getEvaluationSoftSkill(Request $request)
+    {
+        $evaluation = Evaluation::where('soft_skill', 'LIKE', '%' . $request->value . '%')->get();
+
+        if ($evaluation) {
+            return response()->json([
+                "status" => 1,
+                "msg" => "Se han recuperado los siguientes datos",
+                "data" => $evaluation
+            ]);
+        } else {
+            return response()->json([
+                "status" => 0,
+                "msg" => "No se han encontrado registros"
+            ]);
+        }
+    }
+
+    public function getEvaluationBetween(Request $request)
+    {
+        $evaluation = Evaluation::get();
+
+        if ($evaluation) {
+            return response()->json([
+                "status" => 1,
+                "msg" => "Se han recuperado los siguientes datos",
+                "data" => $evaluation
+            ]);
+        } else {
+            return response()->json([
+                "status" => 0,
+                "msg" => "No se han encontrado registros"
+            ]);
+        }
+    }
+
     public function deleteEvaluation(Request $request)
     {
         $request->validate([
@@ -220,11 +314,82 @@ class EvaluationController extends Controller
             } else if ($request->soft_skill == 5) {
                 $softskill->Puntos_habilidades_de_pensamiento =  $softskill->Puntos_habilidades_de_pensamiento - $request->puntos;
             }
+
+            if ($softskill->Puntos_responsabilidad < 1000) {
+                $softskill->Nivel_responsabilidad = 0;
+            } else if ($softskill->Puntos_responsabilidad >= 1000 && $softskill->Puntos_responsabilidad < 2000) {
+                $softskill->Nivel_responsabilidad = 1;
+            } else if ($softskill->Puntos_responsabilidad >= 2000 && $softskill->Puntos_responsabilidad < 4000) {
+                $softskill->Nivel_responsabilidad = 2;
+            } else if ($softskill->Puntos_responsabilidad >= 4000 && $softskill->Puntos_responsabilidad < 7000) {
+                $softskill->Nivel_responsabilidad = 3;
+            } else if ($softskill->Puntos_responsabilidad >= 7000 && $softskill->Puntos_responsabilidad < 10000) {
+                $softskill->Nivel_responsabilidad = 4;
+            } else if ($softskill->Puntos_responsabilidad >= 10000) {
+                $softskill->Nivel_responsabilidad = 5;
+            }
+
+            if ($softskill->Puntos_cooperacion < 1000) {
+                $softskill->Nivel_cooperacion = 0;
+            } else if ($softskill->Puntos_cooperacion >= 1000 && $softskill->Puntos_cooperacion < 2000) {
+                $softskill->Nivel_cooperacion = 1;
+            } else if ($softskill->Puntos_cooperacion >= 2000 && $softskill->Puntos_cooperacion < 4000) {
+                $softskill->Nivel_cooperacion = 2;
+            } else if ($softskill->Puntos_cooperacion >= 4000 && $softskill->Puntos_cooperacion < 7000) {
+                $softskill->Nivel_cooperacion = 3;
+            } else if ($softskill->Puntos_cooperacion >= 7000 && $softskill->Puntos_cooperacion < 10000) {
+                $softskill->Nivel_cooperacion = 4;
+            } else if ($softskill->Puntos_cooperacion >= 10000) {
+                $softskill->Nivel_cooperacion = 5;
+            }
+
+            if ($softskill->Puntos_autonomia_e_iniciativa < 1000) {
+                $softskill->Nivel_autonomia_e_iniciativa = 0;
+            } else if ($softskill->Puntos_autonomia_e_iniciativa >= 1000 && $softskill->Puntos_autonomia_e_iniciativa < 2000) {
+                $softskill->Nivel_autonomia_e_iniciativa = 1;
+            } else if ($softskill->Puntos_autonomia_e_iniciativa >= 2000 && $softskill->Puntos_autonomia_e_iniciativa < 4000) {
+                $softskill->Nivel_autonomia_e_iniciativa = 2;
+            } else if ($softskill->Puntos_autonomia_e_iniciativa >= 4000 && $softskill->Puntos_autonomia_e_iniciativa < 7000) {
+                $softskill->Nivel_autonomia_e_iniciativa = 3;
+            } else if ($softskill->Puntos_autonomia_e_iniciativa >= 7000 && $softskill->Puntos_autonomia_e_iniciativa < 10000) {
+                $softskill->Nivel_autonomia_e_iniciativa = 4;
+            } else if ($softskill->Puntos_autonomia_e_iniciativa >= 10000) {
+                $softskill->Nivel_autonomia_e_iniciativa = 5;
+            }
+
+            if ($softskill->Puntos_gestion_emocional < 1000) {
+                $softskill->Nivel_gestion_emocional = 0;
+            } else if ($softskill->Puntos_gestion_emocional >= 1000 && $softskill->Puntos_gestion_emocional < 2000) {
+                $softskill->Nivel_gestion_emocional = 1;
+            } else if ($softskill->Puntos_gestion_emocional >= 2000 && $softskill->Puntos_gestion_emocional < 4000) {
+                $softskill->Nivel_gestion_emocional = 2;
+            } else if ($softskill->Puntos_gestion_emocional >= 4000 && $softskill->Puntos_gestion_emocional < 7000) {
+                $softskill->Nivel_gestion_emocional = 3;
+            } else if ($softskill->Puntos_gestion_emocional >= 7000 && $softskill->Puntos_gestion_emocional < 10000) {
+                $softskill->Nivel_gestion_emocional = 4;
+            } else if ($softskill->Puntos_gestion_emocional >= 10000) {
+                $softskill->Nivel_gestion_emocional = 5;
+            }
+
+            if ($softskill->Puntos_habilidades_de_pensamiento < 1000) {
+                $softskill->Nivel_habilidades_de_pensamiento = 0;
+            } else if ($softskill->Puntos_habilidades_de_pensamiento >= 1000 && $softskill->Puntos_habilidades_de_pensamiento < 2000) {
+                $softskill->Nivel_habilidades_de_pensamiento = 1;
+            } else if ($softskill->Puntos_habilidades_de_pensamiento >= 2000 && $softskill->Puntos_habilidades_de_pensamiento < 4000) {
+                $softskill->Nivel_habilidades_de_pensamiento = 2;
+            } else if ($softskill->Puntos_habilidades_de_pensamiento >= 4000 && $softskill->Puntos_habilidades_de_pensamiento < 7000) {
+                $softskill->Nivel_habilidades_de_pensamiento = 3;
+            } else if ($softskill->Puntos_habilidades_de_pensamiento >= 7000 && $softskill->Puntos_habilidades_de_pensamiento < 10000) {
+                $softskill->Nivel_habilidades_de_pensamiento = 4;
+            } else if ($softskill->Puntos_habilidades_de_pensamiento >= 10000) {
+                $softskill->Nivel_habilidades_de_pensamiento = 5;
+            }
+
             $evaluation->delete();
             $softskill->save();
             return response()->json([
                 "status" => 1,
-                "msg" => "$evaluation"
+                "msg" => "$request->puntos"
             ]);
         }
     }

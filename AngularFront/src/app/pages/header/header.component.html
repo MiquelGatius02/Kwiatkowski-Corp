@@ -31,6 +31,8 @@
               routerLink="home/ver-peticiones" type="button">Peticiones</button></li>
           <li *ngIf="this.authService.UserData.date == undefined"><button class="dropdown-item"
               routerLink="home/assignment" type="button">Tareas</button></li>
+          <li *ngIf="this.authService.UserData.date == undefined"><button class="dropdown-item"
+              routerLink="home/historial" type="button">Historial</button></li>
           <li *ngIf="this.authService.UserData.date != undefined"><button class="dropdown-item" routerLink=""
               type="button">Mis tareas</button></li>
           <li>

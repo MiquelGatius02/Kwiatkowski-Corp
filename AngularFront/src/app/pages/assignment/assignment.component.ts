@@ -84,7 +84,7 @@ export class AssignmentComponent implements OnInit {
               if (result.isConfirmed) {
                 this.newAssignment.reset();
                 window.location.reload();
-              }else{
+              } else {
                 this.newAssignment.reset();
                 window.location.reload();
               }
@@ -108,76 +108,38 @@ export class AssignmentComponent implements OnInit {
   }
 
   onSubmit() {
+    this.Value = this.newAssignment.value;
+    this.Value.prof_id = this.authService.UserData.id
+    this.rankingService.getRankingDataByCode(this.Value.rank_code)
+    this.assignmentService.createAssignment(this.newAssignment.value).subscribe(
+      (result) => {
+        console.log(result)
+        this.Value = result;
 
-    const swalWithBootstrapButtons = Swal.mixin({
-      customClass: {
-        confirmButton: 'btn btn-success',
-        cancelButton: 'btn btn-danger'
       },
-      buttonsStyling: false
-    })
-
-    swalWithBootstrapButtons.fire({
-      title: '¿Desea crear una tarea?',
-      text: "!Se creará una tarea!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Sí, crear',
-      cancelButtonText: 'No, cancelar!',
-      reverseButtons: true
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.Value = this.newAssignment.value;
-        this.Value.prof_id = this.authService.UserData.id
-        if (this.Value.rank_code == '' || this.Value.rank_code == undefined) {
-          swalWithBootstrapButtons.fire(
-            'Cancelado',
-            'No se ha creado ninguna tarea ya que no se puede crear una tarea sin asignarle un ranking.',
-            'error'
-          ).then((result) => {
-            if (result.isConfirmed) {
-              window.location.reload();
-            }else{
-              window.location.reload();
+      (error) => {
+        this.newAssignment = error.error;
+      },
+      () => {
+        this.AssignmentsData.assignment_id = this.Value.id;
+        this.AssignmentsData.points = 0;
+        console.log(this.rankingService._data3.length)
+        for (let i = 0; i < this.rankingService._data3.length; i++) {
+          this.AssignmentsData.user_id = this.rankingService._data3[i].user_id
+          console.log(this.AssignmentsData)
+          this.assignmentService.createAssignmentData(this.AssignmentsData).subscribe(
+            (result) => {
+              console.log(result)
             }
-          })
+          )
         }
-        this.rankingService.getRankingDataByCode(this.Value.rank_code)
-        this.assignmentService.createAssignment(this.newAssignment.value).subscribe(
-          (result) => {
-            this.Value = result;
 
-          },
-          (error) => {
-            this.newAssignment = error.error;
-          },
-          () => {
-            this.AssignmentsData.assignment_id = this.Value.id;
-            this.AssignmentsData.points = 0;
-            for (let i = 0; i < this.rankingService._data3.length; i++) {
-              this.AssignmentsData.user_id = this.rankingService._data3[i].user_id
-              this.assignmentService.createAssignmentData(this.AssignmentsData).subscribe(
-                (result) => {
-                }
-              )
-            }
-            window.location.reload();
-          }
-        );
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        swalWithBootstrapButtons.fire(
-          'Cancelado',
-          'No se ha creado ninguna tarea.',
-          'error'
-        )
-      } else {
-        swalWithBootstrapButtons.fire(
-          'Cancelado',
-          'No se ha creado ninguna tarea.',
-          'error'
-        )
+        setTimeout(function () {
+          window.location.reload();
+        }, 1000);
+
       }
-    })
+    );
   }
 
 
