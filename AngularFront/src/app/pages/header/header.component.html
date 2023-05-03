@@ -21,7 +21,7 @@
               style="width: 30px; height: 30px;">
             <img *ngIf="userData.imagen == null"
               src="https://www.nicepng.com/png/full/202-2022264_usuario-annimo-usuario-annimo-user-icon-png-transparent.png"
-              style="width: 30px; height: 30px;">
+              style="width: 30px; height: 30px;" alt="UsuarioAnonimo">
             {{this.userData.username}}
           </a>
         </button>
@@ -31,6 +31,8 @@
               routerLink="home/ver-peticiones" type="button">Peticiones</button></li>
           <li *ngIf="this.authService.UserData.date == undefined"><button class="dropdown-item"
               routerLink="home/assignment" type="button">Tareas</button></li>
+          <li *ngIf="this.authService.UserData.date == undefined"><button class="dropdown-item"
+              routerLink="home/historial" type="button">Historial</button></li>
           <li *ngIf="this.authService.UserData.date != undefined"><button class="dropdown-item" routerLink=""
               type="button">Mis tareas</button></li>
           <li>

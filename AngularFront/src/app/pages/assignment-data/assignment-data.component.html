@@ -2,31 +2,37 @@
   <form class="form-signin" [formGroup]="changePoints">
     <table class="table">
       <tr>
-        <th><h1>Tarea: {{assignmentData.assignment_name}}</h1></th>
+        <th>
+          <h1>Tarea: {{assignmentData.assignment_name}}</h1>
+        </th>
         <th></th>
-        <th><button type="button" class="btn btn-primary" style="background-color: #007bff; width: 160px;" (click)="goBack()">Volver</button></th>
+        <th><button type="button" class="btn btn-primary" style="background-color: #007bff; width: 160px;"
+            (click)="goBack()">Volver</button></th>
       </tr>
       <tr>
         <th>Nombre Usuario</th>
         <th>Puntuación</th>
         <th>Acciones</th>
       </tr>
-      <tr *ngFor="let rankingData of this.rankingService._data3; let i = index">
-        <div *ngFor="let user of this.rankingService._data4">
-          <div *ngIf="user.id == rankingData.user_id && user.id != 0 && user.id != User[0].id">
-            <td>
-              <input type="number" formControlName="user_id" hidden value="{{rankingData.user_id}}">{{user.username}}
-            </td>
+      <tbody>
+        <tr *ngFor="let rankingData of this.rankingService._data3; let i = index">
+          <div *ngFor="let user of this.rankingService._data4">
+            <div *ngIf="user.id == rankingData.user_id && user.id != 0 && user.id != User[0].id">
+              <td>
+                <input type="number" formControlName="user_id" hidden value="{{rankingData.user_id}}">{{user.username}}
+              </td>
+            </div>
           </div>
-        </div>
-        <td style="width: 200px;">
-          <input formControlName="points" class="form-control" type="number" placeholder="{{this.rankingData.points}}" style="background-color: white;">
-        </td>
-        <td>
-          <button type="submit" (click)="onSubmit(this.rankingData.user_id)" class="btn btn-success" style="background-color: #28a745;">Guardar cambios</button>
-        </td>
-      </tr>
+          <td style="width: 200px;">
+            <input formControlName="points" class="form-control" type="number" placeholder="{{this.rankingData.points}}"
+              style="background-color: white;">
+          </td>
+          <td>
+            <button type="submit" (click)="onSubmit(this.rankingData.user_id)" class="btn btn-success"
+              style="background-color: #28a745;">Guardar cambios</button>
+          </td>
+        </tr>
+      </tbody>
     </table>
   </form>
 </div>
-

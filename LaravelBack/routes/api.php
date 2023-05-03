@@ -52,6 +52,11 @@ Route::post('setPoints', [AssignmentController::class, 'setPoints']);
 
 
 Route::get('getEvaluation', [EvaluationController::class, 'getEvaluation']);
+Route::get('getEvaluationDate', [EvaluationController::class, 'getEvaluationDate']);
+Route::get('getEvaluationSoftSkill', [EvaluationController::class, 'getEvaluationSoftSkill']);
+Route::get('getEvaluationEvaluado', [EvaluationController::class, 'getEvaluationEvaluado']);
+Route::get('getEvaluationEvaluador', [EvaluationController::class, 'getEvaluationEvaluador']);
+Route::get('getEvaluationBetween', [EvaluationController::class, 'getEvaluationBetween']);
 Route::post('createEvaluation', [EvaluationController::class, 'createEvaluation']);
 
 
