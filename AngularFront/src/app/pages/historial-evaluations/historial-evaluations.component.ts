@@ -43,7 +43,7 @@ export class HistorialEvaluationsComponent implements OnInit {
 
     this.User = this.rankingService._data4
     console.log(this.evaluation)
-    this.Value = this.newAssignment.value;Z
+    this.Value = this.newAssignment.value;
     console.log(this.Value)
     let value = this.newAssignment.get('value')?.value
     let type = this.newAssignment.get('type')?.value
