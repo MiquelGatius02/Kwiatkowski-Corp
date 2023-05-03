@@ -204,7 +204,7 @@ class EvaluationController extends Controller
             'value' => 'required'
         ]);
 
-        $evaluation = Evaluation::where('date', 'LIKE', '%' . $request->value . '%')->get();
+        $evaluation = Evaluation::where('date', 'LIKE', '%' . $request->value . '%')->orderBy('date')->get();
 
         if ($evaluation) {
             return response()->json([
@@ -222,7 +222,7 @@ class EvaluationController extends Controller
 
     public function getEvaluationEvaluado(Request $request)
     {
-        $evaluation = Evaluation::where('evaluado', 'LIKE', '%' . $request->value . '%')->get();
+        $evaluation = Evaluation::where('evaluado', 'LIKE', '%' . $request->value . '%')->orderBy('date')->get();
 
         if ($evaluation) {
             return response()->json([
@@ -240,7 +240,7 @@ class EvaluationController extends Controller
 
     public function getEvaluationEvaluador(Request $request)
     {
-        $evaluation = Evaluation::where('evaluador', 'LIKE', '%' . $request->value . '%')->get();
+        $evaluation = Evaluation::where('evaluador', 'LIKE', '%' . $request->value . '%')->orderBy('date')->get();
 
 
         if ($evaluation) {
@@ -259,7 +259,7 @@ class EvaluationController extends Controller
 
     public function getEvaluationSoftSkill(Request $request)
     {
-        $evaluation = Evaluation::where('soft_skill', 'LIKE', '%' . $request->value . '%')->get();
+        $evaluation = Evaluation::where('soft_skill', 'LIKE', '%' . $request->value . '%')->orderBy('date')->get();
 
         if ($evaluation) {
             return response()->json([

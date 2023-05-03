@@ -3,7 +3,7 @@
     {{this.rankingService.rankCache.rank_name}}</h3>
   <br><br>
   <div class="layout">
-    <table  class="table" style="color: rgb(255, 255, 255)">
+    <table class="table" style="color: rgb(255, 255, 255)">
       <thead>
         <tr>
           <th scope="col">Posicion</th>
@@ -20,7 +20,7 @@
         </tr>
       </thead>
       <tbody *ngFor="let rankingData of this.rankingService._data3;let i = index">
-        <tr *ngFor="let user of User" style="color:white;">
+        <tr *ngFor="let user of this.rankingService._data4" style="color:white;">
           <td *ngIf="user.id == rankingData.user_id && user.id != 0 && i == 0"><img
               src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/fb9cfb5b-aa09-4dc2-b19b-931576776dae/de4fujh-3cf64804-b0b2-4d1a-8f60-928f1ddeb575.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2ZiOWNmYjViLWFhMDktNGRjMi1iMTliLTkzMTU3Njc3NmRhZVwvZGU0ZnVqaC0zY2Y2NDgwNC1iMGIyLTRkMWEtOGY2MC05MjhmMWRkZWI1NzUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.5T7yYnOROSIYA5UVeNWHfc-lfC5EcBmAbgtnGzXv5Pc"
               alt="top 1" width="40" height="40"></td>
@@ -264,7 +264,8 @@
           </td>
 
           <td *ngIf="user.id == rankingData.user_id && user.id != 0 && this.authService.UserData.date == undefined">
-            <button class="btn btn-danger" (click)="eliminarUsuario(this.rankingData.user_id,this.rankingService.rankCache.id)">Eliminar</button>
+            <button class="btn btn-danger"
+              (click)="eliminarUsuario(this.rankingData.user_id,this.rankingService.rankCache.id)">Eliminar</button>
           </td>
         </tr>
       </tbody>
@@ -327,7 +328,8 @@
           </div>
 
           <div class="modal-footer">
-            <button type="button" class="btn btn-success" (click)="evaluar(this.modalTitle, this.ranking.rank_code, this.ranking.puntosSemanales)"
+            <button type="button" class="btn btn-success"
+              (click)="evaluar(this.modalTitle, this.ranking.rank_code, this.ranking.puntosSemanales)"
               data-dismiss="modal">Confirmar</button>
           </div>
 

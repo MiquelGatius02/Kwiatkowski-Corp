@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
 
   userData: UserData = { id: 0, username: "", email: "", firstname: "", lastname: "", centro: undefined, date: undefined, password: "" };
   session: boolean = this.token.isLoggedIn();
+  interval: NodeJS.Timer | undefined;
 
   constructor(
     public router: Router,
@@ -29,7 +30,14 @@ export class HeaderComponent implements OnInit {
     this.userData = this.authService.UserData;
     this.authService.loginStatusChange().subscribe(loggedIn => {
       this.session = loggedIn;
+      this.startTimer()
     });
+  }
+
+  startTimer() {
+    this.interval = setInterval(() => {
+      this.endSession();
+    }, 7200000)
   }
 
   endSession() {
