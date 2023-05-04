@@ -5,6 +5,7 @@ import { AuthStateService } from '../../services/auth-state.service';
 import { AuthService } from '../../services/auth.service';
 import { TokenService } from '../../services/token.service';
 import { UserData } from 'src/app/interfaces/userData.interface';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-header',
@@ -30,19 +31,36 @@ export class HeaderComponent implements OnInit {
     this.userData = this.authService.UserData;
     this.authService.loginStatusChange().subscribe(loggedIn => {
       this.session = loggedIn;
-      this.startTimer()
     });
+    this.startTimer()
   }
 
   startTimer() {
+
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+
     this.interval = setInterval(() => {
-      this.endSession();
+      swalWithBootstrapButtons.fire({
+        title: '¡La sesión ha caducado!',
+        text: "Ha caducado la sesión, por tanto se cerrará la página.",
+        icon: 'warning',
+        confirmButtonText: 'Ok',
+      }).then((result) => {
+        this.endSession()
+        this.router.navigate(['/main']);
+      })
     }, 7200000)
   }
 
   endSession() {
     this.token.removeToken()
-    this.router.navigate(['main']);
+    this.router.navigate(['/main']);
     this.session = false;
   }
 
