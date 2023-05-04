@@ -43,6 +43,7 @@ export class RankingComponent implements OnInit {
     this.rankingService.getRankingDataByCode(this.rankingService.rankCache.id)
     this.rankingService.getUser();
     // console.log(this.User);
+    this.authService.setTimer();
   }
 
   eliminarUsuario(usuario: number, id_rank: number) {

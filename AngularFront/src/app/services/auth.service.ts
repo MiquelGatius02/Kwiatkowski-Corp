@@ -20,7 +20,8 @@ export class AuthService {
     typeUser: number = 0;
     Data: any;
     UserData: UserData = { id: 0, username: '', email: '', firstname: '', lastname: '', centro: undefined, date: undefined, password: '', imagen: '', puntosSemanales: 0 }
-    RankUserData: RankData[] = []
+    RankUserData: RankData[] = [];
+    timer : number = 7200000;
 
     public loggedIn: Subject<boolean> = new ReplaySubject<boolean>(1);
 
@@ -82,4 +83,7 @@ export class AuthService {
         return this.http.post('http://127.0.0.1:8000/api/changePassword', user);
     }
 
+    setTimer () {
+        this.timer = 7200000;
+    }
 }

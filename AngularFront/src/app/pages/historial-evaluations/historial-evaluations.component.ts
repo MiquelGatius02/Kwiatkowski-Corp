@@ -37,6 +37,7 @@ export class HistorialEvaluationsComponent implements OnInit {
   ngOnInit(): void {
     this.evaluation.getEvaluation();
     this.rankingService.getUser();
+    this.authService.setTimer();
   }
 
   onSubmit() {

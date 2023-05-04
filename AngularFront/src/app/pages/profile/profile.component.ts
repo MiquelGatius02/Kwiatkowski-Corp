@@ -100,6 +100,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.authService.profile();
     this.profileData = this.authService.UserData;
+    this.authService.setTimer();
   }
 
   onFileSelected(event: any): void {

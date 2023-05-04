@@ -24,6 +24,7 @@ export class HeaderComponent implements OnInit {
     public authService: AuthService,
     private token: TokenService,
     private authState: AuthStateService
+
   ) { }
 
   ngOnInit(): void {
@@ -55,7 +56,7 @@ export class HeaderComponent implements OnInit {
         this.endSession()
         this.router.navigate(['/main']);
       })
-    }, 7200000)
+    }, this.authService.timer)
   }
 
   endSession() {
