@@ -13,10 +13,10 @@ import { NotfoundComponent } from './notfound/notfound.component';
 const routes: Routes = [
   // RUTAS
   { path: '', redirectTo: '/main', pathMatch: 'full' },
-  { path: 'main', component: MainComponent },
-  { path: 'register-select', component: SelectRegisterComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'main',title:'Menu', component: MainComponent },
+  { path: 'register-select',title:'Registro', component: SelectRegisterComponent },
+  { path: 'register',title:'Registro', component: RegisterComponent },
+  { path: 'login',title:'Login', component: LoginComponent },
   {
     path: 'home', loadChildren: () => import('src/app/pages/pages-routing.module').then((m) => m.PagesRoutingModule),
     canActivate: [AuthGuard]
