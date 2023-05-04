@@ -5,13 +5,15 @@ import { AssignmentComponent } from './assignment/assignment.component';
 import { EvaluationsComponent } from './evaluations/evaluations.component';
 import { HistorialEvaluationsComponent } from './historial-evaluations/historial-evaluations.component';
 import { HomeComponent } from './home/home.component';
+import { MainComponent } from './main/main.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RankingComponent } from './ranking/ranking.component';
 import { VerPetiticionesComponent } from './ver-petiticiones/ver-petiticiones.component';
 
 const routes: Routes = [
 
-  { path: '', component: HomeComponent },
+  { path: '',title:'Principal', component: HomeComponent },
+  { path: 'main',title:'Test', component: MainComponent },
   { path: 'profile', title:'Perfil', component: ProfileComponent },
   { path: 'main-page', title:'Menu', component: HomeComponent },
   { path: 'ranking' , title:'Ranking', component: RankingComponent },
