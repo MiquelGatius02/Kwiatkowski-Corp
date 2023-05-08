@@ -33,7 +33,10 @@ export class HeaderComponent implements OnInit {
     this.authService.loginStatusChange().subscribe(loggedIn => {
       this.session = loggedIn;
     });
-    this.startTimer()
+    console.log(this.session)
+    if (this.session) {
+      this.startTimer()
+    }
   }
 
   startTimer() {

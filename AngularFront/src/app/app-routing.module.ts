@@ -8,7 +8,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { SelectRegisterComponent } from './pages/select-register/select-register.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AuthGuard } from './guards/auth.guard';
-import { NotfoundComponent } from './notfound/notfound.component';
+import { NotfoundComponent } from './pages/notfound/notfound.component';
 
 const routes: Routes = [
   // RUTAS

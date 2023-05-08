@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { HomeComponent } from './pages/home/home.component';
-import { NotfoundComponent } from './notfound/notfound.component';
+import { NotfoundComponent } from './pages/notfound/notfound.component';
 import { RankingComponent } from './pages/ranking/ranking.component';
 import { AssignmentsService } from './services/assignments.service';
 import { AuthInterceptor } from './services/auth.interceptor';

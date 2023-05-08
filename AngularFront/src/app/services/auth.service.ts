@@ -9,6 +9,7 @@ import { AuthStateService } from './auth-state.service';
 import { passwordData } from '../interfaces/passwordData.interface';
 import { RankData } from '../interfaces/rankData.interface ';
 import { RankingService } from './ranking.service';
+import Swal from 'sweetalert2';
 // User interface
 
 @Injectable({
@@ -21,9 +22,11 @@ export class AuthService {
     Data: any;
     UserData: UserData = { id: 0, username: '', email: '', firstname: '', lastname: '', centro: undefined, date: undefined, password: '', imagen: '', puntosSemanales: 0 }
     RankUserData: RankData[] = [];
-    timer : number = 7200000;
+    timer: number = 7200000;
 
     public loggedIn: Subject<boolean> = new ReplaySubject<boolean>(1);
+    interval: NodeJS.Timer | undefined;
+    session: boolean | undefined;
 
     changeType(type: number) {
         this.typeUser = type;
@@ -83,7 +86,35 @@ export class AuthService {
         return this.http.post('http://127.0.0.1:8000/api/changePassword', user);
     }
 
-    setTimer () {
-        this.timer = 7200000;
+    setTimer() {
+        this.timer = 5000;
+    }
+
+    startTimer() {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        })
+
+        this.interval = setInterval(() => {
+            swalWithBootstrapButtons.fire({
+                title: '¡La sesión ha caducado!',
+                text: "Ha caducado la sesión, por tanto se cerrará la página.",
+                icon: 'warning',
+                confirmButtonText: 'Ok',
+            }).then((result) => {
+                this.endSession()
+                this.router.navigate(['/main']);
+            })
+        }, this.timer)
+    }
+
+    endSession() {
+        this.token.removeToken()
+        this.router.navigate(['/main']);
+        this.session = false;
     }
 }
