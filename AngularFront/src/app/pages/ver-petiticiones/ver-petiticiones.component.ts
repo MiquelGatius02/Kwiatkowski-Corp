@@ -23,6 +23,7 @@ export class VerPetiticionesComponent implements OnInit {
   ngOnInit(): void {
     this.petitionsService.getPetitions(this.authService.UserData.id);
     this.PetitionsData = this.petitionsService.dataPetitions;
+    this.authService.setTimer();
   }
 
   aceptarPeticion(){

@@ -40,16 +40,10 @@ export class RankingComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.UsersRankingData = [];
-    this.RankingData = [];
-    this.User = [];
-
-    this.RankingData = this.rankingService._data2
     this.rankingService.getRankingDataByCode(this.rankingService.rankCache.id)
-    this.UsersRankingData = this.rankingService._data3;
     this.rankingService.getUser();
-    this.User = this.rankingService._data4;
     // console.log(this.User);
+    this.authService.setTimer();
   }
 
   eliminarUsuario(usuario: number, id_rank: number) {
@@ -77,8 +71,8 @@ export class RankingComponent implements OnInit {
           'success'
         ).then((result2) => {
           if (result2.isConfirmed) {
-            setTimeout(function(){
-            },1000);
+            setTimeout(function () {
+            }, 1000);
             this.rankingService.deleteUser(usuario, id_rank);
             this.ngOnInit();
           }
@@ -100,7 +94,7 @@ export class RankingComponent implements OnInit {
   }
 
   evaluar(soft_skill: string, rank_code: number, pts: any) {
-    
+
     this.Value = this.evaluation.value;
     this.Value.user_id = this.cacheUser
 
@@ -110,7 +104,7 @@ export class RankingComponent implements OnInit {
           confirmButton: 'btn btn-success',
         },
       })
-  
+
       swalWithBootstrapButtons.fire({
         title: '¡No te puedes evaluar a ti mismo!',
         text: "¡No es posible realizar la evaluación!",
@@ -119,14 +113,14 @@ export class RankingComponent implements OnInit {
         reverseButtons: true
       }).then((result) => {
       })
-    }else if(pts < this.Value.puntos){
+    } else if (pts < this.Value.puntos) {
 
       const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
           confirmButton: 'btn btn-success',
         },
       })
-  
+
       swalWithBootstrapButtons.fire({
         title: '¡No se ha realizado la evaluación!',
         text: "¡No es posible realizar la evaluación ya que no tienes tantos puntos!",
@@ -135,45 +129,43 @@ export class RankingComponent implements OnInit {
         reverseButtons: true
       }).then((result) => {
       })
+    } else {
+      this.Value = this.evaluation.value;
+      if (soft_skill == "Autonmía e iniciativa") {
+        this.Value.soft_skill = 3
+      }
+      else if (soft_skill == "Cooperación") {
+        this.Value.soft_skill = 2
+      }
+      else if (soft_skill == "Gestión emocional") {
 
-    }
+        this.Value.soft_skill = 4
+      }
+      else if (soft_skill == "Habilidades de pensamiento") {
+        this.Value.soft_skill = 5
+      }
+      else if (soft_skill == "Responsabilidad") {
+        this.Value.soft_skill = 1
 
+      }
+      this.Value.rank_code = rank_code;
+      this.evaluationService.evaluar(this.Value);
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+        },
+      })
 
-    this.Value = this.evaluation.value;
-    if (soft_skill == "Autonmía e iniciativa") {
-      this.Value.soft_skill = 3
+      swalWithBootstrapButtons.fire({
+        title: '¡Alumno evaluado!',
+        text: "¡Has evaluado de forma exitosa!",
+        icon: 'success',
+        confirmButtonText: 'OK',
+        reverseButtons: true
+      }).then((result) => {
+        this.ngOnInit();
+      })
     }
-    else if (soft_skill == "Cooperación") {
-      this.Value.soft_skill = 2
-    }
-    else if (soft_skill == "Gestión emocional") {
-
-      this.Value.soft_skill = 4
-    }
-    else if (soft_skill == "Habilidades de pensamiento") {
-      this.Value.soft_skill = 5
-    }
-    else if (soft_skill == "Responsabilidad") {
-      this.Value.soft_skill = 1
-
-    }
-    this.Value.rank_code = rank_code;
-    this.evaluationService.evaluar(this.Value);
-    const swalWithBootstrapButtons = Swal.mixin({
-      customClass: {
-        confirmButton: 'btn btn-success',
-      },
-    })
-
-    swalWithBootstrapButtons.fire({
-      title: '¡Alumno evaluado!',
-      text: "¡Has evaluado de forma exitosa!",
-      icon: 'success',
-      confirmButtonText: 'OK',
-      reverseButtons: true
-    }).then((result) => {
-      this.ngOnInit();
-    })
 
   }
 
@@ -192,7 +184,7 @@ export class RankingComponent implements OnInit {
 
     this.modalTitle = data;
     this.cacheUser = user_id
-    
+
 
     if (this.modalTitle == 'Responsabilidad') {
       this.li1 = 'Trabaja de forma constante.';

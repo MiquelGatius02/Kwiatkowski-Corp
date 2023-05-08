@@ -1,4 +1,31 @@
 <div class="layout">
+  <div class="table">
+    <form class="form-signin" [formGroup]="newAssignment" (ngSubmit)="onSubmit()">
+      <th>
+        <label for="">Valor</label>
+        <div class="form-group">
+          <input type="text" class="form-control" formControlName="value" style="width: 200px; height: 40px" />
+        </div>
+      </th>
+      <th>
+        <label for="">Ranking</label>
+        <div class="form-group">
+          <select formControlName="type" class="form-select" formControlName="type" aria-label="Default select example"
+            style="width: 200px; height: 40px">
+            <option value="1">Fecha</option>
+            <option value="2">Alumno Evaluado</option>
+            <option value="3">Alumno Evaluador</option>
+            <option value="4">Soft Skill</option>
+            <option value="5">Rango de fechas</option>
+          </select>
+        </div>
+      </th>
+      <th><br>
+        <button type="submit" class="btn btn-primary"
+          style="background-color:#007bff;margin-top: 15px;">Filtrar</button>
+      </th>
+    </form>
+  </div>
   <br><br>
   <div>
     <table class="table" style="color: rgb(255, 255, 255)">
@@ -14,15 +41,18 @@
           <th scope="col" *ngIf="this.authService.UserData.date == undefined">Eliminar</th>
         </tr>
       </thead>
-      <tbody *ngFor="let evaluationData of this.EvaluationDisplay let i = index">
+      <tbody *ngFor="let evaluationData of this.evaluation._data1 let i = index">
         <tr style="color:white;">
           <td>{{evaluationData.id}}</td>
           <td>{{evaluationData.ranking_id}}</td>
-          <td>{{evaluationData.evaluador}}</td>
-          <td>{{evaluationData.evaluado}}</td>
+          <ng-container *ngFor="let user of this.rankingService._data4 let j = index">
+            <td *ngIf="evaluationData.evaluador == user.id">{{user.username}}</td>
+            <td *ngIf="evaluationData.evaluado == user.id">{{user.username}}</td>
+          </ng-container>
           <td>{{evaluationData.soft_skill}}</td>
           <td>{{evaluationData.points}}</td>
           <td>{{evaluationData.date}}</td>
+
           <td *ngIf="this.authService.UserData.date == undefined">
             <button class="btn btn-danger"
               (click)="eliminarEvaluation(this.evaluationData.id, this.evaluationData.soft_skill,this.evaluationData.points)">Eliminar</button>
