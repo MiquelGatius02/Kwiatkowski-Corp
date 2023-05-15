@@ -22,7 +22,7 @@ export class AssignmentComponent implements OnInit {
   RankingData: RankData[] = [{ id: 0, rank_name: "", rank_description: "", id_creador: 0 }]
   Value: any;
   Assignments: assignmentData[] = [{ id: 0, assignment_name: "", rank_code: 0, prof_id: 0 }]
-  AssignmentsData: assignmentData_info = { assignment_id: 0, user_id: 0, points: 0 }
+  AssignmentsData: assignmentData_info = { assignment_id: 0, user_id: 0}
   UsersRankingData: RankingUserData[] = [{ id: 0, rank_code: 0, user_id: 0, points: 0 }]
   assignmentData: assignmentData = { id: 0, assignment_name: "", rank_code: 0, prof_id: 0 }
   constructor(
@@ -122,7 +122,6 @@ export class AssignmentComponent implements OnInit {
       },
       () => {
         this.AssignmentsData.assignment_id = this.Value.id;
-        this.AssignmentsData.points = 0;
         console.log(this.rankingService._data3.length)
         for (let i = 0; i < this.rankingService._data3.length; i++) {
           this.AssignmentsData.user_id = this.rankingService._data3[i].user_id

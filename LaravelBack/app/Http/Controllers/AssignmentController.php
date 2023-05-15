@@ -32,13 +32,12 @@ class AssignmentController extends Controller
         $request->validate([
             'assignment_id' => 'required',
             'user_id' => 'required',
-            'points' => 'required'
         ]);
 
         $assignment = new Assignment_Data();
         $assignment->assignment_id = $request->assignment_id;
         $assignment->user_id = $request->user_id;
-        $assignment->points = $request->points;
+        $assignment->points = 0;
         $assignment->save();
 
         return response()->json([
@@ -99,7 +98,7 @@ class AssignmentController extends Controller
         ]);
         $assignment = Assignment_Data::where('assignment_id', $request->id)->where('user_id', $request->user_id)->first();
         if ($assignment) {
-            $assignment->points = $request->points;
+            $assignment->points = $request->points * 10;
             $assignment->save();
         }
         return response()->json(

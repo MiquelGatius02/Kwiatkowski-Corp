@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('assignment_id');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('points');
+            $table->float('points');
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')

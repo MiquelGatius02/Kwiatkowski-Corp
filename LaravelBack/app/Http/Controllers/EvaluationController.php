@@ -384,12 +384,14 @@ class EvaluationController extends Controller
             } else if ($softskill->Puntos_habilidades_de_pensamiento >= 10000) {
                 $softskill->Nivel_habilidades_de_pensamiento = 5;
             }
-
+            $user = RankingData::where('user_id', '=', $evaluation->evaluador)->first();
+            $user->puntosSemanales =  $user->puntosSemanales + $request->puntos;
+            $user->save();
             $evaluation->delete();
             $softskill->save();
             return response()->json([
                 "status" => 1,
-                "msg" => "$request->puntos"
+                "msg" => "$user"
             ]);
         }
     }
