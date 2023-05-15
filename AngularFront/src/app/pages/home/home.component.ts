@@ -198,9 +198,9 @@ export class HomeComponent implements OnInit {
   regenerarCodigo(rank: RankData) {
     let codeNuevo = this.generateRankCode();
     this.rankingService.regenerarCodigo(rank, codeNuevo);
-    setTimeout(() => {
-      window.location.reload();
-    }, 500);
+    // setTimeout(() => {
+    //   window.location.reload();
+    // }, 500);
   }
 
   public setModalTitle(data: string, rank: RankData): void {
