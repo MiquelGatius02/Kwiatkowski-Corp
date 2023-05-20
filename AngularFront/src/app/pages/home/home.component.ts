@@ -69,7 +69,6 @@ export class HomeComponent implements OnInit {
     this.rankingService.getRanking()
     this.RankingData = this.rankingService._data2
     this.checkRanking()
-    this.authService.setTimer();
   }
 
   checkRanking() {
@@ -198,9 +197,9 @@ export class HomeComponent implements OnInit {
   regenerarCodigo(rank: RankData) {
     let codeNuevo = this.generateRankCode();
     this.rankingService.regenerarCodigo(rank, codeNuevo);
-    // setTimeout(() => {
-    //   window.location.reload();
-    // }, 500);
+    setTimeout(() => {
+      window.location.reload();
+    }, 500);
   }
 
   public setModalTitle(data: string, rank: RankData): void {

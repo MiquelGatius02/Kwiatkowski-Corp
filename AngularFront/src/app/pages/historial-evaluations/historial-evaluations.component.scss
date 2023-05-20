@@ -1,9 +1,13 @@
 .container {
     display: inline-flex;
+    color: white;
   }
-  
+  label {
+    color: white;
+  }
+
   .layout {
-    margin-left: 5em;
+    margin-left: 15em;
     width: 70%;
     height: 7em;
     border-radius: 10px;
@@ -13,12 +17,14 @@
   }
   
   .center{
+    color: white;
     display: flex;
     align-items: center;
   }
   
   
   .big-layout {
+    color: white;
     display: flex;
     flex-wrap: wrap;
     margin-left: 5em;
@@ -31,6 +37,7 @@
   
   
   h3{
+    color: white;
     text-align: center;
   }
   

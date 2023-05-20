@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Assignment;
 use App\Models\Assignment_Data;
+use App\Models\Ranking;
+use App\Models\RankingData;
 use Illuminate\Http\Request;
 
 class AssignmentController extends Controller
@@ -100,6 +102,15 @@ class AssignmentController extends Controller
         if ($assignment) {
             $assignment->points = $request->points * 10;
             $assignment->save();
+            $assignment = Assignment_Data::where('user_id', $request->user_id)->get();
+
+            $ranking = Assignment::where('id', $request->id)->first();
+            $rankingInfo = RankingData::where('rank_code', $ranking->rank_code)->where('user_id', $request->user_id)->first();
+            $rankingInfo->points = 0;
+            foreach ($assignment as $ass) {
+                $rankingInfo->points = $rankingInfo->points + $ass->points;
+            }
+            $rankingInfo->save();
         }
         return response()->json(
             $assignment

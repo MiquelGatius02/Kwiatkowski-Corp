@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -28,14 +29,15 @@ export class RegisterComponent implements OnInit {
       firstname: [''],
       lastname: [''],
       centerOrDate: [''],
-      password: [''],
+      password: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      password_confirmation: new FormControl('', [Validators.required, Validators.minLength(3)])
     });
   }
 
   // Getter para obtener los errores del campo email
   get emailErrors() {
     const emailControl = this.registerForm.get('email');
-    if(emailControl != null){
+    if (emailControl != null) {
       if (emailControl.errors && emailControl.dirty) {
         if (emailControl.errors?.['required']) {
           return 'El correo electrónico es obligatorio.';
@@ -55,40 +57,62 @@ export class RegisterComponent implements OnInit {
     this.typeUser = this.authService.typeUser;
   }
   onSubmit() {
-    if (this.typeUser == 0) {
-      this.authService.registerStudent(this.registerForm.value).subscribe(
-        (result) => {
-        },
-        (error) => {
-          this.errors = error.error;
-        },
-        () => {
-          this.registerForm.reset();
-          this.router.navigate(['login']);
-        }
-      );
+    if (this.registerForm.get('password')!.value == this.registerForm.get('password_confirmation')!.value) {
+      if (this.typeUser == 0) {
+        this.authService.registerStudent(this.registerForm.value).subscribe(
+          (result) => {
+          },
+          (error) => {
+            this.errors = error.error;
+          },
+          () => {
+            this.registerForm.reset();
+            this.router.navigate(['login']);
+          }
+        );
+      }
+      else {
+        this.authService.registerProfessor(this.registerForm.value).subscribe(
+          (result) => {
+          },
+          (error) => {
+            this.errors = error.error;
+          },
+          () => {
+            this.registerForm.reset();
+            this.router.navigate(['login']);
+          }
+        );
+      }
     }
+
     else {
-      this.authService.registerProfessor(this.registerForm.value).subscribe(
-        (result) => {
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
         },
-        (error) => {
-          this.errors = error.error;
-        },
-        () => {
-          this.registerForm.reset();
-          this.router.navigate(['login']);
+        buttonsStyling: false
+      })
+      swalWithBootstrapButtons.fire({
+        title: 'Las contraseñas no coinciden',
+        text: "Las contraseñas no son iguales, no se ha registrado este usuario.",
+        icon: 'error',
+        confirmButtonText: '¡OK!',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
         }
-      );
+      })
     }
+
   }
 
   // Obtener los errores del campo nombre
-  controlChars (e:any) { 
+  controlChars(e: any) {
     var regex = new RegExp("^[a-zA-Z0-9_]+$");
     var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
     if (regex.test(str)) {
-        return true;
+      return true;
     }
 
     e.preventDefault();
@@ -97,7 +121,7 @@ export class RegisterComponent implements OnInit {
     return false;
   }
 
-  onPaste(e:any) {
+  onPaste(e: any) {
     e.preventDefault();
     return false;
   }
